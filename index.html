@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tom de Gay — Digital Product Designer</title>
+<meta name="description" content="Tom de Gay, senior product designer specialising in design for AI, automation and complex domains.">
+<meta name="theme-color" content="#000000">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Tom de Gay — Digital Product Designer">
+<meta property="og:description" content="Senior product designer specialising in design for AI, automation and complex domains.">
+<meta property="og:url" content="https://tomdegay.com">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23000'/%3E%3Ctext x='50' y='68' font-size='60' font-family='Georgia,serif' fill='%23fff' text-anchor='middle'%3ET%3C/text%3E%3C/svg%3E">
+
+<style>
+  @font-face {
+    font-family: "Fakt Blond SemiBold";
+    src: url("FaktProSemiBold.woff2") format("woff2"),
+         url("FaktProSemiBold.woff") format("woff");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  :root {
+    color-scheme: dark;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #000;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  main {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: clamp(24px, 6vw, 72px) clamp(24px, 5vw, 56px) clamp(72px, 10vw, 120px);
+  }
+
+  .display {
+    font-family: "Fakt Blond SemiBold", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  h1 {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(28px, 4.6vw, 42px);
+    line-height: 1.1;
+  }
+
+  p.role {
+    margin: 14px 0 0;
+    color: rgba(255, 255, 255, 0.68);
+    font-size: clamp(15px, 1.7vw, 17px);
+    line-height: 1.4;
+    letter-spacing: 0.01em;
+  }
+
+  p.links {
+    margin: 20px 0 0;
+    font-size: clamp(15px, 1.7vw, 17px);
+  }
+
+  a {
+    color: #fff;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+    padding-bottom: 1px;
+    transition: border-color 0.15s ease, opacity 0.15s ease;
+  }
+
+  a:hover,
+  a:focus-visible {
+    border-color: rgba(255, 255, 255, 0.9);
+  }
+
+  a:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.6);
+    outline-offset: 4px;
+    border-radius: 1px;
+  }
+
+  a[target="_blank"] {
+    position: relative;
+  }
+
+  a[target="_blank"]::after {
+    content: "→";
+    position: absolute;
+    right: -1.1em;
+    top: 50%;
+    transform: translate(-4px, -50%);
+    opacity: 0;
+    transition: transform 0.18s ease, opacity 0.18s ease;
+    pointer-events: none;
+    will-change: transform, opacity;
+  }
+
+  a[target="_blank"]:hover::after,
+  a[target="_blank"]:focus-visible::after {
+    opacity: 1;
+    transform: translate(0, -50%);
+  }
+
+  hr.rule {
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+    margin: clamp(48px, 8vw, 72px) 0;
+  }
+
+  section .eyebrow {
+    display: block;
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin: 0 0 20px;
+  }
+
+  .about-statement {
+    color: #fff;
+    font-size: clamp(24px, 3.6vw, 34px);
+    line-height: 1.3;
+    margin: 0;
+    max-width: 34ch;
+  }
+
+  .job {
+    margin: 0 0 8px;
+  }
+
+  .job-company {
+    color: #fff;
+    font-size: clamp(20px, 2.8vw, 26px);
+    line-height: 1.2;
+  }
+
+  .job-desc {
+    color: rgba(255, 255, 255, 0.68);
+    font-size: clamp(15px, 1.7vw, 17px);
+    line-height: 1.5;
+    max-width: 52ch;
+    margin: 14px 0 0;
+  }
+
+  .video-embed {
+    margin: 28px 0 0;
+    width: 100%;
+  }
+
+  .video-embed iframe {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    height: auto;
+    border: 0;
+  }
+
+  .job-link {
+    display: inline-block;
+    margin-top: 16px;
+    font-size: 14px;
+  }
+
+  form {
+    max-width: 480px;
+  }
+
+  .field {
+    margin-bottom: 28px;
+  }
+
+  .field label {
+    display: block;
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .field input,
+  .field textarea {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    color: #fff;
+    font-family: inherit;
+    font-size: 17px;
+    padding: 8px 0 10px;
+    outline: none;
+    transition: border-color 0.15s ease;
+  }
+
+  .field textarea {
+    resize: vertical;
+    min-height: 90px;
+    line-height: 1.4;
+  }
+
+  .field input::placeholder,
+  .field textarea::placeholder {
+    color: rgba(255, 255, 255, 0.32);
+  }
+
+  .field input:focus,
+  .field textarea:focus {
+    border-bottom-color: rgba(255, 255, 255, 0.9);
+  }
+
+  button[type="submit"] {
+    background: none;
+    border: none;
+    padding: 0 0 2px;
+    color: #fff;
+    font-family: inherit;
+    font-size: 16px;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+    transition: border-color 0.15s ease;
+  }
+
+  button[type="submit"]:hover,
+  button[type="submit"]:focus-visible {
+    border-color: rgba(255, 255, 255, 0.9);
+  }
+</style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1 class="display">Tom de Gay</h1>
+      <p class="role">Digital Product Designer</p>
+      <p class="links">
+        <a href="https://www.linkedin.com/in/tom-dg/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      </p>
+    </header>
+
+    <hr class="rule">
+
+    <section aria-labelledby="about-heading">
+      <span class="eyebrow" id="about-heading">About</span>
+      <p class="about-statement display">Senior product designer specialising in design for AI, automation and complex domains. I turn technically ambitious systems and ambiguous problems into clear, usable products.</p>
+    </section>
+
+    <hr class="rule">
+
+    <section aria-labelledby="experience-heading">
+      <span class="eyebrow" id="experience-heading">Principal Experience</span>
+      <div class="job">
+        <p class="job-company display">Head of Design | Quantemplate</p>
+        <p class="job-desc">Enterprise data platform for sharing, transforming, validating and automating complex commercial data in a no-code environment.</p>
+        <div class="video-embed">
+          <iframe src="https://www.youtube.com/embed/n1prlc_ovts?si=_VrXRqxdAqPyB2rU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+        <a class="job-link" href="https://quantemplate.com" target="_blank" rel="noopener noreferrer">quantemplate.com</a>
+      </div>
+    </section>
+
+    <hr class="rule">
+
+    <section aria-labelledby="contact-heading">
+      <span class="eyebrow" id="contact-heading">Contact</span>
+      <form>
+        <div class="field">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" placeholder="Your name" required>
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="you@example.com" required>
+        </div>
+        <div class="field">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="Say hello" required></textarea>
+        </div>
+        <button type="submit">Send</button>
+      </form>
+    </section>
+  </main>
+</body>
+</html>

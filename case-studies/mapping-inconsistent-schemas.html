@@ -246,11 +246,12 @@
     line-height: 1.25;
   }
 
-  .case-body {
+  .case-body h2 {
     max-width: 46rem;
   }
 
   .case-body p {
+    max-width: 46rem;
     color: rgba(255, 255, 255, 0.7);
     font-size: clamp(15.5px, 1.7vw, 17px);
     line-height: 1.65;
@@ -288,6 +289,59 @@
     display: block;
     width: 100%;
     height: auto;
+  }
+
+  /* -- inline diagram -- */
+
+  .diagram {
+    max-width: 46rem;
+    margin: 28px 0 24px;
+    border-radius: 6px;
+    overflow: hidden;
+    background: #000;
+  }
+
+  .diagram svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  /* -- inline screenshot with caption -- */
+
+  .figure {
+    margin: 28px 0 24px;
+  }
+
+  .figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+  }
+
+  .figure figcaption {
+    margin: 10px 0 0;
+    color: rgba(255, 255, 255, 0.45);
+    font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* -- resources -- */
+
+  .resources-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .resources-list a {
+    font-size: clamp(15.5px, 1.7vw, 17px);
   }
 
   /* -- footer -- */
@@ -407,7 +461,240 @@
     <section aria-labelledby="problem-heading" class="case-body">
       <span class="eyebrow" id="problem-heading">The problem</span>
       <h2>Hundreds of schemas, no common language</h2>
-      <p>Insurance companies process risk, premium and claims data from hundreds of trading partners, each with their own data schema which needs to be aligned to the insurer's own standards before it can be used downstream. A column might be called "Unique Market Reference" in one dataset and "UMR" in another. Now multiply that across an average of 250 fields and 2000 distinct files a month in a typical organisation.</p>
+      <p>Insurance companies process risk, premium and claims data from hundreds of trading partners, each with their own data schema which needs to be aligned to the insurer's own standards before it can be used downstream. A column might be called ‘Unique Market Reference’ in one dataset and ‘UMR’ in another. Now multiply that across an average of 250 fields and 2000 distinct files a month in a typical organisation.</p>
+
+      <div class="diagram">
+        <svg viewBox="0 0 1244 848" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" aria-label="Diagram: partner schemas on the left mapping into a common schema in the centre, flowing out to data warehouse, models, partner and reporting destinations on the right.">
+    <defs>
+        <path d="M0,0 L1244,0 L1244,848 L0,848 L0,0 Z" id="path-1"></path>
+        <linearGradient x1="100%" y1="50%" x2="0%" y2="50%" id="linearGradient-2">
+            <stop stop-color="#11382C" stop-opacity="0.2" offset="0%"></stop>
+            <stop stop-color="#51FFCC" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="100%" y1="50%" x2="0%" y2="50%" id="linearGradient-3">
+            <stop stop-color="#11382C" stop-opacity="0.2" offset="0%"></stop>
+            <stop stop-color="#51FFCC" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="100%" y1="50%" x2="0%" y2="50%" id="linearGradient-4">
+            <stop stop-color="#11382C" stop-opacity="0.2" offset="0%"></stop>
+            <stop stop-color="#51FFCC" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="98.0222902%" y1="50%" x2="0%" y2="50%" id="linearGradient-5">
+            <stop stop-color="#11382C" stop-opacity="0.2" offset="0%"></stop>
+            <stop stop-color="#51FFCC" stop-opacity="0.7" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="100%" y1="50%" x2="0%" y2="50%" id="linearGradient-6">
+            <stop stop-color="#A399D4" offset="0%"></stop>
+            <stop stop-color="#6A60AA" stop-opacity="0.3" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="100%" y1="50%" x2="0%" y2="50%" id="linearGradient-7">
+            <stop stop-color="#41BBC9" offset="0%"></stop>
+            <stop stop-color="#41BBC9" stop-opacity="0.2" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="100%" y1="50%" x2="0%" y2="50%" id="linearGradient-8">
+            <stop stop-color="#18CDB7" offset="0%"></stop>
+            <stop stop-color="#18CDB7" stop-opacity="0.3" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="100%" y1="50%" x2="1.22104458%" y2="50%" id="linearGradient-9">
+            <stop stop-color="#1B73AA" offset="0%"></stop>
+            <stop stop-color="#1B73AA" stop-opacity="0.3" offset="100%"></stop>
+        </linearGradient>
+        <filter x="-18.8%" y="-13.0%" width="137.5%" height="137.5%" filterUnits="objectBoundingBox" id="filter-10">
+            <feOffset dx="0" dy="6" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="5.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.25 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+        <linearGradient x1="108.239175%" y1="-8.13039931%" x2="-19.3374764%" y2="120.368411%" id="linearGradient-11">
+            <stop stop-color="#194E46" offset="0%"></stop>
+            <stop stop-color="#00D8AA" offset="100%"></stop>
+        </linearGradient>
+        <radialGradient cx="50%" cy="50%" fx="50%" fy="50%" r="62.2222222%" gradientTransform="translate(0.5, 0.5), scale(1, 0.8036), rotate(90), translate(-0.5, -0.5)" id="radialGradient-12">
+            <stop stop-color="#00D8FF" offset="0%"></stop>
+            <stop stop-color="#007F95" offset="100%"></stop>
+        </radialGradient>
+        <radialGradient cx="50%" cy="50%" fx="50%" fy="50%" r="50%" id="radialGradient-13">
+            <stop stop-color="#3A6FFF" offset="0%"></stop>
+            <stop stop-color="#2440A3" offset="100%"></stop>
+        </radialGradient>
+        <circle id="path-14" cx="81.5" cy="81.5" r="81.5"></circle>
+        <filter x="-11.0%" y="-7.4%" width="122.1%" height="122.1%" filterUnits="objectBoundingBox" id="filter-15">
+            <feOffset dx="0" dy="6" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.25 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Simple-diagram" stroke="none" fill="none" xlink:href="#path-1">
+        <g id="Group" stroke-width="1" fill-rule="evenodd" transform="translate(894, 78)" fill="#181818">
+            <rect id="Rectangle-3" x="0" y="0" width="350" height="770" rx="33.5278511"></rect>
+        </g>
+        <rect id="Rectangle-3" fill="#181818" fill-rule="evenodd" x="0" y="78" width="350" height="770" rx="33.5278511"></rect>
+        <rect id="Rectangle-3" fill="#181818" fill-rule="evenodd" x="370" y="78" width="504" height="770" rx="33.5278511"></rect>
+        <g id="diagram" stroke-width="1" fill-rule="evenodd" transform="translate(636.2601, 195)" stroke-linecap="round">
+            <path d="M0,264.295262 L71.8476844,264.0896 C92.0087185,264.03189 111.487301,271.388565 126.576558,284.759614 L178.089366,330.406679 C193.065583,343.67756 212.36985,351.0273 232.379871,351.076778 L320.73991,351.295262 L320.73991,351.295262" id="Path" stroke="url(#linearGradient-2)" stroke-width="12" transform="translate(160.37, 307.6476) scale(-1, -1) translate(-160.37, -307.6476)"></path>
+            <path d="M15,174 L86.3227586,174.20416 C106.799225,174.262773 126.51597,181.964896 141.610195,195.801568 L192.669647,242.607083 C207.882802,256.552778 227.786831,264.262861 248.424639,264.204499 L320.73991,264 L320.73991,264" id="Path" stroke="url(#linearGradient-3)" stroke-width="12" transform="translate(167.87, 219.1476) scale(-1, 1) translate(-167.87, -219.1476)"></path>
+            <path d="M6,0 L56.5047035,0.0708147026 C79.0761607,0.102463062 99.4503237,13.6015903 108.279322,34.3746612 L191.330397,229.779151 C200.17921,250.598842 220.622253,264.107255 243.244376,264.08302 L320.73991,264 L320.73991,264" id="Path" stroke="url(#linearGradient-4)" stroke-width="12" transform="translate(163.37, 132.0615) scale(-1, 1) translate(-163.37, -132.0615)"></path>
+            <path d="M0,264.295262 L32.1343415,264 L52.5588965,264 C75.1028864,264 95.4766681,277.438169 104.351828,298.161658 L187.336432,491.930619 C196.191567,512.60735 216.496292,526.036206 238.989346,526.092103 L320.73991,526.295262 L320.73991,526.295262" id="Path" stroke="url(#linearGradient-5)" stroke-width="12" transform="translate(160.37, 395.1476) scale(-1, -1) translate(-160.37, -395.1476)"></path>
+        </g>
+        <path d="M160.826393,368.700527 L328.273141,368.700527 C348.987012,368.700527 368.936605,376.524024 384.128462,390.60493 L435.113093,437.861157 C450.262946,451.903132 470.145958,459.723686 490.802516,459.765393 L607,460 L607,460" id="Path" stroke="url(#linearGradient-6)" stroke-width="12"></path>
+        <path d="M161.130087,459.700527 L307.905469,459.700527 C330.449459,459.700527 350.823241,473.138696 359.698401,493.862185 L442.613055,687.467813 C451.503617,708.227267 471.930574,721.672521 494.513646,721.629369 L614,721.401054 L614,721.401054" id="Path" stroke="url(#linearGradient-7)" stroke-width="12" transform="translate(387.565, 590.7005) scale(1, -1) translate(-387.565, -590.7005)"></path>
+        <path d="M160.880383,459.700527 L329.328722,459.700527 C349.408795,459.700527 368.793796,467.053578 383.822396,480.370878 L435.278445,525.967646 C450.349541,539.322602 469.800095,546.678216 489.936906,546.637832 L608,546.401054 L608,546.401054" id="Path" stroke="url(#linearGradient-8)" stroke-width="12" transform="translate(384.4402, 503.2005) scale(1, -1) translate(-384.4402, -503.2005)"></path>
+        <path d="M161.331488,194.700527 L307.739403,194.700527 C330.367438,194.700527 350.800125,208.237799 359.62293,229.074931 L442.750497,425.400242 C451.557436,446.199899 471.934784,459.729656 494.522079,459.774534 L608,460 L608,460" id="Path" stroke="url(#linearGradient-9)" stroke-width="12"></path>
+        <g id="Group" stroke-width="1" fill-rule="evenodd" transform="translate(193, 143)">
+            <rect id="Rectangle" fill="#333333" x="0" y="0" width="104.566944" height="103.150714" rx="13.9914923"></rect>
+            <rect id="Rectangle-6" stroke="#14547D" stroke-width="3.49787317" x="21.075991" y="21.075991" width="44.7727766" height="44.7727766" rx="3.49787307"></rect>
+            <rect id="Rectangle-6" stroke="#1C77B0" stroke-width="3.49787317" fill="#333333" x="29.1889685" y="29.1889685" width="44.7727766" height="44.7727766" rx="3.49787307"></rect>
+            <g transform="translate(39.0509, 39.0509)">
+                <rect id="Rectangle-6" stroke="#28ACFF" stroke-width="3.49787317" fill="#333333" x="-1.74893659" y="-1.74893659" width="44.7727766" height="44.7727766" rx="3.49787307"></rect>
+                <rect id="Rectangle-8" fill="#28ACFF" x="0" y="6.29617171" width="41.2749034" height="3.49787317"></rect>
+                <g transform="translate(4.897, 14.6911)" fill="#28ACFF" id="Rectangle-5">
+                    <rect x="0" y="16.7897912" width="7.69532098" height="3.49787317" rx="1.74893659"></rect>
+                    <rect x="0" y="8.39489561" width="7.69532098" height="3.49787317" rx="1.74893659"></rect>
+                    <rect x="0" y="0" width="7.69532098" height="3.49787317" rx="1.74893659"></rect>
+                    <rect x="11.8927688" y="16.7897912" width="7.69532098" height="3.49787317" rx="1.74893659"></rect>
+                    <rect x="11.8927688" y="8.39489561" width="7.69532098" height="3.49787317" rx="1.74893659"></rect>
+                    <rect x="11.8927688" y="0" width="7.69532098" height="3.49787317" rx="1.74893659"></rect>
+                    <rect x="23.7855376" y="16.7897912" width="7.69532098" height="3.49787317" rx="1.74893659"></rect>
+                    <rect x="23.7855376" y="8.39489561" width="7.69532098" height="3.49787317" rx="1.74893659"></rect>
+                    <rect x="23.7855376" y="0" width="7.69532098" height="3.49787317" rx="1.74893659"></rect>
+                </g>
+            </g>
+        </g>
+        <g id="Group" stroke-width="1" fill-rule="evenodd" transform="translate(193, 318)">
+            <rect id="Rectangle" fill="#333333" x="0" y="0" width="104.566944" height="103.150714" rx="13.9914923"></rect>
+            <rect id="Rectangle-6" stroke="#5F3D7B" stroke-width="3.49787317" x="21.075991" y="22.2349878" width="44.7727766" height="44.7727766" rx="3.49787307"></rect>
+            <rect id="Rectangle-6" stroke="#8153A5" stroke-width="3.49787317" fill="#333333" x="29.1889685" y="29.1889685" width="44.7727766" height="44.7727766" rx="3.49787307"></rect>
+            <rect id="Rectangle-6" stroke="#BA78EF" stroke-width="3.49787317" fill="#333333" x="37.301946" y="37.301946" width="44.7727766" height="44.7727766" rx="3.49787307"></rect>
+            <rect id="Rectangle-8" fill="#BA78EF" x="39.0508826" y="45.3470543" width="41.2749034" height="3.49787317"></rect>
+            <polygon id="Rectangle-8" fill="#BA78EF" transform="translate(54.0324, 62.8471) rotate(90) translate(-54.0324, -62.8471)" points="36.5324087 61.0981177 71.5324087 61.0981177 71.5324087 64.5959909 36.5324087 64.5959909"></polygon>
+            <polygon id="Rectangle-8" fill="#BA78EF" transform="translate(61.4373, 62.8471) rotate(90) translate(-61.4373, -62.8471)" points="43.9372709 61.0981177 78.9372709 61.0981177 78.9372709 64.5959909 43.9372709 64.5959909"></polygon>
+            <polygon id="Rectangle-8" fill="#BA78EF" transform="translate(73.9617, 62.8471) rotate(90) translate(-73.9617, -62.8471)" points="56.4617451 61.0981177 91.4617451 61.0981177 91.4617451 64.5959909 56.4617451 64.5959909"></polygon>
+            <rect id="Rectangle-8" fill="#BA78EF" x="37.1275465" y="61.0981177" width="24.5" height="3.49787317"></rect>
+        </g>
+        <g id="Group" stroke-width="1" fill-rule="evenodd" transform="translate(193, 494)">
+            <rect id="Rectangle" fill="#333333" x="0" y="0" width="104.566944" height="103.150714" rx="13.9914923"></rect>
+            <g transform="translate(22.8249, 23.9839)">
+                <rect id="Rectangle-6" stroke="#006953" stroke-width="3.49787317" x="-1.74893659" y="-1.74893659" width="44.7727766" height="44.7727766" rx="3.49787307"></rect>
+                <rect id="Rectangle-6" stroke="#009B7A" stroke-width="3.49787317" fill="#333333" x="6.36404089" y="5.20504411" width="44.7727766" height="44.7727766" rx="3.49787307"></rect>
+                <g transform="translate(16.226, 15.067)">
+                    <rect id="Rectangle-6" stroke="#00D8AA" stroke-width="3.49787317" fill="#333333" x="-1.74893659" y="-1.74893659" width="44.7727766" height="44.7727766" rx="3.49787307"></rect>
+                    <rect id="Rectangle-8" fill="#00D8AA" x="0" y="6.29617171" width="41.2749034" height="3.49787317"></rect>
+                    <rect id="Rectangle-8" fill="#00D8AA" x="7.27595761e-12" y="22.571977" width="41.2749034" height="3.49787317"></rect>
+                    <polygon id="Rectangle-8" fill="#00D8AA" transform="translate(30.4094, 15.3085) rotate(90) translate(-30.4094, -15.3085)" points="21.3970561 13.559606 39.421798 13.559606 39.421798 17.0574792 21.3970561 17.0574792"></polygon>
+                    <polygon id="Rectangle-8" fill="#00D8AA" transform="translate(23.9289, 15.3085) rotate(90) translate(-23.9289, -15.3085)" points="14.9165001 13.559606 32.941242 13.559606 32.941242 17.0574792 14.9165001 17.0574792"></polygon>
+                    <polygon id="Rectangle-8" fill="#00D8AA" transform="translate(17.4483, 15.3085) rotate(90) translate(-17.4483, -15.3085)" points="8.43594412 13.559606 26.460686 13.559606 26.460686 17.0574792 8.43594412 17.0574792"></polygon>
+                    <rect id="Rectangle-8" fill="#00D8AA" x="7.27595761e-12" y="30.7421754" width="41.2749034" height="3.49787317"></rect>
+                </g>
+            </g>
+        </g>
+        <g id="Group" stroke-width="1" fill-rule="evenodd" transform="translate(193, 670)">
+            <rect id="Rectangle" fill="#333333" x="0" y="0" width="104.566944" height="103.150714" rx="13.9914923"></rect>
+            <rect id="Rectangle-6" stroke="#206E7D" stroke-width="3.49787317" x="21.075991" y="22.2349878" width="44.7727766" height="44.7727766" rx="3.49787307"></rect>
+            <rect id="Rectangle-6" stroke="#2D97AA" stroke-width="3.49787317" fill="#333333" x="29.1889685" y="29.1889685" width="44.7727766" height="44.7727766" rx="3.49787307"></rect>
+            <rect id="Rectangle-6" stroke="#42E2FF" stroke-width="3.49787317" fill="#333333" x="37.301946" y="37.301946" width="44.7727766" height="44.7727766" rx="3.49787307"></rect>
+            <g transform="translate(39.0509, 45.3471)" fill="#42E2FF" id="Rectangle-8">
+                <rect x="0" y="0" width="41.2749034" height="3.49787317"></rect>
+            </g>
+            <polygon id="Rectangle-8" fill="#42E2FF" transform="translate(59.6883, 68.9681) rotate(90) translate(-59.6883, -68.9681)" points="45.6795263 67.2191722 73.6971423 67.2191722 73.6971423 70.7170454 45.6795263 70.7170454"></polygon>
+            <rect id="Rectangle-8" fill="#42E2FF" x="39.0508826" y="53.2103642" width="41.2749034" height="3.49787317"></rect>
+            <rect id="Rectangle-8" fill="#42E2FF" x="39.0508826" y="70.463872" width="41.2749034" height="3.49787317"></rect>
+        </g>
+        <g id="Group" stroke-width="1" fill-rule="evenodd" transform="translate(995, 690)">
+            <path d="M42,2 C43.1045695,2 44.1045695,2.44771525 44.8284271,3.17157288 C45.5522847,3.8954305 46,4.8954305 46,6 L46,54 C46,55.1045695 45.5522847,56.1045695 44.8284271,56.8284271 C44.1045695,57.5522847 43.1045695,58 42,58 L6,58 C4.8954305,58 3.8954305,57.5522847 3.17157288,56.8284271 C2.44771525,56.1045695 2,55.1045695 2,54 L2,15.8712627 L14.897577,2 L42,2 Z" id="Rectangle-7" stroke="#939393" stroke-width="4"></path>
+            <polyline id="Path" stroke="#939393" stroke-width="4" points="17.0262261 3 17.0262261 18 3 18"></polyline>
+            <path d="M35.4717633,19.4090211 C35.8080848,18.8382442 36.5434333,18.6481806 37.1142101,18.984502 C37.684987,19.3208235 37.8750506,20.056172 37.5387291,20.6269488 L25.8657902,40.4372906 C25.4232154,41.1883918 24.3525999,41.2314769 23.8511005,40.5183682 L18.9496444,33.548985 L13.0844335,42.6670369 C12.7498695,43.1870332 12.080991,43.3620006 11.5403197,43.091576 L11.4265924,43.0267741 C10.8694536,42.6683126 10.7083938,41.9260718 11.0668553,41.368933 L17.8973818,30.7525861 C18.358134,30.036462 19.3975277,30.0150528 19.8873777,30.7115966 L24.7426444,37.616985 L35.4717633,19.4090211 Z" id="Path" fill="#939393" fill-rule="nonzero"></path>
+        </g>
+        <text id="Reports" font-family="FaktPro-Bold, Fakt Pro" font-size="24" font-weight="bold" fill="#B3B3B3">
+            <tspan x="1060" y="728">Reports</tspan>
+        </text>
+        <text id="Partner-schemas" font-family="FaktPro-SemiBold, Fakt Pro" font-size="34" font-weight="500" fill="#F3F4EF">
+            <tspan x="47.5" y="44">Partner schemas</tspan>
+        </text>
+        <text id="Common-schema" font-family="FaktPro-SemiBold, Fakt Pro" font-size="34" font-weight="500" fill="#F3F4EF">
+            <tspan x="481.223" y="44">Common schema</tspan>
+        </text>
+        <text id="Downstream-use" font-family="FaktPro-SemiBold, Fakt Pro" font-size="34" font-weight="500" fill="#F3F4EF">
+            <tspan x="934.5" y="44">Downstream use</tspan>
+        </text>
+        <text id="Data-warehouse" font-family="FaktPro-Bold, Fakt Pro" font-size="24" font-weight="bold" line-spacing="26" fill="#B3B3B3">
+            <tspan x="1060" y="193">Data </tspan>
+            <tspan x="1060" y="219">warehouse</tspan>
+        </text>
+        <text id="Models" font-family="FaktPro-Bold, Fakt Pro" font-size="24" font-weight="bold" line-spacing="26" fill="#B3B3B3">
+            <tspan x="1060" y="381">Models</tspan>
+        </text>
+        <text id="Partners" font-family="FaktPro-Bold, Fakt Pro" font-size="24" font-weight="bold" fill="#B3B3B3">
+            <tspan x="1060" y="553">Partners</tspan>
+        </text>
+        <g id="Group" stroke-width="1" fill-rule="evenodd" transform="translate(987, 519)" stroke="#979797" stroke-linecap="round">
+            <path d="M0,50 C0,42.1505561 5.62570161,37.2212961 16.8771048,35.2122199 C9.93316844,16.7266539 11.9115787,7.48387097 22.8123355,7.48387097 C33.7130923,7.48387097 35.505985,16.7266539 28.1910137,35.2122199 C39.3324884,37.7031642 44.9032258,42.6324242 44.9032258,50" id="Path" stroke-width="3.74193548"></path>
+            <path d="M26.2150023,7.09987688 C27.1617939,2.36662563 30.3931631,0 35.9091097,0 C46.8098665,0 48.6027592,9.24278298 41.2877879,27.7283489 C52.4292626,30.2192932 58,35.1485532 58,42.516129" id="Path" stroke-width="3.74193548" opacity="0.5"></path>
+        </g>
+        <path d="M1014.40169,383.117647 C1009.23075,383.117647 1005.03693,378.923824 1005.03693,373.752882 C1005.03693,368.579059 1009.23363,364.382353 1014.40746,364.382353 C1019.5784,364.382353 1023.7751,368.579059 1023.77222,373.75 C1023.76934,378.923824 1019.57263,383.114765 1014.40169,383.117647 M1031.5949,373.751432 C1031.5949,370.491406 1034.02385,367.827237 1037.15457,367.394667 C1036.65045,365.587043 1035.91718,363.833848 1034.97768,362.163729 C1032.4542,364.071617 1028.85945,363.896871 1026.55939,361.596518 C1024.2536,359.293301 1024.08747,355.70097 1025.99512,353.174306 C1024.32521,352.23182 1022.57223,351.504187 1020.76484,351 C1020.32659,354.136844 1017.66562,356.563244 1014.40887,356.563244 C1011.15212,356.563244 1008.48542,354.136844 1008.05004,351 C1006.24264,351.501322 1004.48967,352.23182 1002.81976,353.174306 C1004.72455,355.698105 1004.55269,359.296166 1002.25262,361.596518 C999.949695,363.896871 996.354952,364.068753 993.828606,362.160864 C992.886239,363.830983 992.158698,365.584178 991.654574,367.391803 C994.796752,367.827237 997.222846,370.491406 997.222846,373.751432 C997.222846,377.008594 994.793888,379.675628 991.657438,380.108197 C992.158698,381.921551 992.889104,383.671882 993.831471,385.342001 C996.354952,383.434112 999.95256,383.605994 1002.25835,385.903482 C1004.55841,388.206699 1004.72741,391.807625 1002.81976,394.328559 C1004.48967,395.265315 1006.24264,395.995813 1008.05004,396.5 C1008.48542,393.368885 1011.15212,390.939621 1014.40887,390.939621 C1017.66276,390.939621 1020.32659,393.368885 1020.76197,396.5 C1022.57223,395.995813 1024.32234,395.265315 1025.99225,394.328559 C1024.0846,391.79903 1024.26219,388.20097 1026.55653,385.903482 C1028.85945,383.603129 1032.4542,383.434112 1034.97768,385.339136 C1035.91718,383.669017 1036.64472,381.915822 1037.14885,380.108197 C1034.01812,379.669899 1031.5949,377.008594 1031.5949,373.751432" id="settings/settings-17" stroke="#939393" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+        <path d="M1014,179.5 C1019.17598,179.5 1023.71536,180.161097 1026.98132,181.241545 C1028.53041,181.754018 1029.77798,182.349475 1030.62225,183.02947 C1031.104,183.417483 1031.5,183.808692 1031.5,184.2856 L1031.5,185.999911 C1031.5,186.372756 1030.97667,186.696242 1030.45453,187.0697 C1029.55058,187.716234 1028.23329,188.343677 1026.51114,188.887523 C1023.51371,189.834094 1019.34907,190.5 1014,190.5 C1008.77222,190.5 1003.80293,189.686379 1000.14224,188.309959 C998.908392,187.846171 998.027844,187.355027 997.412969,186.898207 C997.010323,186.599062 996.5,186.371672 996.5,186.285733 L996.5,184.2856 C996.5,183.842516 996.942017,183.484518 997.428695,183.110309 C998.317652,182.426784 999.623249,181.807807 1001.24231,181.272188 C1004.489,180.198116 1008.93992,179.5 1014,179.5 Z" id="Path" stroke="#C0C0C0" stroke-width="3" fill-rule="nonzero"></path>
+        <path d="M1031.5,196.394375 L1031.5,219.967042 C1031.5,220.343587 1030.97781,220.672974 1030.45131,221.051598 C1029.54754,221.701523 1028.23049,222.332309 1026.50871,222.879015 C1023.51183,223.830596 1019.34799,224.5 1014,224.5 C1009.09057,224.5 1005.08883,223.832886 1002.0919,222.926572 C1000.234,222.364716 998.775358,221.716503 997.747567,221.082291 C997.238941,220.768437 996.5,220.545847 996.5,220.254132 L996.5,196.40502 C1001.69959,198.336837 1007.57031,199.522076 1014,199.522076 C1020.28115,199.522076 1026.7588,198.401981 1031.5,196.394375 Z" id="Path" stroke="#C0C0C0" stroke-width="3" fill-rule="nonzero"></path>
+        <g id="Group" stroke-width="1" fill-rule="evenodd" transform="translate(58, 142)">
+            <g transform="translate(2, 0)">
+                <g fill="#FFFFFF" id="Rectangle">
+                    <rect x="0" y="0" width="103" height="103" rx="8.51005268"></rect>
+                </g>
+                <image id="dummy-1" x="11" y="15" width="78" height="72" xlink:href="data:image/png;base64,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"></image>
+            </g>
+            <g filter="url(#filter-10)" transform="translate(1, 175)">
+                <g>
+                    <rect id="Rectangle" fill="#6A60AA" x="0" y="0" width="104" height="104" rx="11.8450737"></rect>
+                    <image id="symbol-only-logos" x="11.4135135" y="8.85643444" width="80.7297297" height="86.2972973" xlink:href="data:image/png;base64,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"></image>
+                </g>
+            </g>
+            <g transform="translate(1, 351)">
+                <g fill="url(#linearGradient-11)" id="Rectangle">
+                    <rect x="0" y="0" width="104" height="104" rx="11.9600735"></rect>
+                </g>
+                <text id="ß" font-family="FSAlbert-Light, FS Albert" font-size="80.1081081" font-weight="300" fill="#51FFCC">
+                    <tspan x="32.3243243" y="78.8648649">ß</tspan>
+                </text>
+            </g>
+            <g transform="translate(0, 527)">
+                <rect id="Rectangle-2" fill="#FFFFFF" x="0" y="0" width="104" height="104" rx="11.2432432"></rect>
+                <path d="M52.7027027,12.6486486 L55.9630811,42.6476486 L70.7817831,33.2182169 L61.2740811,48.1586486 L84.3243243,52 L61.2740811,55.8406486 L70.7817831,70.7817831 L55.9630811,61.3516486 L52.7027027,91.3513514 L49.4420811,61.3516486 L34.6236223,70.7817831 L44.1300811,55.8406486 L21.0810811,52 L44.1300811,48.1586486 L34.6236223,33.2182169 L49.4420811,42.6476486 L52.7027027,12.6486486 Z M52.7020811,50.9146486 L51.6170811,51.9996486 L52.7020811,53.0846486 L53.7878698,51.9991302 L52.7020811,50.9146486 Z" id="Combined-Shape" fill="url(#radialGradient-12)"></path>
+            </g>
+        </g>
+        <g id="Group" stroke-width="1" fill-rule="evenodd" transform="translate(532.5, 378)">
+            <g id="Oval">
+                <use fill="black" fill-opacity="1" filter="url(#filter-15)" xlink:href="#path-14"></use>
+                <use fill="url(#radialGradient-13)" fill-rule="evenodd" xlink:href="#path-14"></use>
+            </g>
+            <g transform="translate(50.5438, 50.5438)">
+                <rect id="Rectangle-6" stroke="#FFFFFF" stroke-width="5.24680976" x="-2.62340488" y="-2.62340488" width="67.1591649" height="67.1591649" rx="5.24680996"></rect>
+                <rect id="Rectangle-8" fill="#FFFFFF" x="0" y="9.44425757" width="61.9123552" height="5.24680976"></rect>
+                <g transform="translate(7.3455, 22.0366)" fill="#FFFFFF" id="Rectangle-5">
+                    <rect x="0" y="25.1846868" width="11.5429815" height="5.24680976" rx="2.62340488"></rect>
+                    <rect x="0" y="12.5923434" width="11.5429815" height="5.24680976" rx="2.62340488"></rect>
+                    <rect x="0" y="0" width="11.5429815" height="5.24680976" rx="2.62340488"></rect>
+                    <rect x="17.8391532" y="25.1846868" width="11.5429815" height="5.24680976" rx="2.62340488"></rect>
+                    <rect x="17.8391532" y="12.5923434" width="11.5429815" height="5.24680976" rx="2.62340488"></rect>
+                    <rect x="17.8391532" y="0" width="11.5429815" height="5.24680976" rx="2.62340488"></rect>
+                    <rect x="35.6783064" y="25.1846868" width="11.5429815" height="5.24680976" rx="2.62340488"></rect>
+                    <rect x="35.6783064" y="12.5923434" width="11.5429815" height="5.24680976" rx="2.62340488"></rect>
+                    <rect x="35.6783064" y="0" width="11.5429815" height="5.24680976" rx="2.62340488"></rect>
+                </g>
+            </g>
+        </g>
+        <g id="Group" stroke-width="1" fill-rule="evenodd" transform="translate(232.2056, 182.1047)">
+            <g>
+                <rect id="Rectangle-6" stroke="#28ACFF" stroke-width="3.49787317" fill="#333333" x="-1.74893659" y="-1.74893659" width="44.7727766" height="44.7727766" rx="3.49787307"></rect>
+                <rect id="Rectangle-8" fill="#28ACFF" x="0" y="6.29617171" width="41.2749034" height="3.49787317"></rect>
+                <polygon id="Rectangle-8" fill="#28ACFF" transform="translate(11.6375, 25.5249) rotate(90) translate(-11.6375, -25.5249)" points="-4.11254828 23.7759669 27.3874517 23.7759669 27.3874517 27.27384 -4.11254828 27.27384"></polygon>
+                <rect id="Rectangle-8" fill="#28ACFF" x="10.3874517" y="25.2759669" width="31.5" height="3.49787317"></rect>
+                <rect id="Rectangle-8" fill="#28ACFF" x="10.3874517" y="32.7759669" width="31.5" height="3.49787317"></rect>
+            </g>
+        </g>
+    </g>
+</svg>
+      </div>
       <p>We observed that this was often performed manually using elaborate Excel hacks. It was slow, specialist work, the knowledge created while mapping one dataset was difficult to reuse, and the next month it all needed doing again.</p>
     </section>
 
@@ -433,7 +720,14 @@
       <p>There was no established product pattern that we could adopt. Instead, a concept emerged directly from the research: an interface with vertically stacked fields, across which multiple schemas could align to a common master.</p>
       <p>The key innovation was separating mapped and unmapped fields into mutually exclusive tabs for each schema. This made it easier to spot gaps and keep track of unmapped items, whilst a progress bar indicated the completeness of each schema.</p>
       <p>Once source schemas were mapped in, the mappings were retained. And if a new variant came in next month, it was just a couple of clicks to get it mapped in.</p>
+
       <blockquote>Processing those 2000 files a month went from taking most of the month to a job running in the background in minutes.</blockquote>
+
+      <div class="ui-video">
+        <video autoplay controls muted loop playsinline poster="media/concept-mapping-detail.jpg">
+          <source src="media/concept-mapping-detail.mp4" type="video/mp4">
+        </video>
+      </div>
     </section>
 
     <hr class="rule">
@@ -443,7 +737,14 @@
       <h2>Suggestions users could trust</h2>
       <p>For every unmapped field we used our matching engine to generate suggestions to map to the master schema. The next step was to automate this: allow top-ranking suggestions to be mapped at once.</p>
       <p>I designed this as a preview mode, so users could see mapping suggestions before committing. I also added a slider, so a minimum confidence threshold could be set: incorrect mappings could be costly, so quality was more important than coverage.</p>
+
       <blockquote>These safeguards helped users trust the automation.</blockquote>
+
+      <div class="ui-video">
+        <video autoplay controls muted loop playsinline poster="media/automap-preview.jpg">
+          <source src="media/automap-preview.mp4" type="video/mp4">
+        </video>
+      </div>
     </section>
 
     <hr class="rule">
@@ -451,8 +752,20 @@
     <section aria-labelledby="refinement-heading" class="case-body">
       <span class="eyebrow" id="refinement-heading">Constant refinement</span>
       <h2>Following the product's desire lines</h2>
-      <p>Column mapping has been in production for ten years. Over that time, we've continually adapted it to how people actually use it, following the product's emerging "desire lines".</p>
+      <p>Column mapping has been in production for ten years. Over that time, we've continually adapted it to how people actually use it, following the product's emerging ‘desire lines’.</p>
+
+      <figure class="figure">
+        <img src="media/mch-early-screenshot-web.jpg" alt="Screenshot of the early Map Column Headers interface, light theme, showing unnamed numbered columns being mapped to a master schema.">
+        <figcaption>QA testing screenshot from our first release of Map Column Headers, early 2017</figcaption>
+      </figure>
+
       <p>Our original sample of users were building master schemas by amalgamating multiple files. But as we broadened the user cohort, they more often started with a definitive file, such as their data warehouse target schema. We evolved the workflow to foreground that behaviour.</p>
+
+      <div class="ui-video">
+        <video autoplay controls muted loop playsinline poster="media/apply-master-schema.jpg">
+          <source src="media/apply-master-schema.mp4" type="video/mp4">
+        </video>
+      </div>
     </section>
 
     <hr class="rule">
@@ -462,18 +775,42 @@
       <h2>From column names to column contents</h2>
       <p>Whilst the interface had served our clients well, we knew the mapping algorithm itself could be improved. It just looked at the similarity of column names, and whether a pair had been mapped before. A more intelligent system would learn the contents of each column to more accurately match them to the master schema.</p>
       <p>In 2026 we initiated a project to identify the type of data in each column, then profile the data inside it, creating a unique data fingerprint for each field.</p>
+
       <p>I did a full audit of the current mapping behaviour, identified shortcomings in our approach and evaluated different paths for improvement. Together with a domain expert, I modelled different methodologies for weighting data fingerprints and prior usage.</p>
+
+      <figure class="figure">
+        <img src="media/mch-modelling-web.jpg" alt="Spreadsheet modelling different scenarios for weighting type match and text match scores when scoring candidate column mappings.">
+        <figcaption>Assessing mapping algorithms by modelling different scenarios</figcaption>
+      </figure>
+
       <p>When it came to the UI, we displayed the data types, allowing users to drill down and see detailed stats for each column. Prior mappings from other users now had avatars and recency information to build trust.</p>
       <blockquote>Our tests showed a 4x improvement in mapping quality for the same coverage.</blockquote>
+
+      <figure class="figure">
+        <img src="media/data-profile-web.jpg" alt="Data profile panel showing uniques, blanks, duplicates, coverage, mode and a value distribution histogram for a Commission Amount column.">
+        <figcaption>Data profiles allow users to understand the content of every column and inform mapping suggestions.</figcaption>
+      </figure>
     </section>
 
     <hr class="rule">
 
     <section aria-labelledby="outcome-heading" class="case-body">
       <span class="eyebrow" id="outcome-heading">Outcome</span>
-      <h2>Scaling without growing the team</h2>
+      <h2>An invisible user experience</h2>
+      <p>Column mapping gives clients control over complex, high-volume data ingestion, allowing them to scale without growing operational headcount.</p>
       <p>With the semantic upgrade, users have the confidence to run their process without even logging in: when new fields are detected, they are mapped in automatically. Our validations framework catches any rare exceptions and notifies the user.</p>
-      <blockquote>Column mapping gives clients control over complex, high-volume data ingestion, allowing them to scale their business without growing headcount.</blockquote>
+      <blockquote>We put considerable effort into creating a compelling user experience. On the happy path, users now never see it.</blockquote>
+    </section>
+
+    <hr class="rule">
+
+    <section aria-labelledby="resources-heading" class="case-body">
+      <span class="eyebrow" id="resources-heading">Resources</span>
+      <ul class="resources-list">
+        <li><a href="https://help.quantemplate.com/map-columns" target="_blank" rel="noopener noreferrer">Map Column Headers support doc</a></li>
+        <li><a href="https://youtu.be/D0qWxXOcpvI?si=9C2ynKbU-jgG2_R4" target="_blank" rel="noopener noreferrer">Map Column Headers tutorial (c.2017)</a></li>
+        <li><a href="https://help.quantemplate.com/data-semantics" target="_blank" rel="noopener noreferrer">Data Semantics support doc</a></li>
+      </ul>
     </section>
 
     <hr class="rule">
@@ -494,6 +831,7 @@
     <a href="#refinement-heading">Constant refinement</a>
     <a href="#semantics-heading">Semantics and fingerprinting</a>
     <a href="#outcome-heading">Outcome</a>
+    <a href="#resources-heading">Resources</a>
   </nav>
   </main>
 

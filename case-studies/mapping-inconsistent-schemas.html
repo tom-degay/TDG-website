@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mapping inconsistent schemas at scale — Tom de Gay</title>
+<meta name="description" content="How Tom de Gay designed Quantemplate's column mapping engine, and later its semantic fingerprinting upgrade — a decade-old feature that still gives clients a 4x improvement in mapping quality.">
+<meta name="theme-color" content="#000000">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mapping inconsistent schemas at scale — Tom de Gay">
+<meta property="og:description" content="How Tom de Gay designed Quantemplate's column mapping engine, and later its semantic fingerprinting upgrade.">
+<meta property="og:url" content="https://tomdegay.com/case-studies/mapping-inconsistent-schemas.html">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23000'/%3E%3Ctext x='50' y='68' font-size='60' font-family='Georgia,serif' fill='%23fff' text-anchor='middle'%3ET%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+
+  @font-face {
+    font-family: "Fakt Blond SemiBold";
+    src: url("../FaktProSemiBold.woff2") format("woff2"),
+         url("../FaktProSemiBold.woff") format("woff");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  :root {
+    color-scheme: dark;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #000;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: clamp(24px, 6vw, 72px) clamp(24px, 5vw, 56px) clamp(96px, 12vw, 140px);
+  }
+
+  @media (min-width: 1100px) {
+    main {
+      max-width: 1320px;
+    }
+  }
+
+  .display {
+    font-family: "Fakt Blond SemiBold", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  a {
+    color: #fff;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+    padding-bottom: 1px;
+    transition: border-color 0.15s ease, opacity 0.15s ease;
+  }
+
+  a:hover,
+  a:focus-visible {
+    border-color: rgba(255, 255, 255, 0.9);
+  }
+
+  a:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.6);
+    outline-offset: 4px;
+    border-radius: 1px;
+  }
+
+  a[target="_blank"] {
+    position: relative;
+  }
+
+  a[target="_blank"]::after {
+    content: "→";
+    position: absolute;
+    right: -1.1em;
+    top: 50%;
+    transform: translate(-4px, -50%);
+    opacity: 0;
+    transition: transform 0.18s ease, opacity 0.18s ease;
+    pointer-events: none;
+    will-change: transform, opacity;
+  }
+
+  a[target="_blank"]:hover::after,
+  a[target="_blank"]:focus-visible::after {
+    opacity: 1;
+    transform: translate(0, -50%);
+  }
+
+  hr.rule {
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    margin: clamp(32px, 5vw, 48px) 0;
+  }
+
+  section .eyebrow,
+  .eyebrow {
+    display: block;
+    font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+    color: #00d8aa;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    word-spacing: -3px;
+    text-transform: uppercase;
+    margin: 0 0 20px;
+  }
+
+  /* -- back nav -- */
+
+  .back-link {
+    display: inline-block;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.55);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  }
+
+  .back-link:hover,
+  .back-link:focus-visible {
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.9);
+  }
+
+  /* -- hero -- */
+
+  .kicker {
+    display: block;
+    font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+    color: #00d8aa;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    word-spacing: -3px;
+    text-transform: uppercase;
+    margin: 32px 0 18px;
+  }
+
+  h1 {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(30px, 5vw, 46px);
+    line-height: 1.12;
+    max-width: 22ch;
+  }
+
+  p.subtitle {
+    margin: 18px 0 0;
+    color: rgba(255, 255, 255, 0.68);
+    font-size: clamp(16px, 1.9vw, 19px);
+    line-height: 1.5;
+    max-width: 54ch;
+  }
+
+  /* -- meta row -- */
+
+  .meta-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 28px 32px;
+    margin: 40px 0 0;
+  }
+
+  .meta-item .eyebrow {
+    margin-bottom: 8px;
+  }
+
+  .meta-item p {
+    margin: 0;
+    color: #fff;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* -- key points -- */
+
+  .key-points {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .key-points li {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    color: #fff;
+    font-size: clamp(18px, 2.4vw, 23px);
+    line-height: 1.4;
+  }
+
+  .key-points li::before {
+    content: "→";
+    flex: 0 0 auto;
+    color: #00d8aa;
+  }
+
+  @media (min-width: 1100px) {
+    .key-points-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    }
+
+    .key-points {
+      grid-column: 2 / -1;
+    }
+  }
+
+  /* -- body copy -- */
+
+  .about-statement {
+    color: #fff;
+    font-size: clamp(22px, 3.2vw, 30px);
+    line-height: 1.35;
+    margin: 0;
+    max-width: 50ch;
+  }
+
+  h2 {
+    margin: 0 0 20px;
+    color: #fff;
+    font-size: clamp(20px, 2.6vw, 25px);
+    line-height: 1.25;
+  }
+
+  .case-body p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: clamp(15.5px, 1.7vw, 17px);
+    line-height: 1.65;
+    max-width: 72ch;
+    margin: 0 0 20px;
+  }
+
+  .case-body p:last-child {
+    margin-bottom: 0;
+  }
+
+  .case-body blockquote {
+    margin: 28px 0 24px;
+    padding-left: 22px;
+    border-left: 2px solid #00d8aa;
+    color: #fff;
+    font-size: clamp(17px, 2vw, 20px);
+    line-height: 1.5;
+    max-width: 54ch;
+  }
+
+  .case-body blockquote:last-child {
+    margin-bottom: 0;
+  }
+
+  /* -- footer -- */
+
+  .case-footer p {
+    color: rgba(255, 255, 255, 0.68);
+    font-size: 15px;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* -- sticky section nav (wide desktop only) -- */
+
+  .toc {
+    display: none;
+  }
+
+  @media (min-width: 1100px) {
+    main {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 230px;
+      column-gap: 96px;
+      align-items: start;
+    }
+
+    .content {
+      grid-column: 1;
+      min-width: 0;
+    }
+
+    .toc {
+      display: flex;
+      flex-direction: column;
+      grid-column: 2;
+      position: sticky;
+      top: 40px;
+    }
+  }
+
+  .toc-heading {
+    margin: 0 0 16px;
+  }
+
+  .toc a {
+    display: block;
+    padding: 8px 0 8px 16px;
+    border-left: 2px solid rgba(255, 255, 255, 0.14);
+    border-bottom: none;
+    font-size: 16px;
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.55);
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .toc a:hover,
+  .toc a:focus-visible {
+    color: #fff;
+    border-left-color: rgba(255, 255, 255, 0.6);
+  }
+
+  .toc a.is-active {
+    color: #00d8aa;
+    border-left-color: #00d8aa;
+  }
+
+</style>
+</head>
+<body>
+  <main>
+  <div class="content">
+    <a class="back-link" href="/">← Tom de Gay</a>
+
+    <header>
+      <span class="kicker">Case Study | Quantemplate</span>
+      <h1 class="display">Mapping inconsistent schemas at scale</h1>
+      <p class="subtitle">Translate inconsistent data sources to a common target format, fully automated and enhanced by AI suggestions.</p>
+
+      <div class="meta-row">
+        <div class="meta-item">
+          <span class="eyebrow">Role</span>
+          <p>Lead product designer, end to end</p>
+        </div>
+        <div class="meta-item">
+          <span class="eyebrow">Team</span>
+          <p>Design, engineering, domain experts and customers</p>
+        </div>
+        <div class="meta-item">
+          <span class="eyebrow">Timeframe</span>
+          <p>V1 concept &amp; design: ~1 month (2016)<br>Semantic layer design: ~1 month (2026)</p>
+        </div>
+      </div>
+    </header>
+
+    <hr class="rule">
+
+    <section aria-labelledby="keypoints-heading">
+      <span class="eyebrow" id="keypoints-heading">Key points</span>
+      <div class="key-points-grid">
+        <ul class="key-points">
+          <li>Automate a month's work in minutes</li>
+          <li>Process 2000 files per org per month</li>
+          <li>Continuously improved for 10 years</li>
+          <li>Data semantics gives 4× improvement in mapping quality</li>
+        </ul>
+      </div>
+    </section>
+
+    <hr class="rule">
+
+    <section aria-labelledby="summary-heading">
+      <span class="eyebrow" id="summary-heading">Summary</span>
+      <p class="about-statement display">In 2016, I designed a new way to map columns across inconsistent data schemas &mdash; informed by research into the labour-intensive manual processes we observed. It became one of Quantemplate's core capabilities, and remains in production nearly a decade later. In 2026 I led its evolution from simply matching column names to weighting suggestions via the semantic fingerprinting of column data, a 4x improvement in automated mapping quality.</p>
+    </section>
+
+    <hr class="rule">
+
+    <section aria-labelledby="problem-heading" class="case-body">
+      <span class="eyebrow" id="problem-heading">The problem</span>
+      <h2>Hundreds of schemas, no common language</h2>
+      <p>Insurance companies process risk, premium and claims data from hundreds of trading partners, each with their own data schema which needs to be aligned to the insurer's own standards before it can be used downstream. A column might be called "Unique Market Reference" in one dataset and "UMR" in another. Now multiply that across an average of 250 fields and 2000 distinct files a month in a typical organisation.</p>
+      <p>We observed that this was often performed manually using elaborate Excel hacks. It was slow, specialist work, the knowledge created while mapping one dataset was difficult to reuse, and the next month it all needed doing again.</p>
+    </section>
+
+    <hr class="rule">
+
+    <section aria-labelledby="research-heading" class="case-body">
+      <span class="eyebrow" id="research-heading">Research</span>
+      <h2>Learning from the Excel workarounds</h2>
+      <p>Studying dozens of Excel processes where people had manually reconciled different schemas revealed consistent patterns. The most effective approaches arranged source and target schemas vertically, using alignment across rows to show mappings. Interviews with domain experts validated the approach, but exposed a recurring pain point: constantly rearranging cells whilst keeping track of what was mapped and what remained.</p>
+    </section>
+
+    <hr class="rule">
+
+    <section aria-labelledby="concept-heading" class="case-body">
+      <span class="eyebrow" id="concept-heading">Concept</span>
+      <h2>Vertically stacked fields, aligned to a common master</h2>
+      <p>There was no established product pattern that we could adopt. Instead, a concept emerged directly from the research: an interface with vertically stacked fields, across which multiple schemas could align to a common master.</p>
+      <p>The key innovation was separating mapped and unmapped fields into mutually exclusive tabs for each schema. This made it easier to spot gaps and keep track of unmapped items, whilst a progress bar indicated the completeness of each schema.</p>
+      <p>Once source schemas were mapped in, the mappings were retained. And if a new variant came in next month, it was just a couple of clicks to get it mapped in.</p>
+      <blockquote>Processing those 2000 files a month went from taking most of the month to a job running in the background in minutes.</blockquote>
+    </section>
+
+    <hr class="rule">
+
+    <section aria-labelledby="automation-heading" class="case-body">
+      <span class="eyebrow" id="automation-heading">Automation</span>
+      <h2>Suggestions users could trust</h2>
+      <p>For every unmapped field we used our matching engine to generate suggestions to map to the master schema. The next step was to automate this: allow top-ranking suggestions to be mapped at once.</p>
+      <p>I designed this as a preview mode, so users could see mapping suggestions before committing. I also added a slider, so a minimum confidence threshold could be set: incorrect mappings could be costly, so quality was more important than coverage.</p>
+      <blockquote>These safeguards helped users trust the automation.</blockquote>
+    </section>
+
+    <hr class="rule">
+
+    <section aria-labelledby="refinement-heading" class="case-body">
+      <span class="eyebrow" id="refinement-heading">Constant refinement</span>
+      <h2>Following the product's desire lines</h2>
+      <p>Column mapping has been in production for ten years. Over that time, we've continually adapted it to how people actually use it, following the product's emerging "desire lines".</p>
+      <p>Our original sample of users were building master schemas by amalgamating multiple files. But as we broadened the user cohort, they more often started with a definitive file, such as their data warehouse target schema. We evolved the workflow to foreground that behaviour.</p>
+    </section>
+
+    <hr class="rule">
+
+    <section aria-labelledby="semantics-heading" class="case-body">
+      <span class="eyebrow" id="semantics-heading">Semantics and fingerprinting</span>
+      <h2>From column names to column contents</h2>
+      <p>Whilst the interface had served our clients well, we knew the mapping algorithm itself could be improved. It just looked at the similarity of column names, and whether a pair had been mapped before. A more intelligent system would learn the contents of each column to more accurately match them to the master schema.</p>
+      <p>In 2026 we initiated a project to identify the type of data in each column, then profile the data inside it, creating a unique data fingerprint for each field.</p>
+      <p>I did a full audit of the current mapping behaviour, identified shortcomings in our approach and evaluated different paths for improvement. Together with a domain expert, I modelled different methodologies for weighting data fingerprints and prior usage.</p>
+      <p>When it came to the UI, we displayed the data types, allowing users to drill down and see detailed stats for each column. Prior mappings from other users now had avatars and recency information to build trust.</p>
+      <blockquote>Our tests showed a 4x improvement in mapping quality for the same coverage.</blockquote>
+    </section>
+
+    <hr class="rule">
+
+    <section aria-labelledby="outcome-heading" class="case-body">
+      <span class="eyebrow" id="outcome-heading">Outcome</span>
+      <h2>Scaling without growing the team</h2>
+      <p>With the semantic upgrade, users have the confidence to run their process without even logging in: when new fields are detected, they are mapped in automatically. Our validations framework catches any rare exceptions and notifies the user.</p>
+      <blockquote>Column mapping gives clients control over complex, high-volume data ingestion, allowing them to scale their business without growing headcount.</blockquote>
+    </section>
+
+    <hr class="rule">
+
+    <footer class="case-footer">
+      <p><a class="back-link" href="/">← Back to Tom de Gay</a></p>
+    </footer>
+  </div>
+
+  <nav class="toc" aria-label="Section navigation">
+    <span class="eyebrow toc-heading">On this page</span>
+    <a href="#keypoints-heading">Key points</a>
+    <a href="#summary-heading">Summary</a>
+    <a href="#problem-heading">The problem</a>
+    <a href="#research-heading">Research</a>
+    <a href="#concept-heading">Concept</a>
+    <a href="#automation-heading">Automation</a>
+    <a href="#refinement-heading">Constant refinement</a>
+    <a href="#semantics-heading">Semantics and fingerprinting</a>
+    <a href="#outcome-heading">Outcome</a>
+  </nav>
+  </main>
+
+  <script>
+    (function () {
+      var links = document.querySelectorAll(".toc a");
+      if (!links.length || !("IntersectionObserver" in window)) return;
+
+      var map = {};
+      links.forEach(function (link) {
+        var id = link.getAttribute("href").slice(1);
+        var el = document.getElementById(id);
+        if (el) map[id] = link;
+      });
+
+      var observer = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            var link = map[entry.target.id];
+            if (!link) return;
+            if (entry.isIntersecting) {
+              links.forEach(function (l) { l.classList.remove("is-active"); });
+              link.classList.add("is-active");
+            }
+          });
+        },
+        { rootMargin: "-20% 0px -70% 0px", threshold: 0 }
+      );
+
+      Object.keys(map).forEach(function (id) {
+        observer.observe(document.getElementById(id));
+      });
+    })();
+  </script>
+  </body>
+</html>

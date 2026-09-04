@@ -272,6 +272,22 @@
     margin-bottom: 0;
   }
 
+  /* -- inline UI video -- */
+
+  .ui-video {
+    margin: 28px 0 0;
+    max-width: 640px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .ui-video video {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
   /* -- footer -- */
 
   .case-footer p {
@@ -399,6 +415,12 @@
       <span class="eyebrow" id="research-heading">Research</span>
       <h2>Learning from the Excel workarounds</h2>
       <p>Studying dozens of Excel processes where people had manually reconciled different schemas revealed consistent patterns. The most effective approaches arranged source and target schemas vertically, using alignment across rows to show mappings. Interviews with domain experts validated the approach, but exposed a recurring pain point: constantly rearranging cells whilst keeping track of what was mapped and what remained.</p>
+
+      <div class="ui-video">
+        <video autoplay muted loop playsinline poster="media/research-excel-mapping.jpg">
+          <source src="media/research-excel-mapping.mp4" type="video/mp4">
+        </video>
+      </div>
     </section>
 
     <hr class="rule">
@@ -474,6 +496,15 @@
   </main>
 
   <script>
+    (function () {
+      if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        document.querySelectorAll(".ui-video video").forEach(function (v) {
+          v.pause();
+          v.removeAttribute("autoplay");
+        });
+      }
+    })();
+
     (function () {
       var links = document.querySelectorAll(".toc a");
       if (!links.length || !("IntersectionObserver" in window)) return;

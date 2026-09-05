@@ -1,0 +1,731 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Connecting organisations through data — Tom de Gay</title>
+<meta name="description" content="How Tom de Gay designed Feeds, Quantemplate's workspace for securely exchanging data between organisations — reframing a simple upload portal into infrastructure for a connected data network.">
+<meta name="theme-color" content="#000000">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Connecting organisations through data — Tom de Gay">
+<meta property="og:description" content="How Tom de Gay designed Feeds, Quantemplate's system for securely exchanging data between organisations.">
+<meta property="og:url" content="https://tomdegay.com/case-studies/connecting-organisations">
+<meta property="og:image" content="https://tomdegay.com/case-studies/media/connecting-organisations-og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Connecting organisations through data — a Quantemplate case study by Tom de Gay">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Connecting organisations through data — Tom de Gay">
+<meta name="twitter:description" content="How Tom de Gay designed Feeds, Quantemplate's system for securely exchanging data between organisations.">
+<meta name="twitter:image" content="https://tomdegay.com/case-studies/media/connecting-organisations-og.jpg">
+
+<link rel="icon" href="/tdg-favicon.svg" type="image/svg+xml">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+
+  @font-face {
+    font-family: "Fakt Blond SemiBold";
+    src: url("../FaktProSemiBold.woff2") format("woff2"),
+         url("../FaktProSemiBold.woff") format("woff");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "FaktPro-SemiBold";
+    src: url("../FaktProSemiBold.woff2") format("woff2"),
+         url("../FaktProSemiBold.woff") format("woff");
+    font-weight: 400 700;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  :root {
+    color-scheme: dark;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #000;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: clamp(24px, 6vw, 72px) clamp(24px, 5vw, 56px) clamp(96px, 12vw, 140px);
+  }
+
+  @media (min-width: 1100px) {
+    main {
+      max-width: 1320px;
+    }
+  }
+
+  .display {
+    font-family: "Fakt Blond SemiBold", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  a {
+    color: #fff;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+    padding-bottom: 1px;
+    transition: border-color 0.15s ease, opacity 0.15s ease;
+  }
+
+  a:hover,
+  a:focus-visible {
+    border-color: rgba(255, 255, 255, 0.9);
+  }
+
+  a:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.6);
+    outline-offset: 4px;
+    border-radius: 1px;
+  }
+
+  a[target="_blank"] {
+    position: relative;
+  }
+
+  a[target="_blank"]::after {
+    content: "→";
+    position: absolute;
+    right: -1.1em;
+    top: 50%;
+    transform: translate(-4px, -50%);
+    opacity: 0;
+    transition: transform 0.18s ease, opacity 0.18s ease;
+    pointer-events: none;
+    will-change: transform, opacity;
+  }
+
+  a[target="_blank"]:hover::after,
+  a[target="_blank"]:focus-visible::after {
+    opacity: 1;
+    transform: translate(0, -50%);
+  }
+
+  hr.rule {
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    margin: clamp(32px, 5vw, 48px) 0;
+  }
+
+  section .eyebrow,
+  .eyebrow {
+    display: block;
+    font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+    color: #00d8aa;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    word-spacing: -3px;
+    text-transform: uppercase;
+    margin: 0 0 20px;
+  }
+
+  /* -- back nav -- */
+
+  .back-link {
+    display: inline-block;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.55);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  }
+
+  .back-link:hover,
+  .back-link:focus-visible {
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.9);
+  }
+
+  /* -- hero -- */
+
+  .kicker {
+    display: block;
+    font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+    color: #00d8aa;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    word-spacing: -3px;
+    text-transform: uppercase;
+    margin: 32px 0 18px;
+  }
+
+  .kicker a {
+    color: inherit;
+    border-bottom: 1px solid rgba(0, 216, 170, 0.45);
+  }
+
+  .kicker a:hover,
+  .kicker a:focus-visible {
+    border-color: #00d8aa;
+  }
+
+  h1 {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(30px, 5vw, 46px);
+    line-height: 1.12;
+    max-width: 22ch;
+  }
+
+  p.subtitle {
+    margin: 18px 0 0;
+    color: rgba(255, 255, 255, 0.68);
+    font-size: clamp(16px, 1.9vw, 19px);
+    line-height: 1.5;
+    max-width: 54ch;
+  }
+
+  /* -- meta row -- */
+
+  .meta-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 28px 32px;
+    margin: 40px 0 0;
+  }
+
+  .meta-item .eyebrow {
+    margin-bottom: 8px;
+  }
+
+  .meta-item p {
+    margin: 0;
+    color: #fff;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* -- key points -- */
+
+  .key-points {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .key-points li {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    color: #fff;
+    font-size: clamp(18px, 2.4vw, 23px);
+    line-height: 1.4;
+  }
+
+  .key-points li::before {
+    content: "→";
+    flex: 0 0 auto;
+    color: #00d8aa;
+  }
+
+  @media (min-width: 1100px) {
+    .key-points-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    }
+
+    .key-points {
+      grid-column: 2 / -1;
+    }
+  }
+
+  /* -- body copy -- */
+
+  .about-statement {
+    color: #fff;
+    font-size: clamp(22px, 3.2vw, 30px);
+    line-height: 1.35;
+    margin: 0 0 20px;
+    max-width: 50ch;
+  }
+
+  .about-statement:last-child {
+    margin-bottom: 0;
+  }
+
+  h2 {
+    margin: 0 0 20px;
+    color: #fff;
+    font-size: clamp(20px, 2.6vw, 25px);
+    line-height: 1.25;
+  }
+
+  .case-body h2 {
+    max-width: 46rem;
+  }
+
+  .case-body p {
+    max-width: 46rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: clamp(15.5px, 1.7vw, 17px);
+    line-height: 1.65;
+    margin: 0 0 20px;
+  }
+
+  .case-body p:last-child {
+    margin-bottom: 0;
+  }
+
+  .case-body blockquote {
+    margin: 28px 0 24px;
+    padding-left: 22px;
+    border-left: 2px solid #00d8aa;
+    color: #fff;
+    font-size: clamp(17px, 2vw, 20px);
+    line-height: 1.5;
+    max-width: 54ch;
+  }
+
+  .case-body blockquote:last-child {
+    margin-bottom: 0;
+  }
+
+  /* -- inline UI video -- */
+
+  .ui-video {
+    margin: 28px 0 0;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .ui-video video {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  /* -- inline diagram -- */
+
+  .diagram {
+    max-width: 46rem;
+    margin: 28px 0 24px;
+    border-radius: 6px;
+    overflow: hidden;
+    background: #000;
+  }
+
+  .diagram svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  /* -- inline screenshot with caption -- */
+
+  .figure {
+    margin: 28px 0 24px;
+  }
+
+  .figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+  }
+
+  .figure figcaption {
+    margin: 10px 0 0;
+    color: rgba(255, 255, 255, 0.45);
+    font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* -- resources -- */
+
+  .resources-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .resources-list a {
+    font-size: clamp(15.5px, 1.7vw, 17px);
+  }
+
+  /* -- footer -- */
+
+  .case-footer p {
+    color: rgba(255, 255, 255, 0.68);
+    font-size: 15px;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* -- sticky section nav (wide desktop only) -- */
+
+  .toc {
+    display: none;
+  }
+
+  @media (min-width: 1100px) {
+    main {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 230px;
+      column-gap: 96px;
+      align-items: start;
+    }
+
+    .content {
+      grid-column: 1;
+      min-width: 0;
+    }
+
+    .toc {
+      display: flex;
+      flex-direction: column;
+      grid-column: 2;
+      position: sticky;
+      top: 40px;
+    }
+  }
+
+  .toc-heading {
+    margin: 0 0 16px;
+  }
+
+  .toc a {
+    display: block;
+    padding: 8px 0 8px 16px;
+    border-left: 2px solid rgba(255, 255, 255, 0.14);
+    border-bottom: none;
+    font-size: 16px;
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.55);
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .toc a:hover,
+  .toc a:focus-visible {
+    color: #fff;
+    border-left-color: rgba(255, 255, 255, 0.6);
+  }
+
+  .toc a.is-active {
+    color: #00d8aa;
+    border-left-color: #00d8aa;
+  }
+
+
+  /* -- next case study link block -- */
+
+  .case-block {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 18px 22px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    background-color: transparent;
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    max-width: 46rem;
+  }
+
+  .case-block:hover,
+  .case-block:focus-visible {
+    background-color: #1a1a1a;
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: scale(1.02);
+  }
+
+  .case-block-title {
+    display: block;
+    font-family: "Fakt Blond SemiBold", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    color: #fff;
+    font-size: clamp(18px, 2.4vw, 22px);
+    line-height: 1.3;
+  }
+
+  .case-block-subtitle {
+    display: block;
+    color: rgba(255, 255, 255, 0.68);
+    font-size: clamp(15px, 1.7vw, 17px);
+    line-height: 1.5;
+    margin-top: 8px;
+    max-width: 54ch;
+  }
+
+  .case-block-arrow {
+    flex: 0 0 auto;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 18px;
+    transition: color 0.2s ease, transform 0.2s ease;
+  }
+
+  .case-block:hover .case-block-arrow,
+  .case-block:focus-visible .case-block-arrow {
+    color: #fff;
+    transform: translateX(3px);
+  }
+
+  /* -- suppress the external-link arrow inside running text -- */
+
+  .case-body p a[target="_blank"]::after,
+  .about-statement a[target="_blank"]::after,
+  .kicker a[target="_blank"]::after {
+    content: none;
+  }
+
+</style>
+</head>
+<body>
+  <main>
+  <div class="content">
+    <a class="back-link" href="/">← Tom de Gay</a>
+
+    <header>
+      <span class="kicker">Case Study | <a href="https://help.quantemplate.com/about-feeds" target="_blank" rel="noopener noreferrer">Quantemplate Feeds</a></span>
+      <h1 class="display">Connecting organisations through data</h1>
+      <p class="subtitle">Infrastructure to automate data exchange, laying the foundation for a connected network.</p>
+
+      <div class="meta-row">
+        <div class="meta-item">
+          <span class="eyebrow">Role</span>
+          <p>Lead product designer, end to end</p>
+        </div>
+        <div class="meta-item">
+          <span class="eyebrow">Team</span>
+          <p>Design, engineering, domain experts and customers</p>
+        </div>
+        <div class="meta-item">
+          <span class="eyebrow">Timeframe</span>
+          <p>Concept to V1 release (2024): 22 months<br>Explored and delivered alongside wider platform enablement work</p>
+        </div>
+      </div>
+    </header>
+
+    <hr class="rule">
+
+    <section aria-labelledby="keypoints-heading">
+      <span class="eyebrow" id="keypoints-heading">Key points</span>
+      <div class="key-points-grid">
+        <ul class="key-points">
+          <li>Project reframes an upload portal as a cross-company network</li>
+          <li>Automates an entire manual workflow, with Feeds set up in under one minute</li>
+          <li>Adapts to any shape of data, across files, formats and organisations</li>
+          <li>Spans submissions, scheduling, org creation, authentication and admin tooling</li>
+        </ul>
+      </div>
+    </section>
+
+    <hr class="rule">
+
+    <section aria-labelledby="summary-heading">
+      <span class="eyebrow" id="summary-heading">Summary</span>
+      <p class="about-statement display">I led the design of <a href="https://help.quantemplate.com/about-feeds" target="_blank" rel="noopener noreferrer">Feeds</a>, a new Quantemplate workspace for securely requesting, receiving, processing and distributing data between organisations.</p>
+      <p class="about-statement display">By mapping the complete workflow, I reframed an initial upload-portal concept as a persistent system, spanning submissions, automation, permissions and operational oversight. Feeds accommodates complex insurance data exchanges while creating the foundation for a broader connected-data strategy.</p>
+      <p class="about-statement display">Feeds are now entering operational use, exchanging millions of rows and automating routine submission administration.</p>
+    </section>
+
+    <hr class="rule">
+
+    <section aria-labelledby="problem-heading" class="case-body">
+      <span class="eyebrow" id="problem-heading">The problem</span>
+      <h2>We&rsquo;d automated the data processing, but not the process</h2>
+      <p>Insurance companies depend on regular submissions from brokers, managing general agents, third-party administrators and other partners. Our data transformation pipelines did a good job of <a href="/case-studies/mapping-inconsistent-schemas">mapping and harmonising</a> this data, but the parts outside Quantemplate were process bottlenecks.</p>
+      <p>Email was manual and difficult to audit, while FTP and API integrations were unwieldy. Moreover, keeping track of what was in or overdue every month was a significant timesink.</p>
+      <p>Even on the happy path, we identified five manual steps to request data and another five to bring it into and out of Quantemplate. Across an average of 150 trading partners, repeated monthly, that amounted to 18,000 manual steps a year.</p>
+    </section>
+
+    <hr class="rule">
+
+    <section aria-labelledby="research-heading" class="case-body">
+      <span class="eyebrow" id="research-heading">Research</span>
+      <h2>Modelling the whole workflow</h2>
+      <p>I mapped every touchpoint from the initial request through submission, processing, validation, correction and onward distribution. For each stage we considered the unhappy paths and dead ends: late or incomplete submissions, incorrect files, resubmissions and validation failures.</p>
+      <p>The map identified every manual step that could be automated, every notification that needed to be sent and every point where human judgement was still required. It became the basis for the submission lifecycle, schedules, statuses, reminders, version history and pipeline triggers.</p>
+    </section>
+
+    <hr class="rule">
+
+    <section aria-labelledby="concept-heading" class="case-body">
+      <span class="eyebrow" id="concept-heading">Concept</span>
+      <h2>From Data Drop to Data Network</h2>
+      <p>My initial concept, Data Drop, was a lightweight portal with an unauthenticated, one-time upload link. It would have been a quick win, but mapping its workflow revealed that it would move the email problem further down the chain: links buried in inboxes, no persistent activity record and resubmissions still needing coordination.</p>
+      <p>I proposed Feeds instead: a whole new area in the product with authenticated users, separate organisations and persistent relationships between partners. This was a larger product increment, but one that addressed the whole workflow, making persistent connections between organisations and opening a path to a broader network strategy.</p>
+    </section>
+
+    <hr class="rule">
+
+    <section aria-labelledby="datamodel-heading" class="case-body">
+      <span class="eyebrow" id="datamodel-heading">Data model</span>
+      <h2>Flexibility for complex submissions</h2>
+      <p>When we spoke with users and looked at their existing Quantemplate workflows, we could see that a submission was rarely uniform: Premium and Claims might arrive as separate tabs, files, or from different organisations, each needing different pipeline logic.</p>
+      <p>I introduced subsections to represent these distinct streams within one submission. Feed owners define subsections, and submitters assign uploads to the appropriate one. Using the wayfinding principle of progressive disclosure, the interface walks them through the process, step-by-step.</p>
+      <p>When Premium and Claims came from different parties, a pipeline could wait until both were complete, with the interface showing what had arrived and what it was still waiting for.</p>
+    </section>
+
+    <hr class="rule">
+
+    <section aria-labelledby="permissions-heading" class="case-body">
+      <span class="eyebrow" id="permissions-heading">Permissions model</span>
+      <h2>Roles for humans and robots alike</h2>
+      <p>I modelled permission levels around the way our clients divided responsibility. Owners and managers needed to configure Feeds, connect with partners and oversee the process. Submitters only needed access when it was time to upload data, while read-only users needed visibility to use Feeds data in pipelines.</p>
+      <p>We also added a Robot User across the platform. When the Robot User has access to a Feed, they can take the data from it, run a pipeline they have access to and output it to a dataset they&rsquo;ve been given write permission on.</p>
+    </section>
+
+    <hr class="rule">
+
+    <section aria-labelledby="connected-heading" class="case-body">
+      <span class="eyebrow" id="connected-heading">Getting connected</span>
+      <h2>Trusted setup in under a minute</h2>
+      <p>Initiating a partner connection required just their contact&rsquo;s email. We used the domain to find their organisation or begin creating it. I researched and proposed a <a href="https://www.logo.dev" target="_blank" rel="noopener noreferrer">logo.dev</a> integration to populate organisation names and logos automatically, reducing setup effort and making requests more recognisable. Admins on each side approve the connection, with all events tracked in a new admin panel.</p>
+      <p>Admins can also create reusable schedules to centrally manage request frequency. Research revealed that feeds often shared a cadence but followed different contract dates. I made start and end dates properties of a Feed, rather than a schedule, allowing requests to stop at contract end without affecting other feeds using the same schedule.</p>
+      <p>All that&rsquo;s required to set up a new Feed is to add subsections, search for a partner and connect an existing schedule. In under one minute you can be requesting data from your trading partners.</p>
+    </section>
+
+    <hr class="rule">
+
+    <section aria-labelledby="audit-heading" class="case-body">
+      <span class="eyebrow" id="audit-heading">Audit and oversight</span>
+      <h2>The full picture, at a glance</h2>
+      <p>Both parties retain an immutable, versioned record of submitted data. Suppliers can correct and resubmit files without overwriting the original, preserving evidence for future disputes. User avatars and organisation domains identify the people and companies behind submissions, building trust.</p>
+      <p>I redesigned the Feed repository as a management dashboard, showing which Feeds are complete, waiting for data or overdue; this real-time view of inventory replaces manual tracking in spreadsheets. Configurable reminders chase outstanding submissions automatically.</p>
+      <p>Visible connections between Feeds and pipelines help managers understand what each submission will trigger and what the automation is still waiting for.</p>
+    </section>
+
+    <hr class="rule">
+
+    <section aria-labelledby="network-heading" class="case-body">
+      <span class="eyebrow" id="network-heading">Network potential</span>
+      <h2>Connecting the whole data chain</h2>
+      <p>Feeds support incoming data, outgoing distribution and onward sharing. An insurer can distribute data to reinsurers, while a broker can receive and pass on the original submission. Each organisation can connect its own processing pipelines while retaining a shared, auditable source record. This uniquely allows us to surface the full data Chain of Custody.</p>
+      <p>The Feeds lay the architectural groundwork for the big vision: automated data flows across the industry.</p>
+    </section>
+
+    <hr class="rule">
+
+    <section aria-labelledby="outcome-heading" class="case-body">
+      <span class="eyebrow" id="outcome-heading">Outcome</span>
+      <h2>A foundation for networked data</h2>
+      <p>Feeds have been running production data for approximately 18 months, processing recurring monthly submissions and 3.4 million rows to date. For the client running it, this removes nearly all of the manual steps identified in the original workflow mapping, for true &lsquo;straight-through processing&rsquo;. The one step that remains, the initial upload, is performed directly by the data supplier.</p>
+      <p>Bringing further partners onto Feeds is an ongoing project: in-app guidance and comprehensive tutorials have driven initial uptake, and upcoming features to share validation reports and suggest corrections should make the value of switching more visible.</p>
+      <p>More strategically, Feeds expanded Quantemplate from a product for automating processes within an organisation, towards infrastructure connecting them. This opens the door to Network Intelligence, where data mappings, transformations and corrections are crowdsourced.</p>
+    </section>
+
+    <hr class="rule">
+
+    <section aria-labelledby="resources-heading" class="case-body">
+      <span class="eyebrow" id="resources-heading">Resources</span>
+      <ul class="resources-list">
+        <li><a href="https://youtube.com/playlist?list=PL08wd7p2fBAm4KWg1JRAsKwGgxsGlRHto&si=VIPEF11wnDgHINdJ" target="_blank" rel="noopener noreferrer">Feeds tutorials</a></li>
+        <li><a href="https://help.quantemplate.com/about-feeds" target="_blank" rel="noopener noreferrer">Feeds support docs</a></li>
+      </ul>
+    </section>
+
+    <hr class="rule">
+
+    <section aria-labelledby="next-heading">
+      <span class="eyebrow" id="next-heading">Next case study</span>
+      <a class="case-block" href="/case-studies/mapping-inconsistent-schemas">
+        <span class="case-block-text">
+          <span class="case-block-title">Mapping inconsistent schemas at scale</span>
+          <span class="case-block-subtitle">Translate inconsistent data sources to a common target format, fully automated and enhanced by AI suggestions.</span>
+        </span>
+        <span class="case-block-arrow" aria-hidden="true">→</span>
+      </a>
+    </section>
+
+    <hr class="rule">
+
+    <footer class="case-footer">
+      <p><a class="back-link" href="/">← Back to Tom de Gay</a></p>
+    </footer>
+  </div>
+
+  <nav class="toc" aria-label="Section navigation">
+    <span class="eyebrow toc-heading">On this page</span>
+    <a href="#keypoints-heading">Key points</a>
+    <a href="#summary-heading">Summary</a>
+    <a href="#problem-heading">The problem</a>
+    <a href="#research-heading">Research</a>
+    <a href="#concept-heading">Concept</a>
+    <a href="#datamodel-heading">Data model</a>
+    <a href="#permissions-heading">Permissions model</a>
+    <a href="#connected-heading">Getting connected</a>
+    <a href="#audit-heading">Audit and oversight</a>
+    <a href="#network-heading">Network potential</a>
+    <a href="#outcome-heading">Outcome</a>
+    <a href="#resources-heading">Resources</a>
+    <a href="#next-heading">Next case study</a>
+  </nav>
+  </main>
+
+  <script>
+    (function () {
+      if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        document.querySelectorAll(".ui-video video").forEach(function (v) {
+          v.pause();
+          v.removeAttribute("autoplay");
+        });
+      }
+    })();
+
+    (function () {
+      var links = document.querySelectorAll(".toc a");
+      if (!links.length || !("IntersectionObserver" in window)) return;
+
+      var map = {};
+      links.forEach(function (link) {
+        var id = link.getAttribute("href").slice(1);
+        var el = document.getElementById(id);
+        if (el) map[id] = link;
+      });
+
+      var observer = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            var link = map[entry.target.id];
+            if (!link) return;
+            if (entry.isIntersecting) {
+              links.forEach(function (l) { l.classList.remove("is-active"); });
+              link.classList.add("is-active");
+            }
+          });
+        },
+        { rootMargin: "-20% 0px -70% 0px", threshold: 0 }
+      );
+
+      Object.keys(map).forEach(function (id) {
+        observer.observe(document.getElementById(id));
+      });
+    })();
+  </script>
+  <script data-goatcounter="https://tomdegay.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+  </body>
+</html>

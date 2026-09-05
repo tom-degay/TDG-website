@@ -355,10 +355,32 @@
 
   .figure figcaption {
     margin: 10px 0 0;
-    color: rgba(255, 255, 255, 0.45);
+    color: rgba(255, 255, 255, 0.55);
     font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
     font-size: 14px;
     line-height: 1.5;
+  }
+
+  /* -- video embed -- */
+
+  .video-embed {
+    margin: 28px 0 0;
+    width: 100%;
+  }
+
+  @media (min-width: 1100px) {
+    .video-embed {
+      max-width: 880px;
+    }
+  }
+
+  .video-embed iframe {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    height: auto;
+    border: 0;
+    border-radius: 6px;
   }
 
   /* -- resources -- */
@@ -513,8 +535,10 @@
     inset: 0;
     background: rgba(0, 0, 0, 0.92);
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 16px;
     padding: clamp(16px, 5vw, 64px);
     opacity: 0;
     visibility: hidden;
@@ -530,9 +554,20 @@
 
   .lightbox img {
     max-width: 100%;
-    max-height: 100%;
+    max-height: calc(100vh - 140px);
     border-radius: 6px;
     box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
+    cursor: default;
+  }
+
+  .lightbox-caption {
+    margin: 0;
+    max-width: 60ch;
+    color: rgba(255, 255, 255, 0.55);
+    font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: center;
     cursor: default;
   }
 
@@ -559,6 +594,43 @@
   .lightbox-close:focus-visible {
     border-color: rgba(255, 255, 255, 0.8);
     background: rgba(0, 0, 0, 0.7);
+  }
+
+  .lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.4);
+    color: #fff;
+    font-size: 24px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+
+  .lightbox-nav:hover,
+  .lightbox-nav:focus-visible {
+    border-color: rgba(255, 255, 255, 0.8);
+    background: rgba(0, 0, 0, 0.7);
+  }
+
+  .lightbox-nav[hidden] {
+    display: none;
+  }
+
+  .lightbox-prev {
+    left: clamp(8px, 3vw, 28px);
+  }
+
+  .lightbox-next {
+    right: clamp(8px, 3vw, 28px);
   }
 
 </style>
@@ -610,6 +682,10 @@
       <p class="about-statement display">I led the design of <a href="https://help.quantemplate.com/about-feeds" target="_blank" rel="noopener noreferrer">Feeds</a>, a new Quantemplate workspace for securely requesting, receiving, processing and distributing data between organisations.</p>
       <p class="about-statement display">By mapping the complete workflow, I reframed an initial upload-portal concept as a persistent system, spanning submissions, automation, permissions and operational oversight. Feeds accommodates complex insurance data exchanges while creating the foundation for a broader connected-data strategy.</p>
       <p class="about-statement display">Feeds are now entering operational use, exchanging millions of rows and automating routine submission administration.</p>
+
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/IgmrfcrYOOk?si=_DXr-BjdaTXHhwcL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
     </section>
 
     <hr class="rule">
@@ -625,6 +701,11 @@
         <img src="media/workflow-bottlenecks-diagram.png" alt="Diagram of a typical MGA data pipeline: manual upload to network storage, an automated import-to-output pipeline including Map Column Headers, then a manual step to push output to the client database via API.">
         <figcaption>2022 analysis of typical Quantemplate workflow, identifying manual bottlenecks.</figcaption>
       </figure>
+
+      <figure class="figure">
+        <img src="media/feeds-problem-postits.png" alt="Annotated version of the Data Repo and pipeline diagram, with yellow sticky notes flagging open questions and trade-offs at each stage: partner data visibility and permissions, input selector categorisation, additive versus replacing submissions, and notification requirements.">
+        <figcaption>2022 analysis showing automation steps required for straight-through-processing. Post-its identify likely trade-offs, challenges to be overcome or areas requiring more research.</figcaption>
+      </figure>
     </section>
 
     <hr class="rule">
@@ -634,6 +715,11 @@
       <h2>Modelling the whole workflow</h2>
       <p>I mapped every touchpoint from the initial request through submission, processing, validation, correction and onward distribution. For each stage we considered the unhappy paths and dead ends: late or incomplete submissions, incorrect files, resubmissions and validation failures.</p>
       <p>The map identified every manual step that could be automated, every notification that needed to be sent and every point where human judgement was still required. It became the basis for the submission lifecycle, schedules, statuses, reminders, version history and pipeline triggers.</p>
+
+      <figure class="figure">
+        <img src="media/feeds-research-lifecycle.png" alt="Swimlane diagram of the submission lifecycle spanning Carrier and MGA roles, from period open through upload, parsing, validation and carrier pipeline review, to period close, with pink notification steps, grey decision points and yellow manual touchpoints.">
+        <figcaption>Submission lifecycle analysis showing notification steps (pink), automated decision points and manual touchpoints (yellow).</figcaption>
+      </figure>
     </section>
 
     <hr class="rule">
@@ -642,7 +728,18 @@
       <span class="eyebrow" id="concept-heading">Concept</span>
       <h2>From Data Drop to Data Network</h2>
       <p>My initial concept, Data Drop, was a lightweight portal with an unauthenticated, one-time upload link. It would have been a quick win, but mapping its workflow revealed that it would move the email problem further down the chain: links buried in inboxes, no persistent activity record and resubmissions still needing coordination.</p>
+
+      <figure class="figure">
+        <img src="media/data-drop-concept.png" alt="Mockup of the Data Drop secure data transfer concept: a card showing transfer from and to organisations, submission type, period, due date, a worksheet selector with checkboxes, and a submit button.">
+        <figcaption>The data drop concept we never shipped. It would have been a quick win but an incomplete solution.</figcaption>
+      </figure>
+
       <p>I proposed Feeds instead: a whole new area in the product with authenticated users, separate organisations and persistent relationships between partners. This was a larger product increment, but one that addressed the whole workflow, making persistent connections between organisations and opening a path to a broader network strategy.</p>
+
+      <figure class="figure">
+        <img src="media/feeds-org-relationship-diagram.jpg" alt="Diagram showing a Data originator org with a Feed Out mirroring data to a Data consumer org's Feed In, fed by API, pipeline and manual upload sources on each side, with an upload portal shown as a separate concept still under consideration.">
+        <figcaption>Architecting the relationship between organisation feeds. Every Feed In corresponds to a Feed Out in the partner org. At this point I was still considering the &lsquo;upload portal&rsquo; as a layer in the workflow. It was descoped when the walkthrough revealed it to be superfluous.</figcaption>
+      </figure>
     </section>
 
     <hr class="rule">
@@ -653,6 +750,10 @@
       <p>When we spoke with users and looked at their existing Quantemplate workflows, we could see that a submission was rarely uniform: Premium and Claims might arrive as separate tabs, files, or from different organisations, each needing different pipeline logic.</p>
       <p>I introduced subsections to represent these distinct streams within one submission. Feed owners define subsections, and submitters assign uploads to the appropriate one. Using the wayfinding principle of progressive disclosure, the interface walks them through the process, step-by-step.</p>
       <p>When Premium and Claims came from different parties, a pipeline could wait until both were complete, with the interface showing what had arrived and what it was still waiting for.</p>
+
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/8-GmO0Smelw?si=uJNjQGcYSAX8VcLX" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
     </section>
 
     <hr class="rule">
@@ -661,7 +762,12 @@
       <span class="eyebrow" id="permissions-heading">Permissions model</span>
       <h2>Roles for humans and robots alike</h2>
       <p>I modelled permission levels around the way our clients divided responsibility. Owners and managers needed to configure Feeds, connect with partners and oversee the process. Submitters only needed access when it was time to upload data, while read-only users needed visibility to use Feeds data in pipelines.</p>
-      <p>We also added a Robot User across the platform. When the Robot User has access to a Feed, they can take the data from it, run a pipeline they have access to and output it to a dataset they&rsquo;ve been given write permission on.</p>
+      <p>Looking at our permissions model, I realised that we needed a way to run automations without a user present, and have those runs tracked in the history. I proposed the &lsquo;Robot User&rsquo; as a pragmatic solution, which users understood without much introduction. When the Robot User has access to a Feed, they can take the data from it, run a pipeline they have access to and output it to a dataset they&rsquo;ve been given write permission on.</p>
+
+      <figure class="figure">
+        <img src="media/feeds-permissions-share-panel.png" alt="Feed sharing panel listing who has access: TDG TPA with 9 members as Submitter, Robot User as Can view, Martina Brito as Manager, and Tom de Gay as Owner.">
+        <figcaption>Sharing a Feed. Owner, Manager, Submitter and view-only roles sit alongside the Robot User, enabling automations across the platform.</figcaption>
+      </figure>
     </section>
 
     <hr class="rule">
@@ -672,6 +778,10 @@
       <p>Initiating a partner connection required just their contact&rsquo;s email. We used the domain to find their organisation or begin creating it. I researched and proposed a <a href="https://www.logo.dev" target="_blank" rel="noopener noreferrer">logo.dev</a> integration to populate organisation names and logos automatically, reducing setup effort and making requests more recognisable. Admins on each side approve the connection, with all events tracked in a new admin panel.</p>
       <p>Admins can also create reusable schedules to centrally manage request frequency. Research revealed that feeds often shared a cadence but followed different contract dates. I made start and end dates properties of a Feed, rather than a schedule, allowing requests to stop at contract end without affecting other feeds using the same schedule.</p>
       <p>All that&rsquo;s required to set up a new Feed is to add subsections, search for a partner and connect an existing schedule. In under one minute you can be requesting data from your trading partners.</p>
+
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/KVrOr-v3Ncs?si=GsG2ycGKF4QdAdE6" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
     </section>
 
     <hr class="rule">
@@ -751,7 +861,10 @@
 
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Enlarged image" tabindex="-1">
     <button class="lightbox-close" type="button" aria-label="Close enlarged image">&times;</button>
+    <button class="lightbox-nav lightbox-prev" type="button" aria-label="Previous image">&lsaquo;</button>
+    <button class="lightbox-nav lightbox-next" type="button" aria-label="Next image">&rsaquo;</button>
     <img src="" alt="">
+    <p class="lightbox-caption" hidden></p>
   </div>
   </main>
 
@@ -799,13 +912,45 @@
       var lightbox = document.getElementById("lightbox");
       if (!lightbox) return;
       var lightboxImg = lightbox.querySelector("img");
+      var lightboxCaption = lightbox.querySelector(".lightbox-caption");
       var closeBtn = lightbox.querySelector(".lightbox-close");
+      var prevBtn = lightbox.querySelector(".lightbox-prev");
+      var nextBtn = lightbox.querySelector(".lightbox-next");
       var lastFocused = null;
 
-      function openLightbox(src, alt) {
+      var items = Array.prototype.slice.call(document.querySelectorAll(".figure img")).map(function (img) {
+        var figure = img.closest("figure");
+        var captionEl = figure ? figure.querySelector("figcaption") : null;
+        return {
+          img: img,
+          src: img.src,
+          alt: img.alt,
+          caption: captionEl ? captionEl.textContent.trim() : ""
+        };
+      });
+      var currentIndex = -1;
+
+      function showIndex(index) {
+        if (!items.length) return;
+        currentIndex = (index + items.length) % items.length;
+        var item = items[currentIndex];
+        lightboxImg.src = item.src;
+        lightboxImg.alt = item.alt || "";
+        if (item.caption) {
+          lightboxCaption.textContent = item.caption;
+          lightboxCaption.hidden = false;
+        } else {
+          lightboxCaption.textContent = "";
+          lightboxCaption.hidden = true;
+        }
+        var showNav = items.length > 1;
+        prevBtn.hidden = !showNav;
+        nextBtn.hidden = !showNav;
+      }
+
+      function openLightbox(index) {
         lastFocused = document.activeElement;
-        lightboxImg.src = src;
-        lightboxImg.alt = alt || "";
+        showIndex(index);
         lightbox.classList.add("is-open");
         document.body.style.overflow = "hidden";
         closeBtn.focus();
@@ -814,23 +959,35 @@
       function closeLightbox() {
         lightbox.classList.remove("is-open");
         lightboxImg.src = "";
+        lightboxCaption.textContent = "";
+        lightboxCaption.hidden = true;
         document.body.style.overflow = "";
         if (lastFocused) lastFocused.focus();
       }
 
-      document.querySelectorAll(".figure img").forEach(function (img) {
+      items.forEach(function (item, index) {
+        var img = item.img;
         img.setAttribute("tabindex", "0");
         img.setAttribute("role", "button");
         img.setAttribute("aria-label", "Click to enlarge image");
         img.addEventListener("click", function () {
-          openLightbox(img.src, img.alt);
+          openLightbox(index);
         });
         img.addEventListener("keydown", function (e) {
           if (e.key === "Enter" || e.key === " ") {
             e.preventDefault();
-            openLightbox(img.src, img.alt);
+            openLightbox(index);
           }
         });
+      });
+
+      prevBtn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        showIndex(currentIndex - 1);
+      });
+      nextBtn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        showIndex(currentIndex + 1);
       });
 
       lightbox.addEventListener("click", function (e) {
@@ -838,8 +995,13 @@
       });
       closeBtn.addEventListener("click", closeLightbox);
       document.addEventListener("keydown", function (e) {
-        if (e.key === "Escape" && lightbox.classList.contains("is-open")) {
+        if (!lightbox.classList.contains("is-open")) return;
+        if (e.key === "Escape") {
           closeLightbox();
+        } else if (e.key === "ArrowLeft") {
+          showIndex(currentIndex - 1);
+        } else if (e.key === "ArrowRight") {
+          showIndex(currentIndex + 1);
         }
       });
     })();

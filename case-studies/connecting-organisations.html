@@ -204,8 +204,11 @@
     margin: 12px 0 0;
     color: rgba(255, 255, 255, 0.45);
     font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
-    font-size: 13px;
-    letter-spacing: 0.3px;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    word-spacing: -3px;
+    text-transform: uppercase;
     line-height: 1.5;
   }
 
@@ -532,8 +535,11 @@
     display: block;
     color: rgba(255, 255, 255, 0.45);
     font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
-    font-size: 12px;
-    letter-spacing: 0.3px;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    word-spacing: -3px;
+    text-transform: uppercase;
     margin-top: 8px;
   }
 
@@ -679,7 +685,9 @@
       <span class="kicker">Case Study | <a href="https://help.quantemplate.com/about-feeds" target="_blank" rel="noopener noreferrer">Quantemplate Feeds</a></span>
       <h1 class="display">Connecting organisations through data</h1>
       <p class="subtitle">Infrastructure to automate data exchange, laying the foundation for a connected network.</p>
-      <p class="keywords">Product strategy | Systems thinking | Process design</p>
+      <p class="keywords">Product strategy · Systems thinking · Process design</p>
+
+      <hr class="rule">
 
       <div class="meta-row">
         <div class="meta-item">
@@ -730,7 +738,9 @@
       <h2>We&rsquo;d automated the data processing, but not the process</h2>
       <p>Insurance companies depend on regular submissions from brokers, managing general agents, third-party administrators and other partners. Our data transformation pipelines did a good job of <a href="/case-studies/mapping-inconsistent-schemas">mapping and harmonising</a> this data, but the parts outside Quantemplate were process bottlenecks.</p>
       <p>Email was manual and difficult to audit, while FTP and API integrations were unwieldy. Moreover, keeping track of what was in or overdue every month was a significant timesink.</p>
-      <p>Even on the happy path, we identified five manual steps to request data and another five to bring it into and out of Quantemplate. Across an average of 150 trading partners, repeated monthly, that amounted to 18,000 manual steps a year.</p>
+      <p>Even on the happy path, we identified five manual steps to request data and another five to bring it into and out of Quantemplate.</p>
+
+      <blockquote>Across an average of 150 trading partners, repeated monthly, that amounted to 18,000 manual steps a year.</blockquote>
 
       <figure class="figure">
         <img src="media/workflow-bottlenecks-diagram.png" alt="Diagram of a typical MGA data pipeline: manual upload to network storage, an automated import-to-output pipeline including Map Column Headers, then a manual step to push output to the client database via API.">
@@ -749,7 +759,9 @@
       <span class="eyebrow" id="approach-heading">Approach</span>
       <h2>Modelling the whole workflow</h2>
       <p>I mapped every touchpoint from the initial request through submission, processing, validation, correction and onward distribution. For each stage we considered the unhappy paths and dead ends: late or incomplete submissions, incorrect files, resubmissions and validation failures.</p>
-      <p>The map identified every manual step that could be automated, every notification that needed to be sent and every point where human judgement was still required. It became the basis for the submission lifecycle, schedules, statuses, reminders, version history and pipeline triggers.</p>
+      <blockquote>The map identified every manual step that could be automated, every notification that needed to be sent and every point where human judgement was still required.</blockquote>
+
+      <p>It became the basis for the submission lifecycle, schedules, statuses, reminders, version history and pipeline triggers.</p>
 
       <figure class="figure">
         <img src="media/feeds-research-lifecycle.png" alt="Swimlane diagram of the submission lifecycle spanning Carrier and MGA roles, from period open through upload, parsing, validation and carrier pipeline review, to period close, with pink notification steps, grey decision points and yellow manual touchpoints.">
@@ -766,9 +778,11 @@
         <h3>From Data Drop to Data Network</h3>
         <p>My initial concept, Data Drop, was a lightweight portal with an unauthenticated, one-time upload link. It would have been a quick win, but mapping its workflow revealed that it would move the email problem further down the chain: links buried in inboxes, no persistent activity record and resubmissions still needing coordination.</p>
 
+        <blockquote>The Data Drop would have been a quick win but an incomplete solution.</blockquote>
+
         <figure class="figure">
           <img src="media/data-drop-concept.png" alt="Mockup of the Data Drop secure data transfer concept: a card showing transfer from and to organisations, submission type, period, due date, a worksheet selector with checkboxes, and a submit button.">
-          <figcaption>The data drop concept we never shipped. It would have been a quick win but an incomplete solution.</figcaption>
+          <figcaption>The data drop concept we never shipped.</figcaption>
         </figure>
 
         <p>I proposed Feeds instead: a whole new area in the product with authenticated users, separate organisations and persistent relationships between partners. This was a larger product increment, but one that addressed the whole workflow, making persistent connections between organisations and opening a path to a broader network strategy.</p>
@@ -783,7 +797,7 @@
         <h3>Flexibility for complex submissions</h3>
         <p>When we spoke with users and looked at their existing Quantemplate workflows, we could see that a submission was rarely uniform: Premium and Claims might arrive as separate tabs, files, or from different organisations, each needing different pipeline logic.</p>
         <p>I introduced subsections to represent these distinct streams within one submission. Feed owners define subsections, and submitters assign uploads to the appropriate one. Using the wayfinding principle of progressive disclosure, the interface walks them through the process, step-by-step.</p>
-        <p>When Premium and Claims came from different parties, a pipeline could wait until both were complete, with the interface showing what had arrived and what it was still waiting for.</p>
+        <blockquote>Using wayfinding principles, I navigated users through the process of assigning their data to the right subsection.</blockquote>
 
         <div class="video-embed">
           <iframe src="https://www.youtube.com/embed/8-GmO0Smelw?si=uJNjQGcYSAX8VcLX" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -793,7 +807,10 @@
       <div class="subsection" id="permissions-heading">
         <h3>Roles for humans and robots alike</h3>
         <p>I modelled permission levels around the way our clients divided responsibility. Owners and managers needed to configure Feeds, connect with partners and oversee the process. Submitters only needed access when it was time to upload data, while read-only users needed visibility to use Feeds data in pipelines.</p>
-        <p>Looking at our permissions model, I realised that we needed a way to run automations without a user present, and have those runs tracked in the history. I proposed the &lsquo;Robot User&rsquo; as a pragmatic solution, which users understood without much introduction. When the Robot User has access to a Feed, they can take the data from it, run a pipeline they have access to and output it to a dataset they&rsquo;ve been given write permission on.</p>
+
+        <blockquote>I introduced the concept of a &lsquo;Robot User&rsquo; to surface automation capabilities across the platform and make them auditable.</blockquote>
+
+        <p>Looking at our permissions model, I realised that we needed a way to run automations without a user present, and have those runs tracked in the history. When the Robot User has access to a Feed, they can take the data from it, run a pipeline they have access to and output it to a dataset they&rsquo;ve been given write permission on.</p>
 
         <figure class="figure">
           <img src="media/feeds-permissions-share-panel.png" alt="Feed sharing panel listing who has access: TDG TPA with 9 members as Submitter, Robot User as Can view, Martina Brito as Manager, and Tom de Gay as Owner.">
@@ -811,9 +828,11 @@
         <h3>Trusted setup in under a minute</h3>
         <p>Initiating a partner connection required just their contact&rsquo;s email. We used the domain to find their organisation or begin creating it. I researched and proposed a <a href="https://www.logo.dev" target="_blank" rel="noopener noreferrer">logo.dev</a> integration to populate organisation names and logos automatically, reducing setup effort and making requests more recognisable. Admins on each side approve the connection, with all events tracked in a new admin panel.</p>
 
+        <blockquote>A lot of complexity behind the scenes, enabling simplicity in the product.</blockquote>
+
         <figure class="figure">
           <img src="media/feeds-add-partners-spec.jpg" alt="Design specification board mapping every path through the add-partners workflow: adding internal submitters, connecting to an existing partner, adding a new partner, setup via a Feed In or Feed Out, setup statuses and review settings.">
-          <figcaption>Design specification for the &lsquo;Add partners&rsquo; workflow. Did the partner already exist on the system? Were they already connected to this? Was the user an admin? A lot of complexity behind the scenes, enabling simplicity in the product.</figcaption>
+          <figcaption>Design specification for the &lsquo;Add partners&rsquo; workflow. Did the partner already exist on the system? Were they already connected to this? Was the user an admin?</figcaption>
         </figure>
 
         <p>Admins can also create reusable schedules to centrally manage request frequency. Research revealed that feeds often shared a cadence but followed different contract dates. I made start and end dates properties of a Feed, rather than a schedule, allowing requests to stop at contract end without affecting other feeds using the same schedule.</p>
@@ -826,7 +845,7 @@
 
       <div class="subsection" id="audit-heading">
         <h3>The full picture, at a glance</h3>
-        <p>Both parties retain an immutable, versioned record of submitted data. Suppliers can correct and resubmit files without overwriting the original, preserving evidence for future disputes. User avatars and organisation domains identify the people and companies behind submissions, building trust.</p>
+        <p>Both parties retain an immutable, versioned record of submitted data. User avatars and organisation domains identify the people and companies behind submissions, building trust.</p>
         <p>I redesigned the Feed repository as a management dashboard, showing which Feeds are complete, waiting for data or overdue; this real-time view of inventory replaces manual tracking in spreadsheets. Configurable reminders chase outstanding submissions automatically.</p>
         <p>Visible connections between Feeds and pipelines help managers understand what each submission will trigger and what the automation is still waiting for.</p>
 
@@ -844,7 +863,9 @@
           <iframe src="https://www.youtube.com/embed/vqHMlfbLOZU?si=8_V2V-7beRQ4BkcO" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
 
-        <p>The Feeds lay the architectural groundwork for the big vision: automated data flows across the industry. We mapped out further <a href="https://help.quantemplate.com/feed-use-cases" target="_blank" rel="noopener noreferrer">Use Cases</a> on this support page.</p>
+        <blockquote>The Feeds lay the architectural groundwork for the big vision: automated data flows across the industry.</blockquote>
+
+        <p>We mapped out further <a href="https://help.quantemplate.com/feed-use-cases" target="_blank" rel="noopener noreferrer">Use Cases</a> on this support page.</p>
 
         <figure class="figure">
           <img src="media/feeds-network-potential-diagram.png" alt="Diagram showing data flowing from MGAs and Carriers who are Quantemplate clients, through to free-user Carriers and Reinsurers, illustrating how submissions and pushes propagate across the network regardless of client status.">
@@ -860,7 +881,9 @@
       <h2>A foundation for networked data</h2>
       <p>Feeds have been running production data for approximately 18 months, processing recurring monthly submissions and 3.4 million rows to date. For the client running it, this removes nearly all of the manual steps identified in the original workflow mapping, for true &lsquo;straight-through processing&rsquo;. The one step that remains, the initial upload, is performed directly by the data supplier.</p>
       <p>Bringing further partners onto Feeds is an ongoing project: in-app guidance and comprehensive tutorials have driven initial uptake, and upcoming features to share validation reports and suggest corrections should make the value of switching more visible.</p>
-      <p>More strategically, Feeds expanded Quantemplate from a product for automating processes within an organisation, towards infrastructure connecting them. This opens the door to <a href="https://help.quantemplate.com/artificial-intelligence" target="_blank" rel="noopener noreferrer">Network Intelligence</a>, where data mappings, transformations and corrections are crowdsourced.</p>
+      <blockquote>Feeds expanded Quantemplate from a product for automating processes within an organisation, towards infrastructure connecting them.</blockquote>
+
+      <p>This opens the door to <a href="https://help.quantemplate.com/artificial-intelligence" target="_blank" rel="noopener noreferrer">Network Intelligence</a>, where data mappings, transformations and corrections are crowdsourced.</p>
     </section>
 
     <hr class="rule">
@@ -881,7 +904,7 @@
         <span class="case-block-text">
           <span class="case-block-title">Mapping inconsistent schemas at scale</span>
           <span class="case-block-subtitle">Translate inconsistent data sources to a common target format, fully automated and enhanced by AI suggestions.</span>
-          <span class="case-block-keywords">Interaction design | Human-in-the-loop</span>
+          <span class="case-block-keywords">Interaction design · Human-in-the-loop</span>
         </span>
         <span class="case-block-arrow" aria-hidden="true">→</span>
       </a>

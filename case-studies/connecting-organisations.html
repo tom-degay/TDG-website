@@ -909,29 +909,39 @@
       var links = document.querySelectorAll(".toc a");
       if (!links.length || !("IntersectionObserver" in window)) return;
 
-      var map = {};
+      // Observe the whole section (not just its heading) so a link stays
+      // highlighted for the entire time its section is in view, even when
+      // the section is tall and its heading has long scrolled past.
+      var sections = [];
       links.forEach(function (link) {
         var id = link.getAttribute("href").slice(1);
         var el = document.getElementById(id);
-        if (el) map[id] = link;
+        var section = el ? el.closest("section") || el : null;
+        if (section) sections.push({ section: section, link: link });
       });
 
       var observer = new IntersectionObserver(
         function (entries) {
           entries.forEach(function (entry) {
-            var link = map[entry.target.id];
-            if (!link) return;
+            var match = null;
+            for (var i = 0; i < sections.length; i++) {
+              if (sections[i].section === entry.target) {
+                match = sections[i];
+                break;
+              }
+            }
+            if (!match) return;
             if (entry.isIntersecting) {
               links.forEach(function (l) { l.classList.remove("is-active"); });
-              link.classList.add("is-active");
+              match.link.classList.add("is-active");
             }
           });
         },
         { rootMargin: "-20% 0px -70% 0px", threshold: 0 }
       );
 
-      Object.keys(map).forEach(function (id) {
-        observer.observe(document.getElementById(id));
+      sections.forEach(function (s) {
+        observer.observe(s.section);
       });
     })();
 

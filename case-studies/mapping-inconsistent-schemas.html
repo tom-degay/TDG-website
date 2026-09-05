@@ -497,6 +497,66 @@
     content: none;
   }
 
+
+  /* -- image lightbox -- */
+
+  .figure img {
+    cursor: zoom-in;
+  }
+
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.92);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(16px, 5vw, 64px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease;
+    z-index: 1000;
+    cursor: zoom-out;
+  }
+
+  .lightbox.is-open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .lightbox img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 6px;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
+    cursor: default;
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: clamp(12px, 3vw, 28px);
+    right: clamp(12px, 3vw, 28px);
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.4);
+    color: #fff;
+    font-size: 20px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+
+  .lightbox-close:hover,
+  .lightbox-close:focus-visible {
+    border-color: rgba(255, 255, 255, 0.8);
+    background: rgba(0, 0, 0, 0.7);
+  }
+
 </style>
 </head>
 <body>
@@ -941,6 +1001,11 @@
     <a href="#outcome-heading">Outcome</a>
     <a href="#resources-heading">Resources</a>
   </nav>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Enlarged image" tabindex="-1">
+    <button class="lightbox-close" type="button" aria-label="Close enlarged image">&times;</button>
+    <img src="" alt="">
+  </div>
   </main>
 
   <script>
@@ -980,6 +1045,55 @@
 
       Object.keys(map).forEach(function (id) {
         observer.observe(document.getElementById(id));
+      });
+    })();
+
+    (function () {
+      var lightbox = document.getElementById("lightbox");
+      if (!lightbox) return;
+      var lightboxImg = lightbox.querySelector("img");
+      var closeBtn = lightbox.querySelector(".lightbox-close");
+      var lastFocused = null;
+
+      function openLightbox(src, alt) {
+        lastFocused = document.activeElement;
+        lightboxImg.src = src;
+        lightboxImg.alt = alt || "";
+        lightbox.classList.add("is-open");
+        document.body.style.overflow = "hidden";
+        closeBtn.focus();
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove("is-open");
+        lightboxImg.src = "";
+        document.body.style.overflow = "";
+        if (lastFocused) lastFocused.focus();
+      }
+
+      document.querySelectorAll(".figure img").forEach(function (img) {
+        img.setAttribute("tabindex", "0");
+        img.setAttribute("role", "button");
+        img.setAttribute("aria-label", "Click to enlarge image");
+        img.addEventListener("click", function () {
+          openLightbox(img.src, img.alt);
+        });
+        img.addEventListener("keydown", function (e) {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            openLightbox(img.src, img.alt);
+          }
+        });
+      });
+
+      lightbox.addEventListener("click", function (e) {
+        if (e.target === lightbox) closeLightbox();
+      });
+      closeBtn.addEventListener("click", closeLightbox);
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && lightbox.classList.contains("is-open")) {
+          closeLightbox();
+        }
       });
     })();
   </script>

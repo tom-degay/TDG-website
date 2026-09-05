@@ -776,6 +776,12 @@
       <span class="eyebrow" id="connected-heading">Getting connected</span>
       <h2>Trusted setup in under a minute</h2>
       <p>Initiating a partner connection required just their contact&rsquo;s email. We used the domain to find their organisation or begin creating it. I researched and proposed a <a href="https://www.logo.dev" target="_blank" rel="noopener noreferrer">logo.dev</a> integration to populate organisation names and logos automatically, reducing setup effort and making requests more recognisable. Admins on each side approve the connection, with all events tracked in a new admin panel.</p>
+
+      <figure class="figure">
+        <img src="media/feeds-add-partners-spec.jpg" alt="Design specification board mapping every path through the add-partners workflow: adding internal submitters, connecting to an existing partner, adding a new partner, setup via a Feed In or Feed Out, setup statuses and review settings.">
+        <figcaption>Design specification for the &lsquo;Add partners&rsquo; workflow. Did the partner already exist on the system? Were they already connected to this? Was the user an admin? A lot of complexity behind the scenes, enabling simplicity in the product.</figcaption>
+      </figure>
+
       <p>Admins can also create reusable schedules to centrally manage request frequency. Research revealed that feeds often shared a cadence but followed different contract dates. I made start and end dates properties of a Feed, rather than a schedule, allowing requests to stop at contract end without affecting other feeds using the same schedule.</p>
       <p>All that&rsquo;s required to set up a new Feed is to add subsections, search for a partner and connect an existing schedule. In under one minute you can be requesting data from your trading partners.</p>
 
@@ -792,6 +798,11 @@
       <p>Both parties retain an immutable, versioned record of submitted data. Suppliers can correct and resubmit files without overwriting the original, preserving evidence for future disputes. User avatars and organisation domains identify the people and companies behind submissions, building trust.</p>
       <p>I redesigned the Feed repository as a management dashboard, showing which Feeds are complete, waiting for data or overdue; this real-time view of inventory replaces manual tracking in spreadsheets. Configurable reminders chase outstanding submissions automatically.</p>
       <p>Visible connections between Feeds and pipelines help managers understand what each submission will trigger and what the automation is still waiting for.</p>
+
+      <figure class="figure">
+        <img src="media/feeds-repo-dashboard.png" alt="Your Feeds dashboard listing partner feeds with status badges (Draft, Overdue, Resubmission, Complete), owners, submission counts and a filterable sidebar for feed status, type and tags.">
+        <figcaption>Feeds repo: I reimagined the document storage as a management dashboard.</figcaption>
+      </figure>
     </section>
 
     <hr class="rule">
@@ -800,7 +811,17 @@
       <span class="eyebrow" id="network-heading">Network potential</span>
       <h2>Connecting the whole data chain</h2>
       <p>Feeds support incoming data, outgoing distribution and onward sharing. An insurer can distribute data to reinsurers, while a broker can receive and pass on the original submission. Each organisation can connect its own processing pipelines while retaining a shared, auditable source record. This uniquely allows us to surface the full data Chain of Custody.</p>
-      <p>The Feeds lay the architectural groundwork for the big vision: automated data flows across the industry.</p>
+
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/vqHMlfbLOZU?si=8_V2V-7beRQ4BkcO" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+
+      <p>The Feeds lay the architectural groundwork for the big vision: automated data flows across the industry. We mapped out further <a href="https://help.quantemplate.com/feed-use-cases" target="_blank" rel="noopener noreferrer">Use Cases</a> on this support page.</p>
+
+      <figure class="figure">
+        <img src="media/feeds-network-potential-diagram.png" alt="Diagram showing data flowing from MGAs and Carriers who are Quantemplate clients, through to free-user Carriers and Reinsurers, illustrating how submissions and pushes propagate across the network regardless of client status.">
+        <figcaption>Potential to flow data seamlessly across the insurance industry.</figcaption>
+      </figure>
     </section>
 
     <hr class="rule">
@@ -810,7 +831,7 @@
       <h2>A foundation for networked data</h2>
       <p>Feeds have been running production data for approximately 18 months, processing recurring monthly submissions and 3.4 million rows to date. For the client running it, this removes nearly all of the manual steps identified in the original workflow mapping, for true &lsquo;straight-through processing&rsquo;. The one step that remains, the initial upload, is performed directly by the data supplier.</p>
       <p>Bringing further partners onto Feeds is an ongoing project: in-app guidance and comprehensive tutorials have driven initial uptake, and upcoming features to share validation reports and suggest corrections should make the value of switching more visible.</p>
-      <p>More strategically, Feeds expanded Quantemplate from a product for automating processes within an organisation, towards infrastructure connecting them. This opens the door to Network Intelligence, where data mappings, transformations and corrections are crowdsourced.</p>
+      <p>More strategically, Feeds expanded Quantemplate from a product for automating processes within an organisation, towards infrastructure connecting them. This opens the door to <a href="https://help.quantemplate.com/artificial-intelligence" target="_blank" rel="noopener noreferrer">Network Intelligence</a>, where data mappings, transformations and corrections are crowdsourced.</p>
     </section>
 
     <hr class="rule">

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="312px" height="312px" viewBox="0 0 312 312" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>tdg-favicon</title>
+    <defs>
+        <path d="M0,0 L312,0 L312,312 L0,312 L0,0 Z" id="path-1"></path>
+    </defs>
+    <g id="tdg-favicon" stroke="none" fill="none" xlink:href="#path-1" fill-rule="evenodd">
+        <use fill="color(display-p3 0.000 0.000 0.000)" xlink:href="#path-1"></use>
+        <g id="T" stroke-width="1" transform="translate(36, 0)" fill="color(display-p3 1.000 1.000 1.000)">
+            <polygon id="Path" fill-rule="nonzero" points="50.6613729 102.539013 102.467394 102.539013 102.467394 229 137.532606 229 137.532606 102.539013 189.338627 102.539013 189.338627 73.3557081 50.6613729 73.3557081"></polygon>
+        </g>
+    </g>
+</svg>

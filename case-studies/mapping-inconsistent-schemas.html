@@ -278,6 +278,23 @@
     max-width: 46rem;
   }
 
+  h3 {
+    margin: 0 0 20px;
+    color: #fff;
+    font-size: clamp(18px, 2.3vw, 22px);
+    line-height: 1.3;
+  }
+
+  .case-body h3 {
+    max-width: 46rem;
+  }
+
+  .subsection + .subsection {
+    margin-top: clamp(40px, 6vw, 56px);
+    padding-top: clamp(40px, 6vw, 56px);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
   .case-body p {
     max-width: 46rem;
     color: rgba(255, 255, 255, 0.7);
@@ -659,7 +676,7 @@
     <hr class="rule">
 
     <section aria-labelledby="problem-heading" class="case-body">
-      <span class="eyebrow" id="problem-heading">The problem</span>
+      <span class="eyebrow" id="problem-heading">The problem and objective</span>
       <h2>Hundreds of schemas, no common language</h2>
       <p>Insurance companies process risk, premium and claims data from hundreds of trading partners, each with their own data schema which needs to be aligned to the insurer's own standards before it can be used downstream. A column might be called ‘Unique Market Reference’ in one dataset and ‘UMR’ in another. Now multiply that across an average of 250 fields and 2000 distinct files a month in a typical organisation.</p>
 
@@ -900,8 +917,8 @@
 
     <hr class="rule">
 
-    <section aria-labelledby="research-heading" class="case-body">
-      <span class="eyebrow" id="research-heading">Research</span>
+    <section aria-labelledby="approach-heading" class="case-body">
+      <span class="eyebrow" id="approach-heading">Approach</span>
       <h2>Learning from the Excel workarounds</h2>
       <p>Studying dozens of Excel processes where people had manually reconciled different schemas revealed consistent patterns. The most effective approaches arranged source and target schemas vertically, using alignment across rows to show mappings. Interviews with domain experts validated the approach, but exposed a recurring pain point: constantly rearranging cells whilst keeping track of what was mapped and what remained.</p>
 
@@ -914,8 +931,8 @@
 
     <hr class="rule">
 
-    <section aria-labelledby="concept-heading" class="case-body">
-      <span class="eyebrow" id="concept-heading">Concept</span>
+    <section aria-labelledby="keydecisions-heading" class="case-body">
+      <span class="eyebrow" id="keydecisions-heading">Key decisions</span>
       <h2>Vertically stacked fields, aligned to a common master</h2>
       <p>There was no established product pattern that we could adopt. Instead, a concept emerged directly from the research: an interface with vertically stacked fields, across which multiple schemas could align to a common master.</p>
 
@@ -937,64 +954,61 @@
 
     <hr class="rule">
 
-    <section aria-labelledby="automation-heading" class="case-body">
-      <span class="eyebrow" id="automation-heading">Automation</span>
-      <h2>Suggestions users could trust</h2>
-      <p>For every unmapped field we used our matching engine to generate suggestions to map to the master schema. The next step was to automate this: allow top-ranking suggestions to be mapped at once.</p>
-      <p>I designed this as a preview mode, so users could see mapping suggestions before committing. I also added a slider, so a minimum confidence threshold could be set: incorrect mappings could be costly, so quality was more important than coverage.</p>
+    <section aria-labelledby="implementation-heading" class="case-body">
+      <span class="eyebrow" id="implementation-heading">Implementation</span>
 
-      <blockquote>These safeguards helped users trust the automation.</blockquote>
+      <div class="subsection" id="automation-heading">
+        <h3>Suggestions users could trust</h3>
+        <p>For every unmapped field we used our matching engine to generate suggestions to map to the master schema. The next step was to automate this: allow top-ranking suggestions to be mapped at once.</p>
+        <p>I designed this as a preview mode, so users could see mapping suggestions before committing. I also added a slider, so a minimum confidence threshold could be set: incorrect mappings could be costly, so quality was more important than coverage.</p>
 
-      <div class="ui-video">
-        <video autoplay controls muted loop playsinline poster="media/automap-preview.jpg">
-          <source src="media/automap-preview.mp4" type="video/mp4">
-        </video>
+        <blockquote>These safeguards helped users trust the automation.</blockquote>
+
+        <div class="ui-video">
+          <video autoplay controls muted loop playsinline poster="media/automap-preview.jpg">
+            <source src="media/automap-preview.mp4" type="video/mp4">
+          </video>
+        </div>
       </div>
-    </section>
 
-    <hr class="rule">
+      <div class="subsection" id="refinement-heading">
+        <h3>Following the product's desire lines</h3>
+        <p>Column mapping has been in production for ten years. Over that time, we've continually adapted it to how people actually use it, following the product's emerging ‘desire lines’.</p>
 
-    <section aria-labelledby="refinement-heading" class="case-body">
-      <span class="eyebrow" id="refinement-heading">Constant refinement</span>
-      <h2>Following the product's desire lines</h2>
-      <p>Column mapping has been in production for ten years. Over that time, we've continually adapted it to how people actually use it, following the product's emerging ‘desire lines’.</p>
+        <figure class="figure">
+          <img src="media/mch-early-screenshot-web.jpg" alt="Screenshot of the early Map Column Headers interface, light theme, showing unnamed numbered columns being mapped to a master schema.">
+          <figcaption>QA testing screenshot from our first release of Map Column Headers, early 2017</figcaption>
+        </figure>
 
-      <figure class="figure">
-        <img src="media/mch-early-screenshot-web.jpg" alt="Screenshot of the early Map Column Headers interface, light theme, showing unnamed numbered columns being mapped to a master schema.">
-        <figcaption>QA testing screenshot from our first release of Map Column Headers, early 2017</figcaption>
-      </figure>
+        <p>Our original sample of users were building master schemas by amalgamating multiple files. But as we broadened the user cohort, they more often started with a definitive file, such as their data warehouse target schema. We evolved the workflow to foreground that behaviour.</p>
 
-      <p>Our original sample of users were building master schemas by amalgamating multiple files. But as we broadened the user cohort, they more often started with a definitive file, such as their data warehouse target schema. We evolved the workflow to foreground that behaviour.</p>
-
-      <div class="ui-video">
-        <video autoplay controls muted loop playsinline poster="media/apply-master-schema.jpg">
-          <source src="media/apply-master-schema.mp4" type="video/mp4">
-        </video>
+        <div class="ui-video">
+          <video autoplay controls muted loop playsinline poster="media/apply-master-schema.jpg">
+            <source src="media/apply-master-schema.mp4" type="video/mp4">
+          </video>
+        </div>
       </div>
-    </section>
 
-    <hr class="rule">
+      <div class="subsection" id="semantics-heading">
+        <h3>From column names to column contents</h3>
+        <p>Whilst the interface had served our clients well, we knew the mapping algorithm itself could be improved. It just looked at the similarity of column names, and whether a pair had been mapped before. A more intelligent system would learn the contents of each column to more accurately match them to the master schema.</p>
+        <p>In 2026 we initiated a project to identify the type of data in each column, then profile the data inside it, creating a unique data fingerprint for each field.</p>
 
-    <section aria-labelledby="semantics-heading" class="case-body">
-      <span class="eyebrow" id="semantics-heading">Semantics and fingerprinting</span>
-      <h2>From column names to column contents</h2>
-      <p>Whilst the interface had served our clients well, we knew the mapping algorithm itself could be improved. It just looked at the similarity of column names, and whether a pair had been mapped before. A more intelligent system would learn the contents of each column to more accurately match them to the master schema.</p>
-      <p>In 2026 we initiated a project to identify the type of data in each column, then profile the data inside it, creating a unique data fingerprint for each field.</p>
+        <p>I did a full audit of the current mapping behaviour, identified shortcomings in our approach and evaluated different paths for improvement. Together with a domain expert, I modelled different methodologies for weighting data fingerprints and prior usage.</p>
 
-      <p>I did a full audit of the current mapping behaviour, identified shortcomings in our approach and evaluated different paths for improvement. Together with a domain expert, I modelled different methodologies for weighting data fingerprints and prior usage.</p>
+        <figure class="figure">
+          <img src="media/mch-modelling-web.jpg" alt="Spreadsheet modelling different scenarios for weighting type match and text match scores when scoring candidate column mappings.">
+          <figcaption>Assessing mapping algorithms by modelling different scenarios</figcaption>
+        </figure>
 
-      <figure class="figure">
-        <img src="media/mch-modelling-web.jpg" alt="Spreadsheet modelling different scenarios for weighting type match and text match scores when scoring candidate column mappings.">
-        <figcaption>Assessing mapping algorithms by modelling different scenarios</figcaption>
-      </figure>
+        <p>When it came to the UI, we displayed the data types, allowing users to drill down and see detailed stats for each column. Prior mappings from other users now had avatars and recency information to build trust.</p>
+        <blockquote>Our tests showed a 4x improvement in mapping quality for the same coverage.</blockquote>
 
-      <p>When it came to the UI, we displayed the data types, allowing users to drill down and see detailed stats for each column. Prior mappings from other users now had avatars and recency information to build trust.</p>
-      <blockquote>Our tests showed a 4x improvement in mapping quality for the same coverage.</blockquote>
-
-      <figure class="figure">
-        <img src="media/data-profile-web.jpg" alt="Data profile panel showing uniques, blanks, duplicates, coverage, mode and a value distribution histogram for a Commission Amount column.">
-        <figcaption>Data profiles allow users to understand the content of every column and inform mapping suggestions.</figcaption>
-      </figure>
+        <figure class="figure">
+          <img src="media/data-profile-web.jpg" alt="Data profile panel showing uniques, blanks, duplicates, coverage, mode and a value distribution histogram for a Commission Amount column.">
+          <figcaption>Data profiles allow users to understand the content of every column and inform mapping suggestions.</figcaption>
+        </figure>
+      </div>
     </section>
 
     <hr class="rule">
@@ -1042,12 +1056,10 @@
     <span class="eyebrow toc-heading">On this page</span>
     <a href="#keypoints-heading">Key points</a>
     <a href="#summary-heading">Summary</a>
-    <a href="#problem-heading">The problem</a>
-    <a href="#research-heading">Research</a>
-    <a href="#concept-heading">Concept</a>
-    <a href="#automation-heading">Automation</a>
-    <a href="#refinement-heading">Constant refinement</a>
-    <a href="#semantics-heading">Semantics and fingerprinting</a>
+    <a href="#problem-heading">The problem and objective</a>
+    <a href="#approach-heading">Approach</a>
+    <a href="#keydecisions-heading">Key decisions</a>
+    <a href="#implementation-heading">Implementation</a>
     <a href="#outcome-heading">Outcome</a>
     <a href="#resources-heading">Resources</a>
   </nav>
@@ -1075,29 +1087,39 @@
       var links = document.querySelectorAll(".toc a");
       if (!links.length || !("IntersectionObserver" in window)) return;
 
-      var map = {};
+      // Observe the whole section (not just its heading) so a link stays
+      // highlighted for the entire time its section is in view, even when
+      // the section is tall and its heading has long scrolled past.
+      var sections = [];
       links.forEach(function (link) {
         var id = link.getAttribute("href").slice(1);
         var el = document.getElementById(id);
-        if (el) map[id] = link;
+        var section = el ? el.closest("section") || el : null;
+        if (section) sections.push({ section: section, link: link });
       });
 
       var observer = new IntersectionObserver(
         function (entries) {
           entries.forEach(function (entry) {
-            var link = map[entry.target.id];
-            if (!link) return;
+            var match = null;
+            for (var i = 0; i < sections.length; i++) {
+              if (sections[i].section === entry.target) {
+                match = sections[i];
+                break;
+              }
+            }
+            if (!match) return;
             if (entry.isIntersecting) {
               links.forEach(function (l) { l.classList.remove("is-active"); });
-              link.classList.add("is-active");
+              match.link.classList.add("is-active");
             }
           });
         },
         { rootMargin: "-20% 0px -70% 0px", threshold: 0 }
       );
 
-      Object.keys(map).forEach(function (id) {
-        observer.observe(document.getElementById(id));
+      sections.forEach(function (s) {
+        observer.observe(s.section);
       });
     })();
 

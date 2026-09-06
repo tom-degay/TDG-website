@@ -1063,6 +1063,12 @@
         <h3>Information design</h3>
         <p>The design of the original report, done in 2017, was driven by information design principles, putting validation failures in the context of a whole dataset to give users a sense of scale.</p>
         <p>I worked on this with an information designer who I was mentoring in UX. We did a lot of whiteboard prototyping so we could test ideas with subject matter experts and engineers before moving to high fidelity mockups to play back to our user cohort.</p>
+
+        <figure class="figure">
+          <img src="media/validation-whiteboard.jpg" alt="Whiteboard sketches exploring the validation report: a segmented ring chart with stacked result rows, a filtered per-input-file variant, drill-down interactions, and notes on the download use cases.">
+          <figcaption>Collaborative whiteboarding helped us originate a solution to a problem where no prior patterns existed</figcaption>
+        </figure>
+
         <p>User feedback also helped us decide what to leave out. We explored allowing users to pivot the report to first view results by input file rather than by validation rule. Their response was helpfully direct:</p>
         <blockquote>&ldquo;Skip the dev on that. Just give me the validations.&rdquo;</blockquote>
         <p>We dropped the alternative view and focused development on the core reporting experience.</p>
@@ -1072,8 +1078,23 @@
         <h3>Ship, learn, repeat</h3>
         <blockquote>Our philosophy was to get a working version into users&rsquo; hands sooner rather than later. We needed to see how the report held up to real data and business use.</blockquote>
         <p>We shipped a capable V1, then observed and progressively refined the experience.</p>
+
+        <figure class="figure">
+          <div class="ui-video">
+            <video autoplay controls muted loop playsinline poster="media/validations-drill-down.jpg">
+              <source src="media/validations-drill-down.mp4" type="video/mp4">
+            </video>
+          </div>
+          <figcaption>An earlier version of the validation report. We later compressed the multi-step drill-down into a single step, based on observed usage</figcaption>
+        </figure>
+
         <p>For the 2026 upgrade to add corrections, we looked at how users were already making spot edits to their data by inserting calculation steps into their pipelines. These would typically map one value to another, sometimes making the mapping conditional on another value, such as the policy ID. This was a &lsquo;desire line&rsquo; in the product.</p>
         <blockquote>The opportunity was to bring that existing pattern into the report, making corrections easier to configure and trace.</blockquote>
+
+        <figure class="figure">
+          <img src="media/ad-hoc-correction.png" alt="A pipeline calculation step containing a hand-written IF statement that sets the Accident State to a fixed value when the policy number matches.">
+          <figcaption>Desire lines in the product: an ad-hoc correction added by a user to a pipeline. A manually-entered IF statement to modify the Accident State for a specific policy number.</figcaption>
+        </figure>
       </div>
     </section>
 
@@ -1111,7 +1132,7 @@
 
       <div class="subsection" id="impl-ordering">
         <h3>Ordering and audit</h3>
-        <p>One of the things we discovered in testing as part of our internal QA process was that the order in which corrections apply is important, since one correction could overwrite a prior one. We created an interface showing all corrections applied to any validation rule, allowing users to reorder or remove them.</p>
+        <p>One of the things we discovered in testing, as part of our internal QA process, was that the order in which corrections apply is important, since one correction could overwrite a prior one. We created an interface showing all corrections applied to any validation rule, allowing users to reorder or remove them.</p>
       </div>
 
       <div class="subsection" id="impl-sharing">

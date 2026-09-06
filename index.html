@@ -442,6 +442,80 @@
     transform: scale(1.03);
   }
 
+  /* -- other work: horizontal, full-width, secondary (coming soon) -- */
+
+  .other-work {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .other-block {
+    display: flex;
+    gap: 22px;
+    align-items: flex-start;
+    padding: 18px 22px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    opacity: 0.7;
+  }
+
+  .other-block-media {
+    flex: 0 0 clamp(150px, 26vw, 260px);
+    width: clamp(150px, 26vw, 260px);
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    object-position: center top;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .other-block-text {
+    min-width: 0;
+  }
+
+  .other-block-title {
+    display: block;
+    font-family: "Fakt Blond SemiBold", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    color: #fff;
+    font-size: clamp(18px, 2.4vw, 22px);
+    line-height: 1.3;
+  }
+
+  .other-block-desc {
+    display: block;
+    color: rgba(255, 255, 255, 0.68);
+    font-size: clamp(15px, 1.7vw, 17px);
+    line-height: 1.5;
+    margin-top: 8px;
+    max-width: 54ch;
+  }
+
+  .other-block-soon {
+    display: block;
+    color: rgba(255, 255, 255, 0.45);
+    font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    word-spacing: -3px;
+    text-transform: uppercase;
+    margin-top: 8px;
+  }
+
+  @media (max-width: 560px) {
+    .other-block {
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .other-block-media {
+      width: 100%;
+      flex-basis: auto;
+    }
+  }
+
   /* -- site nav -- */
 
   .site-nav {
@@ -557,6 +631,18 @@
   .nav-dropdown-card:hover,
   .nav-dropdown-card:focus-visible {
     background-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .nav-dropdown-card-kicker {
+    display: block;
+    font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+    color: #00d8aa;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    word-spacing: -3px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
   }
 
   .nav-dropdown-card-title {
@@ -718,16 +804,16 @@
           <div class="nav-dropdown">
             <div class="nav-dropdown-panel">
               <a class="nav-dropdown-card" href="/case-studies/mapping-inconsistent-schemas">
+                <span class="nav-dropdown-card-kicker">Column mapping</span>
                 <span class="nav-dropdown-card-title">Mapping inconsistent schemas<br>at scale</span>
-                <span class="nav-dropdown-card-subtitle">Translate inconsistent data sources to a common target format, fully automated and enhanced by AI suggestions.</span>
               </a>
               <a class="nav-dropdown-card" href="/case-studies/connecting-organisations">
+                <span class="nav-dropdown-card-kicker">Feeds</span>
                 <span class="nav-dropdown-card-title">Connecting organisations<br>through data</span>
-                <span class="nav-dropdown-card-subtitle">Infrastructure to automate data exchange, laying the foundation for a connected network.</span>
               </a>
               <a class="nav-dropdown-card" href="/case-studies/validation-and-correction">
+                <span class="nav-dropdown-card-kicker">Validation</span>
                 <span class="nav-dropdown-card-title">Closing the loop on<br>data quality</span>
-                <span class="nav-dropdown-card-subtitle">Find and fix data issues before they reach downstream systems, all in one workflow.</span>
               </a>
             </div>
           </div>
@@ -796,6 +882,31 @@
               <span class="case-block-soon-label">Coming soon</span>
             </span>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="rule">
+
+    <section aria-labelledby="other-work-heading">
+      <span class="eyebrow" id="other-work-heading">Other work</span>
+      <div class="other-work">
+        <div class="other-block">
+          <img class="other-block-media" src="/other-work/media/session-review.jpg" alt="Image Insight's Session Review screen: reflective prompts beside evocative images, with a panel of actions to carry forward." loading="lazy">
+          <span class="other-block-text">
+            <span class="other-block-title">Image Insight</span>
+            <span class="other-block-desc">Digital coaching tool that uses images and visual metaphors to prompt deeper reflection in online and face-to-face sessions. Created an elegant, low-friction experience where imagery and conversation take centre stage.</span>
+            <span class="other-block-soon">Coming soon</span>
+          </span>
+        </div>
+
+        <div class="other-block">
+          <img class="other-block-media" src="/other-work/media/zonefully.jpg" alt="Zonefully's Programs screen: a list of training and meal routines beside a Recovery program detail with its ordered sessions." loading="lazy">
+          <span class="other-block-text">
+            <span class="other-block-title">Zonefully</span>
+            <span class="other-block-desc">Designed the interface for a new model for planning recurring activities around long-term goals, working closely with the founder from concept through to a functioning V1.</span>
+            <span class="other-block-soon">Coming soon</span>
+          </span>
         </div>
       </div>
     </section>

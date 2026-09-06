@@ -416,12 +416,17 @@
     transition: transform 0.45s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.2s ease;
   }
 
+  .nav-toggle-bar:nth-child(2) {
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
   .site-nav.is-open .nav-toggle-bar:nth-child(1) {
     transform: translateY(7px) rotate(45deg);
   }
 
   .site-nav.is-open .nav-toggle-bar:nth-child(2) {
     opacity: 0;
+    transform: scaleX(0);
   }
 
   .site-nav.is-open .nav-toggle-bar:nth-child(3) {

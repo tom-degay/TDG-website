@@ -1117,11 +1117,22 @@
       <div class="subsection" id="kd-evidence">
         <h3>Preserve evidence</h3>
         <p>Audit was important to our clients, who use Quantemplate as a system-of-record for financial reporting. To support this we displayed the original failed values alongside the corrected rows in the report. The full change history of each edit was displayed.</p>
+
+        <figure class="figure">
+          <img src="media/validation-history.png" alt="The correction popup with a Correction history section below the Apply button, listing successive edits to a value with the editor's name and a timestamp for each.">
+          <figcaption>Each edit to a failed value is recorded and displayed, building trust in the change and helping our clients meet their audit goals</figcaption>
+        </figure>
       </div>
 
       <div class="subsection" id="kd-feedback">
         <h3>Give immediate feedback</h3>
         <p>Corrections are applied to the output on the next pipeline run, so we called this out with a notification bar. But as a user types in a correction, we check that their entered value will pass the rule, and warn if it&rsquo;s still a fail.</p>
+
+        <div class="ui-video">
+          <video autoplay controls muted loop playsinline poster="media/validation-instant-check.jpg">
+            <source src="media/validation-instant-check.mp4" type="video/mp4">
+          </video>
+        </div>
       </div>
     </section>
 
@@ -1133,6 +1144,11 @@
       <div class="subsection" id="impl-ordering">
         <h3>Ordering and audit</h3>
         <p>One of the things we discovered in testing, as part of our internal QA process, was that the order in which corrections apply is important, since one correction could overwrite a prior one. We created an interface showing all corrections applied to any validation rule, allowing users to reorder or remove them.</p>
+
+        <figure class="figure">
+          <img src="media/validation-correction-log.jpg" alt="A table of all corrections attached to one validation rule, with columns for order, column, the correction rule, last editor and last edit date.">
+          <figcaption>Behind each validation is a log of all corrections applied, allowing reordering of correction rules. We uncovered the need for this in QA testing.</figcaption>
+        </figure>
       </div>
 
       <div class="subsection" id="impl-sharing">

@@ -249,7 +249,7 @@
 
   .form-status {
     margin-top: 18px;
-    font-size: 14px;
+    font-size: 17px;
     color: rgba(255, 255, 255, 0.68);
   }
 
@@ -472,7 +472,7 @@
           .then(function (result) {
             if (result.ok && result.data.success) {
               form.reset();
-              status.textContent = "Thanks — I'll get back to you soon.";
+              status.textContent = "Thanks. I'll get back to you soon";
             } else {
               status.textContent = "Something went wrong. Please email me directly instead.";
             }

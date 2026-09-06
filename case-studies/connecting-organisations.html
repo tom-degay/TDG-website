@@ -700,6 +700,16 @@
     position: sticky;
     top: 0;
     z-index: 50;
+  }
+
+  /* Frosted bar background lives on a pseudo-element so .site-nav itself is
+     not a backdrop-filter root — otherwise the open mobile menu panel (a
+     descendant that has its own backdrop-filter) can't blur the page. */
+  .site-nav::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
     background: rgba(0, 0, 0, 0.86);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -912,6 +922,13 @@
       visibility: visible;
       transform: none;
       transition: none;
+    }
+
+    /* the desktop open-state rule is more specific and would otherwise
+       still slide the panel -50% when the item is hovered/focused here */
+    .nav-item:hover .nav-dropdown,
+    .nav-item:focus-within .nav-dropdown {
+      transform: none;
     }
 
     .nav-dropdown-panel {

@@ -182,6 +182,21 @@
     line-height: 1.5;
   }
 
+  .figure figcaption a {
+    color: rgba(255, 255, 255, 0.8);
+    border-bottom-color: rgba(255, 255, 255, 0.35);
+  }
+
+  .figure figcaption a:hover,
+  .figure figcaption a:focus-visible {
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.9);
+  }
+
+  .figure figcaption a[target="_blank"]::after {
+    content: none;
+  }
+
   /* -- image lightbox -- */
 
   .figure img {
@@ -570,7 +585,7 @@
           <h2 class="principle-title display" id="complexity-heading">Make complexity understandable</h2>
           <figure class="figure">
             <img src="media/dinorwig-quarry-map.webp" alt="Detail from a hand-drawn map of Dinorwig Quarry and Padarn Country Park near Llanberis, showing numbered levels, inclines, buildings and walking routes.">
-            <figcaption>Dinorwig Quarry map (detail). I drew this as part of my Masters final project at Central Saint Martins, where I specialised in wayfinding.</figcaption>
+            <figcaption>Dinorwig Quarry map (detail). I drew this as part of my Masters final project at <a href="https://www.arts.ac.uk/colleges/central-saint-martins" target="_blank" rel="noopener noreferrer">Central Saint Martins</a>, where I specialised in wayfinding.</figcaption>
           </figure>
           <p>A map is a complex artefact, but an experienced navigator knows how to use one. They have a mental model of how the map works. Every cartographer needs to make decisions about what is included and what is omitted. Prominence and hierarchy are key. Likewise, in complex products, we should aim to preserve the capability people need while making it easier to learn and use.</p>
         </section>

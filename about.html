@@ -128,7 +128,8 @@
 
   /* -- suppress the external-link arrow inside running text -- */
 
-  .about-copy a[target="_blank"]::after {
+  .about-copy a[target="_blank"]::after,
+  .site-note a[target="_blank"]::after {
     content: none;
   }
 
@@ -193,6 +194,37 @@
 
   .about-copy a:hover,
   .about-copy a:focus-visible {
+    border-color: rgba(255, 255, 255, 0.9);
+  }
+
+  /* -- "About this site" footnote -- */
+
+  .site-note {
+    margin-top: clamp(48px, 8vw, 88px);
+    padding-top: clamp(28px, 4vw, 36px);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    max-width: 620px;
+  }
+
+  .site-note .eyebrow {
+    margin: 0 0 14px;
+  }
+
+  .site-note p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: clamp(14px, 1.6vw, 15px);
+    line-height: 1.65;
+  }
+
+  .site-note a {
+    color: rgba(255, 255, 255, 0.72);
+    border-bottom-color: rgba(255, 255, 255, 0.25);
+  }
+
+  .site-note a:hover,
+  .site-note a:focus-visible {
+    color: #fff;
     border-color: rgba(255, 255, 255, 0.9);
   }
 
@@ -271,6 +303,10 @@
 
     .about-copy {
       order: 3;
+    }
+
+    .site-note {
+      order: 4;
     }
   }
 
@@ -593,6 +629,11 @@
 
       <p>Outside of work, I&rsquo;m usually to be found at the climbing wall with my family or, even better, bouldering in the forest of Fontainebleau.</p>
     </div>
+
+    <section class="site-note" aria-label="About this site">
+      <span class="eyebrow">About this site</span>
+      <p>Written and designed by me. Vibe coded with <a href="https://claude.com/claude-code" target="_blank" rel="noopener noreferrer">Claude</a>. I put this site together over a weekend and a few evenings to explore a new way of working. Rather than starting with a design drawing to reproduce, I built it incrementally, letting my <a href="/approach">design principles</a> guide each decision.</p>
+    </section>
     </div>
   </main>
   <script>

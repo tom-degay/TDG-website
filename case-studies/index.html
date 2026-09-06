@@ -384,13 +384,125 @@
     color: #00d8aa;
   }
 
+  /* -- mobile: collapse the nav links behind a hamburger (<= 640px) -- */
+
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    margin: -10px -12px -10px 0;
+    padding: 0;
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .nav-toggle-bar {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: currentColor;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
+  .site-nav.is-open .nav-toggle-bar:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .site-nav.is-open .nav-toggle-bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .site-nav.is-open .nav-toggle-bar:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  @media (max-width: 640px) {
+    .nav-toggle {
+      display: flex;
+    }
+
+    .site-nav-inner {
+      flex-wrap: nowrap;
+    }
+
+    .site-nav-links {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      display: none;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      max-height: 72vh;
+      overflow-y: auto;
+      padding: 6px clamp(24px, 5vw, 56px) 18px;
+      background: #000;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .site-nav.is-open .site-nav-links {
+      display: flex;
+    }
+
+    .site-nav-links > a,
+    .nav-item > a {
+      display: block;
+      padding: 14px 0;
+      font-size: 20px;
+    }
+
+    .site-nav-links > a + a,
+    .nav-item {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-dropdown {
+      position: static;
+      min-width: 0;
+      padding: 0 0 10px;
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+      transition: none;
+    }
+
+    .nav-dropdown-panel {
+      gap: 2px;
+      padding: 0;
+      background: none;
+      box-shadow: none;
+    }
+
+    .nav-dropdown-card {
+      padding: 9px 0 9px 16px;
+    }
+
+    .nav-dropdown-card-subtitle {
+      display: none;
+    }
+  }
+
 </style>
 </head>
 <body>
   <nav class="site-nav">
     <div class="site-nav-inner">
       <a class="site-nav-brand display" href="/">Tom de Gay</a>
-      <div class="site-nav-links">
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav-links" aria-label="Menu">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
+      <div class="site-nav-links" id="site-nav-links">
         <a href="/about">About</a>
         <a href="/approach">Approach</a>
         <div class="nav-item">
@@ -453,6 +565,34 @@
       </div>
     </div>
   </main>
+  <script>
+    (function () {
+      var nav = document.querySelector('.site-nav');
+      if (!nav) return;
+      var toggle = nav.querySelector('.nav-toggle');
+      var links = nav.querySelector('.site-nav-links');
+      if (!toggle || !links) return;
+      function setOpen(open) {
+        nav.classList.toggle('is-open', open);
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      }
+      toggle.addEventListener('click', function () {
+        setOpen(!nav.classList.contains('is-open'));
+      });
+      links.addEventListener('click', function (e) {
+        if (e.target.closest('a')) setOpen(false);
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') setOpen(false);
+      });
+      document.addEventListener('click', function (e) {
+        if (nav.classList.contains('is-open') && !nav.contains(e.target)) setOpen(false);
+      });
+      window.addEventListener('resize', function () {
+        if (window.innerWidth > 640) setOpen(false);
+      });
+    })();
+  </script>
   <script data-goatcounter="https://tomdegay.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>

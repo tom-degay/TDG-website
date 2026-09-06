@@ -3,22 +3,22 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Tom de Gay — Digital Product Designer</title>
-<meta name="description" content="Tom de Gay, senior product designer specialising in design for AI, automation and complex domains.">
+<title>Case Studies — Tom de Gay</title>
+<meta name="description" content="Case studies by Tom de Gay, a digital product designer specialising in design for AI, automation and complex domains.">
 <meta name="theme-color" content="#000000">
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="Tom de Gay — Digital Product Designer">
-<meta property="og:description" content="Senior product designer specialising in design for AI, automation and complex domains.">
-<meta property="og:url" content="https://tomdegay.com">
+<meta property="og:title" content="Case Studies — Tom de Gay">
+<meta property="og:description" content="Case studies by Tom de Gay, a digital product designer specialising in design for AI, automation and complex domains.">
+<meta property="og:url" content="https://tomdegay.com/case-studies">
 <meta property="og:image" content="https://tomdegay.com/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Tom de Gay — Digital Product Designer">
 
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Tom de Gay — Digital Product Designer">
-<meta name="twitter:description" content="Senior product designer specialising in design for AI, automation and complex domains.">
+<meta name="twitter:title" content="Case Studies — Tom de Gay">
+<meta name="twitter:description" content="Case studies by Tom de Gay, a digital product designer specialising in design for AI, automation and complex domains.">
 <meta name="twitter:image" content="https://tomdegay.com/og-image.png">
 
 <link rel="icon" href="/tdg-favicon.svg" type="image/svg+xml">
@@ -26,12 +26,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
 <style>
 
   @font-face {
     font-family: "Fakt Blond SemiBold";
-    src: url("FaktProSemiBold.woff2") format("woff2"),
-         url("FaktProSemiBold.woff") format("woff");
+    src: url("../FaktProSemiBold.woff2") format("woff2"),
+         url("../FaktProSemiBold.woff") format("woff");
     font-weight: 600;
     font-style: normal;
     font-display: swap;
@@ -60,8 +61,7 @@
   main {
     max-width: 900px;
     margin: 0 auto;
-    padding: clamp(24px, 6vw, 72px) clamp(24px, 5vw, 56px) clamp(72px, 10vw, 120px);
-    transition: max-width 0.2s ease;
+    padding: clamp(24px, 6vw, 72px) clamp(24px, 5vw, 56px) clamp(96px, 12vw, 140px);
   }
 
   @media (min-width: 1100px) {
@@ -74,23 +74,6 @@
     font-family: "Fakt Blond SemiBold", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     font-weight: 600;
     letter-spacing: -0.01em;
-  }
-
-  h1 {
-    margin: 0;
-    color: #fff;
-    font-size: clamp(28px, 4.6vw, 42px);
-    line-height: 1.1;
-  }
-
-  p.links {
-    margin: 0;
-    font-size: clamp(14px, 1.5vw, 16px);
-    white-space: nowrap;
-  }
-
-  p.links a + a {
-    margin-left: 28px;
   }
 
   a {
@@ -112,35 +95,20 @@
     border-radius: 1px;
   }
 
-  a[target="_blank"] {
-    position: relative;
+  .back-link {
+    display: inline-block;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.55);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
   }
 
-  a[target="_blank"]::after {
-    content: "→";
-    position: absolute;
-    right: -1.1em;
-    top: 50%;
-    transform: translate(-4px, -50%);
-    opacity: 0;
-    transition: transform 0.18s ease, opacity 0.18s ease;
-    pointer-events: none;
-    will-change: transform, opacity;
+  .back-link:hover,
+  .back-link:focus-visible {
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.9);
   }
 
-  a[target="_blank"]:hover::after,
-  a[target="_blank"]:focus-visible::after {
-    opacity: 1;
-    transform: translate(0, -50%);
-  }
-
-  hr.rule {
-    border: none;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-    margin: clamp(32px, 5vw, 48px) 0;
-  }
-
-  section .eyebrow {
+  .eyebrow {
     display: block;
     font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
     color: #00d8aa;
@@ -149,55 +117,23 @@
     letter-spacing: 2px;
     word-spacing: -3px;
     text-transform: uppercase;
-    margin: 0 0 20px;
+    margin: 32px 0 28px;
   }
 
-  .about-statement {
+  .lede {
     color: #fff;
-    font-size: clamp(24px, 3.6vw, 34px);
-    line-height: 1.3;
-    margin: 0;
-    max-width: 40ch;
+    font-size: clamp(24px, 3.6vw, 32px);
+    line-height: 1.35;
+    margin: 0 0 clamp(36px, 5.5vw, 52px);
+    max-width: 32ch;
   }
 
-  .job {
-    margin: 0 0 8px;
-  }
-
-  .job-company {
-    color: #fff;
-    font-size: clamp(20px, 2.8vw, 26px);
-    line-height: 1.2;
-  }
-
-  .job-desc {
-    color: rgba(255, 255, 255, 0.68);
-    font-size: clamp(15px, 1.7vw, 17px);
-    line-height: 1.5;
-    max-width: 60ch;
-    margin: 14px 0 0;
-  }
-
-  .video-embed {
-    margin: 28px auto 0;
-    width: 100%;
-  }
-
-  @media (min-width: 1100px) {
-    .video-embed {
-      max-width: 880px;
-    }
-  }
+  /* -- case study link block -- */
 
   .case-blocks {
-    margin-top: 20px;
     display: grid;
     grid-template-columns: 1fr;
     gap: 16px;
-  }
-
-  .case-blocks .case-block {
-    margin-top: 0;
   }
 
   @media (min-width: 820px) {
@@ -207,106 +143,11 @@
     }
   }
 
-  .video-embed iframe {
-    display: block;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    height: auto;
-    border: 0;
-  }
-
-  .job-link {
-    display: inline-block;
-    margin-top: 16px;
-    font-size: 14px;
-  }
-
-  form {
-    max-width: 480px;
-  }
-
-  .field {
-    margin-bottom: 28px;
-  }
-
-  .field label {
-    display: block;
-    color: rgba(255, 255, 255, 0.45);
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-  }
-
-  .field input,
-  .field textarea {
-    width: 100%;
-    background: transparent;
-    border: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-    color: #fff;
-    font-family: inherit;
-    font-size: 17px;
-    padding: 8px 0 10px;
-    outline: none;
-    transition: border-color 0.15s ease;
-  }
-
-  .field textarea {
-    resize: vertical;
-    min-height: 90px;
-    line-height: 1.4;
-  }
-
-  .field input::placeholder,
-  .field textarea::placeholder {
-    color: rgba(255, 255, 255, 0.32);
-  }
-
-  .field input:focus,
-  .field textarea:focus {
-    border-bottom-color: rgba(255, 255, 255, 0.9);
-  }
-
-  button[type="submit"] {
-    background: none;
-    border: none;
-    padding: 0 0 2px;
-    color: #fff;
-    font-family: inherit;
-    font-size: 16px;
-    letter-spacing: 0.01em;
-    cursor: pointer;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.35);
-    transition: border-color 0.15s ease;
-  }
-
-  button[type="submit"]:hover,
-  button[type="submit"]:focus-visible {
-    border-color: rgba(255, 255, 255, 0.9);
-  }
-
-  button[type="submit"]:disabled {
-    cursor: default;
-    opacity: 0.6;
-  }
-
-  .form-status {
-    margin-top: 18px;
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.68);
-  }
-
-
-  /* -- case study link block -- */
-
   .case-block {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 20px;
-    margin-top: 20px;
     padding: 18px 22px 12px;
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 10px;
@@ -319,10 +160,6 @@
     background-color: #1a1a1a;
     border-color: rgba(255, 255, 255, 0.4);
     transform: scale(1.02);
-  }
-
-  .case-block .eyebrow {
-    margin: 0 0 6px;
   }
 
   .case-block-title {
@@ -355,10 +192,6 @@
     margin-top: 8px;
   }
 
-  .case-studies-heading {
-    margin-top: 0;
-  }
-
   .case-block-arrow {
     flex: 0 0 auto;
     color: rgba(255, 255, 255, 0.5);
@@ -370,14 +203,6 @@
   .case-block:focus-visible .case-block-arrow {
     color: #fff;
     transform: translateX(3px);
-  }
-
-  .case-block[target="_blank"]::after {
-    content: none;
-  }
-
-  .job-company a[target="_blank"]::after {
-    content: none;
   }
 
   .case-block.is-soon {
@@ -525,6 +350,7 @@
   .nav-dropdown-card.is-current .nav-dropdown-card-title {
     color: #00d8aa;
   }
+
 </style>
 </head>
 <body>
@@ -534,7 +360,7 @@
       <div class="site-nav-links">
         <a href="/about">About</a>
         <div class="nav-item">
-          <a href="/case-studies">Case Studies</a>
+          <a href="/case-studies" class="is-current">Case Studies</a>
           <div class="nav-dropdown">
             <div class="nav-dropdown-panel">
               <a class="nav-dropdown-card" href="/case-studies/mapping-inconsistent-schemas">
@@ -553,64 +379,46 @@
     </div>
   </nav>
   <main>
-    <section aria-labelledby="about-heading">
-      <span class="eyebrow" id="about-heading">About</span>
-      <p class="about-statement display">Senior product designer specialising in design for AI, automation and complex domains. I turn technically ambitious systems and ambiguous problems into clear, usable products.</p>
-    </section>
+    <span class="eyebrow">Case Studies</span>
 
-    <hr class="rule">
+    <p class="lede display">Untangling complexity in product for data automation and AI platforms.</p>
 
-    <section aria-labelledby="experience-heading">
-      <span class="eyebrow" id="experience-heading">Principal Experience</span>
-      <div class="job">
-        <p class="job-company display">Head of Design | <a href="https://quantemplate.com" target="_blank" rel="noopener noreferrer">Quantemplate</a></p>
-        <p class="job-desc">Enterprise data platform for sharing, transforming, validating and automating complex commercial data in a no-code environment.</p>
-        <div class="video-embed">
-          <iframe src="https://www.youtube.com/embed/n1prlc_ovts?si=_VrXRqxdAqPyB2rU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        </div>
-        <hr class="rule">
+    <div class="case-blocks">
+      <a class="case-block" href="/case-studies/mapping-inconsistent-schemas">
+        <span class="case-block-text">
+          <span class="case-block-title">Mapping inconsistent schemas at scale</span>
+          <span class="case-block-subtitle">Translate inconsistent data sources to a common target format, fully automated and enhanced by AI suggestions.</span>
+          <span class="case-block-keywords">Interaction design · Human-in-the-loop</span>
+        </span>
+        <span class="case-block-arrow" aria-hidden="true">→</span>
+      </a>
 
-        <span class="eyebrow case-studies-heading">Case Studies</span>
+      <a class="case-block" href="/case-studies/connecting-organisations">
+        <span class="case-block-text">
+          <span class="case-block-title">Connecting organisations through data</span>
+          <span class="case-block-subtitle">Infrastructure to automate data exchange, laying the foundation for a connected network.</span>
+          <span class="case-block-keywords">Product strategy · Systems thinking · Process design</span>
+        </span>
+        <span class="case-block-arrow" aria-hidden="true">→</span>
+      </a>
 
-        <div class="case-blocks">
-          <a class="case-block" href="/case-studies/mapping-inconsistent-schemas">
-            <span class="case-block-text">
-              <span class="case-block-title">Mapping inconsistent schemas at scale</span>
-              <span class="case-block-subtitle">Translate inconsistent data sources to a common target format, fully automated and enhanced by AI suggestions.</span>
-              <span class="case-block-keywords">Interaction design · Human-in-the-loop</span>
-            </span>
-            <span class="case-block-arrow" aria-hidden="true">→</span>
-          </a>
-
-          <a class="case-block" href="/case-studies/connecting-organisations">
-            <span class="case-block-text">
-              <span class="case-block-title">Connecting organisations through data</span>
-              <span class="case-block-subtitle">Infrastructure to automate data exchange, laying the foundation for a connected network.</span>
-              <span class="case-block-keywords">Product strategy · Systems thinking · Process design</span>
-            </span>
-            <span class="case-block-arrow" aria-hidden="true">→</span>
-          </a>
-
-          <div class="case-block is-soon">
-            <span class="case-block-text">
-              <span class="case-block-title">Validation and correction</span>
-              <span class="case-block-subtitle">Assess incoming data quality, flag exceptions and request fully auditable corrections without leaving the workflow.</span>
-            </span>
-            <span class="case-block-soon-label">Coming soon</span>
-          </div>
-
-          <div class="case-block is-soon">
-            <span class="case-block-text">
-              <span class="case-block-title">Data transformation pipelines</span>
-              <span class="case-block-subtitle">Sophisticated data-processing capabilities made accessible through visual, no-code workflows.</span>
-            </span>
-            <span class="case-block-soon-label">Coming soon</span>
-          </div>
-        </div>
+      <div class="case-block is-soon">
+        <span class="case-block-text">
+          <span class="case-block-title">Validation and correction</span>
+          <span class="case-block-subtitle">Assess incoming data quality, flag exceptions and request fully auditable corrections without leaving the workflow.</span>
+        </span>
+        <span class="case-block-soon-label">Coming soon</span>
       </div>
-    </section>
 
+      <div class="case-block is-soon">
+        <span class="case-block-text">
+          <span class="case-block-title">Data transformation pipelines</span>
+          <span class="case-block-subtitle">Sophisticated data-processing capabilities made accessible through visual, no-code workflows.</span>
+        </span>
+        <span class="case-block-soon-label">Coming soon</span>
+      </div>
+    </div>
   </main>
   <script data-goatcounter="https://tomdegay.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-  </body>
+</body>
 </html>

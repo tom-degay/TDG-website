@@ -1140,6 +1140,12 @@
         <p>The next step is to allow clients to send selected validation results back to the supplier through a <a href="/case-studies/connecting-organisations">Feed</a> where they can make corrections.</p>
         <blockquote>This will take out several manual back-and-forth steps which are currently done over email.</blockquote>
         <p>The workflow covers preparing corrections, explicitly submitting them back, tracking progress and notifying both parties through in-app updates and email.</p>
+
+        <figure class="figure">
+          <img src="media/validation-sharing-spec.jpg" alt="Design specification board for the validation sharing workflow: the sharing popup across states, from selecting rules and a partner organisation, through a confirmation step, to automatic sharing settings.">
+          <figcaption>Design specification showing steps in the validation sharing workflow. The user chooses what to share, and to whom, then passes a confirmation step.</figcaption>
+        </figure>
+
         <p>Sharing raised a raft of new questions, for instance: should the validation progress bar reflect the entire dataset or only the validations shared with the supplier? I chose the shared validations, ensuring requester and supplier saw the same measure of completion, and made this clear in the UI.</p>
         <p>Validation Corrections are live in production. Correction sharing is currently under construction, targeting release in October 2026.</p>
       </div>
@@ -1149,6 +1155,12 @@
         <p>We&rsquo;d learnt from our client implementations that validating that data within a column met a generic type definition required too many steps. It wasn&rsquo;t a problem that fitted neatly into the custom validation rule model that we&rsquo;d established.</p>
         <p>The solution arose when we implemented <a href="https://help.quantemplate.com/data-semantics" target="_blank" rel="noopener noreferrer">data semantics</a> across the platform. Now, with an understanding of the data in each column we could implement a very lightweight solution. We added a toggle to enable type validations in Map Column Headers, the point in the pipeline in which schema is defined.</p>
         <blockquote>This cut out at least four pipeline steps for every column whose type was validated, removing implementation complexity and slashing hours from implementation time.</blockquote>
+
+        <div class="ui-video">
+          <video autoplay controls muted loop playsinline poster="media/type-validation.jpg">
+            <source src="media/type-validation.mp4" type="video/mp4">
+          </video>
+        </div>
       </div>
     </section>
 

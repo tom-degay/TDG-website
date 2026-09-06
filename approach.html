@@ -182,6 +182,115 @@
     line-height: 1.5;
   }
 
+  /* -- image lightbox -- */
+
+  .figure img {
+    cursor: zoom-in;
+  }
+
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.92);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: clamp(16px, 5vw, 64px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease;
+    z-index: 1000;
+    cursor: zoom-out;
+  }
+
+  .lightbox.is-open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .lightbox img {
+    max-width: 100%;
+    max-height: calc(100vh - 140px);
+    border-radius: 6px;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
+    cursor: default;
+  }
+
+  .lightbox-caption {
+    margin: 0;
+    max-width: 60ch;
+    color: rgba(255, 255, 255, 0.55);
+    font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: center;
+    cursor: default;
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: clamp(12px, 3vw, 28px);
+    right: clamp(12px, 3vw, 28px);
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.4);
+    color: #fff;
+    font-size: 20px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+
+  .lightbox-close:hover,
+  .lightbox-close:focus-visible {
+    border-color: rgba(255, 255, 255, 0.8);
+    background: rgba(0, 0, 0, 0.7);
+  }
+
+  .lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.4);
+    color: #fff;
+    font-size: 24px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+
+  .lightbox-nav:hover,
+  .lightbox-nav:focus-visible {
+    border-color: rgba(255, 255, 255, 0.8);
+    background: rgba(0, 0, 0, 0.7);
+  }
+
+  .lightbox-nav[hidden] {
+    display: none;
+  }
+
+  .lightbox-prev {
+    left: clamp(8px, 3vw, 28px);
+  }
+
+  .lightbox-next {
+    right: clamp(8px, 3vw, 28px);
+  }
+
   /* -- sticky section nav (wide desktop only), matching the case study pages -- */
 
   .toc {
@@ -260,6 +369,11 @@
     line-height: 1.55;
     margin: 0;
     max-width: 620px;
+  }
+
+  .principle p.principle-applied {
+    font-size: clamp(15px, 1.7vw, 17px);
+    margin-top: clamp(16px, 2vw, 22px);
   }
 
   /* -- site nav -- */
@@ -448,6 +562,7 @@
             <figcaption>An example of progressive disclosure, familiar to anyone on a long drive in the UK.</figcaption>
           </figure>
           <p>Those road signs on the motorway that just say &lsquo;The North&rsquo;? That&rsquo;s a great example of &lsquo;progressive disclosure&rsquo;. You don&rsquo;t need to list every town for the next 200 miles to know you&rsquo;re heading in the right direction. The same&rsquo;s true for digital products, revealing detail when it becomes useful and reducing distractions along the way.</p>
+          <p class="principle-applied"><a href="/case-studies/connecting-organisations#datamodel-heading">See how I applied this principle &rarr;</a></p>
         </section>
 
         <section class="principle">
@@ -483,6 +598,14 @@
       <a href="#experience-heading">Design the whole experience</a>
       <a href="#build-heading">Build together, test and learn</a>
     </nav>
+
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Enlarged image" tabindex="-1">
+      <button class="lightbox-close" type="button" aria-label="Close enlarged image">&times;</button>
+      <button class="lightbox-nav lightbox-prev" type="button" aria-label="Previous image">&lsaquo;</button>
+      <button class="lightbox-nav lightbox-next" type="button" aria-label="Next image">&rsaquo;</button>
+      <img src="" alt="">
+      <p class="lightbox-caption" hidden></p>
+    </div>
   </main>
 
   <script>
@@ -520,6 +643,104 @@
 
       sections.forEach(function (s) {
         observer.observe(s.section);
+      });
+    })();
+
+    (function () {
+      var lightbox = document.getElementById("lightbox");
+      if (!lightbox) return;
+      var lightboxImg = lightbox.querySelector("img");
+      var lightboxCaption = lightbox.querySelector(".lightbox-caption");
+      var closeBtn = lightbox.querySelector(".lightbox-close");
+      var prevBtn = lightbox.querySelector(".lightbox-prev");
+      var nextBtn = lightbox.querySelector(".lightbox-next");
+      var lastFocused = null;
+
+      var items = Array.prototype.slice.call(document.querySelectorAll(".figure img")).map(function (img) {
+        var figure = img.closest("figure");
+        var captionEl = figure ? figure.querySelector("figcaption") : null;
+        return {
+          img: img,
+          src: img.src,
+          alt: img.alt,
+          caption: captionEl ? captionEl.textContent.trim() : ""
+        };
+      });
+      var currentIndex = -1;
+
+      function showIndex(index) {
+        if (!items.length) return;
+        currentIndex = (index + items.length) % items.length;
+        var item = items[currentIndex];
+        lightboxImg.src = item.src;
+        lightboxImg.alt = item.alt || "";
+        if (item.caption) {
+          lightboxCaption.textContent = item.caption;
+          lightboxCaption.hidden = false;
+        } else {
+          lightboxCaption.textContent = "";
+          lightboxCaption.hidden = true;
+        }
+        var showNav = items.length > 1;
+        prevBtn.hidden = !showNav;
+        nextBtn.hidden = !showNav;
+      }
+
+      function openLightbox(index) {
+        lastFocused = document.activeElement;
+        showIndex(index);
+        lightbox.classList.add("is-open");
+        document.body.style.overflow = "hidden";
+        closeBtn.focus();
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove("is-open");
+        lightboxImg.src = "";
+        lightboxCaption.textContent = "";
+        lightboxCaption.hidden = true;
+        document.body.style.overflow = "";
+        if (lastFocused) lastFocused.focus();
+      }
+
+      items.forEach(function (item, index) {
+        var img = item.img;
+        img.setAttribute("tabindex", "0");
+        img.setAttribute("role", "button");
+        img.setAttribute("aria-label", "Click to enlarge image");
+        img.addEventListener("click", function () {
+          openLightbox(index);
+        });
+        img.addEventListener("keydown", function (e) {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            openLightbox(index);
+          }
+        });
+      });
+
+      prevBtn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        showIndex(currentIndex - 1);
+      });
+      nextBtn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        showIndex(currentIndex + 1);
+      });
+
+      lightbox.addEventListener("click", function (e) {
+        if (e.target === lightbox) closeLightbox();
+      });
+      closeBtn.addEventListener("click", closeLightbox);
+      document.addEventListener("keydown", function (e) {
+        if (!lightbox.classList.contains("is-open")) return;
+        if (e.key === "Escape") {
+          closeLightbox();
+        } else if (e.key === "ArrowLeft") {
+          showIndex(currentIndex - 1);
+        } else if (e.key === "ArrowRight") {
+          showIndex(currentIndex + 1);
+        }
       });
     })();
   </script>

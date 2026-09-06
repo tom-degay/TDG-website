@@ -3,22 +3,22 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Contact — Tom de Gay</title>
-<meta name="description" content="Get in touch with Tom de Gay, a digital product designer based in London.">
+<title>Approach — Tom de Gay</title>
+<meta name="description" content="The design principles Tom de Gay brings to digital product design, shaped by a background in wayfinding for complex buildings.">
 <meta name="theme-color" content="#000000">
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="Contact — Tom de Gay">
-<meta property="og:description" content="Get in touch with Tom de Gay, a digital product designer based in London.">
-<meta property="og:url" content="https://tomdegay.com/contact">
+<meta property="og:title" content="Approach — Tom de Gay">
+<meta property="og:description" content="The design principles Tom de Gay brings to digital product design, shaped by a background in wayfinding for complex buildings.">
+<meta property="og:url" content="https://tomdegay.com/approach">
 <meta property="og:image" content="https://tomdegay.com/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Tom de Gay — Digital Product Designer">
 
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Contact — Tom de Gay">
-<meta name="twitter:description" content="Get in touch with Tom de Gay, a digital product designer based in London.">
+<meta name="twitter:title" content="Approach — Tom de Gay">
+<meta name="twitter:description" content="The design principles Tom de Gay brings to digital product design, shaped by a background in wayfinding for complex buildings.">
 <meta name="twitter:image" content="https://tomdegay.com/og-image.png">
 
 <link rel="icon" href="/tdg-favicon.svg" type="image/svg+xml">
@@ -68,9 +68,15 @@
   }
 
   main {
-    max-width: 592px;
+    max-width: 900px;
     margin: 0 auto;
     padding: clamp(24px, 6vw, 72px) clamp(24px, 5vw, 56px) clamp(96px, 12vw, 140px);
+  }
+
+  @media (min-width: 1100px) {
+    main {
+      max-width: 1180px;
+    }
   }
 
   .display {
@@ -119,19 +125,6 @@
     transform: translate(0, -50%);
   }
 
-  .back-link {
-    display: inline-block;
-    font-size: 13px;
-    color: rgba(255, 255, 255, 0.55);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
-  }
-
-  .back-link:hover,
-  .back-link:focus-visible {
-    color: #fff;
-    border-color: rgba(255, 255, 255, 0.9);
-  }
-
   .eyebrow {
     display: block;
     font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
@@ -144,111 +137,127 @@
     margin: 32px 0 28px;
   }
 
-  .contact-header {
-    display: flex;
-    align-items: baseline;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    gap: 10px 24px;
-    margin-bottom: clamp(32px, 5vw, 48px);
-  }
-
-  p.links {
-    margin: 0;
-    font-size: clamp(15px, 1.7vw, 17px);
-    white-space: nowrap;
-  }
-
-  p.links a + a {
-    margin-left: 28px;
-  }
-
   .lede {
-    color: #fff;
-    font-size: clamp(24px, 3.6vw, 32px);
-    line-height: 1.35;
-    margin: 0 0 clamp(36px, 5.5vw, 52px);
-    max-width: 26ch;
+    color: rgba(255, 255, 255, 0.88);
+    font-size: clamp(28px, 4.6vw, 42px);
+    line-height: 1.25;
+    margin: 0 0 clamp(20px, 3vw, 28px);
+    max-width: 24ch;
   }
 
-  form {
-    max-width: 480px;
+  .intro {
+    color: rgba(255, 255, 255, 0.82);
+    font-size: clamp(19px, 2.5vw, 24px);
+    line-height: 1.55;
+    margin: 0;
+    max-width: 620px;
   }
 
-  .field {
-    margin-bottom: 28px;
+  .rule {
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    margin: clamp(32px, 5vw, 48px) 0;
   }
 
-  .field label {
-    font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+  /* -- two-column layout with a sticky in-page sidebar nav -- */
+
+  .approach-body {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(36px, 6vw, 56px);
+  }
+
+  @media (min-width: 900px) {
+    .approach-body {
+      grid-template-columns: 220px minmax(0, 1fr);
+      gap: clamp(48px, 7vw, 88px);
+    }
+  }
+
+  .approach-nav {
+    align-self: start;
+  }
+
+  @media (min-width: 900px) {
+    .approach-nav {
+      position: sticky;
+      top: 88px;
+    }
+  }
+
+  .approach-nav-label {
     display: block;
+    font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
     color: rgba(255, 255, 255, 0.45);
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 500;
     letter-spacing: 2px;
     word-spacing: -3px;
     text-transform: uppercase;
-    margin-bottom: 10px;
+    margin: 0 0 18px;
   }
 
-  .field input,
-  .field textarea {
-    width: 100%;
-    background: transparent;
-    border: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-    color: #fff;
-    font-family: inherit;
-    font-size: 17px;
-    padding: 8px 0 10px;
-    outline: none;
-    transition: border-color 0.15s ease;
+  .approach-nav ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    counter-reset: principle;
   }
 
-  .field textarea {
-    resize: vertical;
-    min-height: 90px;
-    line-height: 1.4;
+  .approach-nav li {
+    counter-increment: principle;
+    margin: 0 0 14px;
   }
 
-  .field input::placeholder,
-  .field textarea::placeholder {
-    color: rgba(255, 255, 255, 0.32);
-  }
-
-  .field input:focus,
-  .field textarea:focus {
-    border-bottom-color: rgba(255, 255, 255, 0.9);
-  }
-
-  button[type="submit"] {
-    background-color: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.35);
-    border-radius: 8px;
-    padding: 12px 26px;
-    color: #fff;
-    font-family: "Fakt Blond SemiBold", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  .approach-nav a {
+    display: block;
+    color: rgba(255, 255, 255, 0.62);
     font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.2s ease, border-color 0.2s ease;
+    line-height: 1.4;
+    border-bottom: none;
+    padding: 0 0 0 28px;
+    position: relative;
   }
 
-  button[type="submit"]:hover,
-  button[type="submit"]:focus-visible {
-    background-color: #1a1a1a;
-    border-color: rgba(255, 255, 255, 0.6);
+  .approach-nav a::before {
+    content: counter(principle);
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.35);
   }
 
-  button[type="submit"]:disabled {
-    cursor: default;
-    opacity: 0.6;
+  .approach-nav a:hover,
+  .approach-nav a:focus-visible {
+    color: #fff;
   }
 
-  .form-status {
-    margin-top: 18px;
-    font-size: 17px;
-    color: rgba(255, 255, 255, 0.68);
+  .principles {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(40px, 6vw, 64px);
+  }
+
+  .principle {
+    scroll-margin-top: 88px;
+  }
+
+  .principle-title {
+    color: #fff;
+    font-size: clamp(22px, 3vw, 30px);
+    line-height: 1.3;
+    margin: 0 0 clamp(14px, 1.8vw, 18px);
+    max-width: 32ch;
+  }
+
+  .principle p {
+    color: rgba(255, 255, 255, 0.82);
+    font-size: clamp(18px, 2.3vw, 22px);
+    line-height: 1.55;
+    margin: 0;
+    max-width: 620px;
   }
 
   /* -- site nav -- */
@@ -379,7 +388,6 @@
   .nav-dropdown-card.is-current .nav-dropdown-card-title {
     color: #00d8aa;
   }
-
 </style>
 </head>
 <body>
@@ -388,7 +396,7 @@
       <a class="site-nav-brand display" href="/">Tom de Gay</a>
       <div class="site-nav-links">
         <a href="/about">About</a>
-        <a href="/approach">Approach</a>
+        <a href="/approach" class="is-current">Approach</a>
         <div class="nav-item">
           <a href="/case-studies">Case Studies</a>
           <div class="nav-dropdown">
@@ -404,90 +412,59 @@
             </div>
           </div>
         </div>
-        <a href="/contact" class="is-current">Contact</a>
+        <a href="/contact">Contact</a>
       </div>
     </div>
   </nav>
   <main>
-    <div class="contact-header">
-      <p class="links">
-        <a href="https://www.linkedin.com/in/tom-dg/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <a href="TomdeGayCV.pdf" download="Tom de Gay - CV.pdf" target="_blank" rel="noopener noreferrer">Download CV</a>
-      </p>
+    <span class="eyebrow">Approach</span>
+
+    <h1 class="lede display">Design principles</h1>
+
+    <p class="intro">Before moving into digital product design, I designed wayfinding systems for schools, hospitals and other complex buildings. That work still shapes my approach: help people understand where they are, what they can do next and whether they&rsquo;re on the right track.</p>
+
+    <hr class="rule">
+
+    <div class="approach-body">
+      <nav class="approach-nav" aria-label="Design principles">
+        <span class="approach-nav-label">Principles</span>
+        <ol>
+          <li><a href="#start-with-people">Start with people and their journeys</a></li>
+          <li><a href="#right-information">Give the right information at the right moment</a></li>
+          <li><a href="#make-complexity-understandable">Make complexity understandable</a></li>
+          <li><a href="#whole-experience">Design the whole experience</a></li>
+          <li><a href="#build-together">Build together, test and learn</a></li>
+        </ol>
+      </nav>
+
+      <div class="principles">
+        <section class="principle" id="start-with-people">
+          <h2 class="principle-title display">Start with people and their journeys</h2>
+          <p>Learn what people are trying to achieve, their context and how much they already know. A first-time visitor needs different guidance from someone who knows the way. Start every project with an understanding of the different user roles, their needs, their expectations, their context outside your product. Decide who you&rsquo;re optimising for at which point.</p>
+        </section>
+
+        <section class="principle" id="right-information">
+          <h2 class="principle-title display">Give the right information at the right moment</h2>
+          <p>Those road signs on the motorway that just say &lsquo;The North&rsquo;? That&rsquo;s a great example of &lsquo;progressive disclosure&rsquo;. You don&rsquo;t need to list every town for the next 200 miles to know you&rsquo;re heading in the right direction. The same&rsquo;s true for digital products, revealing detail when it becomes useful and reducing distractions along the way.</p>
+        </section>
+
+        <section class="principle" id="make-complexity-understandable">
+          <h2 class="principle-title display">Make complexity understandable</h2>
+          <p>A map is a complex artefact, but an experienced navigator knows how to use one. They have a mental model of how the map works. Every cartographer needs to make decisions about what is included and what is omitted. Prominence and hierarchy are key. Likewise, in complex products, we should aim to preserve the capability people need while making it easier to learn and use.</p>
+        </section>
+
+        <section class="principle" id="whole-experience">
+          <h2 class="principle-title display">Design the whole experience</h2>
+          <p>A sign only works as part of a wider wayfinding system &ndash; a coherent visual language applied to a wayfinding plan. Likewise, every component in a design system needs to support a coherent journey. A system is more than a set of consistent visual designs and behaviours, it provides guardrails that enable good decision making.</p>
+        </section>
+
+        <section class="principle" id="build-together">
+          <h2 class="principle-title display">Build together, test and learn</h2>
+          <p>In wayfinding, others manufacture, install and extend the systems you design. Involving the people who will build and maintain a solution from the outset helps it last and adapt. The same applies to digital products: work with users, engineers and subject-matter experts to shape ideas, test prototypes and improve the experience as our needs change and our understanding evolves.</p>
+        </section>
+      </div>
     </div>
-
-    <span class="eyebrow">Contact</span>
-
-    <p class="lede display">Say hello. I&rsquo;m always happy to hear from people.</p>
-
-    <form id="contact-form">
-      <input type="hidden" name="access_key" value="a394dc7c-b791-40e6-9971-a34a75f44939">
-      <input type="checkbox" name="botcheck" style="display: none;" tabindex="-1" autocomplete="off">
-      <div class="field">
-        <label for="name">Name</label>
-        <input type="text" id="name" name="name" placeholder="Your name" required>
-      </div>
-      <div class="field">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" placeholder="you@example.com" required>
-      </div>
-      <div class="field">
-        <label for="message">Message</label>
-        <textarea id="message" name="message" placeholder="Say hello" required></textarea>
-      </div>
-      <button type="submit">Send</button>
-      <p class="form-status" id="form-status" role="status" aria-live="polite" hidden></p>
-    </form>
   </main>
-  <script>
-    (function () {
-      var form = document.getElementById("contact-form");
-      var status = document.getElementById("form-status");
-      var button = form.querySelector('button[type="submit"]');
-
-      form.addEventListener("submit", function (e) {
-        e.preventDefault();
-
-        var formData = new FormData(form);
-        var payload = Object.fromEntries(formData);
-
-        button.disabled = true;
-        button.textContent = "Sending…";
-        status.hidden = true;
-
-        fetch("https://api.web3forms.com/submit", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json"
-          },
-          body: JSON.stringify(payload)
-        })
-          .then(function (response) {
-            return response.json().then(function (data) {
-              return { ok: response.ok, data: data };
-            });
-          })
-          .then(function (result) {
-            if (result.ok && result.data.success) {
-              form.reset();
-              status.textContent = "Thanks. I'll get back to you soon.";
-            } else {
-              status.textContent = "Something went wrong. Please email me directly instead.";
-            }
-            status.hidden = false;
-          })
-          .catch(function () {
-            status.textContent = "Something went wrong. Please email me directly instead.";
-            status.hidden = false;
-          })
-          .finally(function () {
-            button.disabled = false;
-            button.textContent = "Send";
-          });
-      });
-    })();
-  </script>
   <script data-goatcounter="https://tomdegay.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>

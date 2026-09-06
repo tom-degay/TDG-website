@@ -75,7 +75,7 @@
 
   @media (min-width: 1100px) {
     main {
-      max-width: 1180px;
+      max-width: 1320px;
     }
   }
 
@@ -159,79 +159,58 @@
     margin: clamp(32px, 5vw, 48px) 0;
   }
 
-  /* -- two-column layout with a sticky in-page sidebar nav -- */
+  /* -- sticky section nav (wide desktop only), matching the case study pages -- */
 
-  .approach-body {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: clamp(36px, 6vw, 56px);
+  .toc {
+    display: none;
   }
 
-  @media (min-width: 900px) {
-    .approach-body {
-      grid-template-columns: 220px minmax(0, 1fr);
-      gap: clamp(48px, 7vw, 88px);
+  @media (min-width: 1100px) {
+    main {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 230px;
+      column-gap: 96px;
+      align-items: start;
     }
-  }
 
-  .approach-nav {
-    align-self: start;
-  }
+    .content {
+      grid-column: 1;
+      min-width: 0;
+    }
 
-  @media (min-width: 900px) {
-    .approach-nav {
+    .toc {
+      display: flex;
+      flex-direction: column;
+      grid-column: 2;
       position: sticky;
-      top: 88px;
+      top: 100px;
     }
   }
 
-  .approach-nav-label {
+  .toc-heading {
+    margin: 0 0 16px;
+  }
+
+  .toc a {
     display: block;
-    font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
-    color: rgba(255, 255, 255, 0.45);
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 2px;
-    word-spacing: -3px;
-    text-transform: uppercase;
-    margin: 0 0 18px;
-  }
-
-  .approach-nav ol {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    counter-reset: principle;
-  }
-
-  .approach-nav li {
-    counter-increment: principle;
-    margin: 0 0 14px;
-  }
-
-  .approach-nav a {
-    display: block;
-    color: rgba(255, 255, 255, 0.62);
-    font-size: 15px;
-    line-height: 1.4;
+    padding: 8px 0 8px 16px;
+    border-left: 2px solid rgba(255, 255, 255, 0.14);
     border-bottom: none;
-    padding: 0 0 0 28px;
-    position: relative;
+    font-size: 16px;
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.55);
+    transition: color 0.15s ease, border-color 0.15s ease;
   }
 
-  .approach-nav a::before {
-    content: counter(principle);
-    position: absolute;
-    left: 0;
-    top: 0;
-    font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
-    font-size: 13px;
-    color: rgba(255, 255, 255, 0.35);
-  }
-
-  .approach-nav a:hover,
-  .approach-nav a:focus-visible {
+  .toc a:hover,
+  .toc a:focus-visible {
     color: #fff;
+    border-left-color: rgba(255, 255, 255, 0.6);
+  }
+
+  .toc a.is-active {
+    color: #00d8aa;
+    border-left-color: #00d8aa;
   }
 
   .principles {
@@ -241,7 +220,7 @@
   }
 
   .principle {
-    scroll-margin-top: 88px;
+    scroll-margin-top: 100px;
   }
 
   .principle-title {
@@ -417,54 +396,91 @@
     </div>
   </nav>
   <main>
-    <span class="eyebrow">Approach</span>
+    <div class="content">
+      <span class="eyebrow">Approach</span>
 
-    <h1 class="lede display">Design principles</h1>
+      <h1 class="lede display">Design principles</h1>
 
-    <p class="intro">Before moving into digital product design, I designed wayfinding systems for schools, hospitals and other complex buildings. That work still shapes my approach: help people understand where they are, what they can do next and whether they&rsquo;re on the right track.</p>
+      <p class="intro">Before moving into digital product design, I designed wayfinding systems for schools, hospitals and other complex buildings. That work still shapes my approach: help people understand where they are, what they can do next and whether they&rsquo;re on the right track.</p>
 
-    <hr class="rule">
-
-    <div class="approach-body">
-      <nav class="approach-nav" aria-label="Design principles">
-        <span class="approach-nav-label">Principles</span>
-        <ol>
-          <li><a href="#start-with-people">Start with people and their journeys</a></li>
-          <li><a href="#right-information">Give the right information at the right moment</a></li>
-          <li><a href="#make-complexity-understandable">Make complexity understandable</a></li>
-          <li><a href="#whole-experience">Design the whole experience</a></li>
-          <li><a href="#build-together">Build together, test and learn</a></li>
-        </ol>
-      </nav>
+      <hr class="rule">
 
       <div class="principles">
-        <section class="principle" id="start-with-people">
-          <h2 class="principle-title display">Start with people and their journeys</h2>
+        <section class="principle">
+          <h2 class="principle-title display" id="start-heading">Start with people and their journeys</h2>
           <p>Learn what people are trying to achieve, their context and how much they already know. A first-time visitor needs different guidance from someone who knows the way. Start every project with an understanding of the different user roles, their needs, their expectations, their context outside your product. Decide who you&rsquo;re optimising for at which point.</p>
         </section>
 
-        <section class="principle" id="right-information">
-          <h2 class="principle-title display">Give the right information at the right moment</h2>
+        <section class="principle">
+          <h2 class="principle-title display" id="information-heading">Give the right information at the right moment</h2>
           <p>Those road signs on the motorway that just say &lsquo;The North&rsquo;? That&rsquo;s a great example of &lsquo;progressive disclosure&rsquo;. You don&rsquo;t need to list every town for the next 200 miles to know you&rsquo;re heading in the right direction. The same&rsquo;s true for digital products, revealing detail when it becomes useful and reducing distractions along the way.</p>
         </section>
 
-        <section class="principle" id="make-complexity-understandable">
-          <h2 class="principle-title display">Make complexity understandable</h2>
+        <section class="principle">
+          <h2 class="principle-title display" id="complexity-heading">Make complexity understandable</h2>
           <p>A map is a complex artefact, but an experienced navigator knows how to use one. They have a mental model of how the map works. Every cartographer needs to make decisions about what is included and what is omitted. Prominence and hierarchy are key. Likewise, in complex products, we should aim to preserve the capability people need while making it easier to learn and use.</p>
         </section>
 
-        <section class="principle" id="whole-experience">
-          <h2 class="principle-title display">Design the whole experience</h2>
+        <section class="principle">
+          <h2 class="principle-title display" id="experience-heading">Design the whole experience</h2>
           <p>A sign only works as part of a wider wayfinding system &ndash; a coherent visual language applied to a wayfinding plan. Likewise, every component in a design system needs to support a coherent journey. A system is more than a set of consistent visual designs and behaviours, it provides guardrails that enable good decision making.</p>
         </section>
 
-        <section class="principle" id="build-together">
-          <h2 class="principle-title display">Build together, test and learn</h2>
+        <section class="principle">
+          <h2 class="principle-title display" id="build-heading">Build together, test and learn</h2>
           <p>In wayfinding, others manufacture, install and extend the systems you design. Involving the people who will build and maintain a solution from the outset helps it last and adapt. The same applies to digital products: work with users, engineers and subject-matter experts to shape ideas, test prototypes and improve the experience as our needs change and our understanding evolves.</p>
         </section>
       </div>
     </div>
+
+    <nav class="toc" aria-label="Section navigation">
+      <span class="eyebrow toc-heading">On this page</span>
+      <a href="#start-heading">Start with people and their journeys</a>
+      <a href="#information-heading">Give the right information at the right moment</a>
+      <a href="#complexity-heading">Make complexity understandable</a>
+      <a href="#experience-heading">Design the whole experience</a>
+      <a href="#build-heading">Build together, test and learn</a>
+    </nav>
   </main>
+
+  <script>
+    (function () {
+      var links = document.querySelectorAll(".toc a");
+      if (!links.length || !("IntersectionObserver" in window)) return;
+
+      var sections = [];
+      links.forEach(function (link) {
+        var id = link.getAttribute("href").slice(1);
+        var el = document.getElementById(id);
+        var section = el ? el.closest("section") || el : null;
+        if (section) sections.push({ section: section, link: link });
+      });
+
+      var observer = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            var match = null;
+            for (var i = 0; i < sections.length; i++) {
+              if (sections[i].section === entry.target) {
+                match = sections[i];
+                break;
+              }
+            }
+            if (!match) return;
+            if (entry.isIntersecting) {
+              links.forEach(function (l) { l.classList.remove("is-active"); });
+              match.link.classList.add("is-active");
+            }
+          });
+        },
+        { rootMargin: "-20% 0px -70% 0px", threshold: 0 }
+      );
+
+      sections.forEach(function (s) {
+        observer.observe(s.section);
+      });
+    })();
+  </script>
   <script data-goatcounter="https://tomdegay.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>

@@ -252,7 +252,7 @@
   }
 
   .site-nav-inner {
-    max-width: 700px;
+    max-width: 900px;
     margin: 0 auto;
     padding: 14px clamp(24px, 5vw, 56px);
     display: flex;
@@ -261,6 +261,12 @@
     flex-wrap: wrap;
     gap: 10px 24px;
     min-height: 56px;
+  }
+
+  @media (min-width: 1100px) {
+    .site-nav-inner {
+      max-width: 1320px;
+    }
   }
 
   .site-nav-brand {

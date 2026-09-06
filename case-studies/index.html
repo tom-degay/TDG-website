@@ -215,6 +215,7 @@
 
   .case-block.is-soon {
     cursor: default;
+    opacity: 0.7;
   }
 
   .case-block.is-soon:hover,
@@ -225,10 +226,15 @@
   }
 
   .case-block-soon-label {
-    flex: 0 0 auto;
-    color: rgba(255, 255, 255, 0.35);
-    font-size: 12px;
-    white-space: nowrap;
+    display: block;
+    color: rgba(255, 255, 255, 0.45);
+    font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    word-spacing: -3px;
+    text-transform: uppercase;
+    margin-top: 8px;
   }
 
   /* -- case block with lead image -- */
@@ -454,16 +460,16 @@
         <span class="case-block-text">
           <span class="case-block-title">Validation and correction</span>
           <span class="case-block-subtitle">Assess incoming data quality, flag exceptions and request fully auditable corrections without leaving the workflow.</span>
+          <span class="case-block-soon-label">Coming soon</span>
         </span>
-        <span class="case-block-soon-label">Coming soon</span>
       </div>
 
       <div class="case-block is-soon">
         <span class="case-block-text">
           <span class="case-block-title">Data transformation pipelines</span>
           <span class="case-block-subtitle">Sophisticated data-processing capabilities made accessible through visual, no-code workflows.</span>
+          <span class="case-block-soon-label">Coming soon</span>
         </span>
-        <span class="case-block-soon-label">Coming soon</span>
       </div>
     </div>
   </main>

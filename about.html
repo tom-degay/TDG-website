@@ -205,11 +205,22 @@
     margin-bottom: clamp(32px, 5vw, 48px);
   }
 
+  .about-top {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* -- links are collapsed to zero height so the photo starts at the
+        same top edge; the links overlay the top-right, sticky. This
+        holds for the row (wide) and stacked (mid) states; the
+        below-photo state at <=820px resets height/margin. -- */
   p.links {
     position: sticky;
     top: 66px;
     z-index: 40;
-    margin: 0 0 20px;
+    height: 0;
+    margin: 0;
+    overflow: visible;
     text-align: right;
     font-size: clamp(15px, 1.7vw, 17px);
     white-space: nowrap;
@@ -217,6 +228,50 @@
 
   p.links a + a {
     margin-left: 28px;
+  }
+
+  /* -- not enough room for a row of links beside the photo:
+        stack them in the right-hand gutter, still sticky -- */
+  @media (max-width: 1099px) {
+    p.links {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+    }
+
+    p.links a + a {
+      margin-left: 0;
+    }
+  }
+
+  /* -- photo now fills the column: drop the links below it in
+        normal flow and stop them sticking -- */
+  @media (max-width: 820px) {
+    .about-header {
+      order: 0;
+      margin-bottom: 20px;
+    }
+
+    p.links {
+      order: 1;
+      position: static;
+      height: auto;
+      flex-direction: row;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 4px 28px;
+      margin: 0 0 clamp(32px, 5vw, 48px);
+      text-align: left;
+    }
+
+    .lede {
+      order: 2;
+    }
+
+    .about-copy {
+      order: 3;
+    }
   }
 
 
@@ -376,6 +431,7 @@
     </div>
   </nav>
   <main>
+    <div class="about-top">
     <p class="links">
       <a href="https://www.linkedin.com/in/tom-dg/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
       <a href="TomdeGayCV.pdf" download="Tom de Gay - CV.pdf" target="_blank" rel="noopener noreferrer">Download CV</a>
@@ -397,6 +453,7 @@
       <p>I&rsquo;m a co-founder and trustee of the <a href="https://isokongallery.org" target="_blank" rel="noopener noreferrer">Isokon Gallery</a>, an award-winning micro-museum dedicated to the history of modernist design and architecture.</p>
 
       <p>Outside of work, I&rsquo;m usually to be found at the climbing wall with my family or, even better, bouldering in the forest of Fontainebleau.</p>
+    </div>
     </div>
   </main>
 </body>

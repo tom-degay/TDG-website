@@ -3,23 +3,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Connecting organisations through data — Tom de Gay</title>
-<meta name="description" content="How Tom de Gay designed Feeds, Quantemplate's workspace for securely exchanging data between organisations — reframing a simple upload portal into infrastructure for a connected data network.">
+<title>Closing the loop on data quality — Tom de Gay</title>
+<meta name="description" content="How Tom de Gay designed Quantemplate's validation tooling — from row-level reporting in 2017 to integrated, fully auditable corrections and automated data type checks in 2026.">
 <meta name="theme-color" content="#000000">
 
 <meta property="og:type" content="article">
-<meta property="og:title" content="Connecting organisations through data — Tom de Gay">
-<meta property="og:description" content="How Tom de Gay designed Feeds, Quantemplate's system for securely exchanging data between organisations.">
-<meta property="og:url" content="https://tomdegay.com/case-studies/connecting-organisations">
-<meta property="og:image" content="https://tomdegay.com/case-studies/media/connecting-organisations-og.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Connecting organisations through data — a Quantemplate case study by Tom de Gay">
+<meta property="og:title" content="Closing the loop on data quality — Tom de Gay">
+<meta property="og:description" content="How Tom de Gay designed Quantemplate's validation tooling — row-level reporting, integrated corrections with a full audit trail, and automated data type checks.">
+<meta property="og:url" content="https://tomdegay.com/case-studies/validation-and-correction">
+<meta property="og:image" content="https://tomdegay.com/case-studies/media/validation-corrections-preview.png">
+<meta property="og:image:width" content="1899">
+<meta property="og:image:height" content="1068">
+<meta property="og:image:alt" content="Quantemplate's validation report: flagged errors beside an editable corrections column, with the correction popup open on a row.">
 
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Connecting organisations through data — Tom de Gay">
-<meta name="twitter:description" content="How Tom de Gay designed Feeds, Quantemplate's system for securely exchanging data between organisations.">
-<meta name="twitter:image" content="https://tomdegay.com/case-studies/media/connecting-organisations-og.jpg">
+<meta name="twitter:title" content="Closing the loop on data quality — Tom de Gay">
+<meta name="twitter:description" content="How Tom de Gay designed Quantemplate's validation tooling — row-level reporting, integrated corrections with a full audit trail, and automated data type checks.">
+<meta name="twitter:image" content="https://tomdegay.com/case-studies/media/validation-corrections-preview.png">
 
 <link rel="icon" href="/tdg-favicon.svg" type="image/svg+xml">
 
@@ -977,11 +977,11 @@
                 <span class="nav-dropdown-card-title">Mapping inconsistent schemas<br>at scale</span>
                 <span class="nav-dropdown-card-subtitle">Translate inconsistent data sources to a common target format, fully automated and enhanced by AI suggestions.</span>
               </a>
-              <a class="nav-dropdown-card is-current" href="/case-studies/connecting-organisations">
+              <a class="nav-dropdown-card" href="/case-studies/connecting-organisations">
                 <span class="nav-dropdown-card-title">Connecting organisations<br>through data</span>
                 <span class="nav-dropdown-card-subtitle">Infrastructure to automate data exchange, laying the foundation for a connected network.</span>
               </a>
-              <a class="nav-dropdown-card" href="/case-studies/validation-and-correction">
+              <a class="nav-dropdown-card is-current" href="/case-studies/validation-and-correction">
                 <span class="nav-dropdown-card-title">Closing the loop on<br>data quality</span>
                 <span class="nav-dropdown-card-subtitle">Find and fix data issues before they reach downstream systems, all in one workflow.</span>
               </a>
@@ -995,10 +995,10 @@
   <main>
   <div class="content">
     <header>
-      <span class="kicker">Case Study | <a href="https://help.quantemplate.com/about-feeds" target="_blank" rel="noopener noreferrer">Quantemplate Feeds</a></span>
-      <h1 class="display">Connecting organisations through data</h1>
-      <p class="subtitle">Infrastructure to automate data exchange, laying the foundation for a connected network.</p>
-      <p class="keywords">Product strategy · Systems thinking · Process design</p>
+      <span class="kicker">Case Study | <a href="https://help.quantemplate.com/validation-corrections" target="_blank" rel="noopener noreferrer">Quantemplate Validations</a></span>
+      <h1 class="display">Closing the loop on data quality</h1>
+      <p class="subtitle">Find and fix data issues before they reach downstream systems, all in one workflow.</p>
+      <p class="keywords">Workflow · Information design · Auditability</p>
 
       <hr class="rule">
 
@@ -1013,7 +1013,7 @@
         </div>
         <div class="meta-item">
           <span class="eyebrow">Timeframe</span>
-          <p>Concept to V1 release (2024): 22 months. Explored and delivered alongside wider platform enablement work.</p>
+          <p>V1 released: 2017. 2026 upgrades: ~3 months of research and design.</p>
         </div>
       </div>
     </header>
@@ -1024,10 +1024,10 @@
       <span class="eyebrow" id="keypoints-heading">Key points</span>
       <div class="key-points-grid">
         <ul class="key-points">
-          <li>Project reframes an upload portal as a cross-company network</li>
-          <li>Automates an entire manual workflow, with Feeds set up in under one minute</li>
-          <li>Adapts to any shape of data, across files, formats and organisations</li>
-          <li>Spans submissions, scheduling, org creation, authentication and admin tooling</li>
+          <li>New corrections capabilities designed around observed patterns of use</li>
+          <li>Built-in traceability and bulk corrections increase trust and help clients meet audit goals</li>
+          <li>Integrated data type validation eliminates four pipeline steps per column, adding up to dozens of steps in a typical implementation</li>
+          <li>In win-loss reviews, validation reports are a key reason clients choose Quantemplate</li>
         </ul>
       </div>
     </section>
@@ -1036,50 +1036,45 @@
 
     <section aria-labelledby="summary-heading">
       <span class="eyebrow" id="summary-heading">Summary</span>
-      <p class="about-statement display">I led the design of <a href="https://help.quantemplate.com/about-feeds" target="_blank" rel="noopener noreferrer">Feeds</a>, a new Quantemplate workspace for securely requesting, receiving, processing and distributing data between organisations.</p>
-      <p class="about-statement display">By mapping the complete workflow, I reframed an initial upload-portal concept as a persistent system, spanning submissions, automation, permissions and operational oversight. Feeds accommodate complex insurance data exchanges while creating the foundation for a broader connected-data strategy.</p>
+      <p class="about-statement display">I led the design and evolution of Quantemplate&rsquo;s validation tooling, from row-level reporting in 2017 to integrated corrections and automated data type checks in 2026.</p>
+      <p class="about-statement display">The latest work makes validation results actionable. Users can correct invalid values directly in the report, creating targeted mappings with a complete audit trail. Integrated data type checks simplify configuration, while a sharing workflow will bring data suppliers into the process.</p>
 
       <div class="video-embed">
-        <iframe src="https://www.youtube.com/embed/IgmrfcrYOOk?si=_DXr-BjdaTXHhwcL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/OyLH4hdxrPk?si=0T2YaQgTlurOXgJA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
     </section>
 
     <hr class="rule">
 
-    <section aria-labelledby="objective-heading" class="case-body">
-      <span class="eyebrow" id="objective-heading">Objective</span>
-      <h2>We&rsquo;d automated the data processing, but not the process</h2>
-      <p>Insurance companies depend on regular submissions from brokers, managing general agents, third-party administrators and other partners. Our data transformation pipelines did a good job of <a href="/case-studies/mapping-inconsistent-schemas">mapping and harmonising</a> this data, but the parts outside Quantemplate were process bottlenecks.</p>
-      <p>Email was manual and difficult to audit, while FTP and API integrations were unwieldy. Moreover, keeping track of what was in or overdue every month was a significant timesink.</p>
-      <p>Even on the happy path, we identified five manual steps to request data and another five to bring it into and out of Quantemplate.</p>
-
-      <blockquote>Across an average of 150 trading partners, repeated monthly, that amounted to 18,000 manual steps a year.</blockquote>
-
-      <figure class="figure">
-        <img src="media/workflow-bottlenecks-diagram.png" alt="Diagram of a typical MGA data pipeline: manual upload to network storage, an automated import-to-output pipeline including Map Column Headers, then a manual step to push output to the client database via API.">
-        <figcaption>2022 analysis of typical Quantemplate workflow, identifying manual bottlenecks.</figcaption>
-      </figure>
-
-      <figure class="figure">
-        <img src="media/feeds-problem-postits.png" alt="Annotated version of the Data Repo and pipeline diagram, with yellow sticky notes flagging open questions and trade-offs at each stage: partner data visibility and permissions, input selector categorisation, additive versus replacing submissions, and notification requirements.">
-        <figcaption>2022 analysis showing automation steps required for straight-through-processing. Post-its identify likely trade-offs, challenges to be overcome or areas requiring more research.</figcaption>
-      </figure>
+    <section aria-labelledby="problem-heading" class="case-body">
+      <span class="eyebrow" id="problem-heading">Problem</span>
+      <h2>We&rsquo;d made errors easy to spot but hard to fix</h2>
+      <p>Quantemplate&rsquo;s validation reports already identified problems at a row level. But the static reports were a dead end in the workflow. Resolving problems required users to configure additional pipeline steps or ask suppliers to correct and resubmit their files.</p>
+      <p>We needed to make the validations feature solve for the whole workflow. Enabling users to add corrections straight into the report was one step. Making the report&rsquo;s user experience more efficient was another.</p>
+      <blockquote>Unlocking validation results sharing would truly close the loop, enabling rapid round trip correction across organisations.</blockquote>
     </section>
 
     <hr class="rule">
 
     <section aria-labelledby="approach-heading" class="case-body">
       <span class="eyebrow" id="approach-heading">Approach</span>
-      <h2>Modelling the whole workflow</h2>
-      <p>I mapped every touchpoint from the initial request through submission, processing, validation, correction and onward distribution. For each stage we considered the unhappy paths and dead ends: late or incomplete submissions, incorrect files, resubmissions and validation failures.</p>
-      <blockquote>The map identified every manual step that could be automated, every notification that needed to be sent and every point where human judgement was still required.</blockquote>
 
-      <p>It became the basis for the submission lifecycle, schedules, statuses, reminders, version history and pipeline triggers.</p>
+      <div class="subsection" id="approach-infodesign">
+        <h3>Information design</h3>
+        <p>The design of the original report, done in 2017, was driven by information design principles, putting validation failures in the context of a whole dataset to give users a sense of scale.</p>
+        <p>I worked on this with an information designer who I was mentoring in UX. We did a lot of whiteboard prototyping so we could test ideas with subject matter experts and engineers before moving to high fidelity mockups to play back to our user cohort.</p>
+        <p>User feedback also helped us decide what to leave out. We explored allowing users to pivot the report to first view results by input file rather than by validation rule. Their response was helpfully direct:</p>
+        <blockquote>&ldquo;Skip the dev on that. Just give me the validations.&rdquo;</blockquote>
+        <p>We dropped the alternative view and focused development on the core reporting experience.</p>
+      </div>
 
-      <figure class="figure">
-        <img src="media/feeds-research-lifecycle.png" alt="Swimlane diagram of the submission lifecycle spanning Carrier and MGA roles, from period open through upload, parsing, validation and carrier pipeline review, to period close, with pink notification steps, grey decision points and yellow manual touchpoints.">
-        <figcaption>Submission lifecycle analysis showing notification steps (pink), automated decision points and manual touchpoints (yellow).</figcaption>
-      </figure>
+      <div class="subsection" id="approach-ship">
+        <h3>Ship, learn, repeat</h3>
+        <blockquote>Our philosophy was to get a working version into users&rsquo; hands sooner rather than later. We needed to see how the report held up to real data and business use.</blockquote>
+        <p>We shipped a capable V1, then observed and progressively refined the experience.</p>
+        <p>For the 2026 upgrade to add corrections, we looked at how users were already making spot edits to their data by inserting calculation steps into their pipelines. These would typically map one value to another, sometimes making the mapping conditional on another value, such as the policy ID. This was a &lsquo;desire line&rsquo; in the product.</p>
+        <blockquote>The opportunity was to bring that existing pattern into the report, making corrections easier to configure and trace.</blockquote>
+      </div>
     </section>
 
     <hr class="rule">
@@ -1087,48 +1082,25 @@
     <section aria-labelledby="keydecisions-heading" class="case-body">
       <span class="eyebrow" id="keydecisions-heading">Key decisions</span>
 
-      <div class="subsection" id="concept-heading">
-        <h3>From Data Drop to Data Network</h3>
-        <p>My initial concept, Data Drop, was a lightweight portal with an unauthenticated, one-time upload link. It would have been a quick win, but mapping its workflow revealed that it would move the email problem further down the chain: links buried in inboxes, no persistent activity record and resubmissions still needing coordination.</p>
-
-        <blockquote>The Data Drop would have been a quick win but an incomplete solution.</blockquote>
-
-        <figure class="figure">
-          <img src="media/data-drop-concept.png" alt="Mockup of the Data Drop secure data transfer concept: a card showing transfer from and to organisations, submission type, period, due date, a worksheet selector with checkboxes, and a submit button.">
-          <figcaption>The data drop concept we never shipped.</figcaption>
-        </figure>
-
-        <p>I proposed Feeds instead: a whole new area in the product with authenticated users, separate organisations and persistent relationships between partners. This was a larger product increment, but one that addressed the whole workflow, making persistent connections between organisations and opening a path to a broader network strategy.</p>
+      <div class="subsection" id="kd-scope">
+        <h3>Make the scope of changes obvious</h3>
+        <p>Quantemplate applies corrections to bulk data rather than isolated cells, so we needed to make this clear. When a user selects a field, it opens a popup where they enter the correction. The UI makes it clear that corrections can apply to every matching value or use conditions, such as correcting Premium only for a specific Policy Number.</p>
+        <p>We added a formula bar, so users could derive a value from another column. For example, if a date is missing, take the date from another column and subtract one month. Based on what we&rsquo;d observed in production pipelines, this would be a necessary addition.</p>
 
         <figure class="figure">
-          <img src="media/feeds-org-relationship-diagram.jpg" alt="Diagram showing a Data originator org with a Feed Out mirroring data to a Data consumer org's Feed In, fed by API, pipeline and manual upload sources on each side, with an upload portal shown as a separate concept still under consideration.">
-          <figcaption>Architecting the relationship between organisation feeds. Every Feed In corresponds to a Feed Out in the partner org. At this point I was still considering the &lsquo;upload portal&rsquo; as a layer in the workflow. It was descoped when the walkthrough revealed it to be superfluous.</figcaption>
+          <img src="media/validation-corrections-preview.png" alt="Quantemplate's validation report: flagged errors beside an editable corrections column, with the correction popup open on a row.">
+          <figcaption>Entering a correction. The popup makes the scope explicit &mdash; every matching value, or only where a condition is met &mdash; with a formula bar for deriving the value from another column.</figcaption>
         </figure>
       </div>
 
-      <div class="subsection" id="datamodel-heading">
-        <h3>Flexibility for complex submissions</h3>
-        <p>When we spoke with users and looked at their existing Quantemplate workflows, we could see that a submission was rarely uniform: Premium and Claims might arrive as separate tabs, files, or from different organisations, each needing different pipeline logic.</p>
-        <p>I introduced subsections to represent these distinct streams within one submission. Feed owners define subsections, and submitters assign uploads to the appropriate one. Using the wayfinding principle of progressive disclosure, the interface walks them through the process, step-by-step.</p>
-        <blockquote>Using wayfinding principles, I navigated users through the process of assigning their data to the right subsection.</blockquote>
-
-        <div class="video-embed">
-          <iframe src="https://www.youtube.com/embed/8-GmO0Smelw?si=uJNjQGcYSAX8VcLX" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        </div>
+      <div class="subsection" id="kd-evidence">
+        <h3>Preserve evidence</h3>
+        <p>Audit was important to our clients, who use Quantemplate as a system-of-record for financial reporting. To support this we displayed the original failed values alongside the corrected rows in the report. The full change history of each edit was displayed.</p>
       </div>
 
-      <div class="subsection" id="permissions-heading">
-        <h3>Roles for humans and robots alike</h3>
-        <p>I modelled permission levels around the way our clients divided responsibility. Owners and managers needed to configure Feeds, connect with partners and oversee the process. Submitters only needed access when it was time to upload data, while read-only users needed visibility to use Feeds data in pipelines.</p>
-
-        <blockquote>I introduced the concept of a &lsquo;Robot User&rsquo; to surface automation capabilities across the platform and make them auditable.</blockquote>
-
-        <p>Looking at our permissions model, I realised that we needed a way to run automations without a user present, and have those runs tracked in the history. When the Robot User has access to a Feed, they can take the data from it, run a pipeline they have access to and output it to a dataset they&rsquo;ve been given write permission on.</p>
-
-        <figure class="figure">
-          <img src="media/feeds-permissions-share-panel.png" alt="Feed sharing panel listing who has access: TDG TPA with 9 members as Submitter, Robot User as Can view, Martina Brito as Manager, and Tom de Gay as Owner.">
-          <figcaption>Sharing a Feed. Owner, Manager, Submitter and view-only roles sit alongside the Robot User, enabling automations across the platform.</figcaption>
-        </figure>
+      <div class="subsection" id="kd-feedback">
+        <h3>Give immediate feedback</h3>
+        <p>Corrections are applied to the output on the next pipeline run, so we called this out with a notification bar. But as a user types in a correction, we check that their entered value will pass the rule, and warn if it&rsquo;s still a fail.</p>
       </div>
     </section>
 
@@ -1137,53 +1109,25 @@
     <section aria-labelledby="implementation-heading" class="case-body">
       <span class="eyebrow" id="implementation-heading">Implementation</span>
 
-      <div class="subsection" id="connected-heading">
-        <h3>Trusted setup in under a minute</h3>
-        <p>Initiating a partner connection required just their contact&rsquo;s email. We used the domain to find their organisation or begin creating it. I researched and proposed a <a href="https://www.logo.dev" target="_blank" rel="noopener noreferrer">logo.dev</a> integration to populate organisation names and logos automatically, reducing setup effort and making requests more recognisable. Admins on each side approve the connection, with all events tracked in a new admin panel.</p>
-
-        <blockquote>A lot of complexity behind the scenes, enabling simplicity in the product.</blockquote>
-
-        <figure class="figure">
-          <img src="media/feeds-add-partners-spec.jpg" alt="Design specification board mapping every path through the add-partners workflow: adding internal submitters, connecting to an existing partner, adding a new partner, setup via a Feed In or Feed Out, setup statuses and review settings.">
-          <figcaption>Design specification for the &lsquo;Add partners&rsquo; workflow. Did the partner already exist on the system? Were they already connected to this? Was the user an admin?</figcaption>
-        </figure>
-
-        <p>Admins can also create reusable schedules to centrally manage request frequency. Research revealed that feeds often shared a cadence but followed different contract dates. I made start and end dates properties of a Feed, rather than a schedule, allowing requests to stop at contract end without affecting other feeds using the same schedule.</p>
-        <p>All that&rsquo;s required to set up a new Feed is to add subsections, search for a partner and connect an existing schedule. In under one minute you can be requesting data from your trading partners.</p>
-
-        <div class="video-embed">
-          <iframe src="https://www.youtube.com/embed/KVrOr-v3Ncs?si=GsG2ycGKF4QdAdE6" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        </div>
+      <div class="subsection" id="impl-ordering">
+        <h3>Ordering and audit</h3>
+        <p>One of the things we discovered in testing as part of our internal QA process was that the order in which corrections apply is important, since one correction could overwrite a prior one. We created an interface showing all corrections applied to any validation rule, allowing users to reorder or remove them.</p>
       </div>
 
-      <div class="subsection" id="audit-heading">
-        <h3>The full picture, at a glance</h3>
-        <p>Both parties retain an immutable, versioned record of submitted data. User avatars and organisation domains identify the people and companies behind submissions, building trust.</p>
-        <p>I redesigned the Feed repository as a management dashboard, showing which Feeds are complete, waiting for data or overdue; this real-time view of inventory replaces manual tracking in spreadsheets. Configurable reminders chase outstanding submissions automatically.</p>
-        <p>Visible connections between Feeds and pipelines help managers understand what each submission will trigger and what the automation is still waiting for.</p>
-
-        <figure class="figure">
-          <img src="media/feeds-repo-dashboard.png" alt="Your Feeds dashboard listing partner feeds with status badges (Draft, Overdue, Resubmission, Complete), owners, submission counts and a filterable sidebar for feed status, type and tags.">
-          <figcaption>Feeds repo: I reimagined the document storage as a management dashboard.</figcaption>
-        </figure>
+      <div class="subsection" id="impl-sharing">
+        <h3>A shared correction workflow</h3>
+        <p>The next step is to allow clients to send selected validation results back to the supplier through a <a href="/case-studies/connecting-organisations">Feed</a> where they can make corrections.</p>
+        <blockquote>This will take out several manual back-and-forth steps which are currently done over email.</blockquote>
+        <p>The workflow covers preparing corrections, explicitly submitting them back, tracking progress and notifying both parties through in-app updates and email.</p>
+        <p>Sharing raised a raft of new questions, for instance: should the validation progress bar reflect the entire dataset or only the validations shared with the supplier? I chose the shared validations, ensuring requester and supplier saw the same measure of completion, and made this clear in the UI.</p>
+        <p>Validation Corrections are live in production. Correction sharing is currently under construction, targeting release in October 2026.</p>
       </div>
 
-      <div class="subsection" id="network-heading">
-        <h3>Connecting the whole data chain</h3>
-        <p>Feeds support incoming data, outgoing distribution and onward sharing. An insurer can distribute data to reinsurers, while a broker can receive and pass on the original submission. Each organisation can connect its own processing pipelines while retaining a shared, auditable source record. This uniquely allows us to surface the full data Chain of Custody.</p>
-
-        <div class="video-embed">
-          <iframe src="https://www.youtube.com/embed/vqHMlfbLOZU?si=8_V2V-7beRQ4BkcO" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        </div>
-
-        <blockquote>The Feeds lay the architectural groundwork for the big vision: automated data flows across the industry.</blockquote>
-
-        <p>We mapped out further <a href="https://help.quantemplate.com/feed-use-cases" target="_blank" rel="noopener noreferrer">Use Cases</a> on this support page.</p>
-
-        <figure class="figure">
-          <img src="media/feeds-network-potential-diagram.png" alt="Diagram showing data flowing from MGAs and Carriers who are Quantemplate clients, through to free-user Carriers and Reinsurers, illustrating how submissions and pushes propagate across the network regardless of client status.">
-          <figcaption>Potential to flow data seamlessly across the insurance industry.</figcaption>
-        </figure>
+      <div class="subsection" id="impl-typevalidation">
+        <h3>Automated type validation</h3>
+        <p>We&rsquo;d learnt from our client implementations that validating that data within a column met a generic type definition required too many steps. It wasn&rsquo;t a problem that fitted neatly into the custom validation rule model that we&rsquo;d established.</p>
+        <p>The solution arose when we implemented <a href="https://help.quantemplate.com/data-semantics" target="_blank" rel="noopener noreferrer">data semantics</a> across the platform. Now, with an understanding of the data in each column we could implement a very lightweight solution. We added a toggle to enable type validations in Map Column Headers, the point in the pipeline in which schema is defined.</p>
+        <blockquote>This cut out at least four pipeline steps for every column whose type was validated, removing implementation complexity and slashing hours from implementation time.</blockquote>
       </div>
     </section>
 
@@ -1191,34 +1135,22 @@
 
     <section aria-labelledby="outcome-heading" class="case-body">
       <span class="eyebrow" id="outcome-heading">Outcome</span>
-      <h2>A foundation for networked data</h2>
-      <p>Feeds have been running production data for approximately 18 months, processing recurring monthly submissions and 3.4 million rows to date. For the client running it, this removes nearly all of the manual steps identified in the original workflow mapping, for true &lsquo;straight-through processing&rsquo;. The one step that remains, the initial upload, is performed directly by the data supplier.</p>
-      <p>Bringing further partners onto Feeds is an ongoing project: in-app guidance and comprehensive tutorials have driven initial uptake, and upcoming features to share validation reports and suggest corrections should make the value of switching more visible.</p>
-      <blockquote>Feeds expanded Quantemplate from a product for automating processes within an organisation, towards infrastructure connecting them.</blockquote>
-
-      <p>This opens the door to <a href="https://help.quantemplate.com/artificial-intelligence" target="_blank" rel="noopener noreferrer">Network Intelligence</a>, where data mappings, transformations and corrections are crowdsourced.</p>
-    </section>
-
-    <hr class="rule">
-
-    <section aria-labelledby="resources-heading" class="case-body">
-      <span class="eyebrow" id="resources-heading">Resources</span>
-      <ul class="resources-list">
-        <li><a href="https://youtube.com/playlist?list=PL08wd7p2fBAm4KWg1JRAsKwGgxsGlRHto&si=VIPEF11wnDgHINdJ" target="_blank" rel="noopener noreferrer">Feeds tutorials</a></li>
-        <li><a href="https://help.quantemplate.com/about-feeds" target="_blank" rel="noopener noreferrer">Feeds support docs</a></li>
-      </ul>
+      <h2>Closing the loop</h2>
+      <blockquote>In a demo of the new capabilities, clients cited the validation improvements as a significant boost to their workflow, with a clear focus on their productivity bottlenecks.</blockquote>
+      <p>Being able to see who had made corrections was especially valuable to them for supporting their audit processes.</p>
+      <p>The next release will extend that workflow across organisations, addressing one of Quantemplate&rsquo;s most requested capabilities, according to our user interviews: allowing suppliers to resolve reported issues directly, with both parties working from the same results.</p>
     </section>
 
     <hr class="rule">
 
     <section aria-labelledby="next-heading">
       <span class="eyebrow" id="next-heading">Next case study</span>
-      <a class="case-block has-image" href="/case-studies/mapping-inconsistent-schemas">
-        <img class="case-block-media" src="/case-studies/media/concept-mapping-detail.jpg" alt="Concept design for Quantemplate's column mapping interface: schemas as vertically stacked fields aligned to a common master." loading="lazy">
+      <a class="case-block has-image" href="/case-studies/connecting-organisations">
+        <img class="case-block-media" src="/case-studies/media/feeds-repo-dashboard-crop.png" alt="The Feeds repository redesigned as a management dashboard, showing partner feeds and their submission status." loading="lazy">
         <span class="case-block-text">
-          <span class="case-block-title">Mapping inconsistent schemas at scale</span>
-          <span class="case-block-subtitle">Translate inconsistent data sources to a common target format, fully automated and enhanced by AI suggestions.</span>
-          <span class="case-block-keywords">Interaction design · Human-in-the-loop</span>
+          <span class="case-block-title">Connecting organisations through data</span>
+          <span class="case-block-subtitle">Infrastructure to automate data exchange, laying the foundation for a connected network.</span>
+          <span class="case-block-keywords">Product strategy · Systems thinking · Process design</span>
         </span>
       </a>
     </section>
@@ -1229,12 +1161,11 @@
     <span class="eyebrow toc-heading">On this page</span>
     <a href="#keypoints-heading">Key points</a>
     <a href="#summary-heading">Summary</a>
-    <a href="#objective-heading">Objective</a>
+    <a href="#problem-heading">Problem</a>
     <a href="#approach-heading">Approach</a>
     <a href="#keydecisions-heading">Key decisions</a>
     <a href="#implementation-heading">Implementation</a>
     <a href="#outcome-heading">Outcome</a>
-    <a href="#resources-heading">Resources</a>
   </nav>
 
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Enlarged image" tabindex="-1">

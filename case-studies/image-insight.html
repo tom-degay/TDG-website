@@ -3,23 +3,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Connecting organisations through data — Tom de Gay</title>
-<meta name="description" content="How Tom de Gay designed Feeds, Quantemplate's workspace for securely exchanging data between organisations — reframing a simple upload portal into infrastructure for a connected data network.">
+<title>Making space for deeper reflection — Tom de Gay</title>
+<meta name="description" content="How Tom de Gay simplified Image Insight, a digital coaching tool that uses images to prompt reflection, into a calm, low-friction experience — then refined it through school betas.">
 <meta name="theme-color" content="#000000">
 
 <meta property="og:type" content="article">
-<meta property="og:title" content="Connecting organisations through data — Tom de Gay">
-<meta property="og:description" content="How Tom de Gay designed Feeds, Quantemplate's system for securely exchanging data between organisations.">
-<meta property="og:url" content="https://tomdegay.com/case-studies/connecting-organisations">
-<meta property="og:image" content="https://tomdegay.com/case-studies/media/connecting-organisations-og.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Connecting organisations through data — a Quantemplate case study by Tom de Gay">
+<meta property="og:title" content="Making space for deeper reflection — Tom de Gay">
+<meta property="og:description" content="How Tom de Gay simplified Image Insight, a digital coaching tool that uses images to prompt reflection, into a calm, low-friction experience.">
+<meta property="og:url" content="https://tomdegay.com/case-studies/image-insight">
+<meta property="og:image" content="https://tomdegay.com/case-studies/media/image-insight-session-review.jpg">
+<meta property="og:image:width" content="1400">
+<meta property="og:image:height" content="910">
+<meta property="og:image:alt" content="Image Insight's session review screen: each chosen image paired with the participant's reflection, and an Actions panel of next steps.">
 
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Connecting organisations through data — Tom de Gay">
-<meta name="twitter:description" content="How Tom de Gay designed Feeds, Quantemplate's system for securely exchanging data between organisations.">
-<meta name="twitter:image" content="https://tomdegay.com/case-studies/media/connecting-organisations-og.jpg">
+<meta name="twitter:title" content="Making space for deeper reflection — Tom de Gay">
+<meta name="twitter:description" content="How Tom de Gay simplified Image Insight, a digital coaching tool that uses images to prompt reflection, into a calm, low-friction experience.">
+<meta name="twitter:image" content="https://tomdegay.com/case-studies/media/image-insight-session-review.jpg">
 
 <link rel="icon" href="/tdg-favicon.svg" type="image/svg+xml">
 
@@ -78,7 +78,6 @@
     font-family: "Fakt Blond", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    min-width: 250px;
   }
 
   main {
@@ -322,6 +321,19 @@
     max-width: 46rem;
   }
 
+  h4 {
+    font-family: "Fakt Blond SemiBold", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    margin: 28px 0 12px;
+    color: #fff;
+    font-size: clamp(16px, 2vw, 18px);
+    line-height: 1.35;
+  }
+
+  .case-body h4 {
+    max-width: 46rem;
+  }
+
   .subsection + .subsection {
     margin-top: clamp(40px, 6vw, 56px);
     padding-top: clamp(40px, 6vw, 56px);
@@ -352,6 +364,16 @@
 
   .case-body blockquote:last-child {
     margin-bottom: 0;
+  }
+
+  .case-body blockquote cite {
+    display: block;
+    margin-top: 12px;
+    font-style: normal;
+    font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+    font-size: 13px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.55);
   }
 
   /* -- inline UI video -- */
@@ -998,7 +1020,7 @@
                 <span class="nav-dropdown-card-kicker">Column mapping</span>
                 <span class="nav-dropdown-card-title">Mapping inconsistent schemas at scale</span>
               </a>
-              <a class="nav-dropdown-card is-current" href="/case-studies/connecting-organisations">
+              <a class="nav-dropdown-card" href="/case-studies/connecting-organisations">
                 <span class="nav-dropdown-card-kicker">Feeds</span>
                 <span class="nav-dropdown-card-title">Connecting organisations through data</span>
               </a>
@@ -1006,7 +1028,7 @@
                 <span class="nav-dropdown-card-kicker">Validation</span>
                 <span class="nav-dropdown-card-title">Closing the loop on data quality</span>
               </a>
-              <a class="nav-dropdown-card" href="/case-studies/image-insight">
+              <a class="nav-dropdown-card is-current" href="/case-studies/image-insight">
                 <span class="nav-dropdown-card-kicker">Image Insight</span>
                 <span class="nav-dropdown-card-title">Making space for deeper reflection</span>
               </a>
@@ -1020,25 +1042,25 @@
   <main>
   <div class="content">
     <header>
-      <span class="kicker">Case Study | <a href="https://help.quantemplate.com/about-feeds" target="_blank" rel="noopener noreferrer">Quantemplate Feeds</a></span>
-      <h1 class="display">Connecting organisations through data</h1>
-      <p class="subtitle">Infrastructure to automate data exchange, laying the foundation for a connected network.</p>
-      <p class="keywords">Product strategy · Systems thinking · Process design</p>
+      <span class="kicker">Case Study | <a href="https://imageinsight.app" target="_blank" rel="noopener noreferrer">Image Insight</a></span>
+      <h1 class="display">Making space for deeper reflection</h1>
+      <p class="subtitle">Digital coaching tool that uses images and visual metaphors to prompt deeper reflection in online and face-to-face sessions.</p>
+      <p class="keywords">Interaction design · Visual design · Accessibility</p>
 
       <hr class="rule">
 
       <div class="meta-row">
         <div class="meta-item">
           <span class="eyebrow">Role</span>
-          <p>Lead product designer, end to end</p>
+          <p>Product and visual design</p>
         </div>
         <div class="meta-item">
           <span class="eyebrow">Team</span>
-          <p>Design, engineering, domain experts and customers</p>
+          <p>Co-founder and engineering</p>
         </div>
         <div class="meta-item">
           <span class="eyebrow">Timeframe</span>
-          <p>Concept to V1 release (2024): 22 months. Explored and delivered alongside wider platform enablement work.</p>
+          <p>A few days</p>
         </div>
       </div>
     </header>
@@ -1049,10 +1071,9 @@
       <span class="eyebrow" id="keypoints-heading">Key points</span>
       <div class="key-points-grid">
         <ul class="key-points">
-          <li>Project reframes an upload portal as a cross-company network</li>
-          <li>Automates an entire manual workflow, with Feeds set up in under one minute</li>
-          <li>Adapts to any shape of data, across files, formats and organisations</li>
-          <li>Spans submissions, scheduling, org creation, authentication and admin tooling</li>
+          <li>Simplified a working prototype into a calm, low-friction coaching experience</li>
+          <li>Adapted to different participants&rsquo; needs, based on beta testing</li>
+          <li>Refined the session workflow in response to feedback from a school&rsquo;s beta</li>
         </ul>
       </div>
     </section>
@@ -1061,49 +1082,32 @@
 
     <section aria-labelledby="summary-heading">
       <span class="eyebrow" id="summary-heading">Summary</span>
-      <p class="about-statement display">I led the design of <a href="https://help.quantemplate.com/about-feeds" target="_blank" rel="noopener noreferrer">Feeds</a>, a new Quantemplate workspace for securely requesting, receiving, processing and distributing data between organisations.</p>
-      <p class="about-statement display">By mapping the complete workflow, I reframed an initial upload-portal concept as a persistent system, spanning submissions, automation, permissions and operational oversight. Feeds accommodate complex insurance data exchanges while creating the foundation for a broader connected-data strategy.</p>
-
-      <div class="video-embed">
-        <iframe src="https://www.youtube.com/embed/IgmrfcrYOOk?si=_DXr-BjdaTXHhwcL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-      </div>
+      <p class="about-statement display">Image Insight&rsquo;s co-founder approached me with a working prototype for digital coaching cards. The concept was there, but the visual design felt clunky and the user experience needed simplifying.</p>
+      <p class="about-statement display">I refined the interface and key interactions, creating an elegant, low-friction experience where imagery and conversation take centre stage. I subsequently helped refine the product in response to beta feedback.</p>
     </section>
 
     <hr class="rule">
 
-    <section aria-labelledby="objective-heading" class="case-body">
-      <span class="eyebrow" id="objective-heading">Problem</span>
-      <h2>We&rsquo;d automated the data processing, but not the process</h2>
-      <p>Insurance companies depend on regular submissions from brokers, managing general agents, third-party administrators and other partners. Our data transformation pipelines did a good job of <a href="/case-studies/mapping-inconsistent-schemas">mapping and harmonising</a> this data, but the parts outside Quantemplate were process bottlenecks.</p>
-      <p>Email was manual and difficult to audit, while FTP and API integrations were unwieldy. Moreover, keeping track of what was in or overdue every month was a significant timesink.</p>
-      <p>Even on the happy path, we identified five manual steps to request data and another five to bring it into and out of Quantemplate.</p>
-
-      <blockquote>Across an average of 150 trading partners, repeated monthly, that amounted to 18,000 manual steps a year.</blockquote>
-
-      <figure class="figure">
-        <img src="media/workflow-bottlenecks-diagram.png" alt="Diagram of a typical MGA data pipeline: manual upload to network storage, an automated import-to-output pipeline including Map Column Headers, then a manual step to push output to the client database via API.">
-        <figcaption>2022 analysis of typical Quantemplate workflow, identifying manual bottlenecks.</figcaption>
-      </figure>
-
-      <figure class="figure">
-        <img src="media/feeds-problem-postits.png" alt="Annotated version of the Data Repo and pipeline diagram, with yellow sticky notes flagging open questions and trade-offs at each stage: partner data visibility and permissions, input selector categorisation, additive versus replacing submissions, and notification requirements.">
-        <figcaption>2022 analysis showing automation steps required for straight-through-processing. Post-its identify likely trade-offs, challenges to be overcome or areas requiring more research.</figcaption>
-      </figure>
+    <section aria-labelledby="problem-heading" class="case-body">
+      <span class="eyebrow" id="problem-heading">Problem</span>
+      <h2>Bringing coaching cards into a digital session</h2>
+      <p>Physical image cards give people a starting point for conversations that can be difficult to begin with words alone. Taking that approach online makes it possible to explore images together during a video call, then capture the reflections and actions in one place.</p>
+      <p>The tool was intended for coaches and therapists, including those working in schools with children from primary age through to teenagers. The design needed to support the conversation without becoming another task to manage.</p>
     </section>
 
     <hr class="rule">
 
     <section aria-labelledby="approach-heading" class="case-body">
       <span class="eyebrow" id="approach-heading">Approach</span>
-      <h2>Modelling the whole workflow</h2>
-      <p>I mapped every touchpoint from the initial request through submission, processing, validation, correction and onward distribution. For each stage we considered the unhappy paths and dead ends: late or incomplete submissions, incorrect files, resubmissions and validation failures.</p>
-      <blockquote>The map identified every manual step that could be automated, every notification that needed to be sent and every point where human judgement was still required.</blockquote>
-
-      <p>It became the basis for the submission lifecycle, schedules, statuses, reminders, version history and pipeline triggers.</p>
+      <h2>A calm environment for reflection</h2>
+      <blockquote>At Quantemplate, I designed deep capabilities for power users. Image Insight was about stripping things away, letting imagery and conversation take centre stage.</blockquote>
+      <p>I retained the original UI concept, introducing whitespace, calming colours and a clearer visual hierarchy. This was informed by my prior work in education and healthcare, where a &lsquo;therapeutic environment&rsquo; <a href="https://journals.sagepub.com/doi/10.1177/19375867231219031" target="_blank" rel="noopener noreferrer">has been shown to improve wellbeing</a>.</p>
+      <p>I also identified bottlenecks and points of confusion, making actions clearer across the app. Settings and login pages continued the same calm visual approach.</p>
+      <p>I designed the logo around the app&rsquo;s signature image grid, reflecting connection and personal growth.</p>
 
       <figure class="figure">
-        <img src="media/feeds-research-lifecycle.png" alt="Swimlane diagram of the submission lifecycle spanning Carrier and MGA roles, from period open through upload, parsing, validation and carrier pipeline review, to period close, with pink notification steps, grey decision points and yellow manual touchpoints.">
-        <figcaption>Submission lifecycle analysis showing notification steps (pink), automated decision points and manual touchpoints (yellow).</figcaption>
+        <img src="media/image-insight-login.jpg" alt="Image Insight's sign-in page: a soft card on a pale teal background patterned with the app's rounded image-grid motif, with email and password fields and Google or Azure options.">
+        <figcaption>The sign-in page: the same calm palette and generous whitespace as the rest of the app, and a logo built from the signature image grid.</figcaption>
       </figure>
     </section>
 
@@ -1111,50 +1115,21 @@
 
     <section aria-labelledby="keydecisions-heading" class="case-body">
       <span class="eyebrow" id="keydecisions-heading">Key decisions</span>
+      <h2>Keeping imagery and conversation at the centre</h2>
+      <p>The coach asks an open-ended question and the participant selects images from a grid. These become talking points, with reflections translated into actions. A downloadable PDF records the session, with key actions foregrounded.</p>
 
-      <div class="subsection" id="concept-heading">
-        <h3>From Data Drop to Data Network</h3>
-        <p>My initial concept, Data Drop, was a lightweight portal with an unauthenticated, one-time upload link. It would have been a quick win, but mapping its workflow revealed that it would move the email problem further down the chain: links buried in inboxes, no persistent activity record and resubmissions still needing coordination.</p>
+      <figure class="figure">
+        <img src="media/image-insight-grid.jpg" alt="Image Insight's selection screen: a large grid of evocative photographs on the left, with a My session panel on the right showing the coach's question and the participant's numbered picks.">
+        <figcaption>The participant chooses images from the grid in response to the coach&rsquo;s question; selections collect in the session panel.</figcaption>
+      </figure>
 
-        <blockquote>The Data Drop would have been a quick win but an incomplete solution.</blockquote>
+      <p>Adult, teen and child modes change the selection of images shown. AI can describe images to help narrow the selection.</p>
+      <blockquote>My focus was on making the surrounding interface simple enough for the coach and participant to stay with the conversation.</blockquote>
 
-        <figure class="figure">
-          <img src="media/data-drop-concept.png" alt="Mockup of the Data Drop secure data transfer concept: a card showing transfer from and to organisations, submission type, period, due date, a worksheet selector with checkboxes, and a submit button.">
-          <figcaption>The data drop concept we never shipped.</figcaption>
-        </figure>
-
-        <p>I proposed Feeds instead: a whole new area in the product with authenticated users, separate organisations and persistent relationships between partners. This was a larger product increment, but one that addressed the whole workflow, making persistent connections between organisations and opening a path to a broader network strategy.</p>
-
-        <figure class="figure">
-          <img src="media/feeds-org-relationship-diagram.jpg" alt="Diagram showing a Data originator org with a Feed Out mirroring data to a Data consumer org's Feed In, fed by API, pipeline and manual upload sources on each side, with an upload portal shown as a separate concept still under consideration.">
-          <figcaption>Architecting the relationship between organisation feeds. Every Feed In corresponds to a Feed Out in the partner org. At this point I was still considering the &lsquo;upload portal&rsquo; as a layer in the workflow. It was descoped when the walkthrough revealed it to be superfluous.</figcaption>
-        </figure>
-      </div>
-
-      <div class="subsection" id="datamodel-heading">
-        <h3>Flexibility for complex submissions</h3>
-        <p>When we spoke with users and looked at their existing Quantemplate workflows, we could see that a submission was rarely uniform: Premium and Claims might arrive as separate tabs, files, or from different organisations, each needing different pipeline logic.</p>
-        <p>I introduced subsections to represent these distinct streams within one submission. Feed owners define subsections, and submitters assign uploads to the appropriate one. Using the wayfinding principle of progressive disclosure, the interface walks them through the process, step-by-step.</p>
-        <blockquote>Using wayfinding principles, I navigated users through the process of assigning their data to the right subsection.</blockquote>
-
-        <div class="video-embed">
-          <iframe src="https://www.youtube.com/embed/8-GmO0Smelw?si=uJNjQGcYSAX8VcLX" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        </div>
-      </div>
-
-      <div class="subsection" id="permissions-heading">
-        <h3>Roles for humans and robots alike</h3>
-        <p>I modelled permission levels around the way our clients divided responsibility. Owners and managers needed to configure Feeds, connect with partners and oversee the process. Submitters only needed access when it was time to upload data, while read-only users needed visibility to use Feeds data in pipelines.</p>
-
-        <blockquote>I introduced the concept of a &lsquo;Robot User&rsquo; to surface automation capabilities across the platform and make them auditable.</blockquote>
-
-        <p>Looking at our permissions model, I realised that we needed a way to run automations without a user present, and have those runs tracked in the history. When the Robot User has access to a Feed, they can take the data from it, run a pipeline they have access to and output it to a dataset they&rsquo;ve been given write permission on.</p>
-
-        <figure class="figure">
-          <img src="media/feeds-permissions-share-panel.png" alt="Feed sharing panel listing who has access: TDG TPA with 9 members as Submitter, Robot User as Can view, Martina Brito as Manager, and Tom de Gay as Owner.">
-          <figcaption>Sharing a Feed. Owner, Manager, Submitter and view-only roles sit alongside the Robot User, enabling automations across the platform.</figcaption>
-        </figure>
-      </div>
+      <figure class="figure">
+        <img src="media/image-insight-session-review.jpg" alt="Image Insight's session review screen: each chosen image paired with the participant's reflection, and an Actions panel listing next steps to carry forward.">
+        <figcaption>The session review pairs each image with its reflection and foregrounds the actions to take forward, ready to export as a PDF.</figcaption>
+      </figure>
     </section>
 
     <hr class="rule">
@@ -1162,53 +1137,27 @@
     <section aria-labelledby="implementation-heading" class="case-body">
       <span class="eyebrow" id="implementation-heading">Implementation</span>
 
-      <div class="subsection" id="connected-heading">
-        <h3>Trusted setup in under a minute</h3>
-        <p>Initiating a partner connection required just their contact&rsquo;s email. We used the domain to find their organisation or begin creating it. I researched and proposed a <a href="https://www.logo.dev" target="_blank" rel="noopener noreferrer">logo.dev</a> integration to populate organisation names and logos automatically, reducing setup effort and making requests more recognisable. Admins on each side approve the connection, with all events tracked in a new admin panel.</p>
-
-        <blockquote>A lot of complexity behind the scenes, enabling simplicity in the product.</blockquote>
-
-        <figure class="figure">
-          <img src="media/feeds-add-partners-spec.jpg" alt="Design specification board mapping every path through the add-partners workflow: adding internal submitters, connecting to an existing partner, adding a new partner, setup via a Feed In or Feed Out, setup statuses and review settings.">
-          <figcaption>Design specification for the &lsquo;Add partners&rsquo; workflow. Did the partner already exist on the system? Were they already connected to this? Was the user an admin?</figcaption>
-        </figure>
-
-        <p>Admins can also create reusable schedules to centrally manage request frequency. Research revealed that feeds often shared a cadence but followed different contract dates. I made start and end dates properties of a Feed, rather than a schedule, allowing requests to stop at contract end without affecting other feeds using the same schedule.</p>
-        <p>All that&rsquo;s required to set up a new Feed is to add subsections, search for a partner and connect an existing schedule. In under one minute you can be requesting data from your trading partners.</p>
-
-        <div class="video-embed">
-          <iframe src="https://www.youtube.com/embed/KVrOr-v3Ncs?si=GsG2ycGKF4QdAdE6" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        </div>
+      <div class="subsection" id="impl-validating">
+        <h3>Validating the approach</h3>
+        <p>The app was trialled in a beta with a number of schools. Feedback on the design approach was overwhelmingly positive.</p>
+        <blockquote>&ldquo;It gave a focus to answering the question, without distracting from the question.&rdquo;
+          <cite>Helen, Client &middot; <a href="https://imageinsight.app/" target="_blank" rel="noopener noreferrer">Source</a></cite>
+        </blockquote>
+        <blockquote>&ldquo;I love the simplicity.&rdquo;
+          <cite>Ed, Head Teacher / Coach &middot; <a href="https://imageinsight.app/" target="_blank" rel="noopener noreferrer">Source</a></cite>
+        </blockquote>
       </div>
 
-      <div class="subsection" id="audit-heading">
-        <h3>The full picture, at a glance</h3>
-        <p>Both parties retain an immutable, versioned record of submitted data. User avatars and organisation domains identify the people and companies behind submissions, building trust.</p>
-        <p>I redesigned the Feed repository as a management dashboard, showing which Feeds are complete, waiting for data or overdue; this real-time view of inventory replaces manual tracking in spreadsheets. Configurable reminders chase outstanding submissions automatically.</p>
-        <p>Visible connections between Feeds and pipelines help managers understand what each submission will trigger and what the automation is still waiting for.</p>
+      <div class="subsection" id="impl-refining">
+        <h3>Refining around real sessions</h3>
+        <p>Feedback from the beta cohort highlighted two areas where the interface needed to be more flexible.</p>
 
-        <figure class="figure">
-          <img src="media/feeds-repo-dashboard.png" alt="Your Feeds dashboard listing partner feeds with status badges (Draft, Overdue, Resubmission, Complete), owners, submission counts and a filterable sidebar for feed status, type and tags.">
-          <figcaption>Feeds repo: I reimagined the document storage as a management dashboard.</figcaption>
-        </figure>
-      </div>
+        <h4>Starting a session</h4>
+        <p>Coaches wanted to begin immediately rather than schedule something for later. Engineering proposed a separate instant-session button. I made the case for one clear entry point for a new session, avoiding competing actions for essentially the same task.</p>
 
-      <div class="subsection" id="network-heading">
-        <h3>Connecting the whole data chain</h3>
-        <p>Feeds support incoming data, outgoing distribution and onward sharing. An insurer can distribute data to reinsurers, while a broker can receive and pass on the original submission. Each organisation can connect its own processing pipelines while retaining a shared, auditable source record. This uniquely allows us to surface the full data Chain of Custody.</p>
-
-        <div class="video-embed">
-          <iframe src="https://www.youtube.com/embed/vqHMlfbLOZU?si=8_V2V-7beRQ4BkcO" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        </div>
-
-        <blockquote>The Feeds lay the architectural groundwork for the big vision: automated data flows across the industry.</blockquote>
-
-        <p>We mapped out further <a href="https://help.quantemplate.com/feed-use-cases" target="_blank" rel="noopener noreferrer">Use Cases</a> on this support page.</p>
-
-        <figure class="figure">
-          <img src="media/feeds-network-potential-diagram.png" alt="Diagram showing data flowing from MGAs and Carriers who are Quantemplate clients, through to free-user Carriers and Reinsurers, illustrating how submissions and pushes propagate across the network regardless of client status.">
-          <figcaption>Potential to flow data seamlessly across the insurance industry.</figcaption>
-        </figure>
+        <h4>Controlling the image grid</h4>
+        <p>Coaches reported that a large grid could feel overwhelming for some participants, including some neurodivergent children and young people. We added a slider to control how many images were displayed. I placed it alongside the grid so coaches could see the effect immediately and adjust it during the conversation.</p>
+        <p>A gallery selector let coaches choose different image collections, while a refresh button brought up a new batch. Together, these controls made it easier to adapt the session to the person taking part.</p>
       </div>
     </section>
 
@@ -1216,12 +1165,12 @@
 
     <section aria-labelledby="outcome-heading" class="case-body">
       <span class="eyebrow" id="outcome-heading">Outcome</span>
-      <h2>A foundation for networked data</h2>
-      <p>Feeds have been running production data for approximately 18 months, processing recurring monthly submissions and 3.4 million rows to date. For the client running it, this removes nearly all of the manual steps identified in the original workflow mapping, for true &lsquo;straight-through processing&rsquo;. The one step that remains, the initial upload, is performed directly by the data supplier.</p>
-      <p>Bringing further partners onto Feeds is an ongoing project: in-app guidance and comprehensive tutorials have driven initial uptake, and upcoming features to share validation reports and suggest corrections should make the value of switching more visible.</p>
-      <blockquote>Feeds expanded Quantemplate from a product for automating processes within an organisation, towards infrastructure connecting them.</blockquote>
-
-      <p>This opens the door to <a href="https://help.quantemplate.com/artificial-intelligence" target="_blank" rel="noopener noreferrer">Network Intelligence</a>, where data mappings, transformations and corrections are crowdsourced.</p>
+      <h2>An interface that leaves room for conversation</h2>
+      <p>The result was a calmer, clearer coaching tool, refined through use in schools. Feedback from coaches highlighted its simplicity, while co-founder Anna Malone directly credited the design work with making the product easier to use.</p>
+      <blockquote>&ldquo;Tom has been crucial in transforming Image Insight from a clunky MVP to an intuitive, easy-to-use product that I&rsquo;m really proud of.&rdquo;
+        <cite>Anna Malone, Co-founder, Image Insight</cite>
+      </blockquote>
+      <p>The design gives coaches control over the session while keeping imagery and conversation at the centre of the experience.</p>
     </section>
 
     <hr class="rule">
@@ -1229,8 +1178,7 @@
     <section aria-labelledby="resources-heading" class="case-body">
       <span class="eyebrow" id="resources-heading">Resources</span>
       <ul class="resources-list">
-        <li><a href="https://youtube.com/playlist?list=PL08wd7p2fBAm4KWg1JRAsKwGgxsGlRHto&si=VIPEF11wnDgHINdJ" target="_blank" rel="noopener noreferrer">Feeds tutorials</a></li>
-        <li><a href="https://help.quantemplate.com/about-feeds" target="_blank" rel="noopener noreferrer">Feeds support docs</a></li>
+        <li><a href="https://imageinsight.app" target="_blank" rel="noopener noreferrer">Image Insight</a></li>
       </ul>
     </section>
 
@@ -1238,13 +1186,13 @@
 
     <section aria-labelledby="next-heading">
       <span class="eyebrow" id="next-heading">Next case study</span>
-      <a class="case-block has-image" href="/case-studies/mapping-inconsistent-schemas">
-        <img class="case-block-media" src="/case-studies/media/concept-mapping-detail.jpg" alt="Concept design for Quantemplate's column mapping interface: schemas as vertically stacked fields aligned to a common master." loading="lazy">
+      <a class="case-block has-image" href="/case-studies/connecting-organisations">
+        <img class="case-block-media" src="/case-studies/media/feeds-repo-dashboard-crop.png" alt="The Feeds repository redesigned as a management dashboard, showing partner feeds and their submission status." loading="lazy">
         <span class="case-block-text">
-          <span class="case-block-kicker">Column mapping</span>
-          <span class="case-block-title">Mapping inconsistent schemas at scale</span>
-          <span class="case-block-subtitle">Translate inconsistent data sources to a common target format, fully automated and enhanced by AI suggestions.</span>
-          <span class="case-block-keywords">Interaction design · Human-in-the-loop</span>
+          <span class="case-block-kicker">Feeds</span>
+          <span class="case-block-title">Connecting organisations through data</span>
+          <span class="case-block-subtitle">Infrastructure to automate data exchange, laying the foundation for a connected network.</span>
+          <span class="case-block-keywords">Product strategy · Systems thinking · Process design</span>
         </span>
       </a>
     </section>
@@ -1255,7 +1203,7 @@
     <span class="eyebrow toc-heading">On this page</span>
     <a href="#keypoints-heading">Key points</a>
     <a href="#summary-heading">Summary</a>
-    <a href="#objective-heading">Problem</a>
+    <a href="#problem-heading">Problem</a>
     <a href="#approach-heading">Approach</a>
     <a href="#keydecisions-heading">Key decisions</a>
     <a href="#implementation-heading">Implementation</a>

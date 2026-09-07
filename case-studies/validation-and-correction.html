@@ -353,6 +353,16 @@
     margin-bottom: 0;
   }
 
+  .case-body blockquote cite {
+    display: block;
+    margin-top: 12px;
+    font-style: normal;
+    font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+    font-size: 13px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.55);
+  }
+
   /* -- inline UI video -- */
 
   .ui-video {
@@ -1094,7 +1104,9 @@
         </figure>
 
         <p>User feedback also helped us decide what to leave out. We explored allowing users to pivot the report to first view results by input file rather than by validation rule. Their response was helpfully direct:</p>
-        <blockquote>&ldquo;Skip the dev on that. Just give me the validations.&rdquo;</blockquote>
+        <blockquote>Skip the dev on that. Just give me the validations.
+          <cite>User feedback from Senior Analyst</cite>
+        </blockquote>
         <p>We dropped the alternative view and focused development on the core reporting experience.</p>
       </div>
 

@@ -244,6 +244,52 @@
     line-height: 1.5;
   }
 
+  .timeframe-with-donut {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .timeframe-with-donut p {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .timeframe-donut {
+    flex: 0 0 auto;
+    display: block;
+  }
+
+  .timeframe-donut circle {
+    fill: none;
+    stroke-width: 4;
+  }
+
+  .timeframe-donut-track {
+    stroke: rgba(255, 255, 255, 0.15);
+  }
+
+  .timeframe-donut-value {
+    stroke: #00d8aa;
+    stroke-linecap: round;
+    stroke-dasharray: 180;
+    stroke-dashoffset: 180;
+    animation: timeframe-donut-fill 900ms cubic-bezier(0.33, 1, 0.68, 1) 200ms forwards;
+  }
+
+  @keyframes timeframe-donut-fill {
+    to {
+      stroke-dashoffset: var(--donut-offset, 0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .timeframe-donut-value {
+      animation: none;
+      stroke-dashoffset: var(--donut-offset, 0);
+    }
+  }
+
   /* -- key points -- */
 
   .key-points {
@@ -1052,7 +1098,13 @@
         </div>
         <div class="meta-item">
           <span class="eyebrow">Timeframe</span>
-          <p>10 days in 2020/21</p>
+          <div class="timeframe-with-donut">
+            <svg class="timeframe-donut" viewBox="0 0 44 44" width="44" height="44" role="img" aria-label="Design time: about 10 days">
+              <circle class="timeframe-donut-track" cx="22" cy="22" r="18"></circle>
+              <circle class="timeframe-donut-value" cx="22" cy="22" r="18" pathLength="180" style="--donut-offset: 170" transform="rotate(-90 22 22)"></circle>
+            </svg>
+            <p>10 days / 2021</p>
+          </div>
         </div>
       </div>
     </header>

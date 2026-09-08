@@ -415,21 +415,29 @@
     position: relative;
     margin: 28px 0 0;
     max-width: 46rem;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 6px;
+    padding: 8px;
+    border-radius: 8px;
     overflow: hidden;
+    background: rgb(33, 33, 33);
+    transition: background 0.2s ease;
+  }
+
+  .ui-video:hover,
+  .ui-video:focus-within {
+    background: rgb(48, 48, 48);
   }
 
   .ui-video video {
     display: block;
     width: 100%;
     height: auto;
+    border-radius: 4px;
   }
 
   .ui-video-expand {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 16px;
+    right: 16px;
     width: 32px;
     height: 32px;
     display: flex;
@@ -1258,7 +1266,7 @@
     <section aria-labelledby="next-heading">
       <span class="eyebrow" id="next-heading">Next case study</span>
       <a class="case-block has-image" href="/case-studies/pipelines">
-        <img class="case-block-media" src="/case-studies/media/pipelines-placeholder.png" alt="The Quantemplate Pipelines mark." loading="lazy">
+        <img class="case-block-media" src="/case-studies/media/pipelines-card.jpg" alt="Quantemplate Pipelines: a colour-coded list of pipeline stages with connecting lines showing the data flow." loading="lazy">
         <span class="case-block-text">
           <span class="case-block-kicker">Pipelines</span>
           <span class="case-block-title">Bringing clarity to complex data flows</span>

@@ -107,6 +107,19 @@ The site is a dark theme: `color-scheme: dark`, `background: #000` on `html, bod
 - **"Next case study" chain is now a 6-cycle:** connecting → mapping → validation → image-insight → zonefully → **pipelines** → connecting. (`zonefully.html`'s next block was repointed from connecting-organisations to pipelines.)
 - **Open:** Summary has three `.about-statement` (30px) paragraphs, the middle one long — visually heavy, Tom may want to trim. `help.quantemplate.com` kicker link and real screenshots still to come.
 
+## Later Claude Code session — YouTube video modules (branch `youtube-modules`)
+
+Replaced every embedded YouTube `<iframe>` (the old `<div class="video-embed">` pattern) with a **horizontal link card**, styled as a `.case-block` variant so it matches the case-study cards. Motive: no third-party iframe / cookies, lighter pages, and a consistent card language.
+
+- **Six embeds replaced**, all Quantemplate videos:
+  - `index.html` — `n1prlc_ovts` "Quantemplate in 5 mins" (Principal Experience section).
+  - `case-studies/connecting-organisations.html` — four: `IgmrfcrYOOk` (Summary), `8-GmO0Smelw` (Key decisions / subsections), `KVrOr-v3Ncs` (Implementation / trusted setup), `vqHMlfbLOZU` (Implementation / whole data chain).
+  - `case-studies/validation-and-correction.html` — `OyLH4hdxrPk` (Summary).
+  - `mapping-inconsistent-schemas.html` only has a `youtu.be` *link* in Resources (not an embed) — left alone. `pipelines.html` has no video.
+- **Markup:** `<a class="case-block has-thumb" href="https://www.youtube.com/watch?v=<id>" target="_blank" rel="noopener noreferrer">` → `<img class="case-block-thumb">` + `<span class="case-block-text">` containing `.case-block-title` (video title), `.case-block-subtitle` (a trimmed version of the YouTube description — the real descriptions have sign-up links / hashtags / chapter lists stripped), and `.case-block-watch` (plain text "Watch on YouTube" — Tom asked for no trailing arrow).
+- **CSS added to all three pages** (copy-pasted, keep in sync): `.case-block.has-thumb` (the `.has-thumb` pattern is lifted from `ai.html`'s related-case card — flex row, `clamp(150px,26vw,240px)` 16:9 thumb, stacks ≤560px), `.case-block-thumb`, `.case-block-watch` (mono/uppercase/`rgba(255,255,255,0.45)` — **same style as `.case-block-keywords`**, per Tom's ask). Also added `.case-block[target="_blank"]::after { content: none }` to the two case-study pages' arrow-suppression list (they now have an external-link `.case-block`). The unused `.video-embed` / `.video-embed iframe` CSS was deleted from all three.
+- **Thumbnails** downloaded from `i.ytimg.com/vi/<id>/maxresdefault.jpg` (1280×720), resized to 800×450 `sips -Z 800 … formatOptions 82` + `jpegtran -optimize -progressive`, ~30–50 KB each. Committed to `media/youtube-quantemplate-overview.jpg` (root, for `index.html`) and `case-studies/media/youtube-*.jpg` (the other five). If a video is swapped, re-pull the thumb and re-run that compression, and update the title/description in the markup.
+
 ## Later session — Zonefully case study (fifth study) + "Design and AI" page
 
 - **`case-studies/zonefully.html`** (`/case-studies/zonefully`, "Connecting long-term goals to everyday routines") — fifth study, built by copying `validation-and-correction.html`, body copy verbatim from a Google Doc. **No blockquotes, no Resources section** (the doc has neither) — TOC is 7 items. Keywords `Interaction design · Visual design`. 5 figures from `other-work/media/zonefully/` compressed into `case-studies/media/zonefully-*.jpg`. Now the 5th nav-dropdown card and the second "Other work" card (a live `<a>`, no longer coming-soon). "Next case study" chain is now a 5-cycle: connecting → mapping → validation → image-insight → zonefully → connecting.

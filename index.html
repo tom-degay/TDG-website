@@ -187,17 +187,6 @@
     margin: 14px 0 0;
   }
 
-  .video-embed {
-    margin: 28px auto 0;
-    width: 100%;
-  }
-
-  @media (min-width: 1100px) {
-    .video-embed {
-      max-width: 880px;
-    }
-  }
-
   .case-blocks {
     margin-top: 20px;
     display: grid;
@@ -214,14 +203,6 @@
       grid-template-columns: 1fr 1fr;
       column-gap: 20px;
     }
-  }
-
-  .video-embed iframe {
-    display: block;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    height: auto;
-    border: 0;
   }
 
   .job-link {
@@ -440,6 +421,61 @@
   .case-block.has-image:hover .case-block-media,
   .case-block.has-image:focus-visible .case-block-media {
     transform: scale(1.03);
+  }
+
+  /* -- horizontal video card (YouTube) -- */
+
+  .case-block.has-thumb {
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 22px;
+    margin-top: 28px;
+    padding: 18px 22px 16px;
+    overflow: hidden;
+  }
+
+  .case-block-thumb {
+    flex: 0 0 clamp(150px, 26vw, 240px);
+    width: clamp(150px, 26vw, 240px);
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    transition: transform 0.3s ease;
+  }
+
+  .case-block.has-thumb .case-block-text {
+    min-width: 0;
+  }
+
+  .case-block.has-thumb:hover .case-block-thumb,
+  .case-block.has-thumb:focus-visible .case-block-thumb {
+    transform: scale(1.03);
+  }
+
+  .case-block-watch {
+    display: block;
+    margin-top: 12px;
+    font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    word-spacing: -3px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  @media (max-width: 560px) {
+    .case-block.has-thumb {
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .case-block-thumb {
+      width: 100%;
+      flex-basis: auto;
+    }
   }
 
   /* -- site nav -- */
@@ -770,9 +806,14 @@
       <div class="job">
         <p class="job-company display">Head of Design | <a href="https://quantemplate.com" target="_blank" rel="noopener noreferrer">Quantemplate</a></p>
         <p class="job-desc">Enterprise data platform for sharing, transforming, validating and automating complex commercial data in a no-code environment.</p>
-        <div class="video-embed">
-          <iframe src="https://www.youtube.com/embed/n1prlc_ovts?si=_VrXRqxdAqPyB2rU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        </div>
+        <a class="case-block has-thumb" href="https://www.youtube.com/watch?v=n1prlc_ovts" target="_blank" rel="noopener noreferrer">
+          <img class="case-block-thumb" src="/media/youtube-quantemplate-overview.jpg" alt="Thumbnail for the YouTube video &lsquo;Quantemplate in 5 mins: see AI-powered automation in action&rsquo;" loading="lazy">
+          <span class="case-block-text">
+            <span class="case-block-title">Quantemplate in 5 mins: see AI-powered automation in action</span>
+            <span class="case-block-subtitle">A five-minute walkthrough of the platform: requesting and importing data with Feeds, automated pipelines with AI-powered column and value mapping, validation, data lineage and BI reporting.</span>
+            <span class="case-block-watch">Watch on YouTube</span>
+          </span>
+        </a>
         <hr class="rule">
 
         <span class="eyebrow case-studies-heading">Case Studies</span>

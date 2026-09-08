@@ -454,28 +454,6 @@
     line-height: 1.5;
   }
 
-  /* -- video embed -- */
-
-  .video-embed {
-    margin: 28px 0 0;
-    width: 100%;
-  }
-
-  @media (min-width: 1100px) {
-    .video-embed {
-      max-width: 880px;
-    }
-  }
-
-  .video-embed iframe {
-    display: block;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    height: auto;
-    border: 0;
-    border-radius: 6px;
-  }
-
   /* -- resources -- */
 
   .resources-list {
@@ -639,11 +617,66 @@
     transform: scale(1.03);
   }
 
+  /* -- horizontal video card (YouTube) -- */
+
+  .case-block.has-thumb {
+    justify-content: flex-start;
+    gap: 22px;
+    margin-top: 28px;
+    padding: 18px 22px 16px;
+    overflow: hidden;
+  }
+
+  .case-block-thumb {
+    flex: 0 0 clamp(150px, 26vw, 240px);
+    width: clamp(150px, 26vw, 240px);
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    transition: transform 0.3s ease;
+  }
+
+  .case-block.has-thumb .case-block-text {
+    min-width: 0;
+  }
+
+  .case-block.has-thumb:hover .case-block-thumb,
+  .case-block.has-thumb:focus-visible .case-block-thumb {
+    transform: scale(1.03);
+  }
+
+  .case-block-watch {
+    display: block;
+    margin-top: 12px;
+    font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    word-spacing: -3px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  @media (max-width: 560px) {
+    .case-block.has-thumb {
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .case-block-thumb {
+      width: 100%;
+      flex-basis: auto;
+    }
+  }
+
   /* -- suppress the external-link arrow inside running text -- */
 
   .case-body p a[target="_blank"]::after,
   .about-statement a[target="_blank"]::after,
-  .kicker a[target="_blank"]::after {
+  .kicker a[target="_blank"]::after,
+  .case-block[target="_blank"]::after {
     content: none;
   }
 
@@ -1126,9 +1159,14 @@
       <p class="about-statement display">I led the design of <a href="https://help.quantemplate.com/about-feeds" target="_blank" rel="noopener noreferrer">Feeds</a>, a new Quantemplate workspace for securely requesting, receiving, processing and distributing data between organisations.</p>
       <p class="about-statement display">By mapping the complete workflow, I reframed an initial upload-portal concept as a persistent system, spanning submissions, automation, permissions and operational oversight. Feeds accommodate complex insurance data exchanges while creating the foundation for a broader connected-data strategy.</p>
 
-      <div class="video-embed">
-        <iframe src="https://www.youtube.com/embed/IgmrfcrYOOk?si=_DXr-BjdaTXHhwcL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-      </div>
+      <a class="case-block has-thumb" href="https://www.youtube.com/watch?v=IgmrfcrYOOk" target="_blank" rel="noopener noreferrer">
+        <img class="case-block-thumb" src="media/youtube-feeds-overview.jpg" alt="Thumbnail for the YouTube video &lsquo;Learn how to automate data exchange with Quantemplate Feeds&rsquo;" loading="lazy">
+        <span class="case-block-text">
+          <span class="case-block-title">Learn how to automate data exchange with Quantemplate Feeds</span>
+          <span class="case-block-subtitle">A quick guide to Feeds concepts and an overview of the interface.</span>
+          <span class="case-block-watch">Watch on YouTube</span>
+        </span>
+      </a>
     </section>
 
     <hr class="rule">
@@ -1199,9 +1237,14 @@
         <p>I introduced subsections to represent these distinct streams within one submission. Feed owners define subsections, and submitters assign uploads to the appropriate one. Using the wayfinding principle of progressive disclosure, the interface walks them through the process, step-by-step.</p>
         <blockquote>Using wayfinding principles, I navigated users through the process of assigning their data to the right subsection.</blockquote>
 
-        <div class="video-embed">
-          <iframe src="https://www.youtube.com/embed/8-GmO0Smelw?si=uJNjQGcYSAX8VcLX" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        </div>
+        <a class="case-block has-thumb" href="https://www.youtube.com/watch?v=8-GmO0Smelw" target="_blank" rel="noopener noreferrer">
+          <img class="case-block-thumb" src="media/youtube-feeds-submitting-data.jpg" alt="Thumbnail for the YouTube video &lsquo;Feeds 5: Submitting and receiving data&rsquo;" loading="lazy">
+          <span class="case-block-text">
+            <span class="case-block-title">Feeds 5: Submitting and receiving data</span>
+            <span class="case-block-subtitle">Uploading data to a Feed to send to a partner organisation, using subsections to separate Premium and Claims data.</span>
+            <span class="case-block-watch">Watch on YouTube</span>
+          </span>
+        </a>
       </div>
 
       <div class="subsection" id="permissions-heading">
@@ -1238,9 +1281,14 @@
         <p>Admins can also create reusable schedules to centrally manage request frequency. Research revealed that feeds often shared a cadence but followed different contract dates. I made start and end dates properties of a Feed, rather than a schedule, allowing requests to stop at contract end without affecting other feeds using the same schedule.</p>
         <p>All that&rsquo;s required to set up a new Feed is to add subsections, search for a partner and connect an existing schedule. In under one minute you can be requesting data from your trading partners.</p>
 
-        <div class="video-embed">
-          <iframe src="https://www.youtube.com/embed/KVrOr-v3Ncs?si=GsG2ycGKF4QdAdE6" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        </div>
+        <a class="case-block has-thumb" href="https://www.youtube.com/watch?v=KVrOr-v3Ncs" target="_blank" rel="noopener noreferrer">
+          <img class="case-block-thumb" src="media/youtube-feeds-set-up.jpg" alt="Thumbnail for the YouTube video &lsquo;Feeds 2: Set up a feed&rsquo;" loading="lazy">
+          <span class="case-block-text">
+            <span class="case-block-title">Feeds 2: Set up a feed</span>
+            <span class="case-block-subtitle">How to set up a Feed, add subsections and connect a schedule.</span>
+            <span class="case-block-watch">Watch on YouTube</span>
+          </span>
+        </a>
       </div>
 
       <div class="subsection" id="audit-heading">
@@ -1259,9 +1307,14 @@
         <h3>Connecting the whole data chain</h3>
         <p>Feeds support incoming data, outgoing distribution and onward sharing. An insurer can distribute data to reinsurers, while a broker can receive and pass on the original submission. Each organisation can connect its own processing pipelines while retaining a shared, auditable source record. This uniquely allows us to surface the full data Chain of Custody.</p>
 
-        <div class="video-embed">
-          <iframe src="https://www.youtube.com/embed/vqHMlfbLOZU?si=8_V2V-7beRQ4BkcO" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        </div>
+        <a class="case-block has-thumb" href="https://www.youtube.com/watch?v=vqHMlfbLOZU" target="_blank" rel="noopener noreferrer">
+          <img class="case-block-thumb" src="media/youtube-data-chain-of-custody.jpg" alt="Thumbnail for the YouTube video &lsquo;Data Chain of Custody&rsquo;" loading="lazy">
+          <span class="case-block-text">
+            <span class="case-block-title">Data Chain of Custody</span>
+            <span class="case-block-subtitle">How insurers, MGAs, TPAs, brokers and reinsurers exchange bordereaux data through Quantemplate&rsquo;s network, with a transparent, permanent view of where data came from, how it was processed and who it was shared with.</span>
+            <span class="case-block-watch">Watch on YouTube</span>
+          </span>
+        </a>
 
         <blockquote>The Feeds lay the architectural groundwork for the big vision: automated data flows across the industry.</blockquote>
 

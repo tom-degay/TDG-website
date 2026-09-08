@@ -425,7 +425,9 @@
   /* -- inline UI video -- */
 
   .ui-video {
+    position: relative;
     margin: 28px 0 0;
+    max-width: 46rem;
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 6px;
     overflow: hidden;
@@ -435,6 +437,36 @@
     display: block;
     width: 100%;
     height: auto;
+  }
+
+  .ui-video-expand {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.55);
+    color: #fff;
+    cursor: pointer;
+    opacity: 0.55;
+    transition: opacity 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+  }
+
+  .ui-video:hover .ui-video-expand,
+  .ui-video:focus-within .ui-video-expand {
+    opacity: 1;
+  }
+
+  .ui-video-expand:hover,
+  .ui-video-expand:focus-visible {
+    border-color: rgba(255, 255, 255, 0.85);
+    background: rgba(0, 0, 0, 0.8);
   }
 
   /* -- inline diagram -- */
@@ -707,6 +739,15 @@
     max-height: calc(100vh - 140px);
     border-radius: 6px;
     box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
+    cursor: default;
+  }
+
+  .lightbox-video {
+    max-width: 100%;
+    max-height: calc(100vh - 140px);
+    border-radius: 6px;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
+    background: #000;
     cursor: default;
   }
 
@@ -1313,6 +1354,7 @@
     <button class="lightbox-nav lightbox-prev" type="button" aria-label="Previous image">&lsaquo;</button>
     <button class="lightbox-nav lightbox-next" type="button" aria-label="Next image">&rsaquo;</button>
     <img src="" alt="">
+    <video class="lightbox-video" controls muted loop playsinline hidden></video>
     <p class="lightbox-caption" hidden></p>
   </div>
   </main>
@@ -1371,6 +1413,7 @@
       var lightbox = document.getElementById("lightbox");
       if (!lightbox) return;
       var lightboxImg = lightbox.querySelector("img");
+      var lightboxVideo = lightbox.querySelector(".lightbox-video");
       var lightboxCaption = lightbox.querySelector(".lightbox-caption");
       var closeBtn = lightbox.querySelector(".lightbox-close");
       var prevBtn = lightbox.querySelector(".lightbox-prev");
@@ -1407,22 +1450,69 @@
         nextBtn.hidden = !showNav;
       }
 
+      function stopVideo() {
+        if (!lightboxVideo) return;
+        lightboxVideo.pause();
+        lightboxVideo.removeAttribute("src");
+        lightboxVideo.load();
+        lightboxVideo.hidden = true;
+      }
+
       function openLightbox(index) {
         lastFocused = document.activeElement;
+        stopVideo();
+        lightboxImg.hidden = false;
         showIndex(index);
         lightbox.classList.add("is-open");
         document.body.style.overflow = "hidden";
         closeBtn.focus();
       }
 
+      function openVideo(src, caption) {
+        if (!lightboxVideo || !src) return;
+        lastFocused = document.activeElement;
+        lightboxImg.hidden = true;
+        lightboxImg.src = "";
+        lightboxVideo.src = src;
+        lightboxVideo.hidden = false;
+        prevBtn.hidden = true;
+        nextBtn.hidden = true;
+        if (caption) {
+          lightboxCaption.textContent = caption;
+          lightboxCaption.hidden = false;
+        } else {
+          lightboxCaption.textContent = "";
+          lightboxCaption.hidden = true;
+        }
+        lightbox.classList.add("is-open");
+        document.body.style.overflow = "hidden";
+        var playback = lightboxVideo.play();
+        if (playback && playback.catch) playback.catch(function () {});
+        closeBtn.focus();
+      }
+
       function closeLightbox() {
         lightbox.classList.remove("is-open");
         lightboxImg.src = "";
+        stopVideo();
+        lightboxImg.hidden = false;
         lightboxCaption.textContent = "";
         lightboxCaption.hidden = true;
         document.body.style.overflow = "";
         if (lastFocused) lastFocused.focus();
       }
+
+      Array.prototype.forEach.call(document.querySelectorAll(".ui-video-expand"), function (btn) {
+        var wrap = btn.parentNode;
+        var source = wrap.querySelector("source");
+        if (!source) { btn.hidden = true; return; }
+        var figure = wrap.closest("figure");
+        var captionEl = figure ? figure.querySelector("figcaption") : null;
+        var caption = captionEl ? captionEl.textContent.trim() : "";
+        btn.addEventListener("click", function () {
+          openVideo(source.src, caption);
+        });
+      });
 
       items.forEach(function (item, index) {
         var img = item.img;

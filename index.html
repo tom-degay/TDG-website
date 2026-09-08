@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Tom de Gay — Digital Product Designer</title>
-<meta name="description" content="Tom de Gay, senior product designer specialising in design for AI, automation and complex domains.">
+<meta name="description" content="Tom de Gay, digital product designer specialising in design for AI, automation and complex domains.">
 <meta name="theme-color" content="#000000">
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="Tom de Gay — Digital Product Designer">
-<meta property="og:description" content="Senior product designer specialising in design for AI, automation and complex domains.">
+<meta property="og:description" content="Digital product designer specialising in design for AI, automation and complex domains.">
 <meta property="og:url" content="https://tomdegay.com">
 <meta property="og:image" content="https://tomdegay.com/og-image.png">
 <meta property="og:image:width" content="1200">
@@ -18,7 +18,7 @@
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Tom de Gay — Digital Product Designer">
-<meta name="twitter:description" content="Senior product designer specialising in design for AI, automation and complex domains.">
+<meta name="twitter:description" content="Digital product designer specialising in design for AI, automation and complex domains.">
 <meta name="twitter:image" content="https://tomdegay.com/og-image.png">
 
 <link rel="icon" href="/tdg-favicon.svg" type="image/svg+xml">
@@ -179,12 +179,54 @@
     line-height: 1.2;
   }
 
+  .job-keywords {
+    color: rgba(255, 255, 255, 0.45);
+    font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    word-spacing: -3px;
+    text-transform: uppercase;
+    line-height: 1.5;
+    margin: 14px 0 0;
+  }
+
   .job-desc {
     color: rgba(255, 255, 255, 0.68);
-    font-size: clamp(15px, 1.7vw, 17px);
+    font-size: clamp(20px, 2.6vw, 25px);
+    line-height: 1.4;
+    max-width: 55ch;
+    margin: 18px 0 0;
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 28px 32px;
+    margin: 28px 0 0;
+  }
+
+  .stat {
+    margin: 0;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .stat-value {
+    display: block;
+    color: #00d8aa;
+    font-weight: 400;
+    font-size: clamp(28px, 4vw, 40px);
+    line-height: 1.05;
+  }
+
+  .stat-label {
+    display: block;
+    margin: 8px 0 0;
+    color: rgba(255, 255, 255, 0.55);
+    font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+    font-size: 13px;
     line-height: 1.5;
-    max-width: 60ch;
-    margin: 14px 0 0;
   }
 
   .case-blocks {
@@ -796,7 +838,7 @@
   <main>
     <section aria-labelledby="about-heading">
       <span class="eyebrow" id="about-heading">About</span>
-      <p class="about-statement display">Senior product designer specialising in design for AI, automation and complex domains. I turn technically ambitious systems and ambiguous problems into clear, usable products.</p>
+      <p class="about-statement display">Digital product designer specialising in design for AI, automation and complex domains. I turn technically ambitious systems and ambiguous problems into clear, usable products.</p>
     </section>
 
     <hr class="rule">
@@ -805,7 +847,28 @@
       <span class="eyebrow" id="experience-heading">Principal Experience</span>
       <div class="job">
         <p class="job-company display">Head of Design | <a href="https://quantemplate.com" target="_blank" rel="noopener noreferrer">Quantemplate</a></p>
-        <p class="job-desc">Enterprise data platform for sharing, transforming, validating and automating complex commercial data in a no-code environment.</p>
+        <p class="job-keywords">Enterprise data &middot; No-code automation &middot; Connected workflows</p>
+        <p class="job-desc">I&rsquo;ve helped Quantemplate evolve from startup to mature enterprise platform. Working closely with users and with engineering, I bring together product strategy, systems thinking and interaction design to make complex data workflows intuitive, and establish design as a competitive differentiator.</p>
+
+        <dl class="stats">
+          <div class="stat">
+            <dt class="stat-value">10+</dt>
+            <dd class="stat-label">Years product evolution</dd>
+          </div>
+          <div class="stat">
+            <dt class="stat-value">7</dt>
+            <dd class="stat-label">Zero-to-one launches</dd>
+          </div>
+          <div class="stat">
+            <dt class="stat-value">300+</dt>
+            <dd class="stat-label">Features and improvements shipped</dd>
+          </div>
+          <div class="stat">
+            <dt class="stat-value">3.4bn</dt>
+            <dd class="stat-label">Rows processed annually</dd>
+          </div>
+        </dl>
+
         <a class="case-block has-thumb" href="https://www.youtube.com/watch?v=n1prlc_ovts" target="_blank" rel="noopener noreferrer">
           <img class="case-block-thumb" src="/media/youtube-quantemplate-overview.jpg" alt="Thumbnail for the YouTube video &lsquo;Quantemplate in 5 mins: see AI-powered automation in action&rsquo;" loading="lazy">
           <span class="case-block-text">

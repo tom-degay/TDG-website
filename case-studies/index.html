@@ -484,10 +484,12 @@
       right: 0;
       display: none;
       flex-direction: column;
+      flex-wrap: nowrap;
       align-items: stretch;
       gap: 0;
-      max-height: 72vh;
+      max-height: 80vh;
       overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
       padding: 6px clamp(24px, 5vw, 56px) 18px;
       background: rgba(0, 0, 0, 0.86);
       backdrop-filter: blur(10px);
@@ -600,6 +602,16 @@
     <p class="lede display">Untangling complexity in product for data automation and AI platforms.</p>
 
     <div class="case-blocks">
+      <a class="case-block has-image" href="/case-studies/pipelines">
+        <img class="case-block-media" src="/case-studies/media/pipelines-card.jpg" alt="Quantemplate Pipelines: a colour-coded list of pipeline stages with connecting lines showing the data flow." loading="lazy">
+        <span class="case-block-text">
+          <span class="case-block-kicker">Pipelines</span>
+          <span class="case-block-title">Bringing clarity to complex data flows</span>
+          <span class="case-block-subtitle">Enterprise data processing made accessible through flexible, visual workflows.</span>
+          <span class="case-block-keywords">Zero-to-one · Visual programming · Evolution</span>
+        </span>
+      </a>
+
       <a class="case-block has-image" href="/case-studies/mapping-inconsistent-schemas">
         <img class="case-block-media" src="/case-studies/media/concept-mapping-detail.jpg" alt="Concept design for Quantemplate's column mapping interface: schemas as vertically stacked fields aligned to a common master." loading="lazy">
         <span class="case-block-text">
@@ -627,16 +639,6 @@
           <span class="case-block-title">Closing the loop on data quality</span>
           <span class="case-block-subtitle">Find and fix data issues before they reach downstream systems, all in one workflow.</span>
           <span class="case-block-keywords">Workflow · Information design · Auditability</span>
-        </span>
-      </a>
-
-      <a class="case-block has-image" href="/case-studies/pipelines">
-        <img class="case-block-media" src="/case-studies/media/pipelines-card.jpg" alt="Quantemplate Pipelines: a colour-coded list of pipeline stages with connecting lines showing the data flow." loading="lazy">
-        <span class="case-block-text">
-          <span class="case-block-kicker">Pipelines</span>
-          <span class="case-block-title">Bringing clarity to complex data flows</span>
-          <span class="case-block-subtitle">Enterprise data processing made accessible through flexible, visual workflows.</span>
-          <span class="case-block-keywords">Zero-to-one · Visual programming · Evolution</span>
         </span>
       </a>
     </div>

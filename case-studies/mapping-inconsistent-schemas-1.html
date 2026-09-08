@@ -39,15 +39,6 @@
   }
 
   @font-face {
-    font-family: "Fakt Blond";
-    src: url("../FaktProBlond.woff2") format("woff2"),
-         url("../FaktProBlond.woff") format("woff");
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-  }
-
-  @font-face {
     font-family: "FaktPro-SemiBold";
     src: url("../FaktProSemiBold.woff2") format("woff2"),
          url("../FaktProSemiBold.woff") format("woff");
@@ -70,15 +61,10 @@
     background: #000;
   }
 
-  html {
-    scroll-padding-top: 100px;
-  }
-
   body {
-    font-family: "Fakt Blond", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    min-width: 250px;
   }
 
   main {
@@ -96,6 +82,7 @@
   .display {
     font-family: "Fakt Blond SemiBold", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     font-weight: 600;
+    letter-spacing: -0.01em;
   }
 
   a {
@@ -245,52 +232,6 @@
     line-height: 1.5;
   }
 
-  .timeframe-with-donut {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .timeframe-with-donut p {
-    flex: 1;
-    min-width: 0;
-  }
-
-  .timeframe-donut {
-    flex: 0 0 auto;
-    display: block;
-  }
-
-  .timeframe-donut circle {
-    fill: none;
-    stroke-width: 4;
-  }
-
-  .timeframe-donut-track {
-    stroke: rgba(255, 255, 255, 0.15);
-  }
-
-  .timeframe-donut-value {
-    stroke: #00d8aa;
-    stroke-linecap: round;
-    stroke-dasharray: 180;
-    stroke-dashoffset: 180;
-    animation: timeframe-donut-fill 900ms cubic-bezier(0.33, 1, 0.68, 1) 200ms forwards;
-  }
-
-  @keyframes timeframe-donut-fill {
-    to {
-      stroke-dashoffset: var(--donut-offset, 0);
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .timeframe-donut-value {
-      animation: none;
-      stroke-dashoffset: var(--donut-offset, 0);
-    }
-  }
-
   /* -- key points -- */
 
   .key-points {
@@ -339,8 +280,6 @@
   }
 
   h2 {
-    font-family: "Fakt Blond SemiBold", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    font-weight: 600;
     margin: 0 0 20px;
     color: #fff;
     font-size: clamp(20px, 2.6vw, 25px);
@@ -352,8 +291,6 @@
   }
 
   h3 {
-    font-family: "Fakt Blond SemiBold", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    font-weight: 600;
     margin: 0 0 20px;
     color: #fff;
     font-size: clamp(18px, 2.3vw, 22px);
@@ -399,9 +336,7 @@
   /* -- inline UI video -- */
 
   .ui-video {
-    position: relative;
     margin: 28px 0 0;
-    max-width: 46rem;
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 6px;
     overflow: hidden;
@@ -411,36 +346,6 @@
     display: block;
     width: 100%;
     height: auto;
-  }
-
-  .ui-video-expand {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 6px;
-    background: rgba(0, 0, 0, 0.55);
-    color: #fff;
-    cursor: pointer;
-    opacity: 0.55;
-    transition: opacity 0.15s ease, border-color 0.15s ease, background 0.15s ease;
-  }
-
-  .ui-video:hover .ui-video-expand,
-  .ui-video:focus-within .ui-video-expand {
-    opacity: 1;
-  }
-
-  .ui-video-expand:hover,
-  .ui-video-expand:focus-visible {
-    border-color: rgba(255, 255, 255, 0.85);
-    background: rgba(0, 0, 0, 0.8);
   }
 
   /* -- inline diagram -- */
@@ -463,7 +368,6 @@
 
   .figure {
     margin: 28px 0 24px;
-    max-width: 46rem;
   }
 
   .figure img {
@@ -497,6 +401,15 @@
     font-size: clamp(15.5px, 1.7vw, 17px);
   }
 
+  /* -- footer -- */
+
+  .case-footer p {
+    color: rgba(255, 255, 255, 0.68);
+    font-size: 15px;
+    line-height: 1.5;
+    margin: 0;
+  }
+
   /* -- sticky section nav (wide desktop only) -- */
 
   .toc {
@@ -521,7 +434,7 @@
       flex-direction: column;
       grid-column: 2;
       position: sticky;
-      top: 100px;
+      top: 40px;
     }
   }
 
@@ -556,7 +469,7 @@
 
   .case-block {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: space-between;
     gap: 20px;
     padding: 18px 22px 12px;
@@ -571,19 +484,7 @@
   .case-block:focus-visible {
     background-color: #1a1a1a;
     border-color: rgba(255, 255, 255, 0.4);
-    transform: translateY(-4px);
-  }
-
-  .case-block-kicker {
-    display: block;
-    font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
-    color: #00d8aa;
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 2px;
-    word-spacing: -3px;
-    text-transform: uppercase;
-    margin-bottom: 10px;
+    transform: scale(1.02);
   }
 
   .case-block-title {
@@ -616,33 +517,17 @@
     margin-top: 8px;
   }
 
-  .case-block.has-image {
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: flex-start;
-    gap: 0;
-    padding: 0 0 14px;
-    overflow: hidden;
+  .case-block-arrow {
+    flex: 0 0 auto;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 18px;
+    transition: color 0.2s ease, transform 0.2s ease;
   }
 
-  .case-block-media {
-    display: block;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
-    object-position: center top;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-    margin-bottom: 16px;
-    transition: transform 0.3s ease;
-  }
-
-  .case-block.has-image .case-block-text {
-    padding: 0 22px;
-  }
-
-  .case-block.has-image:hover .case-block-media,
-  .case-block.has-image:focus-visible .case-block-media {
-    transform: scale(1.03);
+  .case-block:hover .case-block-arrow,
+  .case-block:focus-visible .case-block-arrow {
+    color: #fff;
+    transform: translateX(3px);
   }
 
   /* -- suppress the external-link arrow inside running text -- */
@@ -687,15 +572,6 @@
     max-height: calc(100vh - 140px);
     border-radius: 6px;
     box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
-    cursor: default;
-  }
-
-  .lightbox-video {
-    max-width: 100%;
-    max-height: calc(100vh - 140px);
-    border-radius: 6px;
-    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
-    background: #000;
     cursor: default;
   }
 
@@ -772,333 +648,18 @@
     right: clamp(8px, 3vw, 28px);
   }
 
-
-  /* -- site nav -- */
-
-  .site-nav {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-  }
-
-  /* Frosted bar background lives on a pseudo-element so .site-nav itself is
-     not a backdrop-filter root — otherwise the open mobile menu panel (a
-     descendant that has its own backdrop-filter) can't blur the page. */
-  .site-nav::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    background: rgba(0, 0, 0, 0.86);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-  }
-
-  .site-nav-inner {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 14px clamp(24px, 5vw, 56px);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 10px 24px;
-    min-height: 56px;
-  }
-
-  @media (min-width: 1100px) {
-    .site-nav-inner {
-      max-width: 1320px;
-    }
-  }
-
-  .site-nav-brand {
-    font-size: 24px;
-    color: #fff;
-    border-bottom: none;
-  }
-
-  .site-nav-links {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 10px 28px;
-  }
-
-  .site-nav-links a {
-    font-family: "Fakt Blond SemiBold", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    font-size: 18px;
-    font-weight: 700;
-    color: rgba(255, 255, 255, 0.65);
-    border-bottom: none;
-  }
-
-  .site-nav-links a:hover,
-  .site-nav-links a:focus-visible {
-    color: #fff;
-  }
-
-  .site-nav-links a.is-current {
-    color: #00d8aa;
-  }
-
-  .nav-item {
-    position: relative;
-  }
-
-  .nav-dropdown {
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    padding-top: 14px;
-    min-width: 360px;
-    opacity: 0;
-    visibility: hidden;
-    transform: translate(-50%, -6px);
-    transition: opacity 0.15s ease 0.12s, transform 0.15s ease 0.12s, visibility 0.15s ease 0.12s;
-    z-index: 60;
-  }
-
-  .nav-item:hover .nav-dropdown,
-  .nav-item:focus-within .nav-dropdown {
-    opacity: 1;
-    visibility: visible;
-    transform: translate(-50%, 0);
-    transition-delay: 0s;
-  }
-
-  .nav-dropdown-panel {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    padding: 10px;
-    background: #1a1a1a;
-    border-radius: 10px;
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55);
-  }
-
-  .nav-dropdown-card {
-    display: block;
-    padding: 14px 16px 12px;
-    border-radius: 8px;
-    background-color: transparent;
-    transition: background-color 0.2s ease;
-  }
-
-  .nav-dropdown-card:hover,
-  .nav-dropdown-card:focus-visible {
-    background-color: rgba(255, 255, 255, 0.08);
-  }
-
-  .nav-dropdown-card-kicker {
-    display: block;
-    font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
-    color: #00d8aa;
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 2px;
-    word-spacing: -3px;
-    text-transform: uppercase;
-    margin-bottom: 6px;
-  }
-
-  .nav-dropdown-card-title {
-    display: block;
-    font-family: "Fakt Blond SemiBold", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    font-weight: 600;
-    color: #fff;
-    font-size: 15px;
-    line-height: 1.3;
-  }
-
-  .nav-dropdown-card-subtitle {
-    display: block;
-    color: rgba(255, 255, 255, 0.62);
-    font-size: 13px;
-    font-weight: 400;
-    line-height: 1.45;
-    margin-top: 6px;
-  }
-
-  /* -- mobile: collapse the nav links behind a hamburger (<= 640px) -- */
-
-  .nav-toggle {
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    width: 44px;
-    height: 44px;
-    margin: -10px -12px -10px 0;
-    padding: 0;
-    background: none;
-    border: none;
-    color: #fff;
-    cursor: pointer;
-  }
-
-  .nav-toggle-bar {
-    display: block;
-    width: 22px;
-    height: 2px;
-    background: currentColor;
-    transition: transform 0.45s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.2s ease;
-  }
-
-  .nav-toggle-bar:nth-child(2) {
-    transition: transform 0.2s ease, opacity 0.2s ease;
-  }
-
-  .site-nav.is-open .nav-toggle-bar:nth-child(1) {
-    transform: translateY(7px) rotate(45deg);
-  }
-
-  .site-nav.is-open .nav-toggle-bar:nth-child(2) {
-    opacity: 0;
-    transform: scaleX(0);
-  }
-
-  .site-nav.is-open .nav-toggle-bar:nth-child(3) {
-    transform: translateY(-7px) rotate(-45deg);
-  }
-
-  @media (max-width: 640px) {
-    .nav-toggle {
-      display: flex;
-    }
-
-    .site-nav-inner {
-      flex-wrap: nowrap;
-    }
-
-    .site-nav-links {
-      position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
-      display: none;
-      flex-direction: column;
-      flex-wrap: nowrap;
-      align-items: stretch;
-      gap: 0;
-      max-height: 80vh;
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
-      padding: 6px clamp(24px, 5vw, 56px) 18px;
-      background: rgba(0, 0, 0, 0.86);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border-top: 1px solid rgba(255, 255, 255, 0.12);
-    }
-
-    .site-nav.is-open .site-nav-links {
-      display: flex;
-    }
-
-    .site-nav-links > a,
-    .nav-item > a {
-      display: block;
-      padding: 14px 0;
-      font-size: 20px;
-    }
-
-    .site-nav-links > a + a,
-    .nav-item {
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .nav-dropdown {
-      position: static;
-      min-width: 0;
-      padding: 0 0 10px;
-      opacity: 1;
-      visibility: visible;
-      transform: none;
-      transition: none;
-    }
-
-    /* the desktop open-state rule is more specific and would otherwise
-       still slide the panel -50% when the item is hovered/focused here */
-    .nav-item:hover .nav-dropdown,
-    .nav-item:focus-within .nav-dropdown {
-      transform: none;
-    }
-
-    .nav-dropdown-panel {
-      gap: 2px;
-      padding: 0;
-      background: none;
-      box-shadow: none;
-    }
-
-    .nav-dropdown-card {
-      padding: 9px 0 9px 16px;
-    }
-
-    .nav-dropdown-card-subtitle {
-      display: none;
-    }
-  }
 </style>
 </head>
 <body>
-  <nav class="site-nav">
-    <div class="site-nav-inner">
-      <a class="site-nav-brand display" href="/">Tom de Gay</a>
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav-links" aria-label="Menu">
-        <span class="nav-toggle-bar"></span>
-        <span class="nav-toggle-bar"></span>
-        <span class="nav-toggle-bar"></span>
-      </button>
-      <div class="site-nav-links" id="site-nav-links">
-        <a href="/about">About</a>
-        <a href="/approach">Approach</a>
-        <a href="/ai">AI</a>
-        <div class="nav-item">
-          <a href="/case-studies" class="is-current">Case Studies</a>
-          <div class="nav-dropdown">
-            <div class="nav-dropdown-panel">
-              <a class="nav-dropdown-card is-current" href="/case-studies/mapping-inconsistent-schemas">
-                <span class="nav-dropdown-card-kicker">Column mapping</span>
-                <span class="nav-dropdown-card-title">Mapping inconsistent schemas at scale</span>
-              </a>
-              <a class="nav-dropdown-card" href="/case-studies/connecting-organisations">
-                <span class="nav-dropdown-card-kicker">Feeds</span>
-                <span class="nav-dropdown-card-title">Connecting organisations through data</span>
-              </a>
-              <a class="nav-dropdown-card" href="/case-studies/validation-and-correction">
-                <span class="nav-dropdown-card-kicker">Validation</span>
-                <span class="nav-dropdown-card-title">Closing the loop on data quality</span>
-              </a>
-              <a class="nav-dropdown-card" href="/case-studies/pipelines">
-                <span class="nav-dropdown-card-kicker">Pipelines</span>
-                <span class="nav-dropdown-card-title">Bringing clarity to complex data flows</span>
-              </a>
-              <a class="nav-dropdown-card" href="/case-studies/image-insight">
-                <span class="nav-dropdown-card-kicker">Image Insight</span>
-                <span class="nav-dropdown-card-title">Making space for deeper reflection</span>
-              </a>
-              <a class="nav-dropdown-card" href="/case-studies/zonefully">
-                <span class="nav-dropdown-card-kicker">Zonefully</span>
-                <span class="nav-dropdown-card-title">Connecting long-term goals to everyday routines</span>
-              </a>
-            </div>
-          </div>
-        </div>
-        <a href="/contact">Contact</a>
-      </div>
-    </div>
-  </nav>
   <main>
   <div class="content">
+    <a class="back-link" href="/">← Tom de Gay</a>
+
     <header>
       <span class="kicker">Case Study | <a href="https://help.quantemplate.com/map-columns" target="_blank" rel="noopener noreferrer">Quantemplate Column Mapping</a></span>
       <h1 class="display">Mapping inconsistent schemas at scale</h1>
       <p class="subtitle">Translate inconsistent data sources to a common target format, fully automated and enhanced by AI suggestions.</p>
       <p class="keywords">Interaction design · Human-in-the-loop</p>
-
-      <hr class="rule">
 
       <div class="meta-row">
         <div class="meta-item">
@@ -1111,13 +672,7 @@
         </div>
         <div class="meta-item">
           <span class="eyebrow">Timeframe</span>
-          <div class="timeframe-with-donut">
-            <svg class="timeframe-donut" viewBox="0 0 44 44" width="44" height="44" role="img" aria-label="Design time: about 60 days">
-              <circle class="timeframe-donut-track" cx="22" cy="22" r="18"></circle>
-              <circle class="timeframe-donut-value" cx="22" cy="22" r="18" pathLength="180" style="--donut-offset: 120" transform="rotate(-90 22 22)"></circle>
-            </svg>
-            <p>1 month / 2016 v1 release<br>1 month / 2026 upgrade</p>
-          </div>
+          <p>V1 concept &amp; design: ~1 month (2016)<br>Semantic layer design: ~1 month (2026)</p>
         </div>
       </div>
     </header>
@@ -1140,13 +695,13 @@
 
     <section aria-labelledby="summary-heading">
       <span class="eyebrow" id="summary-heading">Summary</span>
-      <p class="about-statement display">In 2016, I designed a new way to map columns across inconsistent data schemas, informed by research into the labour-intensive manual processes we observed. It became one of Quantemplate's core capabilities, and remains in production nearly a decade later. In 2026 I led its evolution from simply matching column names to weighting suggestions via the semantic fingerprinting of column data, a 4x improvement in automated mapping quality.</p>
+      <p class="about-statement display">In 2016, I designed a new way to map columns across inconsistent data schemas &mdash; informed by research into the labour-intensive manual processes we observed. It became one of Quantemplate's core capabilities, and remains in production nearly a decade later. In 2026 I led its evolution from simply matching column names to weighting suggestions via the semantic fingerprinting of column data, a 4x improvement in automated mapping quality.</p>
     </section>
 
     <hr class="rule">
 
     <section aria-labelledby="problem-heading" class="case-body">
-      <span class="eyebrow" id="problem-heading">Problem</span>
+      <span class="eyebrow" id="problem-heading">The problem and objective</span>
       <h2>Hundreds of schemas, no common language</h2>
       <p>Insurance companies process risk, premium and claims data from hundreds of trading partners, each with their own data schema which needs to be aligned to the insurer's own standards before it can be used downstream. A column might be called ‘Unique Market Reference’ in one dataset and ‘UMR’ in another. Now multiply that across an average of 250 fields and 2000 distinct files a month in a typical organisation.</p>
 
@@ -1393,10 +948,9 @@
       <p>Studying dozens of Excel processes where people had manually reconciled different schemas revealed consistent patterns. The most effective approaches arranged source and target schemas vertically, using alignment across rows to show mappings. Interviews with domain experts validated the approach, but exposed a recurring pain point: constantly rearranging cells whilst keeping track of what was mapped and what remained.</p>
 
       <div class="ui-video">
-        <video autoplay controls muted loop playsinline disablepictureinpicture controlslist="nofullscreen nodownload" poster="media/research-excel-mapping.jpg">
+        <video autoplay muted loop playsinline poster="media/research-excel-mapping.jpg">
           <source src="media/research-excel-mapping.mp4" type="video/mp4">
         </video>
-      <button class="ui-video-expand" type="button" aria-label="View full size"><svg viewBox="0 0 20 20" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3H3v4M13 3h4v4M13 17h4v-4M7 17H3v-4"/></svg></button>
       </div>
     </section>
 
@@ -1417,10 +971,9 @@
       <blockquote>Processing those 2000 files a month went from taking most of the month to a job running in the background in minutes.</blockquote>
 
       <div class="ui-video">
-        <video autoplay controls muted loop playsinline disablepictureinpicture controlslist="nofullscreen nodownload" poster="media/concept-mapping-detail.jpg">
+        <video autoplay controls muted loop playsinline poster="media/concept-mapping-detail.jpg">
           <source src="media/concept-mapping-detail.mp4" type="video/mp4">
         </video>
-      <button class="ui-video-expand" type="button" aria-label="View full size"><svg viewBox="0 0 20 20" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3H3v4M13 3h4v4M13 17h4v-4M7 17H3v-4"/></svg></button>
       </div>
     </section>
 
@@ -1437,10 +990,9 @@
         <blockquote>These safeguards helped users trust the automation.</blockquote>
 
         <div class="ui-video">
-          <video autoplay controls muted loop playsinline disablepictureinpicture controlslist="nofullscreen nodownload" poster="media/automap-preview.jpg">
+          <video autoplay controls muted loop playsinline poster="media/automap-preview.jpg">
             <source src="media/automap-preview.mp4" type="video/mp4">
           </video>
-        <button class="ui-video-expand" type="button" aria-label="View full size"><svg viewBox="0 0 20 20" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3H3v4M13 3h4v4M13 17h4v-4M7 17H3v-4"/></svg></button>
         </div>
       </div>
 
@@ -1456,10 +1008,9 @@
         <p>Our original sample of users were building master schemas by amalgamating multiple files. But as we broadened the user cohort, they more often started with a definitive file, such as their data warehouse target schema. We evolved the workflow to foreground that behaviour.</p>
 
         <div class="ui-video">
-          <video autoplay controls muted loop playsinline disablepictureinpicture controlslist="nofullscreen nodownload" poster="media/apply-master-schema.jpg">
+          <video autoplay controls muted loop playsinline poster="media/apply-master-schema.jpg">
             <source src="media/apply-master-schema.mp4" type="video/mp4">
           </video>
-        <button class="ui-video-expand" type="button" aria-label="View full size"><svg viewBox="0 0 20 20" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3H3v4M13 3h4v4M13 17h4v-4M7 17H3v-4"/></svg></button>
         </div>
       </div>
 
@@ -1510,24 +1061,28 @@
 
     <section aria-labelledby="next-heading">
       <span class="eyebrow" id="next-heading">Next case study</span>
-      <a class="case-block has-image" href="/case-studies/validation-and-correction">
-        <img class="case-block-media" src="/case-studies/media/validation-corrections-preview-crop.png" alt="Quantemplate's validation report: flagged errors beside an editable corrections column, with the correction popup open on a row." loading="lazy">
+      <a class="case-block" href="/case-studies/connecting-organisations">
         <span class="case-block-text">
-          <span class="case-block-kicker">Validation</span>
-          <span class="case-block-title">Closing the loop on data quality</span>
-          <span class="case-block-subtitle">Find and fix data issues before they reach downstream systems, all in one workflow.</span>
-          <span class="case-block-keywords">Workflow · Information design · Auditability</span>
+          <span class="case-block-title">Connecting organisations through data</span>
+          <span class="case-block-subtitle">Infrastructure to automate data exchange, laying the foundation for a connected network.</span>
+          <span class="case-block-keywords">Product strategy · Systems thinking · Process design</span>
         </span>
+        <span class="case-block-arrow" aria-hidden="true">→</span>
       </a>
     </section>
 
+    <hr class="rule">
+
+    <footer class="case-footer">
+      <p><a class="back-link" href="/">← Back to Tom de Gay</a></p>
+    </footer>
   </div>
 
   <nav class="toc" aria-label="Section navigation">
     <span class="eyebrow toc-heading">On this page</span>
     <a href="#keypoints-heading">Key points</a>
     <a href="#summary-heading">Summary</a>
-    <a href="#problem-heading">Problem</a>
+    <a href="#problem-heading">The problem and objective</a>
     <a href="#approach-heading">Approach</a>
     <a href="#keydecisions-heading">Key decisions</a>
     <a href="#implementation-heading">Implementation</a>
@@ -1540,7 +1095,6 @@
     <button class="lightbox-nav lightbox-prev" type="button" aria-label="Previous image">&lsaquo;</button>
     <button class="lightbox-nav lightbox-next" type="button" aria-label="Next image">&rsaquo;</button>
     <img src="" alt="">
-    <video class="lightbox-video" controls muted loop playsinline hidden></video>
     <p class="lightbox-caption" hidden></p>
   </div>
   </main>
@@ -1599,7 +1153,6 @@
       var lightbox = document.getElementById("lightbox");
       if (!lightbox) return;
       var lightboxImg = lightbox.querySelector("img");
-      var lightboxVideo = lightbox.querySelector(".lightbox-video");
       var lightboxCaption = lightbox.querySelector(".lightbox-caption");
       var closeBtn = lightbox.querySelector(".lightbox-close");
       var prevBtn = lightbox.querySelector(".lightbox-prev");
@@ -1636,69 +1189,22 @@
         nextBtn.hidden = !showNav;
       }
 
-      function stopVideo() {
-        if (!lightboxVideo) return;
-        lightboxVideo.pause();
-        lightboxVideo.removeAttribute("src");
-        lightboxVideo.load();
-        lightboxVideo.hidden = true;
-      }
-
       function openLightbox(index) {
         lastFocused = document.activeElement;
-        stopVideo();
-        lightboxImg.hidden = false;
         showIndex(index);
         lightbox.classList.add("is-open");
         document.body.style.overflow = "hidden";
         closeBtn.focus();
       }
 
-      function openVideo(src, caption) {
-        if (!lightboxVideo || !src) return;
-        lastFocused = document.activeElement;
-        lightboxImg.hidden = true;
-        lightboxImg.src = "";
-        lightboxVideo.src = src;
-        lightboxVideo.hidden = false;
-        prevBtn.hidden = true;
-        nextBtn.hidden = true;
-        if (caption) {
-          lightboxCaption.textContent = caption;
-          lightboxCaption.hidden = false;
-        } else {
-          lightboxCaption.textContent = "";
-          lightboxCaption.hidden = true;
-        }
-        lightbox.classList.add("is-open");
-        document.body.style.overflow = "hidden";
-        var playback = lightboxVideo.play();
-        if (playback && playback.catch) playback.catch(function () {});
-        closeBtn.focus();
-      }
-
       function closeLightbox() {
         lightbox.classList.remove("is-open");
         lightboxImg.src = "";
-        stopVideo();
-        lightboxImg.hidden = false;
         lightboxCaption.textContent = "";
         lightboxCaption.hidden = true;
         document.body.style.overflow = "";
         if (lastFocused) lastFocused.focus();
       }
-
-      Array.prototype.forEach.call(document.querySelectorAll(".ui-video-expand"), function (btn) {
-        var wrap = btn.parentNode;
-        var source = wrap.querySelector("source");
-        if (!source) { btn.hidden = true; return; }
-        var figure = wrap.closest("figure");
-        var captionEl = figure ? figure.querySelector("figcaption") : null;
-        var caption = captionEl ? captionEl.textContent.trim() : "";
-        btn.addEventListener("click", function () {
-          openVideo(source.src, caption);
-        });
-      });
 
       items.forEach(function (item, index) {
         var img = item.img;
@@ -1738,34 +1244,6 @@
         } else if (e.key === "ArrowRight") {
           showIndex(currentIndex + 1);
         }
-      });
-    })();
-  </script>
-  <script>
-    (function () {
-      var nav = document.querySelector('.site-nav');
-      if (!nav) return;
-      var toggle = nav.querySelector('.nav-toggle');
-      var links = nav.querySelector('.site-nav-links');
-      if (!toggle || !links) return;
-      function setOpen(open) {
-        nav.classList.toggle('is-open', open);
-        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-      }
-      toggle.addEventListener('click', function () {
-        setOpen(!nav.classList.contains('is-open'));
-      });
-      links.addEventListener('click', function (e) {
-        if (e.target.closest('a')) setOpen(false);
-      });
-      document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') setOpen(false);
-      });
-      document.addEventListener('click', function (e) {
-        if (nav.classList.contains('is-open') && !nav.contains(e.target)) setOpen(false);
-      });
-      window.addEventListener('resize', function () {
-        if (window.innerWidth > 640) setOpen(false);
       });
     })();
   </script>

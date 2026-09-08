@@ -39,15 +39,6 @@
   }
 
   @font-face {
-    font-family: "Fakt Blond";
-    src: url("../FaktProBlond.woff2") format("woff2"),
-         url("../FaktProBlond.woff") format("woff");
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-  }
-
-  @font-face {
     font-family: "FaktPro-SemiBold";
     src: url("../FaktProSemiBold.woff2") format("woff2"),
          url("../FaktProSemiBold.woff") format("woff");
@@ -70,15 +61,10 @@
     background: #000;
   }
 
-  html {
-    scroll-padding-top: 100px;
-  }
-
   body {
-    font-family: "Fakt Blond", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    min-width: 250px;
   }
 
   main {
@@ -96,6 +82,7 @@
   .display {
     font-family: "Fakt Blond SemiBold", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     font-weight: 600;
+    letter-spacing: -0.01em;
   }
 
   a {
@@ -245,52 +232,6 @@
     line-height: 1.5;
   }
 
-  .timeframe-with-donut {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .timeframe-with-donut p {
-    flex: 1;
-    min-width: 0;
-  }
-
-  .timeframe-donut {
-    flex: 0 0 auto;
-    display: block;
-  }
-
-  .timeframe-donut circle {
-    fill: none;
-    stroke-width: 4;
-  }
-
-  .timeframe-donut-track {
-    stroke: rgba(255, 255, 255, 0.15);
-  }
-
-  .timeframe-donut-value {
-    stroke: #00d8aa;
-    stroke-linecap: round;
-    stroke-dasharray: 180;
-    stroke-dashoffset: 180;
-    animation: timeframe-donut-fill 900ms cubic-bezier(0.33, 1, 0.68, 1) 200ms forwards;
-  }
-
-  @keyframes timeframe-donut-fill {
-    to {
-      stroke-dashoffset: var(--donut-offset, 0);
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .timeframe-donut-value {
-      animation: none;
-      stroke-dashoffset: var(--donut-offset, 0);
-    }
-  }
-
   /* -- key points -- */
 
   .key-points {
@@ -343,8 +284,6 @@
   }
 
   h2 {
-    font-family: "Fakt Blond SemiBold", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    font-weight: 600;
     margin: 0 0 20px;
     color: #fff;
     font-size: clamp(20px, 2.6vw, 25px);
@@ -356,8 +295,6 @@
   }
 
   h3 {
-    font-family: "Fakt Blond SemiBold", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    font-weight: 600;
     margin: 0 0 20px;
     color: #fff;
     font-size: clamp(18px, 2.3vw, 22px);
@@ -403,9 +340,7 @@
   /* -- inline UI video -- */
 
   .ui-video {
-    position: relative;
     margin: 28px 0 0;
-    max-width: 46rem;
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 6px;
     overflow: hidden;
@@ -415,36 +350,6 @@
     display: block;
     width: 100%;
     height: auto;
-  }
-
-  .ui-video-expand {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 6px;
-    background: rgba(0, 0, 0, 0.55);
-    color: #fff;
-    cursor: pointer;
-    opacity: 0.55;
-    transition: opacity 0.15s ease, border-color 0.15s ease, background 0.15s ease;
-  }
-
-  .ui-video:hover .ui-video-expand,
-  .ui-video:focus-within .ui-video-expand {
-    opacity: 1;
-  }
-
-  .ui-video-expand:hover,
-  .ui-video-expand:focus-visible {
-    border-color: rgba(255, 255, 255, 0.85);
-    background: rgba(0, 0, 0, 0.8);
   }
 
   /* -- inline diagram -- */
@@ -467,7 +372,6 @@
 
   .figure {
     margin: 28px 0 24px;
-    max-width: 46rem;
   }
 
   .figure img {
@@ -486,6 +390,28 @@
     line-height: 1.5;
   }
 
+  /* -- video embed -- */
+
+  .video-embed {
+    margin: 28px 0 0;
+    width: 100%;
+  }
+
+  @media (min-width: 1100px) {
+    .video-embed {
+      max-width: 880px;
+    }
+  }
+
+  .video-embed iframe {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    height: auto;
+    border: 0;
+    border-radius: 6px;
+  }
+
   /* -- resources -- */
 
   .resources-list {
@@ -499,6 +425,15 @@
 
   .resources-list a {
     font-size: clamp(15.5px, 1.7vw, 17px);
+  }
+
+  /* -- footer -- */
+
+  .case-footer p {
+    color: rgba(255, 255, 255, 0.68);
+    font-size: 15px;
+    line-height: 1.5;
+    margin: 0;
   }
 
   /* -- sticky section nav (wide desktop only) -- */
@@ -525,7 +460,7 @@
       flex-direction: column;
       grid-column: 2;
       position: sticky;
-      top: 100px;
+      top: 40px;
     }
   }
 
@@ -560,7 +495,7 @@
 
   .case-block {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: space-between;
     gap: 20px;
     padding: 18px 22px 12px;
@@ -575,19 +510,7 @@
   .case-block:focus-visible {
     background-color: #1a1a1a;
     border-color: rgba(255, 255, 255, 0.4);
-    transform: translateY(-4px);
-  }
-
-  .case-block-kicker {
-    display: block;
-    font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
-    color: #00d8aa;
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 2px;
-    word-spacing: -3px;
-    text-transform: uppercase;
-    margin-bottom: 10px;
+    transform: scale(1.02);
   }
 
   .case-block-title {
@@ -620,104 +543,24 @@
     margin-top: 8px;
   }
 
-  .case-block.has-image {
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: flex-start;
-    gap: 0;
-    padding: 0 0 14px;
-    overflow: hidden;
+  .case-block-arrow {
+    flex: 0 0 auto;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 18px;
+    transition: color 0.2s ease, transform 0.2s ease;
   }
 
-  .case-block-media {
-    display: block;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
-    object-position: center top;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-    margin-bottom: 16px;
-    transition: transform 0.3s ease;
-  }
-
-  .case-block.has-image .case-block-text {
-    padding: 0 22px;
-  }
-
-  .case-block.has-image:hover .case-block-media,
-  .case-block.has-image:focus-visible .case-block-media {
-    transform: scale(1.03);
-  }
-
-  /* -- horizontal video card (YouTube) -- */
-
-  .case-block.has-thumb {
-    justify-content: flex-start;
-    gap: 22px;
-    margin-top: 28px;
-    padding: 18px 22px 16px;
-    overflow: hidden;
-    border-color: rgb(33, 33, 33);
-    background-color: rgb(33, 33, 33);
-  }
-
-  .case-block.has-thumb:hover,
-  .case-block.has-thumb:focus-visible {
-    border-color: rgb(48, 48, 48);
-    background-color: rgb(48, 48, 48);
-    transform: none;
-  }
-
-  .case-block-thumb {
-    flex: 0 0 clamp(150px, 26vw, 240px);
-    width: clamp(150px, 26vw, 240px);
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
-    object-position: center;
-    border-radius: 6px;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    transition: transform 0.3s ease;
-  }
-
-  .case-block.has-thumb .case-block-text {
-    min-width: 0;
-  }
-
-  .case-block.has-thumb:hover .case-block-thumb,
-  .case-block.has-thumb:focus-visible .case-block-thumb {
-    transform: scale(1.03);
-  }
-
-  .case-block-watch {
-    display: block;
-    margin-top: 12px;
-    font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 2px;
-    word-spacing: -3px;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.45);
-  }
-
-  @media (max-width: 560px) {
-    .case-block.has-thumb {
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    .case-block-thumb {
-      width: 100%;
-      flex-basis: auto;
-    }
+  .case-block:hover .case-block-arrow,
+  .case-block:focus-visible .case-block-arrow {
+    color: #fff;
+    transform: translateX(3px);
   }
 
   /* -- suppress the external-link arrow inside running text -- */
 
   .case-body p a[target="_blank"]::after,
   .about-statement a[target="_blank"]::after,
-  .kicker a[target="_blank"]::after,
-  .case-block[target="_blank"]::after {
+  .kicker a[target="_blank"]::after {
     content: none;
   }
 
@@ -755,15 +598,6 @@
     max-height: calc(100vh - 140px);
     border-radius: 6px;
     box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
-    cursor: default;
-  }
-
-  .lightbox-video {
-    max-width: 100%;
-    max-height: calc(100vh - 140px);
-    border-radius: 6px;
-    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
-    background: #000;
     cursor: default;
   }
 
@@ -840,333 +674,18 @@
     right: clamp(8px, 3vw, 28px);
   }
 
-
-  /* -- site nav -- */
-
-  .site-nav {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-  }
-
-  /* Frosted bar background lives on a pseudo-element so .site-nav itself is
-     not a backdrop-filter root — otherwise the open mobile menu panel (a
-     descendant that has its own backdrop-filter) can't blur the page. */
-  .site-nav::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    background: rgba(0, 0, 0, 0.86);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-  }
-
-  .site-nav-inner {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 14px clamp(24px, 5vw, 56px);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 10px 24px;
-    min-height: 56px;
-  }
-
-  @media (min-width: 1100px) {
-    .site-nav-inner {
-      max-width: 1320px;
-    }
-  }
-
-  .site-nav-brand {
-    font-size: 24px;
-    color: #fff;
-    border-bottom: none;
-  }
-
-  .site-nav-links {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 10px 28px;
-  }
-
-  .site-nav-links a {
-    font-family: "Fakt Blond SemiBold", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    font-size: 18px;
-    font-weight: 700;
-    color: rgba(255, 255, 255, 0.65);
-    border-bottom: none;
-  }
-
-  .site-nav-links a:hover,
-  .site-nav-links a:focus-visible {
-    color: #fff;
-  }
-
-  .site-nav-links a.is-current {
-    color: #00d8aa;
-  }
-
-  .nav-item {
-    position: relative;
-  }
-
-  .nav-dropdown {
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    padding-top: 14px;
-    min-width: 360px;
-    opacity: 0;
-    visibility: hidden;
-    transform: translate(-50%, -6px);
-    transition: opacity 0.15s ease 0.12s, transform 0.15s ease 0.12s, visibility 0.15s ease 0.12s;
-    z-index: 60;
-  }
-
-  .nav-item:hover .nav-dropdown,
-  .nav-item:focus-within .nav-dropdown {
-    opacity: 1;
-    visibility: visible;
-    transform: translate(-50%, 0);
-    transition-delay: 0s;
-  }
-
-  .nav-dropdown-panel {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    padding: 10px;
-    background: #1a1a1a;
-    border-radius: 10px;
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55);
-  }
-
-  .nav-dropdown-card {
-    display: block;
-    padding: 14px 16px 12px;
-    border-radius: 8px;
-    background-color: transparent;
-    transition: background-color 0.2s ease;
-  }
-
-  .nav-dropdown-card:hover,
-  .nav-dropdown-card:focus-visible {
-    background-color: rgba(255, 255, 255, 0.08);
-  }
-
-  .nav-dropdown-card-kicker {
-    display: block;
-    font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
-    color: #00d8aa;
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 2px;
-    word-spacing: -3px;
-    text-transform: uppercase;
-    margin-bottom: 6px;
-  }
-
-  .nav-dropdown-card-title {
-    display: block;
-    font-family: "Fakt Blond SemiBold", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    font-weight: 600;
-    color: #fff;
-    font-size: 15px;
-    line-height: 1.3;
-  }
-
-  .nav-dropdown-card-subtitle {
-    display: block;
-    color: rgba(255, 255, 255, 0.62);
-    font-size: 13px;
-    font-weight: 400;
-    line-height: 1.45;
-    margin-top: 6px;
-  }
-
-  /* -- mobile: collapse the nav links behind a hamburger (<= 640px) -- */
-
-  .nav-toggle {
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    width: 44px;
-    height: 44px;
-    margin: -10px -12px -10px 0;
-    padding: 0;
-    background: none;
-    border: none;
-    color: #fff;
-    cursor: pointer;
-  }
-
-  .nav-toggle-bar {
-    display: block;
-    width: 22px;
-    height: 2px;
-    background: currentColor;
-    transition: transform 0.45s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.2s ease;
-  }
-
-  .nav-toggle-bar:nth-child(2) {
-    transition: transform 0.2s ease, opacity 0.2s ease;
-  }
-
-  .site-nav.is-open .nav-toggle-bar:nth-child(1) {
-    transform: translateY(7px) rotate(45deg);
-  }
-
-  .site-nav.is-open .nav-toggle-bar:nth-child(2) {
-    opacity: 0;
-    transform: scaleX(0);
-  }
-
-  .site-nav.is-open .nav-toggle-bar:nth-child(3) {
-    transform: translateY(-7px) rotate(-45deg);
-  }
-
-  @media (max-width: 640px) {
-    .nav-toggle {
-      display: flex;
-    }
-
-    .site-nav-inner {
-      flex-wrap: nowrap;
-    }
-
-    .site-nav-links {
-      position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
-      display: none;
-      flex-direction: column;
-      flex-wrap: nowrap;
-      align-items: stretch;
-      gap: 0;
-      max-height: 80vh;
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
-      padding: 6px clamp(24px, 5vw, 56px) 18px;
-      background: rgba(0, 0, 0, 0.86);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border-top: 1px solid rgba(255, 255, 255, 0.12);
-    }
-
-    .site-nav.is-open .site-nav-links {
-      display: flex;
-    }
-
-    .site-nav-links > a,
-    .nav-item > a {
-      display: block;
-      padding: 14px 0;
-      font-size: 20px;
-    }
-
-    .site-nav-links > a + a,
-    .nav-item {
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .nav-dropdown {
-      position: static;
-      min-width: 0;
-      padding: 0 0 10px;
-      opacity: 1;
-      visibility: visible;
-      transform: none;
-      transition: none;
-    }
-
-    /* the desktop open-state rule is more specific and would otherwise
-       still slide the panel -50% when the item is hovered/focused here */
-    .nav-item:hover .nav-dropdown,
-    .nav-item:focus-within .nav-dropdown {
-      transform: none;
-    }
-
-    .nav-dropdown-panel {
-      gap: 2px;
-      padding: 0;
-      background: none;
-      box-shadow: none;
-    }
-
-    .nav-dropdown-card {
-      padding: 9px 0 9px 16px;
-    }
-
-    .nav-dropdown-card-subtitle {
-      display: none;
-    }
-  }
 </style>
 </head>
 <body>
-  <nav class="site-nav">
-    <div class="site-nav-inner">
-      <a class="site-nav-brand display" href="/">Tom de Gay</a>
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav-links" aria-label="Menu">
-        <span class="nav-toggle-bar"></span>
-        <span class="nav-toggle-bar"></span>
-        <span class="nav-toggle-bar"></span>
-      </button>
-      <div class="site-nav-links" id="site-nav-links">
-        <a href="/about">About</a>
-        <a href="/approach">Approach</a>
-        <a href="/ai">AI</a>
-        <div class="nav-item">
-          <a href="/case-studies" class="is-current">Case Studies</a>
-          <div class="nav-dropdown">
-            <div class="nav-dropdown-panel">
-              <a class="nav-dropdown-card" href="/case-studies/mapping-inconsistent-schemas">
-                <span class="nav-dropdown-card-kicker">Column mapping</span>
-                <span class="nav-dropdown-card-title">Mapping inconsistent schemas at scale</span>
-              </a>
-              <a class="nav-dropdown-card is-current" href="/case-studies/connecting-organisations">
-                <span class="nav-dropdown-card-kicker">Feeds</span>
-                <span class="nav-dropdown-card-title">Connecting organisations through data</span>
-              </a>
-              <a class="nav-dropdown-card" href="/case-studies/validation-and-correction">
-                <span class="nav-dropdown-card-kicker">Validation</span>
-                <span class="nav-dropdown-card-title">Closing the loop on data quality</span>
-              </a>
-              <a class="nav-dropdown-card" href="/case-studies/pipelines">
-                <span class="nav-dropdown-card-kicker">Pipelines</span>
-                <span class="nav-dropdown-card-title">Bringing clarity to complex data flows</span>
-              </a>
-              <a class="nav-dropdown-card" href="/case-studies/image-insight">
-                <span class="nav-dropdown-card-kicker">Image Insight</span>
-                <span class="nav-dropdown-card-title">Making space for deeper reflection</span>
-              </a>
-              <a class="nav-dropdown-card" href="/case-studies/zonefully">
-                <span class="nav-dropdown-card-kicker">Zonefully</span>
-                <span class="nav-dropdown-card-title">Connecting long-term goals to everyday routines</span>
-              </a>
-            </div>
-          </div>
-        </div>
-        <a href="/contact">Contact</a>
-      </div>
-    </div>
-  </nav>
   <main>
   <div class="content">
+    <a class="back-link" href="/">← Tom de Gay</a>
+
     <header>
       <span class="kicker">Case Study | <a href="https://help.quantemplate.com/about-feeds" target="_blank" rel="noopener noreferrer">Quantemplate Feeds</a></span>
       <h1 class="display">Connecting organisations through data</h1>
       <p class="subtitle">Infrastructure to automate data exchange, laying the foundation for a connected network.</p>
       <p class="keywords">Product strategy · Systems thinking · Process design</p>
-
-      <hr class="rule">
 
       <div class="meta-row">
         <div class="meta-item">
@@ -1179,13 +698,7 @@
         </div>
         <div class="meta-item">
           <span class="eyebrow">Timeframe</span>
-          <div class="timeframe-with-donut">
-            <svg class="timeframe-donut" viewBox="0 0 44 44" width="44" height="44" role="img" aria-label="Design time: about 150 days">
-              <circle class="timeframe-donut-track" cx="22" cy="22" r="18"></circle>
-              <circle class="timeframe-donut-value" cx="22" cy="22" r="18" pathLength="180" style="--donut-offset: 30" transform="rotate(-90 22 22)"></circle>
-            </svg>
-            <p>Several months as part of longer strategic programme&nbsp;/ 2022</p>
-          </div>
+          <p>Concept to V1 release (2024): 22 months. Explored and delivered alongside wider platform enablement work.</p>
         </div>
       </div>
     </header>
@@ -1211,26 +724,19 @@
       <p class="about-statement display">I led the design of <a href="https://help.quantemplate.com/about-feeds" target="_blank" rel="noopener noreferrer">Feeds</a>, a new Quantemplate workspace for securely requesting, receiving, processing and distributing data between organisations.</p>
       <p class="about-statement display">By mapping the complete workflow, I reframed an initial upload-portal concept as a persistent system, spanning submissions, automation, permissions and operational oversight. Feeds accommodate complex insurance data exchanges while creating the foundation for a broader connected-data strategy.</p>
 
-      <a class="case-block has-thumb" href="https://www.youtube.com/watch?v=IgmrfcrYOOk" target="_blank" rel="noopener noreferrer">
-        <img class="case-block-thumb" src="media/youtube-feeds-overview.jpg" alt="Thumbnail for the YouTube video &lsquo;Learn how to automate data exchange with Quantemplate Feeds&rsquo;" loading="lazy">
-        <span class="case-block-text">
-          <span class="case-block-title">Learn how to automate data exchange with Quantemplate Feeds</span>
-          <span class="case-block-subtitle">A quick guide to Feeds concepts and an overview of the interface.</span>
-          <span class="case-block-watch">Watch on YouTube</span>
-        </span>
-      </a>
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/IgmrfcrYOOk?si=_DXr-BjdaTXHhwcL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
     </section>
 
     <hr class="rule">
 
     <section aria-labelledby="objective-heading" class="case-body">
-      <span class="eyebrow" id="objective-heading">Problem</span>
+      <span class="eyebrow" id="objective-heading">Objective</span>
       <h2>We&rsquo;d automated the data processing, but not the process</h2>
       <p>Insurance companies depend on regular submissions from brokers, managing general agents, third-party administrators and other partners. Our data transformation pipelines did a good job of <a href="/case-studies/mapping-inconsistent-schemas">mapping and harmonising</a> this data, but the parts outside Quantemplate were process bottlenecks.</p>
       <p>Email was manual and difficult to audit, while FTP and API integrations were unwieldy. Moreover, keeping track of what was in or overdue every month was a significant timesink.</p>
-      <p>Even on the happy path, we identified five manual steps to request data and another five to bring it into and out of Quantemplate.</p>
-
-      <blockquote>Across an average of 150 trading partners, repeated monthly, that amounted to 18,000 manual steps a year.</blockquote>
+      <p>Even on the happy path, we identified five manual steps to request data and another five to bring it into and out of Quantemplate. Across an average of 150 trading partners, repeated monthly, that amounted to 18,000 manual steps a year.</p>
 
       <figure class="figure">
         <img src="media/workflow-bottlenecks-diagram.png" alt="Diagram of a typical MGA data pipeline: manual upload to network storage, an automated import-to-output pipeline including Map Column Headers, then a manual step to push output to the client database via API.">
@@ -1249,9 +755,7 @@
       <span class="eyebrow" id="approach-heading">Approach</span>
       <h2>Modelling the whole workflow</h2>
       <p>I mapped every touchpoint from the initial request through submission, processing, validation, correction and onward distribution. For each stage we considered the unhappy paths and dead ends: late or incomplete submissions, incorrect files, resubmissions and validation failures.</p>
-      <blockquote>The map identified every manual step that could be automated, every notification that needed to be sent and every point where human judgement was still required.</blockquote>
-
-      <p>It became the basis for the submission lifecycle, schedules, statuses, reminders, version history and pipeline triggers.</p>
+      <p>The map identified every manual step that could be automated, every notification that needed to be sent and every point where human judgement was still required. It became the basis for the submission lifecycle, schedules, statuses, reminders, version history and pipeline triggers.</p>
 
       <figure class="figure">
         <img src="media/feeds-research-lifecycle.png" alt="Swimlane diagram of the submission lifecycle spanning Carrier and MGA roles, from period open through upload, parsing, validation and carrier pipeline review, to period close, with pink notification steps, grey decision points and yellow manual touchpoints.">
@@ -1268,11 +772,9 @@
         <h3>From Data Drop to Data Network</h3>
         <p>My initial concept, Data Drop, was a lightweight portal with an unauthenticated, one-time upload link. It would have been a quick win, but mapping its workflow revealed that it would move the email problem further down the chain: links buried in inboxes, no persistent activity record and resubmissions still needing coordination.</p>
 
-        <blockquote>The Data Drop would have been a quick win but an incomplete solution.</blockquote>
-
         <figure class="figure">
           <img src="media/data-drop-concept.png" alt="Mockup of the Data Drop secure data transfer concept: a card showing transfer from and to organisations, submission type, period, due date, a worksheet selector with checkboxes, and a submit button.">
-          <figcaption>The data drop concept we never shipped.</figcaption>
+          <figcaption>The data drop concept we never shipped. It would have been a quick win but an incomplete solution.</figcaption>
         </figure>
 
         <p>I proposed Feeds instead: a whole new area in the product with authenticated users, separate organisations and persistent relationships between partners. This was a larger product increment, but one that addressed the whole workflow, making persistent connections between organisations and opening a path to a broader network strategy.</p>
@@ -1287,25 +789,17 @@
         <h3>Flexibility for complex submissions</h3>
         <p>When we spoke with users and looked at their existing Quantemplate workflows, we could see that a submission was rarely uniform: Premium and Claims might arrive as separate tabs, files, or from different organisations, each needing different pipeline logic.</p>
         <p>I introduced subsections to represent these distinct streams within one submission. Feed owners define subsections, and submitters assign uploads to the appropriate one. Using the wayfinding principle of progressive disclosure, the interface walks them through the process, step-by-step.</p>
-        <blockquote>Using wayfinding principles, I navigated users through the process of assigning their data to the right subsection.</blockquote>
+        <p>When Premium and Claims came from different parties, a pipeline could wait until both were complete, with the interface showing what had arrived and what it was still waiting for.</p>
 
-        <a class="case-block has-thumb" href="https://www.youtube.com/watch?v=8-GmO0Smelw" target="_blank" rel="noopener noreferrer">
-          <img class="case-block-thumb" src="media/youtube-feeds-submitting-data.jpg" alt="Thumbnail for the YouTube video &lsquo;Feeds 5: Submitting and receiving data&rsquo;" loading="lazy">
-          <span class="case-block-text">
-            <span class="case-block-title">Feeds 5: Submitting and receiving data</span>
-            <span class="case-block-subtitle">Uploading data to a Feed to send to a partner organisation, using subsections to separate Premium and Claims data.</span>
-            <span class="case-block-watch">Watch on YouTube</span>
-          </span>
-        </a>
+        <div class="video-embed">
+          <iframe src="https://www.youtube.com/embed/8-GmO0Smelw?si=uJNjQGcYSAX8VcLX" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
       </div>
 
       <div class="subsection" id="permissions-heading">
         <h3>Roles for humans and robots alike</h3>
         <p>I modelled permission levels around the way our clients divided responsibility. Owners and managers needed to configure Feeds, connect with partners and oversee the process. Submitters only needed access when it was time to upload data, while read-only users needed visibility to use Feeds data in pipelines.</p>
-
-        <blockquote>I introduced the concept of a &lsquo;Robot User&rsquo; to surface automation capabilities across the platform and make them auditable.</blockquote>
-
-        <p>Looking at our permissions model, I realised that we needed a way to run automations without a user present, and have those runs tracked in the history. When the Robot User has access to a Feed, they can take the data from it, run a pipeline they have access to and output it to a dataset they&rsquo;ve been given write permission on.</p>
+        <p>Looking at our permissions model, I realised that we needed a way to run automations without a user present, and have those runs tracked in the history. I proposed the &lsquo;Robot User&rsquo; as a pragmatic solution, which users understood without much introduction. When the Robot User has access to a Feed, they can take the data from it, run a pipeline they have access to and output it to a dataset they&rsquo;ve been given write permission on.</p>
 
         <figure class="figure">
           <img src="media/feeds-permissions-share-panel.png" alt="Feed sharing panel listing who has access: TDG TPA with 9 members as Submitter, Robot User as Can view, Martina Brito as Manager, and Tom de Gay as Owner.">
@@ -1323,29 +817,22 @@
         <h3>Trusted setup in under a minute</h3>
         <p>Initiating a partner connection required just their contact&rsquo;s email. We used the domain to find their organisation or begin creating it. I researched and proposed a <a href="https://www.logo.dev" target="_blank" rel="noopener noreferrer">logo.dev</a> integration to populate organisation names and logos automatically, reducing setup effort and making requests more recognisable. Admins on each side approve the connection, with all events tracked in a new admin panel.</p>
 
-        <blockquote>A lot of complexity behind the scenes, enabling simplicity in the product.</blockquote>
-
         <figure class="figure">
           <img src="media/feeds-add-partners-spec.jpg" alt="Design specification board mapping every path through the add-partners workflow: adding internal submitters, connecting to an existing partner, adding a new partner, setup via a Feed In or Feed Out, setup statuses and review settings.">
-          <figcaption>Design specification for the &lsquo;Add partners&rsquo; workflow. Did the partner already exist on the system? Were they already connected to this? Was the user an admin?</figcaption>
+          <figcaption>Design specification for the &lsquo;Add partners&rsquo; workflow. Did the partner already exist on the system? Were they already connected to this? Was the user an admin? A lot of complexity behind the scenes, enabling simplicity in the product.</figcaption>
         </figure>
 
         <p>Admins can also create reusable schedules to centrally manage request frequency. Research revealed that feeds often shared a cadence but followed different contract dates. I made start and end dates properties of a Feed, rather than a schedule, allowing requests to stop at contract end without affecting other feeds using the same schedule.</p>
         <p>All that&rsquo;s required to set up a new Feed is to add subsections, search for a partner and connect an existing schedule. In under one minute you can be requesting data from your trading partners.</p>
 
-        <a class="case-block has-thumb" href="https://www.youtube.com/watch?v=KVrOr-v3Ncs" target="_blank" rel="noopener noreferrer">
-          <img class="case-block-thumb" src="media/youtube-feeds-set-up.jpg" alt="Thumbnail for the YouTube video &lsquo;Feeds 2: Set up a feed&rsquo;" loading="lazy">
-          <span class="case-block-text">
-            <span class="case-block-title">Feeds 2: Set up a feed</span>
-            <span class="case-block-subtitle">How to set up a Feed, add subsections and connect a schedule.</span>
-            <span class="case-block-watch">Watch on YouTube</span>
-          </span>
-        </a>
+        <div class="video-embed">
+          <iframe src="https://www.youtube.com/embed/KVrOr-v3Ncs?si=GsG2ycGKF4QdAdE6" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
       </div>
 
       <div class="subsection" id="audit-heading">
         <h3>The full picture, at a glance</h3>
-        <p>Both parties retain an immutable, versioned record of submitted data. User avatars and organisation domains identify the people and companies behind submissions, building trust.</p>
+        <p>Both parties retain an immutable, versioned record of submitted data. Suppliers can correct and resubmit files without overwriting the original, preserving evidence for future disputes. User avatars and organisation domains identify the people and companies behind submissions, building trust.</p>
         <p>I redesigned the Feed repository as a management dashboard, showing which Feeds are complete, waiting for data or overdue; this real-time view of inventory replaces manual tracking in spreadsheets. Configurable reminders chase outstanding submissions automatically.</p>
         <p>Visible connections between Feeds and pipelines help managers understand what each submission will trigger and what the automation is still waiting for.</p>
 
@@ -1359,18 +846,11 @@
         <h3>Connecting the whole data chain</h3>
         <p>Feeds support incoming data, outgoing distribution and onward sharing. An insurer can distribute data to reinsurers, while a broker can receive and pass on the original submission. Each organisation can connect its own processing pipelines while retaining a shared, auditable source record. This uniquely allows us to surface the full data Chain of Custody.</p>
 
-        <a class="case-block has-thumb" href="https://www.youtube.com/watch?v=vqHMlfbLOZU" target="_blank" rel="noopener noreferrer">
-          <img class="case-block-thumb" src="media/youtube-data-chain-of-custody.jpg" alt="Thumbnail for the YouTube video &lsquo;Data Chain of Custody&rsquo;" loading="lazy">
-          <span class="case-block-text">
-            <span class="case-block-title">Data Chain of Custody</span>
-            <span class="case-block-subtitle">How insurers, MGAs, TPAs, brokers and reinsurers exchange bordereaux data through Quantemplate&rsquo;s network, with a transparent, permanent view of where data came from, how it was processed and who it was shared with.</span>
-            <span class="case-block-watch">Watch on YouTube</span>
-          </span>
-        </a>
+        <div class="video-embed">
+          <iframe src="https://www.youtube.com/embed/vqHMlfbLOZU?si=8_V2V-7beRQ4BkcO" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
 
-        <blockquote>The Feeds lay the architectural groundwork for the big vision: automated data flows across the industry.</blockquote>
-
-        <p>We mapped out further <a href="https://help.quantemplate.com/feed-use-cases" target="_blank" rel="noopener noreferrer">Use Cases</a> on this support page.</p>
+        <p>The Feeds lay the architectural groundwork for the big vision: automated data flows across the industry. We mapped out further <a href="https://help.quantemplate.com/feed-use-cases" target="_blank" rel="noopener noreferrer">Use Cases</a> on this support page.</p>
 
         <figure class="figure">
           <img src="media/feeds-network-potential-diagram.png" alt="Diagram showing data flowing from MGAs and Carriers who are Quantemplate clients, through to free-user Carriers and Reinsurers, illustrating how submissions and pushes propagate across the network regardless of client status.">
@@ -1386,9 +866,7 @@
       <h2>A foundation for networked data</h2>
       <p>Feeds have been running production data for approximately 18 months, processing recurring monthly submissions and 3.4 million rows to date. For the client running it, this removes nearly all of the manual steps identified in the original workflow mapping, for true &lsquo;straight-through processing&rsquo;. The one step that remains, the initial upload, is performed directly by the data supplier.</p>
       <p>Bringing further partners onto Feeds is an ongoing project: in-app guidance and comprehensive tutorials have driven initial uptake, and upcoming features to share validation reports and suggest corrections should make the value of switching more visible.</p>
-      <blockquote>Feeds expanded Quantemplate from a product for automating processes within an organisation, towards infrastructure connecting them.</blockquote>
-
-      <p>This opens the door to <a href="https://help.quantemplate.com/artificial-intelligence" target="_blank" rel="noopener noreferrer">Network Intelligence</a>, where data mappings, transformations and corrections are crowdsourced.</p>
+      <p>More strategically, Feeds expanded Quantemplate from a product for automating processes within an organisation, towards infrastructure connecting them. This opens the door to <a href="https://help.quantemplate.com/artificial-intelligence" target="_blank" rel="noopener noreferrer">Network Intelligence</a>, where data mappings, transformations and corrections are crowdsourced.</p>
     </section>
 
     <hr class="rule">
@@ -1405,24 +883,28 @@
 
     <section aria-labelledby="next-heading">
       <span class="eyebrow" id="next-heading">Next case study</span>
-      <a class="case-block has-image" href="/case-studies/mapping-inconsistent-schemas">
-        <img class="case-block-media" src="/case-studies/media/concept-mapping-detail.jpg" alt="Concept design for Quantemplate's column mapping interface: schemas as vertically stacked fields aligned to a common master." loading="lazy">
+      <a class="case-block" href="/case-studies/mapping-inconsistent-schemas">
         <span class="case-block-text">
-          <span class="case-block-kicker">Column mapping</span>
           <span class="case-block-title">Mapping inconsistent schemas at scale</span>
           <span class="case-block-subtitle">Translate inconsistent data sources to a common target format, fully automated and enhanced by AI suggestions.</span>
           <span class="case-block-keywords">Interaction design · Human-in-the-loop</span>
         </span>
+        <span class="case-block-arrow" aria-hidden="true">→</span>
       </a>
     </section>
 
+    <hr class="rule">
+
+    <footer class="case-footer">
+      <p><a class="back-link" href="/">← Back to Tom de Gay</a></p>
+    </footer>
   </div>
 
   <nav class="toc" aria-label="Section navigation">
     <span class="eyebrow toc-heading">On this page</span>
     <a href="#keypoints-heading">Key points</a>
     <a href="#summary-heading">Summary</a>
-    <a href="#objective-heading">Problem</a>
+    <a href="#objective-heading">Objective</a>
     <a href="#approach-heading">Approach</a>
     <a href="#keydecisions-heading">Key decisions</a>
     <a href="#implementation-heading">Implementation</a>
@@ -1435,7 +917,6 @@
     <button class="lightbox-nav lightbox-prev" type="button" aria-label="Previous image">&lsaquo;</button>
     <button class="lightbox-nav lightbox-next" type="button" aria-label="Next image">&rsaquo;</button>
     <img src="" alt="">
-    <video class="lightbox-video" controls muted loop playsinline hidden></video>
     <p class="lightbox-caption" hidden></p>
   </div>
   </main>
@@ -1494,7 +975,6 @@
       var lightbox = document.getElementById("lightbox");
       if (!lightbox) return;
       var lightboxImg = lightbox.querySelector("img");
-      var lightboxVideo = lightbox.querySelector(".lightbox-video");
       var lightboxCaption = lightbox.querySelector(".lightbox-caption");
       var closeBtn = lightbox.querySelector(".lightbox-close");
       var prevBtn = lightbox.querySelector(".lightbox-prev");
@@ -1531,69 +1011,22 @@
         nextBtn.hidden = !showNav;
       }
 
-      function stopVideo() {
-        if (!lightboxVideo) return;
-        lightboxVideo.pause();
-        lightboxVideo.removeAttribute("src");
-        lightboxVideo.load();
-        lightboxVideo.hidden = true;
-      }
-
       function openLightbox(index) {
         lastFocused = document.activeElement;
-        stopVideo();
-        lightboxImg.hidden = false;
         showIndex(index);
         lightbox.classList.add("is-open");
         document.body.style.overflow = "hidden";
         closeBtn.focus();
       }
 
-      function openVideo(src, caption) {
-        if (!lightboxVideo || !src) return;
-        lastFocused = document.activeElement;
-        lightboxImg.hidden = true;
-        lightboxImg.src = "";
-        lightboxVideo.src = src;
-        lightboxVideo.hidden = false;
-        prevBtn.hidden = true;
-        nextBtn.hidden = true;
-        if (caption) {
-          lightboxCaption.textContent = caption;
-          lightboxCaption.hidden = false;
-        } else {
-          lightboxCaption.textContent = "";
-          lightboxCaption.hidden = true;
-        }
-        lightbox.classList.add("is-open");
-        document.body.style.overflow = "hidden";
-        var playback = lightboxVideo.play();
-        if (playback && playback.catch) playback.catch(function () {});
-        closeBtn.focus();
-      }
-
       function closeLightbox() {
         lightbox.classList.remove("is-open");
         lightboxImg.src = "";
-        stopVideo();
-        lightboxImg.hidden = false;
         lightboxCaption.textContent = "";
         lightboxCaption.hidden = true;
         document.body.style.overflow = "";
         if (lastFocused) lastFocused.focus();
       }
-
-      Array.prototype.forEach.call(document.querySelectorAll(".ui-video-expand"), function (btn) {
-        var wrap = btn.parentNode;
-        var source = wrap.querySelector("source");
-        if (!source) { btn.hidden = true; return; }
-        var figure = wrap.closest("figure");
-        var captionEl = figure ? figure.querySelector("figcaption") : null;
-        var caption = captionEl ? captionEl.textContent.trim() : "";
-        btn.addEventListener("click", function () {
-          openVideo(source.src, caption);
-        });
-      });
 
       items.forEach(function (item, index) {
         var img = item.img;
@@ -1633,34 +1066,6 @@
         } else if (e.key === "ArrowRight") {
           showIndex(currentIndex + 1);
         }
-      });
-    })();
-  </script>
-  <script>
-    (function () {
-      var nav = document.querySelector('.site-nav');
-      if (!nav) return;
-      var toggle = nav.querySelector('.nav-toggle');
-      var links = nav.querySelector('.site-nav-links');
-      if (!toggle || !links) return;
-      function setOpen(open) {
-        nav.classList.toggle('is-open', open);
-        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-      }
-      toggle.addEventListener('click', function () {
-        setOpen(!nav.classList.contains('is-open'));
-      });
-      links.addEventListener('click', function (e) {
-        if (e.target.closest('a')) setOpen(false);
-      });
-      document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') setOpen(false);
-      });
-      document.addEventListener('click', function (e) {
-        if (nav.classList.contains('is-open') && !nav.contains(e.target)) setOpen(false);
-      });
-      window.addEventListener('resize', function () {
-        if (window.innerWidth > 640) setOpen(false);
       });
     })();
   </script>

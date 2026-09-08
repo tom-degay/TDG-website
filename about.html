@@ -243,9 +243,9 @@
   }
 
   /* -- links are collapsed to zero height so the photo starts at the
-        same top edge; the links overlay the top-right, sticky. This
-        holds for the row (wide) and stacked (mid) states; the
-        below-photo state at <=820px resets height/margin. -- */
+        same top edge; the buttons overlay the top-right gutter, stacked
+        vertically and right-aligned, sticky. The below-photo state at
+        <=820px resets height/margin and lays them out in a row. -- */
   p.links {
     position: sticky;
     top: 66px;
@@ -253,28 +253,52 @@
     height: 0;
     margin: 0;
     overflow: visible;
-    text-align: right;
-    font-size: clamp(15px, 1.7vw, 17px);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+  }
+
+  /* -- LinkedIn / CV as dark button modules, matching the YouTube link cards -- */
+  p.links a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-width: 156px;
+    padding: 10px 15px;
+    border: 1px solid rgb(33, 33, 33);
+    border-radius: 8px;
+    background-color: rgb(33, 33, 33);
+    color: #fff;
+    font-family: "Fakt Blond SemiBold", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 1;
     white-space: nowrap;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
   }
 
-  p.links a + a {
-    margin-left: 28px;
+  p.links a span {
+    display: block;
+    transform: translateY(2px);
   }
 
-  /* -- not enough room for a row of links beside the photo:
-        stack them in the right-hand gutter, still sticky -- */
-  @media (max-width: 1099px) {
-    p.links {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 8px;
-    }
+  p.links a:hover,
+  p.links a:focus-visible {
+    background-color: rgb(48, 48, 48);
+    border-color: rgb(48, 48, 48);
+  }
 
-    p.links a + a {
-      margin-left: 0;
-    }
+  p.links a svg {
+    flex: 0 0 auto;
+    width: 16px;
+    height: 16px;
+    opacity: 0.7;
+  }
+
+  p.links a[target="_blank"]::after {
+    content: none;
   }
 
   /* -- photo now fills the column: drop the links below it in
@@ -292,7 +316,7 @@
       flex-direction: row;
       align-items: center;
       flex-wrap: wrap;
-      gap: 4px 28px;
+      gap: 10px;
       margin: 0 0 clamp(32px, 5vw, 48px);
       text-align: left;
     }
@@ -393,8 +417,17 @@
     opacity: 0;
     visibility: hidden;
     transform: translate(-50%, -6px);
-    transition: opacity 0.15s ease 0.12s, transform 0.15s ease 0.12s, visibility 0.15s ease 0.12s;
+    transition: opacity 0.12s ease, transform 0.12s ease, visibility 0.12s ease;
     z-index: 60;
+  }
+
+  /* Approach popover holds short items -> shrink to content instead of the 360px case-studies width */
+  .nav-dropdown--tight {
+    min-width: 0;
+  }
+
+  .nav-dropdown--tight .nav-dropdown-card-title {
+    white-space: nowrap;
   }
 
   .nav-item:hover .nav-dropdown,
@@ -402,7 +435,7 @@
     opacity: 1;
     visibility: visible;
     transform: translate(-50%, 0);
-    transition-delay: 0s;
+    transition-delay: 0.14s;
   }
 
   .nav-dropdown-panel {
@@ -591,12 +624,30 @@
       </button>
       <div class="site-nav-links" id="site-nav-links">
         <a href="/about" class="is-current">About</a>
-        <a href="/approach">Approach</a>
-        <a href="/ai">AI</a>
+        <div class="nav-item">
+          <a href="/approach">Approach</a>
+          <div class="nav-dropdown nav-dropdown--tight">
+            <div class="nav-dropdown-panel">
+              <a class="nav-dropdown-card" href="/ai">
+                <span class="nav-dropdown-card-title">Design and AI</span>
+              </a>
+              <a class="nav-dropdown-card" href="/design-craft">
+                <span class="nav-dropdown-card-title">Design Craft</span>
+              </a>
+              <a class="nav-dropdown-card" href="/approach">
+                <span class="nav-dropdown-card-title">Learning from wayfinding</span>
+              </a>
+            </div>
+          </div>
+        </div>
         <div class="nav-item">
           <a href="/case-studies">Case Studies</a>
           <div class="nav-dropdown">
             <div class="nav-dropdown-panel">
+              <a class="nav-dropdown-card" href="/case-studies/pipelines">
+                <span class="nav-dropdown-card-kicker">Pipelines</span>
+                <span class="nav-dropdown-card-title">Bringing clarity to complex data flows</span>
+              </a>
               <a class="nav-dropdown-card" href="/case-studies/mapping-inconsistent-schemas">
                 <span class="nav-dropdown-card-kicker">Column mapping</span>
                 <span class="nav-dropdown-card-title">Mapping inconsistent schemas at scale</span>
@@ -608,10 +659,6 @@
               <a class="nav-dropdown-card" href="/case-studies/validation-and-correction">
                 <span class="nav-dropdown-card-kicker">Validation</span>
                 <span class="nav-dropdown-card-title">Closing the loop on data quality</span>
-              </a>
-              <a class="nav-dropdown-card" href="/case-studies/pipelines">
-                <span class="nav-dropdown-card-kicker">Pipelines</span>
-                <span class="nav-dropdown-card-title">Bringing clarity to complex data flows</span>
               </a>
               <a class="nav-dropdown-card" href="/case-studies/image-insight">
                 <span class="nav-dropdown-card-kicker">Image Insight</span>
@@ -631,8 +678,8 @@
   <main>
     <div class="about-top">
     <p class="links">
-      <a href="https://www.linkedin.com/in/tom-dg/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-      <a href="TomdeGayCV.pdf" download="Tom de Gay - CV.pdf" target="_blank" rel="noopener noreferrer">Download CV</a>
+      <a href="https://www.linkedin.com/in/tom-dg/" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg><span>LinkedIn</span></a>
+      <a href="TomdeGayCV.pdf" download="Tom de Gay - CV.pdf" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span>Download CV</span></a>
     </p>
 
     <div class="about-header">
@@ -642,20 +689,20 @@
     <p class="lede display">Hello. I&rsquo;m Tom, a digital product designer based in London.</p>
 
     <div class="about-copy">
-      <p>I&rsquo;ve been untangling complexity in product for 14 years now, but my background is in wayfinding: design to help people navigate spaces, which has shaped the principles I bring to user experience.<!-- You can read more about that <a href="#">here</a>. --></p>
+      <p>I&rsquo;ve been untangling complexity in product for 14 years now, but <a href="/approach">my background is in wayfinding</a>: design to help people navigate spaces, which has shaped the principles I bring to user experience.</p>
 
-      <p>I helped to get data automation platform <a href="https://quantemplate.com" target="_blank" rel="noopener noreferrer">Quantemplate</a> started and have spent over a decade there building out the vision as Head of Design, with end-to-end ownership of the design, from the first scribble on a whiteboard to the last pixel tweaked. <a href="https://www.linkedin.com/in/tom-dg/details/recommendations/" target="_blank" rel="noopener noreferrer">People say</a> I&rsquo;m good at defining high level concepts, finding a path through uncertain territory, and executing the visual design craft.</p>
+      <p>I helped to get data automation platform <a href="https://quantemplate.com" target="_blank" rel="noopener noreferrer">Quantemplate</a> started and have spent over a decade there building out the vision as Head of Design, with end-to-end ownership of the design, from the first scribble on a whiteboard to the last pixel tweaked. <a href="https://www.linkedin.com/in/tom-dg/details/recommendations/" target="_blank" rel="noopener noreferrer">People say</a> I&rsquo;m good at defining high level concepts, finding a path through uncertain territory, and executing the <a href="/design-craft">visual design craft</a>.</p>
 
       <p>Along the way, I&rsquo;ve hired and managed some talented people, led design of Quantemplate&rsquo;s brand and website, and taken on a few fun side projects. I&rsquo;ve done <a href="https://www.linkedin.com/posts/tom-dg_ux-design-machinelearning-activity-6458986381313216513-8wQN" target="_blank" rel="noopener noreferrer">a bit of speaking</a> and co-founded the <a href="https://www.linkedin.com/posts/tom-dg_ux-design-teams-activity-6478973052465090560-AWHE" target="_blank" rel="noopener noreferrer">Design for Complexity</a> meetup in London.</p>
 
-      <p>I&rsquo;m a co-founder and trustee of the <a href="https://isokongallery.org" target="_blank" rel="noopener noreferrer">Isokon Gallery</a>, an award-winning micro-museum dedicated to the history of modernist design and architecture.</p>
+      <p>I&rsquo;m a co-founder and trustee of the <a href="https://isokongallery.org" target="_blank" rel="noopener noreferrer">Isokon Gallery</a>, an award-winning <a href="/design-craft#isokon-heading">micro-museum</a> dedicated to the history of modernist design and architecture.</p>
 
       <p>Outside of work, I&rsquo;m usually to be found at the climbing wall with my family or, even better, bouldering in the forest of Fontainebleau.</p>
     </div>
 
     <section class="site-note" aria-label="About this site">
       <span class="eyebrow">About this site</span>
-      <p>Written and designed by me. Vibe coded with <a href="https://claude.com/claude-code" target="_blank" rel="noopener noreferrer">Claude</a>. I put this site together over a weekend and a few evenings to explore a new way of working. Rather than starting with a design drawing to reproduce, I built it incrementally, letting my <a href="/approach">design principles</a> guide each decision.</p>
+      <p>Written and designed by me. Vibe coded with <a href="https://claude.com/claude-code" target="_blank" rel="noopener noreferrer">Claude</a>. I put this site together over a weekend and a few evenings to <a href="/ai#ai-with-heading">explore a new way of working</a>. Rather than starting with a design drawing to reproduce, I built it incrementally, letting my <a href="/approach">design principles</a> guide each decision.</p>
     </section>
     </div>
   </main>

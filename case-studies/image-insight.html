@@ -394,6 +394,11 @@
     margin: 0 0 20px;
   }
 
+  .case-body p.see-also {
+    margin-top: 22px;
+    font-size: 15px;
+  }
+
   .case-body p:last-child {
     margin-bottom: 0;
   }
@@ -907,8 +912,17 @@
     opacity: 0;
     visibility: hidden;
     transform: translate(-50%, -6px);
-    transition: opacity 0.15s ease 0.12s, transform 0.15s ease 0.12s, visibility 0.15s ease 0.12s;
+    transition: opacity 0.12s ease, transform 0.12s ease, visibility 0.12s ease;
     z-index: 60;
+  }
+
+  /* Approach popover holds short items -> shrink to content instead of the 360px case-studies width */
+  .nav-dropdown--tight {
+    min-width: 0;
+  }
+
+  .nav-dropdown--tight .nav-dropdown-card-title {
+    white-space: nowrap;
   }
 
   .nav-item:hover .nav-dropdown,
@@ -916,7 +930,7 @@
     opacity: 1;
     visibility: visible;
     transform: translate(-50%, 0);
-    transition-delay: 0s;
+    transition-delay: 0.14s;
   }
 
   .nav-dropdown-panel {
@@ -1105,12 +1119,30 @@
       </button>
       <div class="site-nav-links" id="site-nav-links">
         <a href="/about">About</a>
-        <a href="/approach">Approach</a>
-        <a href="/ai">AI</a>
+        <div class="nav-item">
+          <a href="/approach">Approach</a>
+          <div class="nav-dropdown nav-dropdown--tight">
+            <div class="nav-dropdown-panel">
+              <a class="nav-dropdown-card" href="/ai">
+                <span class="nav-dropdown-card-title">Design and AI</span>
+              </a>
+              <a class="nav-dropdown-card" href="/design-craft">
+                <span class="nav-dropdown-card-title">Design Craft</span>
+              </a>
+              <a class="nav-dropdown-card" href="/approach">
+                <span class="nav-dropdown-card-title">Learning from wayfinding</span>
+              </a>
+            </div>
+          </div>
+        </div>
         <div class="nav-item">
           <a href="/case-studies" class="is-current">Case Studies</a>
           <div class="nav-dropdown">
             <div class="nav-dropdown-panel">
+              <a class="nav-dropdown-card" href="/case-studies/pipelines">
+                <span class="nav-dropdown-card-kicker">Pipelines</span>
+                <span class="nav-dropdown-card-title">Bringing clarity to complex data flows</span>
+              </a>
               <a class="nav-dropdown-card" href="/case-studies/mapping-inconsistent-schemas">
                 <span class="nav-dropdown-card-kicker">Column mapping</span>
                 <span class="nav-dropdown-card-title">Mapping inconsistent schemas at scale</span>
@@ -1122,10 +1154,6 @@
               <a class="nav-dropdown-card" href="/case-studies/validation-and-correction">
                 <span class="nav-dropdown-card-kicker">Validation</span>
                 <span class="nav-dropdown-card-title">Closing the loop on data quality</span>
-              </a>
-              <a class="nav-dropdown-card" href="/case-studies/pipelines">
-                <span class="nav-dropdown-card-kicker">Pipelines</span>
-                <span class="nav-dropdown-card-title">Bringing clarity to complex data flows</span>
               </a>
               <a class="nav-dropdown-card is-current" href="/case-studies/image-insight">
                 <span class="nav-dropdown-card-kicker">Image Insight</span>
@@ -1224,6 +1252,8 @@
       <p>I also identified bottlenecks and points of confusion, making actions clearer across the app. Settings and login pages continued the same calm visual approach.</p>
       <p>I designed the logo around the app&rsquo;s signature image grid, reflecting connection and personal growth.</p>
 
+      <p class="see-also"><a href="/design-craft">More visual identities and material explorations &rarr;</a></p>
+
       <figure class="figure">
         <img src="media/image-insight-landing.jpg" alt="Image Insight's dashboard: cards for a new session and past sessions, a count of completed and active sessions, and panels for referrals, tutorials and support.">
         <figcaption>The dashboard applies the same calm treatment across the app: one clear primary action, a light summary of activity, and help within reach.</figcaption>
@@ -1297,7 +1327,7 @@
           <figcaption>The grid toolbar floats over the images: refresh for a new batch, a gallery selector, and a slider for how many images show.</figcaption>
         </figure>
 
-        <p>A gallery selector let coaches choose different image collections, while a refresh button brought up a new batch. Together, these controls made it easier to adapt the session to the person taking part.</p>
+        <p>A gallery selector let coaches choose different image collections, while a refresh button brought up a new batch. Together, these controls made it easier to <a href="/approach#start-heading">adapt the session to the person taking part</a>.</p>
       </div>
     </section>
 

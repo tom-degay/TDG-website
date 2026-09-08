@@ -413,6 +413,11 @@
     margin: 0 0 20px;
   }
 
+  .case-body p.see-also {
+    margin-top: 22px;
+    font-size: 15px;
+  }
+
   .case-body p:last-child {
     margin-bottom: 0;
   }
@@ -1033,8 +1038,17 @@
     opacity: 0;
     visibility: hidden;
     transform: translate(-50%, -6px);
-    transition: opacity 0.15s ease 0.12s, transform 0.15s ease 0.12s, visibility 0.15s ease 0.12s;
+    transition: opacity 0.12s ease, transform 0.12s ease, visibility 0.12s ease;
     z-index: 60;
+  }
+
+  /* Approach popover holds short items -> shrink to content instead of the 360px case-studies width */
+  .nav-dropdown--tight {
+    min-width: 0;
+  }
+
+  .nav-dropdown--tight .nav-dropdown-card-title {
+    white-space: nowrap;
   }
 
   .nav-item:hover .nav-dropdown,
@@ -1042,7 +1056,7 @@
     opacity: 1;
     visibility: visible;
     transform: translate(-50%, 0);
-    transition-delay: 0s;
+    transition-delay: 0.14s;
   }
 
   .nav-dropdown-panel {
@@ -1231,12 +1245,30 @@
       </button>
       <div class="site-nav-links" id="site-nav-links">
         <a href="/about">About</a>
-        <a href="/approach">Approach</a>
-        <a href="/ai">AI</a>
+        <div class="nav-item">
+          <a href="/approach">Approach</a>
+          <div class="nav-dropdown nav-dropdown--tight">
+            <div class="nav-dropdown-panel">
+              <a class="nav-dropdown-card" href="/ai">
+                <span class="nav-dropdown-card-title">Design and AI</span>
+              </a>
+              <a class="nav-dropdown-card" href="/design-craft">
+                <span class="nav-dropdown-card-title">Design Craft</span>
+              </a>
+              <a class="nav-dropdown-card" href="/approach">
+                <span class="nav-dropdown-card-title">Learning from wayfinding</span>
+              </a>
+            </div>
+          </div>
+        </div>
         <div class="nav-item">
           <a href="/case-studies" class="is-current">Case Studies</a>
           <div class="nav-dropdown">
             <div class="nav-dropdown-panel">
+              <a class="nav-dropdown-card is-current" href="/case-studies/pipelines">
+                <span class="nav-dropdown-card-kicker">Pipelines</span>
+                <span class="nav-dropdown-card-title">Bringing clarity to complex data flows</span>
+              </a>
               <a class="nav-dropdown-card" href="/case-studies/mapping-inconsistent-schemas">
                 <span class="nav-dropdown-card-kicker">Column mapping</span>
                 <span class="nav-dropdown-card-title">Mapping inconsistent schemas at scale</span>
@@ -1248,10 +1280,6 @@
               <a class="nav-dropdown-card" href="/case-studies/validation-and-correction">
                 <span class="nav-dropdown-card-kicker">Validation</span>
                 <span class="nav-dropdown-card-title">Closing the loop on data quality</span>
-              </a>
-              <a class="nav-dropdown-card is-current" href="/case-studies/pipelines">
-                <span class="nav-dropdown-card-kicker">Pipelines</span>
-                <span class="nav-dropdown-card-title">Bringing clarity to complex data flows</span>
               </a>
               <a class="nav-dropdown-card" href="/case-studies/image-insight">
                 <span class="nav-dropdown-card-kicker">Image Insight</span>
@@ -1359,10 +1387,14 @@
       </blockquote>
       <p>So we set about building a race track, taking everything we had learnt from building the analytics tools and applying it to data integration.</p>
 
-        <figure class="figure">
-          <img src="media/dashboard.jpg" alt="Concept design for Quantemplate&rsquo;s early analytics dashboard: a solvency-margin chart, a Value at Risk gauge, a sunburst volatility breakdown, and region, industry and risk breakdown tables in a dark theme.">
-          <figcaption>Dashboard concept design, c.2013. The data just wasn&rsquo;t there to make it work.</figcaption>
-        </figure>
+        <a class="case-block has-thumb" href="https://www.youtube.com/watch?v=0C2ujVRZ5dA" target="_blank" rel="noopener noreferrer">
+          <img class="case-block-thumb" src="media/youtube-quantemplate-bi-demo.jpg" alt="Thumbnail for the YouTube video &lsquo;Business Intelligence and Analytics demo&rsquo;" loading="lazy">
+          <span class="case-block-text">
+            <span class="case-block-title">Business Intelligence and Analytics demo</span>
+            <span class="case-block-watch">Watch on YouTube</span>
+          </span>
+        </a>
+      <p class="see-also"><a href="/design-craft#quantemplate-heading">Where Quantemplate&rsquo;s visual language came from &rarr;</a></p>
       <blockquote>The zero-to-one challenge was that a pipeline needed to support every transformation required to complete the job.</blockquote>
       <p>A missing operation could leave the whole workflow unusable. We needed to get to that breadth of capability quickly, then make it easier to work with.</p>
     </section>
@@ -1477,7 +1509,7 @@
 
       <div class="subsection" id="impl-lineage">
         <h3>Show the lineage</h3>
-        <p>Another pain point we identified was keeping track of data lineage through pipelines. I proposed connecting lines between stages to help users follow data through a pipeline. Initially, I envisioned user-defined colour groups to denote functions, but the feedback we got was that these would add configuration overhead. Instead, we automatically cycled colours through a spectrum to distinguish connections.</p>
+        <p>Another pain point we identified was keeping track of data lineage through pipelines. I proposed connecting lines between stages to <a href="/approach#complexity-heading">help users follow data through a pipeline</a>. Initially, I envisioned user-defined colour groups to denote functions, but the feedback we got was that these would add configuration overhead. Instead, we automatically cycled colours through a spectrum to distinguish connections.</p>
 
         <div class="ui-video">
           <video autoplay controls muted loop playsinline disablepictureinpicture controlslist="nofullscreen nodownload" poster="media/pipelines-lineage-highlight.jpg">

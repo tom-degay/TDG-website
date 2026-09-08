@@ -612,8 +612,17 @@
     opacity: 0;
     visibility: hidden;
     transform: translate(-50%, -6px);
-    transition: opacity 0.15s ease 0.12s, transform 0.15s ease 0.12s, visibility 0.15s ease 0.12s;
+    transition: opacity 0.12s ease, transform 0.12s ease, visibility 0.12s ease;
     z-index: 60;
+  }
+
+  /* Approach popover holds short items -> shrink to content instead of the 360px case-studies width */
+  .nav-dropdown--tight {
+    min-width: 0;
+  }
+
+  .nav-dropdown--tight .nav-dropdown-card-title {
+    white-space: nowrap;
   }
 
   .nav-item:hover .nav-dropdown,
@@ -621,7 +630,7 @@
     opacity: 1;
     visibility: visible;
     transform: translate(-50%, 0);
-    transition-delay: 0s;
+    transition-delay: 0.14s;
   }
 
   .nav-dropdown-panel {
@@ -810,12 +819,30 @@
       </button>
       <div class="site-nav-links" id="site-nav-links">
         <a href="/about">About</a>
-        <a href="/approach">Approach</a>
-        <a href="/ai" class="is-current">AI</a>
+        <div class="nav-item">
+          <a href="/approach" class="is-current">Approach</a>
+          <div class="nav-dropdown nav-dropdown--tight">
+            <div class="nav-dropdown-panel">
+              <a class="nav-dropdown-card" href="/ai">
+                <span class="nav-dropdown-card-title">Design and AI</span>
+              </a>
+              <a class="nav-dropdown-card" href="/design-craft">
+                <span class="nav-dropdown-card-title">Design Craft</span>
+              </a>
+              <a class="nav-dropdown-card" href="/approach">
+                <span class="nav-dropdown-card-title">Learning from wayfinding</span>
+              </a>
+            </div>
+          </div>
+        </div>
         <div class="nav-item">
           <a href="/case-studies">Case Studies</a>
           <div class="nav-dropdown">
             <div class="nav-dropdown-panel">
+              <a class="nav-dropdown-card" href="/case-studies/pipelines">
+                <span class="nav-dropdown-card-kicker">Pipelines</span>
+                <span class="nav-dropdown-card-title">Bringing clarity to complex data flows</span>
+              </a>
               <a class="nav-dropdown-card" href="/case-studies/mapping-inconsistent-schemas">
                 <span class="nav-dropdown-card-kicker">Column mapping</span>
                 <span class="nav-dropdown-card-title">Mapping inconsistent schemas at scale</span>
@@ -827,10 +854,6 @@
               <a class="nav-dropdown-card" href="/case-studies/validation-and-correction">
                 <span class="nav-dropdown-card-kicker">Validation</span>
                 <span class="nav-dropdown-card-title">Closing the loop on data quality</span>
-              </a>
-              <a class="nav-dropdown-card" href="/case-studies/pipelines">
-                <span class="nav-dropdown-card-kicker">Pipelines</span>
-                <span class="nav-dropdown-card-title">Bringing clarity to complex data flows</span>
               </a>
               <a class="nav-dropdown-card" href="/case-studies/image-insight">
                 <span class="nav-dropdown-card-kicker">Image Insight</span>
@@ -853,10 +876,9 @@
         <section class="principle">
           <h1 class="lede display" id="ai-for-heading">Designing for AI</h1>
           <blockquote>How much should a system do on someone&rsquo;s behalf&mdash;and when should it ask? When new data changes its decisions, how do we communicate that?</blockquote>
-          <p>At <a href="https://quantemplate.com" target="_blank" rel="noopener noreferrer">Quantemplate</a>, I&rsquo;ve spent years designing systems that suggest <a href="/case-studies/mapping-inconsistent-schemas">column mappings</a>, identify join points and resolve inconsistent company names.</p>
+          <p>At <a href="https://quantemplate.com" target="_blank" rel="noopener noreferrer">Quantemplate</a>, I&rsquo;ve spent years designing systems that suggest column mappings, identify join points and resolve inconsistent company names.</p>
           <p>An uncertain suggestion may be useful if it&rsquo;s easy to check and correct. Even a confident one may need approval if a mistake would be costly. I design previews, controls and feedback around that distinction, helping people put their attention where it matters.</p>
           <p>When results change between runs, people need to see what changed. Their corrections shouldn&rsquo;t be silently undone. They should control what automation can access and change, and be able to trace what it did.</p>
-          <p>See how I applied these principles in <a href="/case-studies/mapping-inconsistent-schemas">Mapping inconsistent schemas at scale</a>.</p>
 
           <a class="case-block has-thumb" href="/case-studies/mapping-inconsistent-schemas">
             <img class="case-block-thumb" src="/case-studies/media/concept-mapping-detail.jpg" alt="Concept design for Quantemplate's column mapping interface: schemas as vertically stacked fields aligned to a common master." loading="lazy">

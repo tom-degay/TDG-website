@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Approach — Tom de Gay</title>
+<title>Learning from wayfinding — Tom de Gay</title>
 <meta name="description" content="The design principles Tom de Gay brings to digital product design, shaped by a background in wayfinding for complex buildings.">
 <meta name="theme-color" content="#000000">
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="Approach — Tom de Gay">
+<meta property="og:title" content="Learning from wayfinding — Tom de Gay">
 <meta property="og:description" content="The design principles Tom de Gay brings to digital product design, shaped by a background in wayfinding for complex buildings.">
 <meta property="og:url" content="https://tomdegay.com/approach">
 <meta property="og:image" content="https://tomdegay.com/og-image.png">
@@ -17,7 +17,7 @@
 <meta property="og:image:alt" content="Tom de Gay — Digital Product Designer">
 
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Approach — Tom de Gay">
+<meta name="twitter:title" content="Learning from wayfinding — Tom de Gay">
 <meta name="twitter:description" content="The design principles Tom de Gay brings to digital product design, shaped by a background in wayfinding for complex buildings.">
 <meta name="twitter:image" content="https://tomdegay.com/og-image.png">
 
@@ -479,8 +479,17 @@
     opacity: 0;
     visibility: hidden;
     transform: translate(-50%, -6px);
-    transition: opacity 0.15s ease 0.12s, transform 0.15s ease 0.12s, visibility 0.15s ease 0.12s;
+    transition: opacity 0.12s ease, transform 0.12s ease, visibility 0.12s ease;
     z-index: 60;
+  }
+
+  /* Approach popover holds short items -> shrink to content instead of the 360px case-studies width */
+  .nav-dropdown--tight {
+    min-width: 0;
+  }
+
+  .nav-dropdown--tight .nav-dropdown-card-title {
+    white-space: nowrap;
   }
 
   .nav-item:hover .nav-dropdown,
@@ -488,7 +497,7 @@
     opacity: 1;
     visibility: visible;
     transform: translate(-50%, 0);
-    transition-delay: 0s;
+    transition-delay: 0.14s;
   }
 
   .nav-dropdown-panel {
@@ -677,12 +686,30 @@
       </button>
       <div class="site-nav-links" id="site-nav-links">
         <a href="/about">About</a>
-        <a href="/approach" class="is-current">Approach</a>
-        <a href="/ai">AI</a>
+        <div class="nav-item">
+          <a href="/approach" class="is-current">Approach</a>
+          <div class="nav-dropdown nav-dropdown--tight">
+            <div class="nav-dropdown-panel">
+              <a class="nav-dropdown-card" href="/ai">
+                <span class="nav-dropdown-card-title">Design and AI</span>
+              </a>
+              <a class="nav-dropdown-card" href="/design-craft">
+                <span class="nav-dropdown-card-title">Design Craft</span>
+              </a>
+              <a class="nav-dropdown-card" href="/approach">
+                <span class="nav-dropdown-card-title">Learning from wayfinding</span>
+              </a>
+            </div>
+          </div>
+        </div>
         <div class="nav-item">
           <a href="/case-studies">Case Studies</a>
           <div class="nav-dropdown">
             <div class="nav-dropdown-panel">
+              <a class="nav-dropdown-card" href="/case-studies/pipelines">
+                <span class="nav-dropdown-card-kicker">Pipelines</span>
+                <span class="nav-dropdown-card-title">Bringing clarity to complex data flows</span>
+              </a>
               <a class="nav-dropdown-card" href="/case-studies/mapping-inconsistent-schemas">
                 <span class="nav-dropdown-card-kicker">Column mapping</span>
                 <span class="nav-dropdown-card-title">Mapping inconsistent schemas at scale</span>
@@ -694,10 +721,6 @@
               <a class="nav-dropdown-card" href="/case-studies/validation-and-correction">
                 <span class="nav-dropdown-card-kicker">Validation</span>
                 <span class="nav-dropdown-card-title">Closing the loop on data quality</span>
-              </a>
-              <a class="nav-dropdown-card" href="/case-studies/pipelines">
-                <span class="nav-dropdown-card-kicker">Pipelines</span>
-                <span class="nav-dropdown-card-title">Bringing clarity to complex data flows</span>
               </a>
               <a class="nav-dropdown-card" href="/case-studies/image-insight">
                 <span class="nav-dropdown-card-kicker">Image Insight</span>
@@ -716,7 +739,7 @@
   </nav>
   <main>
     <div class="content">
-      <h1 class="lede display">Design principles</h1>
+      <h1 class="lede display">Learning from wayfinding</h1>
 
       <p class="intro">Before moving into digital product design, I designed wayfinding systems for schools, hospitals and other complex buildings. That work still shapes my approach: help people understand where they are, what they can do next and whether they&rsquo;re on the right track.</p>
 
@@ -735,7 +758,7 @@
             <figcaption>A typical visitor journey at Haggerston School, showing key decision points and information disclosure.</figcaption>
           </figure>
           <p>Learn what people are trying to achieve, their context and how much they already know. A first-time visitor needs different guidance from someone who knows the way. Start every project with an understanding of the different user roles, their needs, their expectations, their context outside your product. Decide who you&rsquo;re optimising for at which point.</p>
-          <p class="principle-applied"><a href="/case-studies/mapping-inconsistent-schemas#approach-heading">See how I applied this principle &rarr;</a></p>
+          <p class="principle-applied"><a href="/case-studies/mapping-inconsistent-schemas#approach-heading">Learning from users&rsquo; Excel workarounds &rarr;</a></p>
         </section>
 
         <hr class="rule">
@@ -747,7 +770,7 @@
             <figcaption>An example of progressive disclosure, familiar to anyone on a long drive in the UK.</figcaption>
           </figure>
           <p>Those road signs on the motorway that just say &lsquo;The North&rsquo;? That&rsquo;s a great example of &lsquo;progressive disclosure&rsquo;. You don&rsquo;t need to list every town for the next 200 miles to know you&rsquo;re heading in the right direction. The same&rsquo;s true for digital products, revealing detail when it becomes useful and reducing distractions along the way.</p>
-          <p class="principle-applied"><a href="/case-studies/connecting-organisations#datamodel-heading">See how I applied this principle &rarr;</a></p>
+          <p class="principle-applied"><a href="/case-studies/connecting-organisations#datamodel-heading">Guiding users through complex submissions &rarr;</a></p>
         </section>
 
         <hr class="rule">
@@ -759,6 +782,7 @@
             <figcaption>Dinorwig Quarry map (detail). I drew this as part of my Masters final project at <a href="https://www.arts.ac.uk/colleges/central-saint-martins" target="_blank" rel="noopener noreferrer">Central Saint Martins</a>, where I specialised in wayfinding.</figcaption>
           </figure>
           <p>A map is a complex artefact, but an experienced navigator knows how to use one. They have a mental model of how the map works. Every cartographer needs to make decisions about what is included and what is omitted. Prominence and hierarchy are key. Likewise, in complex products, we should aim to preserve the capability people need while making it easier to learn and use.</p>
+          <p class="principle-applied"><a href="/case-studies/pipelines#kd-hierarchy">Giving pipelines a simple hierarchy &rarr;</a></p>
         </section>
 
         <hr class="rule">
@@ -770,6 +794,7 @@
             <figcaption>1957 UK road sign system, still in use today. The entire system can be specified using the width of a letter I as the base unit of measurement.</figcaption>
           </figure>
           <p>A sign only works as part of a wider wayfinding system &ndash; a coherent visual language applied to a wayfinding plan. Likewise, every component in a design system needs to support a coherent journey. A system is more than a set of consistent visual designs and behaviours, it provides guardrails that enable good decision making.</p>
+          <p class="principle-applied"><a href="/case-studies/connecting-organisations#approach-heading">Mapping the complete data submission workflow &rarr;</a></p>
         </section>
 
         <hr class="rule">
@@ -781,6 +806,7 @@
             <figcaption>1960 legibility test, comparing different fonts for the UK road signs system. An early example of methodical testing of a design.</figcaption>
           </figure>
           <p>In wayfinding, others manufacture, install and extend the systems you design. Involving the people who will build and maintain a solution from the outset helps it last and adapt. The same applies to digital products: work with users, engineers and subject-matter experts to shape ideas, test prototypes and improve the experience as our needs change and our understanding evolves.</p>
+          <p class="principle-applied"><a href="/case-studies/validation-and-correction#approach-infodesign">Shaping validation reports through collaboration and feedback &rarr;</a></p>
         </section>
       </div>
     </div>

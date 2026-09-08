@@ -381,6 +381,11 @@
     margin: 0 0 20px;
   }
 
+  .case-body p.see-also {
+    margin-top: 22px;
+    font-size: 15px;
+  }
+
   .case-body p:last-child {
     margin-bottom: 0;
   }
@@ -932,8 +937,17 @@
     opacity: 0;
     visibility: hidden;
     transform: translate(-50%, -6px);
-    transition: opacity 0.15s ease 0.12s, transform 0.15s ease 0.12s, visibility 0.15s ease 0.12s;
+    transition: opacity 0.12s ease, transform 0.12s ease, visibility 0.12s ease;
     z-index: 60;
+  }
+
+  /* Approach popover holds short items -> shrink to content instead of the 360px case-studies width */
+  .nav-dropdown--tight {
+    min-width: 0;
+  }
+
+  .nav-dropdown--tight .nav-dropdown-card-title {
+    white-space: nowrap;
   }
 
   .nav-item:hover .nav-dropdown,
@@ -941,7 +955,7 @@
     opacity: 1;
     visibility: visible;
     transform: translate(-50%, 0);
-    transition-delay: 0s;
+    transition-delay: 0.14s;
   }
 
   .nav-dropdown-panel {
@@ -1130,12 +1144,30 @@
       </button>
       <div class="site-nav-links" id="site-nav-links">
         <a href="/about">About</a>
-        <a href="/approach">Approach</a>
-        <a href="/ai">AI</a>
+        <div class="nav-item">
+          <a href="/approach">Approach</a>
+          <div class="nav-dropdown nav-dropdown--tight">
+            <div class="nav-dropdown-panel">
+              <a class="nav-dropdown-card" href="/ai">
+                <span class="nav-dropdown-card-title">Design and AI</span>
+              </a>
+              <a class="nav-dropdown-card" href="/design-craft">
+                <span class="nav-dropdown-card-title">Design Craft</span>
+              </a>
+              <a class="nav-dropdown-card" href="/approach">
+                <span class="nav-dropdown-card-title">Learning from wayfinding</span>
+              </a>
+            </div>
+          </div>
+        </div>
         <div class="nav-item">
           <a href="/case-studies" class="is-current">Case Studies</a>
           <div class="nav-dropdown">
             <div class="nav-dropdown-panel">
+              <a class="nav-dropdown-card" href="/case-studies/pipelines">
+                <span class="nav-dropdown-card-kicker">Pipelines</span>
+                <span class="nav-dropdown-card-title">Bringing clarity to complex data flows</span>
+              </a>
               <a class="nav-dropdown-card" href="/case-studies/mapping-inconsistent-schemas">
                 <span class="nav-dropdown-card-kicker">Column mapping</span>
                 <span class="nav-dropdown-card-title">Mapping inconsistent schemas at scale</span>
@@ -1147,10 +1179,6 @@
               <a class="nav-dropdown-card is-current" href="/case-studies/validation-and-correction">
                 <span class="nav-dropdown-card-kicker">Validation</span>
                 <span class="nav-dropdown-card-title">Closing the loop on data quality</span>
-              </a>
-              <a class="nav-dropdown-card" href="/case-studies/pipelines">
-                <span class="nav-dropdown-card-kicker">Pipelines</span>
-                <span class="nav-dropdown-card-title">Bringing clarity to complex data flows</span>
               </a>
               <a class="nav-dropdown-card" href="/case-studies/image-insight">
                 <span class="nav-dropdown-card-kicker">Image Insight</span>
@@ -1247,7 +1275,7 @@
 
       <div class="subsection" id="approach-infodesign">
         <h3>Information design</h3>
-        <p>The design of the original report, done in 2017, was driven by information design principles, putting validation failures in the context of a whole dataset to give users a sense of scale.</p>
+        <p>The design of the original report, done in 2017, was driven by <a href="/approach#complexity-heading">information design principles</a>, putting validation failures in the context of a whole dataset to give users a sense of scale.</p>
         <p>I worked on this with an information designer who I was mentoring in UX. We did a lot of whiteboard prototyping so we could test ideas with subject matter experts and engineers before moving to high fidelity mockups to play back to our user cohort.</p>
 
         <figure class="figure">
@@ -1284,6 +1312,8 @@
           <img src="media/ad-hoc-correction.png" alt="A pipeline calculation step containing a hand-written IF statement that sets the Accident State to a fixed value when the policy number matches.">
           <figcaption>Desire lines in the product: an ad-hoc correction added by a user to a pipeline. A manually-entered IF statement to modify the Accident State for a specific policy number.</figcaption>
         </figure>
+
+        <p class="see-also"><a href="/ai#ai-with-heading">How AI now helps me shorten this feedback loop &rarr;</a></p>
       </div>
     </section>
 
@@ -1359,7 +1389,7 @@
       <div class="subsection" id="impl-typevalidation">
         <h3>Automated type validation</h3>
         <p>We&rsquo;d learnt from our client implementations that validating that data within a column met a generic type definition required too many steps. It wasn&rsquo;t a problem that fitted neatly into the custom validation rule model that we&rsquo;d established.</p>
-        <p>The solution arose when we implemented <a href="https://help.quantemplate.com/data-semantics" target="_blank" rel="noopener noreferrer">data semantics</a> across the platform. Now, with an understanding of the data in each column we could implement a very lightweight solution. We added a toggle to enable type validations in Map Column Headers, the point in the pipeline in which schema is defined.</p>
+        <p>The solution arose when we implemented <a href="https://help.quantemplate.com/data-semantics" target="_blank" rel="noopener noreferrer">data semantics</a> across the platform. Now, with an understanding of the data in each column we could implement a very lightweight solution. We added a toggle to enable type validations in <a href="/case-studies/mapping-inconsistent-schemas#semantics-heading">Map Column Headers</a>, the point in the pipeline in which schema is defined.</p>
         <blockquote>This cut out at least four pipeline steps for every column whose type was validated, removing implementation complexity and slashing hours from implementation time.</blockquote>
 
         <div class="ui-video">

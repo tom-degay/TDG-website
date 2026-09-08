@@ -245,6 +245,26 @@
       grid-template-columns: 1fr 1fr;
       column-gap: 20px;
     }
+
+    .case-blocks.approach-blocks {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .approach-blocks .case-block {
+    border-color: rgb(33, 33, 33);
+    background-color: rgb(33, 33, 33);
+  }
+
+  .approach-blocks .case-block:hover,
+  .approach-blocks .case-block:focus-visible {
+    border-color: rgb(48, 48, 48);
+    background-color: rgb(48, 48, 48);
+    transform: none;
+  }
+
+  .approach-blocks .case-block-media {
+    aspect-ratio: 5 / 2;
   }
 
   .job-link {
@@ -915,7 +935,7 @@
 
         <hr class="rule">
 
-        <span class="eyebrow case-studies-heading">Case Studies</span>
+        <span class="eyebrow case-studies-heading">Quantemplate case studies</span>
 
         <div class="case-blocks">
           <a class="case-block has-image" href="/case-studies/pipelines">
@@ -958,6 +978,37 @@
             </span>
           </a>
         </div>
+      </div>
+    </section>
+
+    <hr class="rule">
+
+    <section aria-labelledby="approach-heading">
+      <span class="eyebrow" id="approach-heading">Approach</span>
+      <div class="case-blocks approach-blocks">
+        <a class="case-block has-image" href="/ai">
+          <img class="case-block-media" src="/media/approach-ai.png" alt="Detail of Quantemplate&rsquo;s column-mapping interface." loading="lazy">
+          <span class="case-block-text">
+            <span class="case-block-title">Design and AI</span>
+            <span class="case-block-subtitle">Designing for intelligent systems. Using AI in my work.</span>
+          </span>
+        </a>
+
+        <a class="case-block has-image" href="/design-craft">
+          <img class="case-block-media" src="/media/approach-craft.jpg" alt="The blind-embossed White Rainbow logo, in detail." loading="lazy">
+          <span class="case-block-text">
+            <span class="case-block-title">Design Craft</span>
+            <span class="case-block-subtitle">Building brands and caring about the details.</span>
+          </span>
+        </a>
+
+        <a class="case-block has-image" href="/approach">
+          <img class="case-block-media" src="/media/approach-wayfinding.jpg" alt="Detail of a UK motorway sign reading &lsquo;The North&rsquo;." loading="lazy">
+          <span class="case-block-text">
+            <span class="case-block-title">Wayfinding</span>
+            <span class="case-block-subtitle">Design principles learned from wayfinding.</span>
+          </span>
+        </a>
       </div>
     </section>
 

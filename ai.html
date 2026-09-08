@@ -355,13 +355,87 @@
       min-width: 0;
     }
 
-    .toc {
-      display: flex;
-      flex-direction: column;
+    .side-rail {
       grid-column: 2;
       position: sticky;
       top: 100px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
     }
+
+    .toc {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .side-rail .related {
+      grid-template-columns: 1fr;
+      margin-top: 0;
+      padding-top: 0;
+      border-top: none;
+    }
+  }
+
+  .related {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    max-width: 46rem;
+    margin-top: clamp(40px, 6vw, 56px);
+    padding-top: 28px;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  @media (max-width: 560px) {
+    .related {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .related-heading {
+    grid-column: 1 / -1;
+    margin: 0 0 4px;
+  }
+
+  .related a {
+    display: block;
+    overflow: hidden;
+    border: 1px solid rgb(33, 33, 33);
+    border-radius: 8px;
+    background-color: rgb(33, 33, 33);
+    color: #fff;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .related a:hover,
+  .related a:focus-visible {
+    background-color: rgb(48, 48, 48);
+    border-color: rgb(48, 48, 48);
+  }
+
+  .related-thumb {
+    display: block;
+    width: 100%;
+    aspect-ratio: 5 / 2;
+    object-fit: cover;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    transition: transform 0.3s ease;
+  }
+
+  .related a:hover .related-thumb,
+  .related a:focus-visible .related-thumb {
+    transform: scale(1.04);
+  }
+
+  .related-title {
+    display: block;
+    padding: 12px 15px 14px;
+    font-family: "Fakt Blond SemiBold", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    color: #fff;
+    font-size: 15px;
+    line-height: 1.35;
   }
 
   .toc-heading {
@@ -411,6 +485,12 @@
 
   .principle p + p {
     margin-top: clamp(16px, 2.2vw, 24px);
+  }
+
+  .principle p.note {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: clamp(15.5px, 1.7vw, 17px);
+    line-height: 1.65;
   }
 
   .principle blockquote {
@@ -907,15 +987,27 @@
             </div>
             <figcaption>A 10-minute prototype made in Lovable to test and refine some interactions. It doesn&rsquo;t look exactly like Quantemplate but at this point in the process it doesn&rsquo;t have to.</figcaption>
           </figure>
+
+          <p class="note">In this example I used Lovable to test how users could find and sort datasets designated as &lsquo;data dictionaries&rsquo;. I explored placing the filter in the sidebar or the top ribbon, and sorting by properties unique to data dictionaries.</p>
+          <p class="note">The prototype revealed a conflict between dictionary-specific sorting and the main dataset sort setting. I made the dictionary sort behave like a removable filter: users could see when it was active and clear it to return to the main sort order.</p>
+          <p class="note">Working with realistic data exposed an issue that would have been harder to spot in a conventional click-through prototype.</p>
         </section>
       </div>
     </div>
 
+    <div class="side-rail">
     <nav class="toc" aria-label="Section navigation">
       <span class="eyebrow toc-heading">On this page</span>
       <a href="#ai-for-heading">Designing for AI</a>
       <a href="#ai-with-heading">Designing with AI</a>
     </nav>
+
+      <nav class="related" aria-label="More in Approach">
+        <span class="eyebrow related-heading">More</span>
+      <a href="/design-craft"><img class="related-thumb" src="/media/approach-craft.jpg" alt="" loading="lazy"><span class="related-title">Design Craft</span></a>
+      <a href="/approach"><img class="related-thumb" src="/media/approach-wayfinding.jpg" alt="" loading="lazy"><span class="related-title">Learning from wayfinding</span></a>
+      </nav>
+    </div>
 
     <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Enlarged image" tabindex="-1">
       <button class="lightbox-close" type="button" aria-label="Close enlarged image">&times;</button>

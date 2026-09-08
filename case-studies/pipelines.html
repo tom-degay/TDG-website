@@ -3,23 +3,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Connecting long-term goals to everyday routines — Tom de Gay</title>
-<meta name="description" content="How Tom de Gay designed the UX and UI for Zonefully, a planning app that links long-term goals to recurring routines and a calendar — working directly with the founder to a functioning v1.">
+<title>Bringing clarity to complex data flows — Tom de Gay</title>
+<meta name="description" content="How Tom de Gay led the design and evolution of Quantemplate Pipelines — from a code editor to a visual environment for building, running and tracing complex data transformations.">
 <meta name="theme-color" content="#000000">
 
 <meta property="og:type" content="article">
-<meta property="og:title" content="Connecting long-term goals to everyday routines — Tom de Gay">
-<meta property="og:description" content="How Tom de Gay designed the UX and UI for Zonefully, a planning app that links long-term goals to recurring routines and a calendar.">
-<meta property="og:url" content="https://tomdegay.com/case-studies/zonefully">
-<meta property="og:image" content="https://tomdegay.com/case-studies/media/zonefully.jpg">
-<meta property="og:image:width" content="1400">
-<meta property="og:image:height" content="937">
-<meta property="og:image:alt" content="Zonefully's Programs screen: a list of training and meal routines beside a Recovery programme detail with its ordered routines.">
+<meta property="og:title" content="Bringing clarity to complex data flows — Tom de Gay">
+<meta property="og:description" content="How Tom de Gay led the design and evolution of Quantemplate Pipelines — enterprise data processing made accessible through flexible, visual workflows.">
+<meta property="og:url" content="https://tomdegay.com/case-studies/pipelines">
+<meta property="og:image" content="https://tomdegay.com/case-studies/media/pipelines-placeholder.png">
+<meta property="og:image:width" content="1322">
+<meta property="og:image:height" content="743">
+<meta property="og:image:alt" content="The Quantemplate Pipelines mark.">
 
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Connecting long-term goals to everyday routines — Tom de Gay">
-<meta name="twitter:description" content="How Tom de Gay designed the UX and UI for Zonefully, a planning app that links long-term goals to recurring routines and a calendar.">
-<meta name="twitter:image" content="https://tomdegay.com/case-studies/media/zonefully.jpg">
+<meta name="twitter:title" content="Bringing clarity to complex data flows — Tom de Gay">
+<meta name="twitter:description" content="How Tom de Gay led the design and evolution of Quantemplate Pipelines — enterprise data processing made accessible through flexible, visual workflows.">
+<meta name="twitter:image" content="https://tomdegay.com/case-studies/media/pipelines-placeholder.png">
 
 <link rel="icon" href="/tdg-favicon.svg" type="image/svg+xml">
 
@@ -325,6 +325,38 @@
     .key-points {
       grid-column: 2 / -1;
     }
+  }
+
+  /* -- summary stats -- */
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 28px 32px;
+    margin: 32px 0 0;
+  }
+
+  .stat {
+    margin: 0;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .stat-value {
+    display: block;
+    color: #00d8aa;
+    font-weight: 400;
+    font-size: clamp(28px, 4vw, 40px);
+    line-height: 1.05;
+  }
+
+  .stat-label {
+    display: block;
+    margin: 8px 0 0;
+    color: rgba(255, 255, 255, 0.55);
+    font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+    font-size: 13px;
+    line-height: 1.5;
   }
 
   /* -- body copy -- */
@@ -1063,7 +1095,7 @@
                 <span class="nav-dropdown-card-kicker">Validation</span>
                 <span class="nav-dropdown-card-title">Closing the loop on data quality</span>
               </a>
-              <a class="nav-dropdown-card" href="/case-studies/pipelines">
+              <a class="nav-dropdown-card is-current" href="/case-studies/pipelines">
                 <span class="nav-dropdown-card-kicker">Pipelines</span>
                 <span class="nav-dropdown-card-title">Bringing clarity to complex data flows</span>
               </a>
@@ -1071,7 +1103,7 @@
                 <span class="nav-dropdown-card-kicker">Image Insight</span>
                 <span class="nav-dropdown-card-title">Making space for deeper reflection</span>
               </a>
-              <a class="nav-dropdown-card is-current" href="/case-studies/zonefully">
+              <a class="nav-dropdown-card" href="/case-studies/zonefully">
                 <span class="nav-dropdown-card-kicker">Zonefully</span>
                 <span class="nav-dropdown-card-title">Connecting long-term goals to everyday routines</span>
               </a>
@@ -1085,30 +1117,30 @@
   <main>
   <div class="content">
     <header>
-      <span class="kicker">Case Study | Zonefully</span>
-      <h1 class="display">Connecting long-term goals to everyday routines</h1>
-      <p class="subtitle">A planning app that connects personal goals with recurring routines and a calendar to put them into practice.</p>
-      <p class="keywords">Interaction design · Visual design</p>
+      <span class="kicker">Case Study | <a href="https://help.quantemplate.com/about-pipelines" target="_blank" rel="noopener noreferrer">Quantemplate Pipelines</a></span>
+      <h1 class="display">Bringing clarity to complex data flows</h1>
+      <p class="subtitle">Enterprise data processing made accessible through flexible, visual workflows.</p>
+      <p class="keywords">Zero-to-one · Visual programming · Evolution</p>
 
       <hr class="rule">
 
       <div class="meta-row">
         <div class="meta-item">
           <span class="eyebrow">Role</span>
-          <p>UX and UI design</p>
+          <p>Lead product designer, end to end</p>
         </div>
         <div class="meta-item">
           <span class="eyebrow">Team</span>
-          <p>Working directly with the founder</p>
+          <p>Design, engineering, domain experts and customers</p>
         </div>
         <div class="meta-item">
           <span class="eyebrow">Timeframe</span>
           <div class="timeframe-with-donut">
-            <svg class="timeframe-donut" viewBox="0 0 44 44" width="44" height="44" role="img" aria-label="Design time: about 10 days">
+            <svg class="timeframe-donut" viewBox="0 0 44 44" width="44" height="44" role="img" aria-label="Design time: about 90 days for v1">
               <circle class="timeframe-donut-track" cx="22" cy="22" r="18"></circle>
-              <circle class="timeframe-donut-value" cx="22" cy="22" r="18" pathLength="180" style="--donut-offset: 170" transform="rotate(-90 22 22)"></circle>
+              <circle class="timeframe-donut-value" cx="22" cy="22" r="18" pathLength="180" style="--donut-offset: 90" transform="rotate(-90 22 22)"></circle>
             </svg>
-            <p>10 days / 2021</p>
+            <p>3 months / 2016 v1<br>Still improving today</p>
           </div>
         </div>
       </div>
@@ -1120,9 +1152,10 @@
       <span class="eyebrow" id="keypoints-heading">Key points</span>
       <div class="key-points-grid">
         <ul class="key-points">
-          <li>Translated the founder&rsquo;s conceptual model into a coherent interface</li>
-          <li>Used connected cards to keep context visible between programmes and routines</li>
-          <li>Worked with the founder from concept through to a functioning v1</li>
+          <li>Solved the initial zero-to-one problem with a code editor, then progressively introduced visual controls</li>
+          <li>Co-created a stages-and-operations model with engineering, making complex pipelines manageable and accelerating development</li>
+          <li>Used client workshops, training sessions and hands-on implementation to identify and refine difficult workflows</li>
+          <li>Pipelines became the platform&rsquo;s marquee product and primary growth driver, processing 3.4bn rows of data per year</li>
         </ul>
       </div>
     </section>
@@ -1131,56 +1164,89 @@
 
     <section aria-labelledby="summary-heading">
       <span class="eyebrow" id="summary-heading">Summary</span>
-      <p class="about-statement display">Zonefully&rsquo;s founder approached me to design the UX and UI for an app that organised recurring activities around long-term goals. He had a well-developed conceptual model, and my role was to make it understandable through the interface.</p>
-      <p class="about-statement display">During a short engagement, I designed the navigation, editing states and visual treatment, helping translate the concept into a functioning first version.</p>
+      <p class="about-statement display">I led the design and evolution of <a href="https://help.quantemplate.com/about-pipelines" target="_blank" rel="noopener noreferrer">Quantemplate Pipelines</a>, taking it from a code editor to a visual environment for building and managing data transformations.</p>
+      <p class="about-statement display">The initial challenge was breadth: clients needed every transformation in their workflow to be possible before the product could be useful. We shipped that capability through code, then progressively made it accessible through stages, operations and dedicated interfaces. Continued work with clients, and our own use, shaped how users navigate complex data flows, manage inputs and outputs, and connect pipelines together.</p>
+      <p class="about-statement display">Pipelines are now Quantemplate&rsquo;s core offering, with use at enterprise scale. Their flexibility allows them to tackle dozens of data domains, spanning fleet auto, catastrophe risk modelling and credit analysis.</p>
+
+      <dl class="stats">
+        <div class="stat">
+          <dt class="stat-value">17k</dt>
+          <dd class="stat-label">Runs per year</dd>
+        </div>
+        <div class="stat">
+          <dt class="stat-value">3.4bn</dt>
+          <dd class="stat-label">Rows processed annually</dd>
+        </div>
+        <div class="stat">
+          <dt class="stat-value">34+</dt>
+          <dd class="stat-label">Different data domains</dd>
+        </div>
+        <div class="stat">
+          <dt class="stat-value">100%</dt>
+          <dd class="stat-label">Sales attributed to pipelines</dd>
+        </div>
+      </dl>
     </section>
 
     <hr class="rule">
 
     <section aria-labelledby="problem-heading" class="case-body">
       <span class="eyebrow" id="problem-heading">Problem</span>
-      <h2>Connecting the bigger goal to the next action</h2>
-      <p>Zonefully brought together several related concepts. Activities represented the things people wanted to plan and track. Programmes grouped Routines into sequences, which could then be applied to a calendar.</p>
-      <p>For a cycling goal, that could mean training and recovery programmes containing individual rides and rest days. The challenge was to make these relationships easy to follow without asking people to understand the whole system before they could start.</p>
-
-      <figure class="figure">
-        <img src="media/zonefully-planner.jpg" alt="Zonefully's Planner: a programme's routines laid across a week, with a side panel naming the Activity, Programme and Routine for the selected slot.">
-        <figcaption>A programme&rsquo;s routines placed on the calendar, with the chain from activity to programme to routine kept in view.</figcaption>
-      </figure>
+      <h2>Ferraris on country roads</h2>
+      <p>Quantemplate&rsquo;s first product offering was a high-performance, drag-and-drop analytics suite. In 2013, there was nothing else like it. We had gone to insurers with these tools, but they were struggling to get their data into a form that could be analysed. One client put it memorably:</p>
+      <blockquote>Quantemplate is a Ferrari, but our data is on country roads.
+        <cite>COO, major European insurance company</cite>
+      </blockquote>
+      <p>So we set about building a race track, taking everything we had learnt from building the analytics tools and applying it to data integration.</p>
+      <blockquote>The zero-to-one challenge was that a pipeline needed to support every transformation required to complete the job.</blockquote>
+      <p>A missing operation could leave the whole workflow unusable. We needed to get to that breadth of capability quickly, then make it easier to work with.</p>
     </section>
 
     <hr class="rule">
 
     <section aria-labelledby="approach-heading" class="case-body">
       <span class="eyebrow" id="approach-heading">Approach</span>
-      <h2>Making the structure visible</h2>
-      <p>I worked within the founder&rsquo;s conceptual model, focusing on how people would navigate between its different levels. Programme lists, routine lists and detail views followed a consistent visual structure.</p>
-      <p>A spacious layout separated the main areas of the interface. Activity colours, selection highlights and breadcrumb labels reinforced the connections between goals, programmes and routines.</p>
 
-      <figure class="figure">
-        <img src="media/zonefully-programs.jpg" alt="Zonefully's Programs screen: a searchable list of programmes on the left, and the selected programme's detail — cover image, activity and ordered routines — on the right.">
-        <figcaption>Programme list and detail share one spacious structure; the activity colour and selection highlight tie a programme to its routines.</figcaption>
-      </figure>
+      <div class="subsection" id="approach-capability">
+        <h3>Ship the capability, then refine the experience</h3>
+        <p>We released a code editor with views for inputs, transformation code and outputs. This gave us the flexibility to support clients&rsquo; requirements and learn what was required while we developed the visual experience.</p>
+        <p>We then broke the code into understandable portions and began building dedicated interfaces for each of them. Workshops with clients helped us map out their data flows and stack-rank the operations to tackle first.</p>
+        <p>This approach meant that each operation could have an interface tailored to its particular task.</p>
+        <blockquote>This was progressive disclosure, a principle I had learnt through wayfinding: help people orient themselves, then reveal the detail they need at the point they need it.</blockquote>
+      </div>
+
+      <div class="subsection" id="approach-implementations">
+        <h3>Stay close to real implementations</h3>
+        <blockquote>I made sure I was in every client meeting or training session. I also used the product extensively, becoming deeply involved in production implementations and building many pipelines myself.</blockquote>
+        <p>This helped me understand where the design became difficult under the complexity of real data. Following data through a pipeline was one recurring problem, confirmed by conversations with other users. Later, the need to understand connections between multiple pipelines emerged in the same way.</p>
+      </div>
     </section>
 
     <hr class="rule">
 
     <section aria-labelledby="keydecisions-heading" class="case-body">
       <span class="eyebrow" id="keydecisions-heading">Key decisions</span>
-      <h2>Keeping context alongside the detail</h2>
-      <p>The interface centred on cards that opened and collapsed across the screen. Selecting a programme revealed its routines; opening a routine brought its details into focus alongside the programme it belonged to.</p>
-      <p>This gave navigation a consistent direction. The intention was to let people move into the detail without losing sight of the plan they were working on.</p>
 
-      <figure class="figure">
-        <img src="media/zonefully-routine-context.jpg" alt="A routine opened for editing alongside the programme it sits in, with a breadcrumb reading Activities › Ride the Tourmalet › Programs.">
-        <figcaption>Opening a routine brings its detail into focus without losing the programme it belongs to; the breadcrumb holds the path back.</figcaption>
-      </figure>
-      <p>Creation states made the next steps explicit. Prompts such as &ldquo;Assign to an Activity&rdquo; and &ldquo;Add some Routines&rdquo; guided the setup of a new programme. Contextual controls grouped actions such as setting a cover image, duplicating and deleting.</p>
+      <div class="subsection" id="kd-hierarchy">
+        <h3>Give pipelines a simple hierarchy</h3>
+        <p>Our first visual model broke the code into steps called stages. We soon realised that pipelines would become enormous if every operation occupied its own stage.</p>
+        <p>Working with engineering, we introduced operations within stages. Stages represented the broader structure of the data flow (joining, combining or transforming inputs) while operations contained the detailed work.</p>
+        <blockquote>This collapsed the pipeline into a manageable sequence. Users could see its overall structure, then open a stage to work on individual operations.</blockquote>
+        <p>The model also made development practical. It allowed us to build the web application rapidly without getting caught up in complicated flowchart engineering, for which suitable web-based libraries were not available at the time.</p>
+      </div>
 
-      <figure class="figure">
-        <img src="media/zonefully-new-program.jpg" alt="A newly created 'Untitled Program' selected in the list and open in the detail panel, with an 'Assign to an Activity' prompt and empty day-by-day routine fields.">
-        <figcaption>A new programme starts with the next steps spelled out: assign it to an activity, then add some routines.</figcaption>
-      </figure>
+      <div class="subsection" id="kd-history">
+        <h3>Preserve the run history</h3>
+        <p>Every pipeline run was recorded, with users able to navigate back through all previous runs.</p>
+        <p>This was important for clients who relied on Quantemplate as a system of record. The experience needed to support looking back at prior activity as well as configuring and running the next transformation.</p>
+      </div>
+
+      <div class="subsection" id="kd-trace">
+        <h3>Trace the changes</h3>
+        <p>The engineering team built a new technology called Trace to preview the current state of the data and validate configuration as it flows through the pipeline. I designed the experience for this, indicating when a trace was running, and showing error states when an exception was found.</p>
+        <p>Later, when we started chaining pipelines together and introduced automated runs, I realised this created the potential for infinite loops.</p>
+        <blockquote>This was a systemic risk. I advocated for the engineering team to develop loop detection and designed a UI for it.</blockquote>
+      </div>
     </section>
 
     <hr class="rule">
@@ -1188,19 +1254,30 @@
     <section aria-labelledby="implementation-heading" class="case-body">
       <span class="eyebrow" id="implementation-heading">Implementation</span>
 
-      <div class="subsection" id="impl-developing">
-        <h3>Developing the interface</h3>
-        <p>I developed designs for programme browsing, routine details and new-programme creation, including selection and hover states. I also explored variations in cover imagery and action placement to balance functionality with a spacious layout.</p>
-
-        <figure class="figure">
-          <img src="media/zonefully-actions.jpg" alt="A variant of the programme detail without a cover image, with the contextual action controls placed in a row at the top of the panel.">
-          <figcaption>One of the explorations of where the programme&rsquo;s controls sit, keeping them reachable without crowding the layout.</figcaption>
-        </figure>
+      <div class="subsection" id="impl-evolution">
+        <h3>Continuous evolution</h3>
+        <p>We progressively replaced transformation code with dedicated operation interfaces, prioritised through client workshops. Training sessions and hands-on implementation revealed where further refinement was needed. More recent additions include AI suggestions for join points, next-generation column-header mapping and one-click validations.</p>
       </div>
 
-      <div class="subsection" id="impl-firstversion">
-        <h3>Working towards a first version</h3>
-        <p>Working closely with the founder, I contributed the interaction design and visual language that helped bring the concept into a functioning v1.</p>
+      <div class="subsection" id="impl-io">
+        <h3>Bring inputs and outputs into one view</h3>
+        <p>The pipeline&rsquo;s right-hand area was originally intended for live data preview, but this proved technically challenging. Based on user feedback, I repurposed it to bring inputs and outputs together from their three separate tabs, resolving a navigation problem inherited from the original code editor.</p>
+      </div>
+
+      <div class="subsection" id="impl-lineage">
+        <h3>Show the lineage</h3>
+        <p>Another pain point we identified was keeping track of data lineage through pipelines. I proposed connecting lines between stages to help users follow data through a pipeline. Initially, I envisioned user-defined colour groups to denote functions, but the feedback we got was that these would add configuration overhead. Instead, we automatically cycled colours through a spectrum to distinguish connections.</p>
+      </div>
+
+      <div class="subsection" id="impl-connections">
+        <h3>Follow the connections between pipelines</h3>
+        <p>As clients chained pipelines together, we found ourselves explaining the connections through <a href="https://miro.com" target="_blank" rel="noopener noreferrer">Miro</a> flowcharts. This was a desire line: a view we repeatedly created outside the product.</p>
+        <p>In 2026, we built a flowchart view into Quantemplate, giving users an overview across pipelines alongside the detailed stage editor.</p>
+      </div>
+
+      <div class="subsection" id="impl-activity">
+        <h3>Make activity visible</h3>
+        <p>Pipelines glow as they run, along with their corresponding connecting lines in the flowchart. This makes execution visible in the context of the wider workflow. We recorded an uptick in engagement during demos and training sessions as the data flow through a pipeline became tangible.</p>
       </div>
     </section>
 
@@ -1208,21 +1285,24 @@
 
     <section aria-labelledby="outcome-heading" class="case-body">
       <span class="eyebrow" id="outcome-heading">Outcome</span>
-      <h2>A working expression of the concept</h2>
-      <p>The work helped bring the founder&rsquo;s concept into a functioning first version. I established a coherent visual language and a consistent way to move between goals, programmes and routines, giving the product a concrete foundation for further development.</p>
+      <h2>From transformation code to a visual workflow</h2>
+      <p>Pipelines evolved from a code editor into a fully-featured visual environment for building, running and tracing complex data transformations.</p>
+      <p>The stages-and-operations model gave us a structure that could grow with clients&rsquo; requirements. Dedicated operation interfaces made individual tasks understandable, while consolidated inputs and outputs, connecting lines and the flowchart view helped users navigate the larger process.</p>
+      <p>The work began with getting the full transformation capability into users&rsquo; hands. Sustained refinement then came from observing how clients used it, building pipelines ourselves and following the workarounds that showed us what the product needed next.</p>
+      <blockquote>Pipelines have driven the growth of the business and are now responsible for 100% of engagements and sales, processing 3.4bn rows per year with 17k pipeline runs in client production environments.</blockquote>
     </section>
 
     <hr class="rule">
 
     <section aria-labelledby="next-heading">
       <span class="eyebrow" id="next-heading">Next case study</span>
-      <a class="case-block has-image" href="/case-studies/pipelines">
-        <img class="case-block-media" src="/case-studies/media/pipelines-placeholder.png" alt="The Quantemplate Pipelines mark." loading="lazy">
+      <a class="case-block has-image" href="/case-studies/connecting-organisations">
+        <img class="case-block-media" src="/case-studies/media/feeds-repo-dashboard-crop.png" alt="The Feeds repository redesigned as a management dashboard, showing partner feeds and their submission status." loading="lazy">
         <span class="case-block-text">
-          <span class="case-block-kicker">Pipelines</span>
-          <span class="case-block-title">Bringing clarity to complex data flows</span>
-          <span class="case-block-subtitle">Enterprise data processing made accessible through flexible, visual workflows.</span>
-          <span class="case-block-keywords">Zero-to-one · Visual programming · Evolution</span>
+          <span class="case-block-kicker">Feeds</span>
+          <span class="case-block-title">Connecting organisations through data</span>
+          <span class="case-block-subtitle">Infrastructure to automate data exchange, laying the foundation for a connected network.</span>
+          <span class="case-block-keywords">Product strategy · Systems thinking · Process design</span>
         </span>
       </a>
     </section>

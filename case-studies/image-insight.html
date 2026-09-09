@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Making space for deeper reflection — Tom de Gay</title>
+<title>Image Insight</title>
 <meta name="description" content="How Tom de Gay simplified Image Insight, a digital coaching tool that uses images to prompt reflection, into a calm, low-friction experience — then refined it through school betas.">
 <meta name="theme-color" content="#131313">
 
@@ -142,6 +142,44 @@
     border: none;
     border-top: 1px solid rgba(255, 255, 255, 0.2);
     margin: clamp(32px, 5vw, 48px) 0;
+  }
+
+  hr.rule:has(+ .back-to-top-row) {
+    margin-bottom: clamp(8px, 1.2vw, 14px);
+  }
+
+  .case-footer {
+    margin-top: clamp(48px, 7vw, 76px);
+  }
+
+  .back-to-top-row {
+    margin: 0;
+    text-align: right;
+  }
+
+  .back-to-top {
+    font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.45);
+    border-bottom: none;
+    white-space: nowrap;
+  }
+
+  .back-to-top:hover,
+  .back-to-top:focus-visible {
+    color: #fff;
+    border-bottom: none;
+  }
+
+  .case-footer .eyebrow {
+    margin-top: 0;
+  }
+
+  .case-footer .case-block {
+    margin-top: 0;
   }
 
   section .eyebrow,
@@ -1210,6 +1248,11 @@
           <li>Refined the session workflow in response to feedback from a school&rsquo;s beta</li>
         </ul>
       </div>
+
+      <figure class="figure">
+        <img src="media/image-insight-session-expanded.jpg" alt="The session opened to full screen: a large 'What cards represent your weaknesses?' heading above three chosen images, with 'Review session' and 'Add question' below.">
+        <figcaption>The redesign in one view: the question and the chosen images hold the centre, and the rest of the interface steps back.</figcaption>
+      </figure>
     </section>
 
     <hr class="rule">
@@ -1218,11 +1261,6 @@
       <span class="eyebrow" id="summary-heading">Summary</span>
       <p class="about-statement display">Image Insight&rsquo;s co-founder approached me with a working prototype for digital coaching cards. The concept was there, but the visual design felt clunky and the user experience needed simplifying.</p>
       <p class="about-statement display">I refined the interface and key interactions, creating an elegant, low-friction experience where imagery and conversation take centre stage. I subsequently helped refine the product in response to beta feedback.</p>
-
-      <figure class="figure">
-        <img src="media/image-insight-session-expanded.jpg" alt="The session opened to full screen: a large 'What cards represent your weaknesses?' heading above three chosen images, with 'Review session' and 'Add question' below.">
-        <figcaption>The redesign in one view: the question and the chosen images hold the centre, and the rest of the interface steps back.</figcaption>
-      </figure>
     </section>
 
     <hr class="rule">
@@ -1351,7 +1389,9 @@
 
     <hr class="rule">
 
-    <section aria-labelledby="next-heading">
+    <p class="back-to-top-row"><a class="back-to-top" href="#">Back to top <span aria-hidden="true">&uarr;</span></a></p>
+
+    <section aria-labelledby="next-heading" class="case-footer">
       <span class="eyebrow" id="next-heading">Next case study</span>
       <a class="case-block has-image" href="/case-studies/zonefully">
         <img class="case-block-media" src="/case-studies/media/zonefully.jpg" alt="Zonefully's Programs screen: a list of training and meal routines beside a Recovery programme detail with its ordered routines." loading="lazy">
@@ -1396,6 +1436,17 @@
           v.removeAttribute("autoplay");
         });
       }
+    })();
+
+    (function () {
+      var link = document.querySelector(".back-to-top");
+      if (!link) return;
+      link.addEventListener("click", function (e) {
+        e.preventDefault();
+        var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+        link.blur();
+      });
     })();
 
     (function () {

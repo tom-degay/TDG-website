@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Connecting organisations through data — Tom de Gay</title>
+<title>Feeds</title>
 <meta name="description" content="How Tom de Gay designed Feeds, Quantemplate's workspace for securely exchanging data between organisations — reframing a simple upload portal into infrastructure for a connected data network.">
 <meta name="theme-color" content="#131313">
 
@@ -143,6 +143,44 @@
     border: none;
     border-top: 1px solid rgba(255, 255, 255, 0.2);
     margin: clamp(32px, 5vw, 48px) 0;
+  }
+
+  hr.rule:has(+ .back-to-top-row) {
+    margin-bottom: clamp(8px, 1.2vw, 14px);
+  }
+
+  .case-footer {
+    margin-top: clamp(48px, 7vw, 76px);
+  }
+
+  .back-to-top-row {
+    margin: 0;
+    text-align: right;
+  }
+
+  .back-to-top {
+    font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.45);
+    border-bottom: none;
+    white-space: nowrap;
+  }
+
+  .back-to-top:hover,
+  .back-to-top:focus-visible {
+    color: #fff;
+    border-bottom: none;
+  }
+
+  .case-footer .eyebrow {
+    margin-top: 0;
+  }
+
+  .case-footer .case-block {
+    margin-top: 0;
   }
 
   section .eyebrow,
@@ -469,6 +507,10 @@
     max-width: 46rem;
   }
 
+  .figure.is-full {
+    max-width: none;
+  }
+
   .figure img {
     display: block;
     width: 100%;
@@ -482,6 +524,25 @@
     font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
     font-size: 14px;
     line-height: 1.5;
+  }
+
+  .figure-strip-imgs {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .figure-strip .figure-strip-imgs img {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+  }
+
+  @media (max-width: 560px) {
+    .figure-strip-imgs {
+      grid-template-columns: 1fr;
+    }
   }
 
   /* -- resources -- */
@@ -1222,6 +1283,11 @@
           <li>Spans submissions, scheduling, org creation, authentication and admin tooling</li>
         </ul>
       </div>
+
+      <figure class="figure is-full">
+        <img src="media/chain-of-custody.png" alt="A chain-of-custody view in Feeds: two partner organisations supplying premium, payment, claims and loss-adjustment data into an insurer, which passes it on to a broker and three reinsurers downstream, with each card showing who last used the data and where it flows.">
+        <figcaption>Feeds keeps the chain of custody for every dataset: which organisation supplied it, who has used it, and where it flows downstream.</figcaption>
+      </figure>
     </section>
 
     <hr class="rule">
@@ -1252,14 +1318,12 @@
 
       <blockquote>Across an average of 150 trading partners, repeated monthly, that amounted to 18,000 manual steps a year.</blockquote>
 
-      <figure class="figure">
-        <img src="media/workflow-bottlenecks-diagram.png" alt="Diagram of a typical MGA data pipeline: manual upload to network storage, an automated import-to-output pipeline including Map Column Headers, then a manual step to push output to the client database via API.">
-        <figcaption>2022 analysis of typical Quantemplate workflow, identifying manual bottlenecks.</figcaption>
-      </figure>
-
-      <figure class="figure">
-        <img src="media/feeds-problem-postits.png" alt="Annotated version of the Data Repo and pipeline diagram, with yellow sticky notes flagging open questions and trade-offs at each stage: partner data visibility and permissions, input selector categorisation, additive versus replacing submissions, and notification requirements.">
-        <figcaption>2022 analysis showing automation steps required for straight-through-processing. Post-its identify likely trade-offs, challenges to be overcome or areas requiring more research.</figcaption>
+      <figure class="figure figure-strip">
+        <div class="figure-strip-imgs">
+          <img src="media/workflow-bottlenecks-diagram.png" alt="Diagram of a typical MGA data pipeline: manual upload to network storage, an automated import-to-output pipeline including Map Column Headers, then a manual step to push output to the client database via API." loading="lazy">
+          <img src="media/feeds-problem-postits.png" alt="Annotated version of the Data Repo and pipeline diagram, with yellow sticky notes flagging open questions and trade-offs at each stage: partner data visibility and permissions, input selector categorisation, additive versus replacing submissions, and notification requirements." loading="lazy">
+        </div>
+        <figcaption>2022 analysis of the typical Quantemplate workflow, identifying the manual bottlenecks &mdash; then an annotated version flagging the trade-offs and open questions on the way to straight-through processing.</figcaption>
       </figure>
     </section>
 
@@ -1423,7 +1487,9 @@
 
     <hr class="rule">
 
-    <section aria-labelledby="next-heading">
+    <p class="back-to-top-row"><a class="back-to-top" href="#">Back to top <span aria-hidden="true">&uarr;</span></a></p>
+
+    <section aria-labelledby="next-heading" class="case-footer">
       <span class="eyebrow" id="next-heading">Next case study</span>
       <a class="case-block has-image" href="/case-studies/mapping-inconsistent-schemas">
         <img class="case-block-media" src="/case-studies/media/concept-mapping-detail.png" alt="Concept design for Quantemplate's column mapping interface: schemas as vertically stacked fields aligned to a common master." loading="lazy">
@@ -1468,6 +1534,17 @@
           v.removeAttribute("autoplay");
         });
       }
+    })();
+
+    (function () {
+      var link = document.querySelector(".back-to-top");
+      if (!link) return;
+      link.addEventListener("click", function (e) {
+        e.preventDefault();
+        var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+        link.blur();
+      });
     })();
 
     (function () {

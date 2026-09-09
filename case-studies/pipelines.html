@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Bringing clarity to complex data flows — Tom de Gay</title>
+<title>Pipelines</title>
 <meta name="description" content="How Tom de Gay led the design and evolution of Quantemplate Pipelines — from a code editor to a visual environment for building, running and tracing complex data transformations.">
 <meta name="theme-color" content="#131313">
 
@@ -142,6 +142,44 @@
     border: none;
     border-top: 1px solid rgba(255, 255, 255, 0.2);
     margin: clamp(32px, 5vw, 48px) 0;
+  }
+
+  hr.rule:has(+ .back-to-top-row) {
+    margin-bottom: clamp(8px, 1.2vw, 14px);
+  }
+
+  .case-footer {
+    margin-top: clamp(48px, 7vw, 76px);
+  }
+
+  .back-to-top-row {
+    margin: 0;
+    text-align: right;
+  }
+
+  .back-to-top {
+    font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.45);
+    border-bottom: none;
+    white-space: nowrap;
+  }
+
+  .back-to-top:hover,
+  .back-to-top:focus-visible {
+    color: #fff;
+    border-bottom: none;
+  }
+
+  .case-footer .eyebrow {
+    margin-top: 0;
+  }
+
+  .case-footer .case-block {
+    margin-top: 0;
   }
 
   section .eyebrow,
@@ -1338,14 +1376,6 @@
           <li>Pipelines became the platform&rsquo;s marquee product and primary growth driver, processing 3.4bn rows of data per year</li>
         </ul>
       </div>
-    </section>
-
-    <hr class="rule">
-
-    <section aria-labelledby="summary-heading">
-      <span class="eyebrow" id="summary-heading">Summary</span>
-      <p class="about-statement display">I led the design and evolution of <a href="https://help.quantemplate.com/about-pipelines" target="_blank" rel="noopener noreferrer">Quantemplate Pipelines</a>, taking it from a code editor to a visual environment for building and managing data transformations.</p>
-      <p class="about-statement display">The initial challenge was breadth: clients needed every transformation in their workflow to be possible before the product could be useful. We shipped that capability through code, then progressively made it accessible through stages, operations and dedicated interfaces.</p>
 
       <dl class="stats">
         <div class="stat">
@@ -1372,6 +1402,14 @@
         </video>
         <button class="ui-video-expand" type="button" aria-label="View full size"><svg viewBox="0 0 20 20" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3H3v4M13 3h4v4M13 17h4v-4M7 17H3v-4"/></svg></button>
       </div>
+    </section>
+
+    <hr class="rule">
+
+    <section aria-labelledby="summary-heading">
+      <span class="eyebrow" id="summary-heading">Summary</span>
+      <p class="about-statement display">I led the design and evolution of <a href="https://help.quantemplate.com/about-pipelines" target="_blank" rel="noopener noreferrer">Quantemplate Pipelines</a>, taking it from a code editor to a visual environment for building and managing data transformations.</p>
+      <p class="about-statement display">The initial challenge was breadth: clients needed every transformation in their workflow to be possible before the product could be useful. We shipped that capability through code, then progressively made it accessible through stages, operations and dedicated interfaces.</p>
     </section>
 
     <hr class="rule">
@@ -1557,10 +1595,12 @@
 
     <hr class="rule">
 
-    <section aria-labelledby="next-heading">
+    <p class="back-to-top-row"><a class="back-to-top" href="#">Back to top <span aria-hidden="true">&uarr;</span></a></p>
+
+    <section aria-labelledby="next-heading" class="case-footer">
       <span class="eyebrow" id="next-heading">Next case study</span>
       <a class="case-block has-image" href="/case-studies/connecting-organisations">
-        <img class="case-block-media" src="/case-studies/media/feeds-repo-dashboard-crop.png" alt="The Feeds repository redesigned as a management dashboard, showing partner feeds and their submission status." loading="lazy">
+        <img class="case-block-media" src="/case-studies/media/custody-chart-2.png" alt="A section of the Feeds chain-of-custody view: an insurer's data passing to a broker and on to its reinsurers, each node showing when it was last used." loading="lazy">
         <span class="case-block-text">
           <span class="case-block-kicker">Feeds</span>
           <span class="case-block-title">Connecting organisations through data</span>
@@ -1601,6 +1641,17 @@
           v.removeAttribute("autoplay");
         });
       }
+    })();
+
+    (function () {
+      var link = document.querySelector(".back-to-top");
+      if (!link) return;
+      link.addEventListener("click", function (e) {
+        e.preventDefault();
+        var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+        link.blur();
+      });
     })();
 
     (function () {

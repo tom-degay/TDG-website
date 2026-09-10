@@ -596,15 +596,30 @@
   }
 
   .case-block-keywords {
-    display: block;
-    color: rgba(255, 255, 255, 0.45);
-    font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 2px;
-    word-spacing: -3px;
-    text-transform: uppercase;
-    margin-top: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+  }
+
+  .case-block-keyword {
+    display: inline-block;
+    padding: 9px 13px;
+    border-radius: 6px;
+    background: rgb(48, 48, 48);
+    color: rgba(255, 255, 255, 0.72);
+    font-family: "Fakt Blond SemiBold", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    transition: background-color 0.2s ease;
+  }
+
+  .case-block:hover .case-block-keyword,
+  .case-block:focus-visible .case-block-keyword {
+    background: rgb(64, 64, 64);
   }
 
   .case-block.has-thumb {
@@ -1023,7 +1038,7 @@
               <span class="case-block-kicker">Column mapping</span>
               <span class="case-block-title">Mapping inconsistent schemas at scale</span>
               <span class="case-block-subtitle">Translate inconsistent data sources to a common target format, fully automated and enhanced by AI suggestions.</span>
-              <span class="case-block-keywords">Interaction design &middot; Human-in-the-loop</span>
+              <span class="case-block-keywords"><span class="case-block-keyword">Interaction design</span><span class="case-block-keyword">Human-in-the-loop</span></span>
             </span>
           </a>
         </section>

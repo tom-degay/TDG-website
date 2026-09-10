@@ -244,6 +244,23 @@
     cursor: zoom-in;
   }
 
+  /* outgoing image, sits over .gallery-main and dissolves to reveal the new one */
+  .gallery-fade {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 6px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gallery-fade { display: none; }
+  }
+
   .gallery-nav {
     position: absolute;
     top: 50%;
@@ -260,7 +277,7 @@
     color: #fff;
     cursor: pointer;
     opacity: 0;
-    transition: opacity 0.15s ease, background 0.15s ease;
+    transition: opacity 0.15s ease, background 0.15s ease, transform 0.08s ease;
   }
 
   .gallery-frame:hover .gallery-nav,
@@ -271,6 +288,10 @@
   .gallery-nav:hover,
   .gallery-nav:focus-visible {
     background: rgba(0, 0, 0, 0.8);
+  }
+
+  .gallery-nav:active {
+    transform: translateY(-50%) translateY(1px);
   }
 
   .gallery-nav svg { display: block; }
@@ -284,6 +305,16 @@
     .gallery-nav { opacity: 0.9; }
   }
 
+  .gallery-count {
+    margin: 12px 0 0;
+    color: rgba(255, 255, 255, 0.4);
+    font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    font-variant-numeric: tabular-nums;
+  }
+
   .gallery .gallery-caption {
     margin: 10px 0 0;
     max-width: none;
@@ -292,6 +323,10 @@
     font-size: 14px;
     font-weight: 400;
     line-height: 1.5;
+  }
+
+  .gallery-count + .gallery-caption {
+    margin-top: 5px;
   }
 
   .gallery-thumbs {
@@ -312,7 +347,7 @@
     overflow: hidden;
     cursor: pointer;
     opacity: 0.5;
-    transition: opacity 0.15s ease, border-color 0.15s ease;
+    transition: opacity 0.15s ease, border-color 0.15s ease, transform 0.08s ease;
   }
 
   .gallery-thumb img {
@@ -325,6 +360,10 @@
   .gallery-thumb:hover,
   .gallery-thumb:focus-visible {
     opacity: 0.85;
+  }
+
+  .gallery-thumb:active {
+    transform: translateY(1px);
   }
 
   .gallery-thumb.is-active {
@@ -1178,35 +1217,37 @@
 
           <div class="gallery">
             <div class="gallery-frame">
-              <img class="gallery-main" src="media/craft-isokon-01.jpg" alt="The white modernist Isokon building (Lawn Road Flats) with cantilevered access balconies, and raised cast lettering on the end wall reading &lsquo;Isokon &ndash; Lawn Road Flats&rsquo;.">
+              <img class="gallery-main" loading="lazy" src="media/craft-isokon-01.jpg" alt="The white modernist Isokon building (Lawn Road Flats) with cantilevered access balconies, and raised cast lettering on the end wall reading &lsquo;Isokon &ndash; Lawn Road Flats&rsquo;.">
+              <img class="gallery-fade" alt="" aria-hidden="true">
               <button class="gallery-nav gallery-nav-prev" type="button" aria-label="Previous image"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
               <button class="gallery-nav gallery-nav-next" type="button" aria-label="Next image"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
             </div>
+            <p class="gallery-count" aria-hidden="true">01 / 01</p>
             <p class="gallery-caption">The Isokon building (Lawn Road Flats) and the cast sign, designed 2005.</p>
             <div class="gallery-thumbs">
               <button class="gallery-thumb is-active" type="button" aria-label="Show image 1 of 8">
-                <img src="media/craft-isokon-01.jpg" alt="" data-alt="The white modernist Isokon building (Lawn Road Flats) with cantilevered access balconies, and raised cast lettering on the end wall reading &lsquo;Isokon &ndash; Lawn Road Flats&rsquo;." data-caption="The Isokon building (Lawn Road Flats) and the cast sign, designed 2005.">
+                <img src="media/craft-isokon-01-thumb.jpg" data-full="media/craft-isokon-01.jpg" alt="" loading="lazy" data-alt="The white modernist Isokon building (Lawn Road Flats) with cantilevered access balconies, and raised cast lettering on the end wall reading &lsquo;Isokon &ndash; Lawn Road Flats&rsquo;." data-caption="The Isokon building (Lawn Road Flats) and the cast sign, designed 2005.">
               </button>
               <button class="gallery-thumb" type="button" aria-label="Show image 2 of 8">
-                <img src="media/craft-isokon-01a.jpg" alt="" data-alt="Close-up of the Isokon sign: raised cast letters reading &lsquo;ISOKON / LAWN ROAD FLATS&rsquo; throwing long shadows across the white rendered wall." data-caption="The cast sign, in detail.">
+                <img src="media/craft-isokon-01a-thumb.jpg" data-full="media/craft-isokon-01a.jpg" alt="" loading="lazy" data-alt="Close-up of the Isokon sign: raised cast letters reading &lsquo;ISOKON / LAWN ROAD FLATS&rsquo; throwing long shadows across the white rendered wall." data-caption="The cast sign, in detail.">
               </button>
               <button class="gallery-thumb" type="button" aria-label="Show image 3 of 8">
-                <img src="media/craft-isokon-02.jpg" alt="" data-alt="Exhibition view among black timber columns: two Penguin Donkey bookcases, one natural plywood and one painted white, on a low plinth." data-caption="Luther | Isokon exhibition at the Museum of Estonian Architecture, 30 August 2018.">
+                <img src="media/craft-isokon-02-thumb.jpg" data-full="media/craft-isokon-02.jpg" alt="" loading="lazy" data-alt="Exhibition view among black timber columns: two Penguin Donkey bookcases, one natural plywood and one painted white, on a low plinth." data-caption="Luther | Isokon exhibition at the Museum of Estonian Architecture, 30 August 2018.">
               </button>
               <button class="gallery-thumb" type="button" aria-label="Show image 4 of 8">
-                <img src="media/craft-isokon-03.jpg" alt="" data-alt="The Isokon Gallery interior: the ISOKON GALLERY wordmark, a lit architectural model in a vitrine, wall text on the company&rsquo;s founding principles, and Isokon furniture on plinths." data-caption="The Isokon Gallery, London.">
+                <img src="media/craft-isokon-03-thumb.jpg" data-full="media/craft-isokon-03.jpg" alt="" loading="lazy" data-alt="The Isokon Gallery interior: the ISOKON GALLERY wordmark, a lit architectural model in a vitrine, wall text on the company&rsquo;s founding principles, and Isokon furniture on plinths." data-caption="The Isokon Gallery, London.">
               </button>
               <button class="gallery-thumb" type="button" aria-label="Show image 5 of 8">
-                <img src="media/craft-isokon-04.jpg" alt="" data-alt="A printer&rsquo;s press sheet with two copies of the cover of &lsquo;The Fractured Life of Egon Riss&rsquo;, a Pantone formula guide alongside." data-caption="The Egon Riss book on press.">
+                <img src="media/craft-isokon-04-thumb.jpg" data-full="media/craft-isokon-04.jpg" alt="" loading="lazy" data-alt="A printer&rsquo;s press sheet with two copies of the cover of &lsquo;The Fractured Life of Egon Riss&rsquo;, a Pantone formula guide alongside." data-caption="The Egon Riss book on press.">
               </button>
               <button class="gallery-thumb" type="button" aria-label="Show image 6 of 8">
-                <img src="media/craft-isokon-05.jpg" alt="" data-alt="A copy of the finished book &lsquo;The Fractured Life of Egon Riss / Design, Displacement &amp; Donkeys&rsquo;, its cover a photograph of Egon Riss in a hat with a white line-drawn question-mark motif." data-caption="The Fractured Life of Egon Riss. A &lt;a href=&quot;https://isokongallery.org/products/design-displacement-donkeys-the-fractured-life-of-egon-riss&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;book&lt;/a&gt; I designed for the gallery.">
+                <img src="media/craft-isokon-05-thumb.jpg" data-full="media/craft-isokon-05.jpg" alt="" loading="lazy" data-alt="A copy of the finished book &lsquo;The Fractured Life of Egon Riss / Design, Displacement &amp; Donkeys&rsquo;, its cover a photograph of Egon Riss in a hat with a white line-drawn question-mark motif." data-caption="The Fractured Life of Egon Riss. A &lt;a href=&quot;https://isokongallery.org/products/design-displacement-donkeys-the-fractured-life-of-egon-riss&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;book&lt;/a&gt; I designed for the gallery.">
               </button>
               <button class="gallery-thumb" type="button" aria-label="Show image 7 of 8">
-                <img src="media/craft-isokon-06.jpg" alt="" data-alt="A large uncut press sheet laid on carpet, gridded with black-and-white photographs and the covers of several Isokon Gallery books, a CMYK colour bar along the bottom edge." data-caption="Press proof for a book on photographer (and Cold War spy recruiter) Edith Tudor-Hart.">
+                <img src="media/craft-isokon-06-thumb.jpg" data-full="media/craft-isokon-06.jpg" alt="" loading="lazy" data-alt="A large uncut press sheet laid on carpet, gridded with black-and-white photographs and the covers of several Isokon Gallery books, a CMYK colour bar along the bottom edge." data-caption="Press proof for a book on photographer (and Cold War spy recruiter) Edith Tudor-Hart.">
               </button>
               <button class="gallery-thumb" type="button" aria-label="Show image 8 of 8">
-                <img src="media/craft-isokon-07.jpg" alt="" data-alt="Hands holding an open Isokon Gallery booklet at a spread on Marcel Breuer and Walter Gropius furniture, the left page white, the right page red with a Gropius quotation." data-caption="A spread from an Isokon Gallery booklet.">
+                <img src="media/craft-isokon-07-thumb.jpg" data-full="media/craft-isokon-07.jpg" alt="" loading="lazy" data-alt="Hands holding an open Isokon Gallery booklet at a spread on Marcel Breuer and Walter Gropius furniture, the left page white, the right page red with a Gropius quotation." data-caption="A spread from an Isokon Gallery booklet.">
               </button>
             </div>
           </div>
@@ -1222,44 +1263,46 @@
 
           <div class="gallery">
             <div class="gallery-frame">
-              <img class="gallery-main" src="media/craft-white-rainbow-01.jpg" alt="Surface Tension catalogue folder seen from behind, a circular halftone-dot logo blind-embossed at the centre.">
+              <img class="gallery-main" loading="lazy" src="media/craft-white-rainbow-01.jpg" alt="Surface Tension catalogue folder seen from behind, a circular halftone-dot logo blind-embossed at the centre.">
+              <img class="gallery-fade" alt="" aria-hidden="true">
               <button class="gallery-nav gallery-nav-prev" type="button" aria-label="Previous image"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
               <button class="gallery-nav gallery-nav-next" type="button" aria-label="Next image"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
             </div>
+            <p class="gallery-count" aria-hidden="true">01 / 01</p>
             <p class="gallery-caption">Surface Tension catalogue, rear cover: the White Rainbow logo, blind-embossed.</p>
             <div class="gallery-thumbs">
               <button class="gallery-thumb is-active" type="button" aria-label="Show image 1 of 11">
-                <img src="media/craft-white-rainbow-01.jpg" alt="" data-alt="Surface Tension catalogue folder seen from behind, a circular halftone-dot logo blind-embossed at the centre." data-caption="Surface Tension catalogue, rear cover: the White Rainbow logo, blind-embossed.">
+                <img src="media/craft-white-rainbow-01-thumb.jpg" data-full="media/craft-white-rainbow-01.jpg" alt="" loading="lazy" data-alt="Surface Tension catalogue folder seen from behind, a circular halftone-dot logo blind-embossed at the centre." data-caption="Surface Tension catalogue, rear cover: the White Rainbow logo, blind-embossed.">
               </button>
               <button class="gallery-thumb" type="button" aria-label="Show image 2 of 11">
-                <img src="media/craft-white-rainbow-02.jpg" alt="" data-alt="Surface Tension catalogue: a white folder with the title embossed in bold sans-serif type, wrapped in a translucent silver paper band." data-caption="Surface Tension catalogue: an embossed A5 folder with a silver washi band, holding five folding posters.">
+                <img src="media/craft-white-rainbow-02-thumb.jpg" data-full="media/craft-white-rainbow-02.jpg" alt="" loading="lazy" data-alt="Surface Tension catalogue: a white folder with the title embossed in bold sans-serif type, wrapped in a translucent silver paper band." data-caption="Surface Tension catalogue: an embossed A5 folder with a silver washi band, holding five folding posters.">
               </button>
               <button class="gallery-thumb" type="button" aria-label="Show image 3 of 11">
-                <img src="media/craft-white-rainbow-03.jpg" alt="" data-alt="Close-up of the embossed Surface Tension invitation, the raised letters turning translucent over a fine line drawing of a face." data-caption="Surface Tension invitation: the paper turns transparent where it is embossed.">
+                <img src="media/craft-white-rainbow-03-thumb.jpg" data-full="media/craft-white-rainbow-03.jpg" alt="" loading="lazy" data-alt="Close-up of the embossed Surface Tension invitation, the raised letters turning translucent over a fine line drawing of a face." data-caption="Surface Tension invitation: the paper turns transparent where it is embossed.">
               </button>
               <button class="gallery-thumb" type="button" aria-label="Show image 4 of 11">
-                <img src="media/craft-white-rainbow-04.jpg" alt="" data-alt="A long folding poster from the Surface Tension catalogue opened out: an essay panel and, below the name Masaya Hashimoto, a dark photograph of a pale flower." data-caption="Each of the four artists had a long folding poster; this one is Masaya Hashimoto.">
+                <img src="media/craft-white-rainbow-04-thumb.jpg" data-full="media/craft-white-rainbow-04.jpg" alt="" loading="lazy" data-alt="A long folding poster from the Surface Tension catalogue opened out: an essay panel and, below the name Masaya Hashimoto, a dark photograph of a pale flower." data-caption="Each of the four artists had a long folding poster; this one is Masaya Hashimoto.">
               </button>
               <button class="gallery-thumb" type="button" aria-label="Show image 5 of 11">
-                <img src="media/craft-white-rainbow-05.jpg" alt="" data-alt="Surface Tension exhibition invitation: the title embossed over a Kumi Machida line drawing of two child-like figures, one leaning close to the other." data-caption="The invitation, with a Kumi Machida drawing, on a Japanese paper that turns transparent where embossed &ndash; its first use in the UK, as far as I know.">
+                <img src="media/craft-white-rainbow-05-thumb.jpg" data-full="media/craft-white-rainbow-05.jpg" alt="" loading="lazy" data-alt="Surface Tension exhibition invitation: the title embossed over a Kumi Machida line drawing of two child-like figures, one leaning close to the other." data-caption="The invitation, with a Kumi Machida drawing, on a Japanese paper that turns transparent where embossed &ndash; its first use in the UK, as far as I know.">
               </button>
               <button class="gallery-thumb" type="button" aria-label="Show image 6 of 11">
-                <img src="media/craft-white-rainbow-06.jpg" alt="" data-alt="The By The Mountain Path catalogue folded shut, soft photographs of clover and grasses above and below a bright orange belly-band lettered &lsquo;by the mountain path&rsquo;." data-caption="By The Mountain Path: a folding-map catalogue held by an orange band with white foil lettering. Cover artwork by Hidemi Nishida.">
+                <img src="media/craft-white-rainbow-06-thumb.jpg" data-full="media/craft-white-rainbow-06.jpg" alt="" loading="lazy" data-alt="The By The Mountain Path catalogue folded shut, soft photographs of clover and grasses above and below a bright orange belly-band lettered &lsquo;by the mountain path&rsquo;." data-caption="By The Mountain Path: a folding-map catalogue held by an orange band with white foil lettering. Cover artwork by Hidemi Nishida.">
               </button>
               <button class="gallery-thumb" type="button" aria-label="Show image 7 of 11">
-                <img src="media/craft-white-rainbow-07.jpg" alt="" data-alt="The By The Mountain Path catalogue opened flat into a large creased sheet, small reproductions of artworks and installation shots scattered across it, one edge orange." data-caption="Opened out, the catalogue is a single sheet: artworks on one side, essays on the reverse.">
+                <img src="media/craft-white-rainbow-07-thumb.jpg" data-full="media/craft-white-rainbow-07.jpg" alt="" loading="lazy" data-alt="The By The Mountain Path catalogue opened flat into a large creased sheet, small reproductions of artworks and installation shots scattered across it, one edge orange." data-caption="Opened out, the catalogue is a single sheet: artworks on one side, essays on the reverse.">
               </button>
               <button class="gallery-thumb" type="button" aria-label="Show image 8 of 11">
-                <img src="media/craft-white-rainbow-08.jpg" alt="" data-alt="The Shigeo Anza&iuml; &lsquo;Index&rsquo; catalogue: a black wire-bound book, the name in white serif type and &lsquo;Index&rsquo; in black gloss foil, two section headings set top right." data-caption="&lsquo;Index&rsquo;, the Shigeo Anzai catalogue: screenprinted black on greyboard with black foil, ring-bound to lie flat and mix paper stocks.">
+                <img src="media/craft-white-rainbow-08-thumb.jpg" data-full="media/craft-white-rainbow-08.jpg" alt="" loading="lazy" data-alt="The Shigeo Anza&iuml; &lsquo;Index&rsquo; catalogue: a black wire-bound book, the name in white serif type and &lsquo;Index&rsquo; in black gloss foil, two section headings set top right." data-caption="&lsquo;Index&rsquo;, the Shigeo Anzai catalogue: screenprinted black on greyboard with black foil, ring-bound to lie flat and mix paper stocks.">
               </button>
               <button class="gallery-thumb" type="button" aria-label="Show image 9 of 11">
-                <img src="media/craft-white-rainbow-09.jpg" alt="" data-alt="A fold-out page from the Anzai catalogue printed silver on black stock, the word &lsquo;timeline&rsquo; and a column of years reading along it." data-caption="The Anzai catalogue&rsquo;s fold-out timeline, printed silver on black.">
+                <img src="media/craft-white-rainbow-09-thumb.jpg" data-full="media/craft-white-rainbow-09.jpg" alt="" loading="lazy" data-alt="A fold-out page from the Anzai catalogue printed silver on black stock, the word &lsquo;timeline&rsquo; and a column of years reading along it." data-caption="The Anzai catalogue&rsquo;s fold-out timeline, printed silver on black.">
               </button>
               <button class="gallery-thumb" type="button" aria-label="Show image 10 of 11">
-                <img src="media/craft-white-rainbow-10.jpg" alt="" data-alt="The front of the Chu Enoki invitation: &lsquo;Chu Enoki Enoki Chu&rsquo; in silver and gunmetal foil on a dark metallic card, the White Rainbow dot logo top right." data-caption="The Chu Enoki invitation: silver ink and silver-and-gunmetal foils on metallic black stock. The artist made use of gunmetal in the exhibition.">
+                <img src="media/craft-white-rainbow-10-thumb.jpg" data-full="media/craft-white-rainbow-10.jpg" alt="" loading="lazy" data-alt="The front of the Chu Enoki invitation: &lsquo;Chu Enoki Enoki Chu&rsquo; in silver and gunmetal foil on a dark metallic card, the White Rainbow dot logo top right." data-caption="The Chu Enoki invitation: silver ink and silver-and-gunmetal foils on metallic black stock. The artist made use of gunmetal in the exhibition.">
               </button>
               <button class="gallery-thumb" type="button" aria-label="Show image 11 of 11">
-                <img src="media/craft-white-rainbow-11.jpg" alt="" data-alt="The reverse of the Chu Enoki invitation: a coarse-screened photograph printed twice, the artist with a half-shaved head on one side and long hair on the other." data-caption="The reverse: the artist before and after Going to Hungary with Hangari, 1977.">
+                <img src="media/craft-white-rainbow-11-thumb.jpg" data-full="media/craft-white-rainbow-11.jpg" alt="" loading="lazy" data-alt="The reverse of the Chu Enoki invitation: a coarse-screened photograph printed twice, the artist with a half-shaved head on one side and long hair on the other." data-caption="The reverse: the artist before and after Going to Hungary with Hangari, 1977.">
               </button>
             </div>
           </div>
@@ -1439,25 +1482,53 @@
       // Galleries -> each its own list; thumbnails swap the main image
       Array.prototype.slice.call(document.querySelectorAll(".gallery")).forEach(function (gallery) {
         var main = gallery.querySelector(".gallery-main");
+        var fade = gallery.querySelector(".gallery-fade");
         var caption = gallery.querySelector(".gallery-caption");
+        var counter = gallery.querySelector(".gallery-count");
         var thumbs = Array.prototype.slice.call(gallery.querySelectorAll(".gallery-thumb"));
+        var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         var list = thumbs.map(function (thumb) {
           var img = thumb.querySelector("img");
           return {
-            src: img.getAttribute("src"),
+            src: img.getAttribute("data-full") || img.getAttribute("src"),
             alt: img.getAttribute("data-alt") || "",
             caption: img.getAttribute("data-caption") || ""
           };
         });
         var active = 0;
 
-        function select(i) {
+        function pad(n) { return n < 10 ? "0" + n : "" + n; }
+
+        function paint(it) {
+          main.src = it.src;
+          main.alt = it.alt;
+        }
+
+        function dissolve(it) {
+          if (!fade || reduceMotion) { paint(it); return; }
+          fade.src = main.currentSrc || main.src;
+          fade.style.transition = "none";
+          fade.style.opacity = "1";
+          void fade.offsetWidth;
+          paint(it);
+          fade.style.transition = "";
+          fade.style.opacity = "0";
+        }
+
+        function select(i, instant) {
           active = (i + list.length) % list.length;
           var it = list[active];
-          if (main) { main.src = it.src; main.alt = it.alt; }
-          if (caption) caption.innerHTML = it.caption;
           thumbs.forEach(function (t, ti) { t.classList.toggle("is-active", ti === active); });
+          if (caption) caption.innerHTML = it.caption;
+          if (counter) counter.textContent = pad(active + 1) + " / " + pad(list.length);
+          if (!main) return;
+          if (instant) { paint(it); return; }
+          var pre = new Image();
+          pre.onload = pre.onerror = function () { dissolve(it); };
+          pre.src = it.src;
         }
+
+        select(0, true);
 
         thumbs.forEach(function (thumb, i) {
           thumb.addEventListener("click", function () { select(i); });

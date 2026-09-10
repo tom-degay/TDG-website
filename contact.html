@@ -190,7 +190,7 @@
     font-size: 15px;
     line-height: 1;
     white-space: nowrap;
-    transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+    transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.08s ease;
   }
 
   p.links a span {
@@ -205,7 +205,7 @@
   }
 
   p.links a:active {
-    transform: scale(0.97);
+    transform: translateY(1px);
   }
 
   p.links a svg {
@@ -292,7 +292,7 @@
     font-weight: 600;
     line-height: 1;
     cursor: pointer;
-    transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+    transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.08s ease;
   }
 
   button[type="submit"] span {
@@ -307,7 +307,7 @@
   }
 
   button[type="submit"]:active {
-    transform: scale(0.97);
+    transform: translateY(1px);
   }
 
   button[type="submit"]:disabled {
@@ -766,7 +766,7 @@
               form.reset();
               status.textContent = "Thanks. I'll get back to you soon.";
             } else {
-              status.textContent = "Something went wrong. Please email me directly instead.";
+              status.innerHTML = 'Something went wrong sending that. You can also reach me on <a href="https://www.linkedin.com/in/tom-dg/" target="_blank" rel="noopener noreferrer">LinkedIn</a>.';
             }
             status.hidden = false;
           })

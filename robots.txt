@@ -27,4 +27,4 @@ Allow: /
 User-agent: Applebot-Extended
 Allow: /
 
-Sitemap: https://www.tomdegay.com/sitemap.xml
+Sitemap: https://tomdegay.com/sitemap.xml

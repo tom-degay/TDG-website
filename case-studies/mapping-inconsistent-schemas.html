@@ -576,6 +576,7 @@
 
   .toc {
     display: none;
+    position: relative;
   }
 
   @media (min-width: 1100px) {
@@ -623,7 +624,30 @@
 
   .toc a.is-active {
     color: #00d8aa;
-    border-left-color: #00d8aa;
+  }
+
+  .toc-indicator {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 2px;
+    height: 0;
+    background: #00d8aa;
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1),
+                height 0.32s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.2s ease;
+  }
+
+  .toc-indicator.is-visible {
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .toc-indicator {
+      transition: none;
+    }
   }
 
 
@@ -1427,6 +1451,7 @@
   </div>
 
   <nav class="toc" aria-label="Section navigation">
+    <span class="toc-indicator" aria-hidden="true"></span>
     <span class="eyebrow toc-heading">On this page</span>
     <a href="#keypoints-heading">Key points</a>
     <a href="#summary-heading">Summary</a>
@@ -1473,6 +1498,18 @@
       var links = document.querySelectorAll(".toc a");
       if (!links.length || !("IntersectionObserver" in window)) return;
 
+      var indicator = document.querySelector(".toc-indicator");
+      function moveIndicator(link) {
+        if (!indicator || !link) return;
+        indicator.style.height = link.offsetHeight + "px";
+        indicator.style.transform = "translateY(" + link.offsetTop + "px)";
+        indicator.classList.add("is-visible");
+      }
+      window.addEventListener("resize", function () {
+        var active = document.querySelector(".toc a.is-active");
+        if (active) moveIndicator(active);
+      });
+
       // Observe the whole section (not just its heading) so a link stays
       // highlighted for the entire time its section is in view, even when
       // the section is tall and its heading has long scrolled past.
@@ -1498,6 +1535,7 @@
             if (entry.isIntersecting) {
               links.forEach(function (l) { l.classList.remove("is-active"); });
               match.link.classList.add("is-active");
+              moveIndicator(match.link);
             }
           });
         },

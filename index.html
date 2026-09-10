@@ -830,7 +830,68 @@
       display: none;
     }
   }
+
+  /* -- hero entrance animation (word-by-word rise) --
+     .hero-armed is set on <html> by an inline head script only when
+     prefers-reduced-motion is not set; the body script splits the
+     statement into .word spans, staggers them, then adds .hero-play. */
+
+  .hero-armed #about-heading {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  .hero-armed .about-statement {
+    opacity: 0;
+  }
+
+  .hero-armed .about-statement .word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(0.5em);
+    will-change: transform, opacity;
+  }
+
+  .hero-play #about-heading {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .hero-play .about-statement {
+    opacity: 1;
+  }
+
+  .hero-play .about-statement .word {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.66s ease, transform 0.72s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .about-statement .word {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
+  }
 </style>
+<script>
+  /* Arm the hero animation before first paint, but only when motion is welcome. */
+  (function () {
+    try {
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('hero-armed');
+      }
+    } catch (e) {}
+  })();
+</script>
+<noscript>
+  <style>
+    .hero-armed #about-heading,
+    .hero-armed .about-statement { opacity: 1 !important; transform: none !important; }
+  </style>
+</noscript>
 </head>
 <body>
   <nav class="site-nav">
@@ -1097,6 +1158,52 @@
       document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape') closeAll(null);
       });
+    })();
+
+    (function () {
+      var root = document.documentElement;
+      if (!root.classList.contains('hero-armed')) return;
+
+      var stmt = document.querySelector('.about-statement');
+      var eyebrow = document.getElementById('about-heading');
+      if (!stmt) { root.classList.remove('hero-armed'); return; }
+
+      try {
+        var words = stmt.textContent.trim().split(/\s+/);
+        stmt.textContent = '';
+        var wordEls = words.map(function (w, i) {
+          var s = document.createElement('span');
+          s.className = 'word';
+          s.textContent = w;
+          stmt.appendChild(s);
+          if (i < words.length - 1) stmt.appendChild(document.createTextNode(' '));
+          return s;
+        });
+
+        var STEP = 58;      // ms between words
+        var LEAD = 120;     // ms before the first word (after the eyebrow)
+        if (eyebrow) eyebrow.style.transitionDelay = '0ms';
+        wordEls.forEach(function (el, i) {
+          el.style.transitionDelay = (LEAD + i * STEP) + 'ms';
+        });
+
+        requestAnimationFrame(function () {
+          requestAnimationFrame(function () {
+            root.classList.add('hero-play');
+          });
+        });
+
+        // tidy up once the run is over
+        setTimeout(function () {
+          wordEls.forEach(function (el) {
+            el.style.willChange = '';
+            el.style.transitionDelay = '';
+          });
+          if (eyebrow) eyebrow.style.transitionDelay = '';
+        }, LEAD + wordEls.length * STEP + 900);
+      } catch (e) {
+        root.classList.remove('hero-armed');
+      }
     })();
   </script>
   <script data-goatcounter="https://tomdegay.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>

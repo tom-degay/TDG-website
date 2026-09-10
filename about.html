@@ -812,6 +812,8 @@
         var link = item.firstElementChild;
         if (!link || link.tagName !== 'A') return;
         link.addEventListener('click', function (e) {
+          // On mobile the dropdown is shown expanded inline; let the link navigate.
+          if (window.matchMedia('(max-width: 640px)').matches) return;
           e.preventDefault();
           var wasOpen = item.classList.contains('is-open');
           closeAll(item);

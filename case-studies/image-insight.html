@@ -1788,6 +1788,13 @@
         } else if (e.key === "ArrowRight") {
           showIndex(currentIndex + 1);
         }
+        else if (e.key === "Tab") {
+          var f = Array.prototype.slice.call(lightbox.querySelectorAll('button, video[controls], [href], [tabindex]:not([tabindex=\"-1\"])')).filter(function (el) { return !el.hidden && el.offsetParent !== null; });
+          if (!f.length) { e.preventDefault(); return; }
+          var first = f[0], last = f[f.length - 1];
+          if (e.shiftKey && (document.activeElement === first || !lightbox.contains(document.activeElement))) { e.preventDefault(); last.focus(); }
+          else if (!e.shiftKey && (document.activeElement === last || !lightbox.contains(document.activeElement))) { e.preventDefault(); first.focus(); }
+        }
       });
     })();
   </script>
@@ -1831,6 +1838,8 @@
         var link = item.firstElementChild;
         if (!link || link.tagName !== 'A') return;
         link.addEventListener('click', function (e) {
+          // On mobile the dropdown is shown expanded inline; let the link navigate.
+          if (window.matchMedia('(max-width: 640px)').matches) return;
           e.preventDefault();
           var wasOpen = item.classList.contains('is-open');
           closeAll(item);

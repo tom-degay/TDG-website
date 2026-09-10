@@ -252,15 +252,24 @@
   }
 
   p.keywords {
-    margin: 12px 0 0;
-    color: rgba(255, 255, 255, 0.45);
-    font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 2px;
-    word-spacing: -3px;
-    text-transform: uppercase;
-    line-height: 1.5;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 16px 0 0;
+  }
+
+  .keyword {
+    display: inline-block;
+    padding: 9px 13px;
+    border-radius: 6px;
+    background: rgb(48, 48, 48);
+    color: rgba(255, 255, 255, 0.72);
+    font-family: "Fakt Blond SemiBold", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
   }
 
   /* -- meta row -- */
@@ -1360,7 +1369,7 @@
       <span class="kicker">Case Study | <a href="https://help.quantemplate.com/about-pipelines" target="_blank" rel="noopener noreferrer">Quantemplate Pipelines</a></span>
       <h1 class="display">Bringing clarity to complex data flows</h1>
       <p class="subtitle">Enterprise data processing made accessible through flexible, visual workflows.</p>
-      <p class="keywords">Zero-to-one · Visual programming · Evolution</p>
+      <p class="keywords"><span class="keyword">Zero-to-one</span><span class="keyword">Visual programming</span><span class="keyword">Evolution</span></p>
 
       <hr class="rule">
 

@@ -181,15 +181,24 @@
   }
 
   .job-keywords {
-    color: rgba(255, 255, 255, 0.45);
-    font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 2px;
-    word-spacing: -3px;
-    text-transform: uppercase;
-    line-height: 1.5;
-    margin: 14px 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 16px 0 0;
+  }
+
+  .keyword {
+    display: inline-block;
+    padding: 9px 13px;
+    border-radius: 6px;
+    background: rgb(48, 48, 48);
+    color: rgba(255, 255, 255, 0.72);
+    font-family: "Fakt Blond SemiBold", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
   }
 
   .job-desc {
@@ -1009,7 +1018,7 @@
       <span class="eyebrow" id="experience-heading">Principal Experience</span>
       <div class="job">
         <p class="job-company display">Head of Design | <a href="https://quantemplate.com" target="_blank" rel="noopener noreferrer">Quantemplate</a></p>
-        <p class="job-keywords">Enterprise data &middot; No-code automation &middot; Connected workflows</p>
+        <p class="job-keywords"><span class="keyword">Enterprise data</span><span class="keyword">No-code automation</span><span class="keyword">Connected workflows</span></p>
 
         <dl class="stats">
           <div class="stat">

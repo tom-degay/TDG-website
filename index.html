@@ -956,25 +956,18 @@
   /* Pipelines card: cascading green stages and colour-matched flow. */
 @keyframes pipeline-trace { 0% {opacity:0;stroke-dashoffset:18;} 10% {opacity:1;} 85% {opacity:1;} 100% {opacity:0;stroke-dashoffset:-100;} }
 .green-stage [fill], .green-stage [stroke] { transition:fill .45s ease,stroke .45s ease; }
-.green-pipeline:focus-visible .green-stage [fill]:not([fill="none"]):not(.stage-bg) { fill:#8af4d2; }
-.green-pipeline:focus-visible .green-stage .stage-bg { fill:#091d1b; }
-.green-pipeline:focus-visible .green-stage [stroke] { stroke:#8af4d2; }
-.green-pipeline:focus-visible .green-stage [fill], .green-pipeline:focus-visible .green-stage [stroke] { transition-delay:var(--stage-delay); }
-@media(hover:hover) {
- .green-pipeline:hover .green-stage [fill]:not([fill="none"]):not(.stage-bg) { fill:#8af4d2; }
- .green-pipeline:hover .green-stage .stage-bg { fill:#091d1b; }
- .green-pipeline:hover .green-stage [stroke] { stroke:#8af4d2; }
- .green-pipeline:hover .green-stage [fill], .green-pipeline:hover .green-stage [stroke] { transition-delay:var(--stage-delay); }
-}
+.green-pipeline.is-flow-active .green-stage [fill]:not([fill="none"]):not(.stage-bg) { fill:#8af4d2; }
+.green-pipeline.is-flow-active .green-stage .stage-bg { fill:#091d1b; }
+.green-pipeline.is-flow-active .green-stage [stroke] { stroke:#8af4d2; }
+.green-pipeline.is-flow-active .green-stage [fill], .green-pipeline.is-flow-active .green-stage [stroke] { transition-delay:var(--stage-delay); }
+
 @media(prefers-reduced-motion:reduce) { .green-pipeline .green-stage [fill], .green-pipeline .green-stage [stroke] { transition:none; } }
 
 .green-trace { opacity:0; stroke-dasharray:18 118; stroke-dashoffset:18; pointer-events:none; }
 @media(prefers-reduced-motion:no-preference) {
- .green-pipeline:focus-visible .green-trace { animation:pipeline-trace .85s linear var(--trace-delay) both; }
+ .green-pipeline.is-flow-active .green-trace { animation:pipeline-trace .85s linear var(--trace-delay) both; }
 }
-@media(hover:hover) and (prefers-reduced-motion:no-preference) {
- .green-pipeline:hover .green-trace { animation:pipeline-trace .85s linear var(--trace-delay) both; }
-}
+
 
 </style>
 <script>
@@ -1389,5 +1382,65 @@
     })();
   </script>
   <script data-goatcounter="https://tomdegay.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+  <script>
+    (function () {
+      var card = document.querySelector('.green-pipeline');
+      if (!card) return;
+      var scrollMode = window.matchMedia('(max-width: 1024px), (hover: none)');
+      var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      var observer, inView = false, hovered = false, running = false, completed = 0;
+      var pulseCount = card.querySelectorAll('.green-trace').length;
+      function engaged() {
+        return (scrollMode.matches ? inView : hovered) || card.matches(':focus-visible');
+      }
+      function update() {
+        if (reducedMotion.matches) {
+          running = false;
+          card.classList.remove('is-flow-active');
+          return;
+        }
+        // Retain the active class for the entire sequence, even after leaving.
+        if (running) return;
+        if (engaged()) {
+          if (card.classList.contains('is-flow-active')) return;
+          completed = 0;
+          running = true;
+          card.classList.add('is-flow-active');
+        } else card.classList.remove('is-flow-active');
+      }
+      card.addEventListener('animationend', function (event) {
+        if (event.animationName !== 'pipeline-trace' || !running) return;
+        if (++completed === pulseCount) {
+          running = false;
+          update();
+        }
+      });
+      card.addEventListener('pointerenter', function (event) {
+        if (event.pointerType === 'touch') return;
+        hovered = true;
+        update();
+      });
+      card.addEventListener('pointerleave', function () { hovered = false; update(); });
+      card.addEventListener('focus', update);
+      card.addEventListener('blur', function () { requestAnimationFrame(update); });
+      function configure() {
+        if (observer) observer.disconnect();
+        inView = false;
+        if (scrollMode.matches && !reducedMotion.matches && 'IntersectionObserver' in window) {
+          observer = new IntersectionObserver(function (entries) {
+            var entry = entries[0];
+            if (entry.intersectionRatio >= 0.6) inView = true;
+            else if (!entry.isIntersecting) inView = false;
+            update();
+          }, { threshold: [0, 0.6], rootMargin: '-64px 0px 0px 0px' });
+          observer.observe(card.querySelector('.pipeline-vector'));
+        }
+        update();
+      }
+      scrollMode.addEventListener('change', configure);
+      reducedMotion.addEventListener('change', configure);
+      configure();
+    })();
+  </script>
   </body>
 </html>

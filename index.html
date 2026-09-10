@@ -955,7 +955,7 @@
 
   /* Pipelines card: cascading green stages and colour-matched flow. */
 @keyframes pipeline-trace { 0% {opacity:0;stroke-dashoffset:18;} 10% {opacity:1;} 85% {opacity:1;} 100% {opacity:0;stroke-dashoffset:-100;} }
-.green-stage [fill], .green-stage [stroke] { transition:fill .45s ease,stroke .45s ease; }
+.green-stage [fill], .green-stage [stroke] { transition:fill .585s ease,stroke .585s ease; }
 .green-pipeline.is-flow-active .green-stage [fill]:not([fill="none"]):not(.stage-bg) { fill:#8af4d2; }
 .green-pipeline.is-flow-active .green-stage .stage-bg { fill:#091d1b; }
 .green-pipeline.is-flow-active .green-stage [stroke] { stroke:#8af4d2; }
@@ -965,7 +965,7 @@
 
 .green-trace { opacity:0; stroke-dasharray:18 118; stroke-dashoffset:18; pointer-events:none; }
 @media(prefers-reduced-motion:no-preference) {
- .green-pipeline.is-flow-active .green-trace { animation:pipeline-trace .85s linear var(--trace-delay) both; }
+ .green-pipeline.is-flow-active .green-trace { animation:pipeline-trace 1.105s linear var(--trace-delay) both; }
 }
 
 
@@ -1023,6 +1023,10 @@
   @media(prefers-reduced-motion:reduce) {
     .mapping-row {opacity:1;}
     .mapping-progress {transform:none;}
+  }
+  /* Reset finished artwork before an explicitly requested hover replay. */
+  .is-flow-reset .green-stage [fill], .is-flow-reset .green-stage [stroke] {
+    transition: none !important;
   }
 </style>
 <script>
@@ -1155,7 +1159,7 @@
 
         <div class="case-blocks">
           <a class="case-block has-image green-pipeline" id="pipelines-card" href="/case-studies/pipelines">
-            <svg class="case-block-media pipeline-vector" viewBox="0 0 1136 639" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Six pipeline stages: premium and claims data are mapped, combined and joined."><rect width="1136" height="639" fill="#000"/><path d="M924 109H937Q949 109 949 121V165Q949 177 937 177H924" fill="none" stroke="#8ff4d4" stroke-opacity=".45" stroke-width="4"/><path class="green-trace" style="--trace-delay:0.22s" d="M924 109H937Q949 109 949 121V165Q949 177 937 177H924" fill="none" stroke="#8ff4d4" stroke-width="5" stroke-linecap="round" pathLength="100"/><path d="M924 207H937Q949 207 949 219V263Q949 275 937 275H924" fill="none" stroke="#67d1f1" stroke-opacity=".45" stroke-width="4"/><path class="green-trace" style="--trace-delay:0.4s" d="M924 207H937Q949 207 949 219V263Q949 275 937 275H924" fill="none" stroke="#67d1f1" stroke-width="5" stroke-linecap="round" pathLength="100"/><path d="M924 305H947Q959 305 959 317V563Q959 575 947 575H924" fill="none" stroke="#459cff" stroke-opacity=".45" stroke-width="4"/><path class="green-trace" style="--trace-delay:0.58s" d="M924 305H947Q959 305 959 317V563Q959 575 947 575H924" fill="none" stroke="#459cff" stroke-width="5" stroke-linecap="round" pathLength="100"/><path d="M924 403H937Q949 403 949 415V459Q949 471 937 471H924" fill="none" stroke="#426eff" stroke-opacity=".45" stroke-width="4"/><path class="green-trace" style="--trace-delay:0.76s" d="M924 403H937Q949 403 949 415V459Q949 471 937 471H924" fill="none" stroke="#426eff" stroke-width="5" stroke-linecap="round" pathLength="100"/><path d="M924 501H937Q949 501 949 513V555Q949 567 937 567H924" fill="none" stroke="#8060fa" stroke-opacity=".45" stroke-width="4"/><path class="green-trace" style="--trace-delay:0.94s" d="M924 501H937Q949 501 949 513V555Q949 567 937 567H924" fill="none" stroke="#8060fa" stroke-width="5" stroke-linecap="round" pathLength="100"/><g class="green-stage" style="--stage-delay:0.00s" transform="translate(171 53)"><rect class="stage-bg" width="758" height="82" rx="16" fill="#091d1b"/><path d="M3 0V82" stroke="#8af4d2" stroke-width="6"/><text x="43" y="52" fill="#8af4d2" opacity=".8" font-size="32" font-family="Arial,sans-serif" font-weight="600">1</text><text x="84" y="52" fill="#8af4d2" font-size="32" font-family="Arial,sans-serif" font-weight="600">Premium | Map &amp; Tag Data</text><path d="M688 26h16v16h-16z" fill="#8af4d2"/><circle cx="709" cy="46" r="9" fill="#8af4d2"/></g><g class="green-stage" style="--stage-delay:0.18s" transform="translate(171 151)"><rect class="stage-bg" width="758" height="82" rx="16" fill="#12162e"/><path d="M3 0V82" stroke="#67cff1" stroke-width="6"/><text x="43" y="52" fill="#8996bd" opacity=".8" font-size="32" font-family="Arial,sans-serif" font-weight="600">2</text><text x="84" y="52" fill="#fff" font-size="32" font-family="Arial,sans-serif" font-weight="600">Premium | Union Files</text><g fill="#8996bd"><path d="M686 28h28v8h-28z"/><path d="M686 38h28v18h-28z" opacity=".6"/></g><path d="M690 36v6a10 10 0 0 0 20 0v-6" fill="none" stroke="#8996bd" stroke-width="3"/></g><g class="green-stage" style="--stage-delay:0.36s" transform="translate(171 249)"><rect class="stage-bg" width="758" height="82" rx="16" fill="#12162e"/><path d="M3 0V82" stroke="#428ffa" stroke-width="6"/><text x="43" y="52" fill="#8996bd" opacity=".8" font-size="32" font-family="Arial,sans-serif" font-weight="600">3</text><text x="84" y="52" fill="#fff" font-size="32" font-family="Arial,sans-serif" font-weight="600">Premium | Calculations</text><path d="M688 26h16v16h-16z" fill="#8996bd"/><circle cx="709" cy="46" r="9" fill="#8996bd"/><g fill="#8996bd"><circle cx="635" cy="44" r="3"/><circle cx="645" cy="44" r="3"/><circle cx="655" cy="44" r="3"/></g></g><g class="green-stage" style="--stage-delay:0.54s" transform="translate(171 347)"><rect class="stage-bg" width="758" height="82" rx="16" fill="#12162e"/><path d="M3 0V82" stroke="#315fff" stroke-width="6"/><text x="43" y="52" fill="#8996bd" opacity=".8" font-size="32" font-family="Arial,sans-serif" font-weight="600">4</text><text x="84" y="52" fill="#fff" font-size="32" font-family="Arial,sans-serif" font-weight="600">Claims | Map &amp; Tag Data</text><path d="M688 26h16v16h-16z" fill="#8996bd"/><circle cx="709" cy="46" r="9" fill="#8996bd"/></g><g class="green-stage" style="--stage-delay:0.72s" transform="translate(171 445)"><rect class="stage-bg" width="758" height="82" rx="16" fill="#12162e"/><path d="M3 0V82" stroke="#6845ed" stroke-width="6"/><text x="43" y="52" fill="#8996bd" opacity=".8" font-size="32" font-family="Arial,sans-serif" font-weight="600">5</text><text x="84" y="52" fill="#fff" font-size="32" font-family="Arial,sans-serif" font-weight="600">Claims | Union Files</text><g fill="#8996bd"><path d="M686 28h28v8h-28z"/><path d="M686 38h28v18h-28z" opacity=".6"/></g><path d="M690 36v6a10 10 0 0 0 20 0v-6" fill="none" stroke="#8996bd" stroke-width="3"/></g><g class="green-stage" style="--stage-delay:0.90s" transform="translate(171 543)"><rect class="stage-bg" width="758" height="82" rx="16" fill="#12162e"/><path d="M3 0V82" stroke="#a169ed" stroke-width="6"/><text x="43" y="52" fill="#8996bd" opacity=".8" font-size="32" font-family="Arial,sans-serif" font-weight="600">6</text><text x="84" y="52" fill="#fff" font-size="32" font-family="Arial,sans-serif" font-weight="600">Combined | Join Premium &amp; Cla…</text><circle cx="694" cy="40" r="12" fill="#8996bd"/><circle cx="710" cy="40" r="12" fill="#8996bd" opacity=".5"/></g></svg>
+            <svg class="case-block-media pipeline-vector" viewBox="0 0 1136 639" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Six pipeline stages: premium and claims data are mapped, combined and joined."><rect width="1136" height="639" fill="#000"/><path d="M924 109H937Q949 109 949 121V165Q949 177 937 177H924" fill="none" stroke="#8ff4d4" stroke-opacity=".45" stroke-width="4"/><path class="green-trace" style="--trace-delay:0.286s" d="M924 109H937Q949 109 949 121V165Q949 177 937 177H924" fill="none" stroke="#8ff4d4" stroke-width="5" stroke-linecap="round" pathLength="100"/><path d="M924 207H937Q949 207 949 219V263Q949 275 937 275H924" fill="none" stroke="#67d1f1" stroke-opacity=".45" stroke-width="4"/><path class="green-trace" style="--trace-delay:0.52s" d="M924 207H937Q949 207 949 219V263Q949 275 937 275H924" fill="none" stroke="#67d1f1" stroke-width="5" stroke-linecap="round" pathLength="100"/><path d="M924 305H947Q959 305 959 317V563Q959 575 947 575H924" fill="none" stroke="#459cff" stroke-opacity=".45" stroke-width="4"/><path class="green-trace" style="--trace-delay:0.754s" d="M924 305H947Q959 305 959 317V563Q959 575 947 575H924" fill="none" stroke="#459cff" stroke-width="5" stroke-linecap="round" pathLength="100"/><path d="M924 403H937Q949 403 949 415V459Q949 471 937 471H924" fill="none" stroke="#426eff" stroke-opacity=".45" stroke-width="4"/><path class="green-trace" style="--trace-delay:0.988s" d="M924 403H937Q949 403 949 415V459Q949 471 937 471H924" fill="none" stroke="#426eff" stroke-width="5" stroke-linecap="round" pathLength="100"/><path d="M924 501H937Q949 501 949 513V555Q949 567 937 567H924" fill="none" stroke="#8060fa" stroke-opacity=".45" stroke-width="4"/><path class="green-trace" style="--trace-delay:1.222s" d="M924 501H937Q949 501 949 513V555Q949 567 937 567H924" fill="none" stroke="#8060fa" stroke-width="5" stroke-linecap="round" pathLength="100"/><g class="green-stage" style="--stage-delay:0s" transform="translate(171 53)"><rect class="stage-bg" width="758" height="82" rx="16" fill="#091d1b"/><path d="M3 0V82" stroke="#8af4d2" stroke-width="6"/><text x="43" y="52" fill="#8af4d2" opacity=".8" font-size="32" font-family="Arial,sans-serif" font-weight="600">1</text><text x="84" y="52" fill="#8af4d2" font-size="32" font-family="Arial,sans-serif" font-weight="600">Premium | Map &amp; Tag Data</text><path d="M688 26h16v16h-16z" fill="#8af4d2"/><circle cx="709" cy="46" r="9" fill="#8af4d2"/></g><g class="green-stage" style="--stage-delay:0.234s" transform="translate(171 151)"><rect class="stage-bg" width="758" height="82" rx="16" fill="#12162e"/><path d="M3 0V82" stroke="#67cff1" stroke-width="6"/><text x="43" y="52" fill="#8996bd" opacity=".8" font-size="32" font-family="Arial,sans-serif" font-weight="600">2</text><text x="84" y="52" fill="#fff" font-size="32" font-family="Arial,sans-serif" font-weight="600">Premium | Union Files</text><g fill="#8996bd"><path d="M686 28h28v8h-28z"/><path d="M686 38h28v18h-28z" opacity=".6"/></g><path d="M690 36v6a10 10 0 0 0 20 0v-6" fill="none" stroke="#8996bd" stroke-width="3"/></g><g class="green-stage" style="--stage-delay:0.468s" transform="translate(171 249)"><rect class="stage-bg" width="758" height="82" rx="16" fill="#12162e"/><path d="M3 0V82" stroke="#428ffa" stroke-width="6"/><text x="43" y="52" fill="#8996bd" opacity=".8" font-size="32" font-family="Arial,sans-serif" font-weight="600">3</text><text x="84" y="52" fill="#fff" font-size="32" font-family="Arial,sans-serif" font-weight="600">Premium | Calculations</text><path d="M688 26h16v16h-16z" fill="#8996bd"/><circle cx="709" cy="46" r="9" fill="#8996bd"/><g fill="#8996bd"><circle cx="635" cy="44" r="3"/><circle cx="645" cy="44" r="3"/><circle cx="655" cy="44" r="3"/></g></g><g class="green-stage" style="--stage-delay:0.702s" transform="translate(171 347)"><rect class="stage-bg" width="758" height="82" rx="16" fill="#12162e"/><path d="M3 0V82" stroke="#315fff" stroke-width="6"/><text x="43" y="52" fill="#8996bd" opacity=".8" font-size="32" font-family="Arial,sans-serif" font-weight="600">4</text><text x="84" y="52" fill="#fff" font-size="32" font-family="Arial,sans-serif" font-weight="600">Claims | Map &amp; Tag Data</text><path d="M688 26h16v16h-16z" fill="#8996bd"/><circle cx="709" cy="46" r="9" fill="#8996bd"/></g><g class="green-stage" style="--stage-delay:0.936s" transform="translate(171 445)"><rect class="stage-bg" width="758" height="82" rx="16" fill="#12162e"/><path d="M3 0V82" stroke="#6845ed" stroke-width="6"/><text x="43" y="52" fill="#8996bd" opacity=".8" font-size="32" font-family="Arial,sans-serif" font-weight="600">5</text><text x="84" y="52" fill="#fff" font-size="32" font-family="Arial,sans-serif" font-weight="600">Claims | Union Files</text><g fill="#8996bd"><path d="M686 28h28v8h-28z"/><path d="M686 38h28v18h-28z" opacity=".6"/></g><path d="M690 36v6a10 10 0 0 0 20 0v-6" fill="none" stroke="#8996bd" stroke-width="3"/></g><g class="green-stage" style="--stage-delay:1.17s" transform="translate(171 543)"><rect class="stage-bg" width="758" height="82" rx="16" fill="#12162e"/><path d="M3 0V82" stroke="#a169ed" stroke-width="6"/><text x="43" y="52" fill="#8996bd" opacity=".8" font-size="32" font-family="Arial,sans-serif" font-weight="600">6</text><text x="84" y="52" fill="#fff" font-size="32" font-family="Arial,sans-serif" font-weight="600">Combined | Join Premium &amp; Cla…</text><circle cx="694" cy="40" r="12" fill="#8996bd"/><circle cx="710" cy="40" r="12" fill="#8996bd" opacity=".5"/></g></svg>
             <span class="case-block-text">
               <span class="case-block-kicker">Pipelines</span>
               <span class="case-block-title">Bringing clarity to complex data flows</span>
@@ -1440,13 +1444,23 @@
   <script>
     (function () {
       document.querySelectorAll('.green-pipeline, .validation-card, .feeds-card, .mapping-card').forEach(function (card) {
-      var scrollMode = window.matchMedia('(max-width: 1024px), (hover: none)');
       var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-      var observer, inView = false, hovered = false, running = false, completed = 0;
+      var observer, inView = false, running = false, completed = 0;
       var animationName = card.classList.contains('mapping-card') ? 'mapping-fill-right' : card.classList.contains('feeds-card') ? 'feeds-arrive' : card.classList.contains('validation-card') ? 'validation-ring' : 'pipeline-trace';
       var pulseCount = card.classList.contains('mapping-card') ? 1 : card.querySelectorAll('.green-trace, .validation-arc, .feeds-arrival').length;
-      function engaged() {
-        return (scrollMode.matches ? inView : hovered) || card.matches(':focus-visible');
+      function start(replay) {
+        if (running || reducedMotion.matches) return;
+        running = true;
+        completed = 0;
+        if (replay) {
+          card.classList.add('is-flow-reset');
+          card.classList.remove('is-flow-active');
+          // Commit the starting artwork before restarting the CSS animations.
+          void card.offsetWidth;
+          card.classList.remove('is-flow-reset');
+          void card.offsetWidth;
+        }
+        card.classList.add('is-flow-active');
       }
       function update() {
         if (reducedMotion.matches) {
@@ -1456,13 +1470,17 @@
         }
         // Retain the active class for the entire sequence, even after leaving.
         if (running) return;
-        if (engaged()) {
+        if (inView) {
           if (card.classList.contains('is-flow-active')) return;
-          completed = 0;
-          running = true;
-          card.classList.add('is-flow-active');
+          start(false);
         } else card.classList.remove('is-flow-active');
       }
+      card.addEventListener('pointerenter', function (event) {
+        if (event.pointerType !== 'touch') start(true);
+      });
+      card.addEventListener('focus', function () {
+        if (card.matches(':focus-visible')) start(true);
+      });
       card.addEventListener('animationend', function (event) {
         if (event.animationName !== animationName || !running) return;
         if (++completed === pulseCount) {
@@ -1470,18 +1488,10 @@
           update();
         }
       });
-      card.addEventListener('pointerenter', function (event) {
-        if (event.pointerType === 'touch') return;
-        hovered = true;
-        update();
-      });
-      card.addEventListener('pointerleave', function () { hovered = false; update(); });
-      card.addEventListener('focus', update);
-      card.addEventListener('blur', function () { requestAnimationFrame(update); });
       function configure() {
         if (observer) observer.disconnect();
         inView = false;
-        if (scrollMode.matches && !reducedMotion.matches && 'IntersectionObserver' in window) {
+        if (!reducedMotion.matches && 'IntersectionObserver' in window) {
           observer = new IntersectionObserver(function (entries) {
             var entry = entries[0];
             if (entry.intersectionRatio >= 0.6) inView = true;
@@ -1492,7 +1502,6 @@
         }
         update();
       }
-      scrollMode.addEventListener('change', configure);
       reducedMotion.addEventListener('change', configure);
       configure();
       });

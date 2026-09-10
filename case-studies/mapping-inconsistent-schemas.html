@@ -1281,6 +1281,82 @@
       transform: translate(var(--dx), var(--dy));
     }
   }
+
+  /* Pipelines card: cascading green stages and colour-matched flow. */
+@keyframes pipeline-trace { 0% {opacity:0;stroke-dashoffset:18;} 10% {opacity:1;} 85% {opacity:1;} 100% {opacity:0;stroke-dashoffset:-100;} }
+.green-stage [fill], .green-stage [stroke] { transition:fill .585s ease,stroke .585s ease; }
+.green-pipeline.is-flow-active .green-stage [fill]:not([fill="none"]):not(.stage-bg) { fill:#8af4d2; }
+.green-pipeline.is-flow-active .green-stage .stage-bg { fill:#091d1b; }
+.green-pipeline.is-flow-active .green-stage [stroke] { stroke:#8af4d2; }
+.green-pipeline.is-flow-active .green-stage [fill], .green-pipeline.is-flow-active .green-stage [stroke] { transition-delay:var(--stage-delay); }
+
+@media(prefers-reduced-motion:reduce) { .green-pipeline .green-stage [fill], .green-pipeline .green-stage [stroke] { transition:none; } }
+
+.green-trace { opacity:0; stroke-dasharray:18 118; stroke-dashoffset:18; pointer-events:none; }
+@media(prefers-reduced-motion:no-preference) {
+ .green-pipeline.is-flow-active .green-trace { animation:pipeline-trace 1.105s linear var(--trace-delay) both; }
+}
+
+
+
+  /* Validation rings retract and redraw, with a gentle top-to-bottom stagger. */
+  @keyframes validation-ring {
+    0%, 100% { stroke-dasharray: var(--arc) 100; }
+    38%, 48% { stroke-dasharray: 0 100; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .validation-card.is-flow-active .validation-arc {
+      animation: validation-ring 2.1s cubic-bezier(.4,0,.2,1) var(--ring-delay) both;
+    }
+  }
+
+  .feeds-line { stroke-dasharray:100; stroke-dashoffset:100; }
+  .feeds-pulse { stroke-dasharray:12 112; stroke-dashoffset:12; opacity:0; }
+  .feeds-module { transform-box:fill-box; transform-origin:center; }
+  .feeds-arrival { opacity:0; }
+  @keyframes feeds-line-in { to {stroke-dashoffset:0;} }
+  @keyframes feeds-travel {
+    0% {stroke-dashoffset:12;opacity:0;} 8%,90% {opacity:1;}
+    100% {stroke-dashoffset:-100;opacity:0;}
+  }
+  @keyframes feeds-pop { 0%,100% {transform:scale(1);} 40% {transform:scale(1.045);} }
+  @keyframes feeds-arrive { 0%,100% {opacity:0;} 22% {opacity:.7;} }
+  @media(prefers-reduced-motion:no-preference) {
+    .feeds-card.is-flow-active .feeds-line {animation:feeds-line-in var(--feed-duration) linear var(--feed-delay) both;}
+    .feeds-card.is-flow-active .feeds-pulse {animation:feeds-travel var(--feed-duration) linear var(--feed-delay) both;}
+    .feeds-card.is-flow-active .feeds-module {animation:feeds-pop .5s ease var(--arrival) both;}
+    .feeds-card.is-flow-active .feeds-arrival {animation:feeds-arrive .85s ease-out var(--arrival) both;}
+  }
+  @media(prefers-reduced-motion:reduce) { .feeds-line {stroke-dashoffset:0;} }
+
+  .mapping-row { opacity:0; }
+  .mapping-progress { transform:scaleX(0); transform-box:fill-box; transform-origin:left center; }
+  .mapping-progress-left { transform:scaleX(.6); }
+  @keyframes mapping-row-in { from {opacity:0;} to {opacity:1;} }
+  @keyframes mapping-fill-left {
+    0%,12% {transform:scaleX(.6);} 22%,61% {transform:scaleX(.8);}
+    75%,100% {transform:scaleX(1);}
+  }
+  @keyframes mapping-fill-right {
+    0%,4% {transform:scaleX(0);} 13%,19% {transform:scaleX(.125);}
+    28% {transform:scaleX(.25);} 35% {transform:scaleX(.375);}
+    43% {transform:scaleX(.5);} 50% {transform:scaleX(.625);}
+    58%,70% {transform:scaleX(.75);} 79% {transform:scaleX(.875);}
+    88%,100% {transform:scaleX(1);}
+  }
+  @media(prefers-reduced-motion:no-preference) {
+    .mapping-card.is-flow-active .mapping-row {animation:mapping-row-in .3s ease var(--mapping-delay) both;}
+    .mapping-card.is-flow-active .mapping-progress-left {animation:mapping-fill-left 3.4s ease both;}
+    .mapping-card.is-flow-active .mapping-progress-right {animation:mapping-fill-right 3.4s ease both;}
+  }
+  @media(prefers-reduced-motion:reduce) {
+    .mapping-row {opacity:1;}
+    .mapping-progress {transform:none;}
+  }
+  /* Reset finished artwork before an explicitly requested hover replay. */
+  .is-flow-reset .green-stage [fill], .is-flow-reset .green-stage [stroke] {
+    transition: none !important;
+  }
 </style>
 <script>
   (function () {
@@ -1566,8 +1642,8 @@
 
     <section aria-labelledby="next-heading" class="case-footer">
       <span class="eyebrow" id="next-heading">Next case study</span>
-      <a class="case-block has-image" href="/case-studies/connecting-organisations">
-        <img class="case-block-media" src="/case-studies/media/custody-chart-2.png" alt="A section of the Feeds chain-of-custody view: an insurer's data passing to a broker and on to its reinsurers, each node showing when it was last used." loading="lazy">
+      <a class="case-block has-image feeds-card" id="feeds-card" href="/case-studies/connecting-organisations">
+        <svg class="case-block-media feeds-vector" viewBox="0 0 2048 1152" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Data flows from Example Insurance through Placefield Brokers to three reinsurers."><defs><linearGradient id="feeds-max"><stop stop-color="#60c4d0"/><stop offset="1" stop-color="#d82b68"/></linearGradient><linearGradient id="feeds-beta"><stop stop-color="#387567"/><stop offset="1" stop-color="#224b42"/></linearGradient></defs><rect width="2048" height="1152" fill="#000"/><path d="M360 0V53Q360 85 392 85H729Q761 85 761 117V130" fill="none" stroke="#414747" stroke-width="4"/><path class="feeds-line" d="M360 0V53Q360 85 392 85H729Q761 85 761 117V130" fill="none" stroke="#00d8aa" stroke-width="4" stroke-linecap="round" pathLength="100" style="--feed-delay:0s;--feed-duration:0.7s"/><path class="feeds-pulse" d="M360 0V53Q360 85 392 85H729Q761 85 761 117V130" fill="none" stroke="#9affdf" stroke-width="6" stroke-linecap="round" pathLength="100" style="--feed-delay:0s;--feed-duration:0.7s"/><path d="M1161 0V53Q1161 85 1129 85H793Q761 85 761 117V130" fill="none" stroke="#414747" stroke-width="4"/><path class="feeds-line" d="M1161 0V53Q1161 85 1129 85H793Q761 85 761 117V130" fill="none" stroke="#00d8aa" stroke-width="4" stroke-linecap="round" pathLength="100" style="--feed-delay:0s;--feed-duration:0.7s"/><path class="feeds-pulse" d="M1161 0V53Q1161 85 1129 85H793Q761 85 761 117V130" fill="none" stroke="#9affdf" stroke-width="6" stroke-linecap="round" pathLength="100" style="--feed-delay:0s;--feed-duration:0.7s"/><path d="M761 362V463" fill="none" stroke="#414747" stroke-width="4"/><path class="feeds-line" d="M761 362V463" fill="none" stroke="#00d8aa" stroke-width="4" stroke-linecap="round" pathLength="100" style="--feed-delay:0.85s;--feed-duration:0.65s"/><path class="feeds-pulse" d="M761 362V463" fill="none" stroke="#9affdf" stroke-width="6" stroke-linecap="round" pathLength="100" style="--feed-delay:0.85s;--feed-duration:0.65s"/><path d="M761 694V716Q761 748 729 748H-40" fill="none" stroke="#414747" stroke-width="4"/><path class="feeds-line" d="M761 694V716Q761 748 729 748H-40" fill="none" stroke="#00d8aa" stroke-width="4" stroke-linecap="round" pathLength="100" style="--feed-delay:1.7s;--feed-duration:1s"/><path class="feeds-pulse" d="M761 694V716Q761 748 729 748H-40" fill="none" stroke="#9affdf" stroke-width="6" stroke-linecap="round" pathLength="100" style="--feed-delay:1.7s;--feed-duration:1s"/><path d="M761 694V844" fill="none" stroke="#414747" stroke-width="4"/><path class="feeds-line" d="M761 694V844" fill="none" stroke="#00d8aa" stroke-width="4" stroke-linecap="round" pathLength="100" style="--feed-delay:2.0s;--feed-duration:1s"/><path class="feeds-pulse" d="M761 694V844" fill="none" stroke="#9affdf" stroke-width="6" stroke-linecap="round" pathLength="100" style="--feed-delay:2.0s;--feed-duration:1s"/><path d="M761 694V716Q761 748 793 748H1529Q1561 748 1561 780V844" fill="none" stroke="#414747" stroke-width="4"/><path class="feeds-line" d="M761 694V716Q761 748 793 748H1529Q1561 748 1561 780V844" fill="none" stroke="#00d8aa" stroke-width="4" stroke-linecap="round" pathLength="100" style="--feed-delay:2.3s;--feed-duration:1s"/><path class="feeds-pulse" d="M761 694V716Q761 748 793 748H1529Q1561 748 1561 780V844" fill="none" stroke="#9affdf" stroke-width="6" stroke-linecap="round" pathLength="100" style="--feed-delay:2.3s;--feed-duration:1s"/><g transform="translate(431 130)"><g class="feeds-module" style="--arrival:0.7s"><rect width="660" height="232" rx="18" fill="#e9ebe7"/><rect class="feeds-arrival" width="660" height="232" rx="18" fill="none" stroke="#00d8aa" stroke-width="5"/><rect x="28" y="28" width="91" height="91" rx="13" fill="#fff"/><text x="48" y="92" font-family="Georgia,serif" font-size="76" fill="#222">e</text><circle cx="95" cy="87" r="6" fill="#e94e45"/><text x="145" y="66" fill="#5275ff" font-family="Arial,sans-serif" font-size="30">Example Insurance</text><rect x="523" y="28" width="109" height="39" rx="7" fill="url(#feeds-max)"/><text x="535" y="55" fill="#fff" font-family="Arial,sans-serif" font-weight="600" letter-spacing="2" font-size="22">⬡ MAX</text><path d="M145 97H631" stroke="#939693" stroke-opacity=".45" stroke-width="2"/><text x="145" y="136" fill="#939693" font-family="Arial,sans-serif" font-size="24">Used 4 months ago</text><path d="M145 157H631" stroke="#cdd0d0" stroke-width="2"/><text x="145" y="198" fill="#939693" font-family="Arial,sans-serif" font-size="24">⚙  Data triggers automations</text></g></g><g transform="translate(431 463)"><g class="feeds-module" style="--arrival:1.5s"><rect width="660" height="231" rx="18" fill="#121831"/><rect class="feeds-arrival" width="660" height="231" rx="18" fill="none" stroke="#5275ff" stroke-width="5"/><rect x="28" y="28" width="91" height="91" rx="13" fill="#ed4565"/><text x="56" y="98" font-family="Arial,sans-serif" font-size="76" fill="#fff">P</text><text x="145" y="66" fill="#eee" font-family="Arial,sans-serif" font-size="30">Placefield Brokers</text><rect x="455" y="28" width="109" height="39" rx="7" fill="#446cf4"/><text x="467" y="55" fill="#fff" font-family="Arial,sans-serif" font-weight="600" letter-spacing="2" font-size="22">⬡ FREE</text><text x="145" y="106" fill="#8290b3" font-family="Arial,sans-serif" font-size="25">placefield.com</text><path d="M145 126H631" stroke="#8290b3" stroke-opacity=".45" stroke-width="2"/><text x="145" y="165" fill="#8290b3" font-family="Arial,sans-serif" font-size="24">Seen 4 months ago</text></g></g><g transform="translate(-370 844)"><g class="feeds-module" style="--arrival:2.7s"><rect width="660" height="232" rx="18" fill="#121831"/><rect class="feeds-arrival" width="660" height="232" rx="18" fill="none" stroke="#5275ff" stroke-width="5"/><rect x="28" y="28" width="91" height="91" rx="13" fill="#fff"/><path d="M48 96L83 48H102L69 96ZM77 96L101 61V96Z" fill="#327dab"/><text x="145" y="66" fill="#eee" font-family="Arial,sans-serif" font-size="30">Reinsurance</text><rect x="455" y="28" width="109" height="39" rx="7" fill="url(#feeds-max)"/><text x="467" y="55" fill="#fff" font-family="Arial,sans-serif" font-weight="600" letter-spacing="2" font-size="22">⬡ MAX</text><path d="M145 97H631" stroke="#8290b3" stroke-opacity=".45" stroke-width="2"/><text x="145" y="136" fill="#8290b3" font-family="Arial,sans-serif" font-size="24">Not seen yet</text></g></g><g transform="translate(431 844)"><g class="feeds-module" style="--arrival:3.0s"><rect width="660" height="168" rx="18" fill="#121831"/><rect class="feeds-arrival" width="660" height="168" rx="18" fill="none" stroke="#5275ff" stroke-width="5"/><rect x="28" y="28" width="91" height="91" rx="13" fill="url(#feeds-beta)"/><text x="56" y="98" font-family="Georgia,serif" font-size="76" fill="#87f6d8">β</text><text x="145" y="66" fill="#eee" font-family="Arial,sans-serif" font-size="30">Beta Reinsurance</text><rect x="455" y="28" width="109" height="39" rx="7" fill="#446cf4"/><text x="467" y="55" fill="#fff" font-family="Arial,sans-serif" font-weight="600" letter-spacing="2" font-size="22">⬡ FREE</text><path d="M145 97H631" stroke="#8290b3" stroke-opacity=".45" stroke-width="2"/><text x="145" y="136" fill="#8290b3" font-family="Arial,sans-serif" font-size="24">Not seen yet</text></g></g><g transform="translate(1231 844)"><g class="feeds-module" style="--arrival:3.3s"><rect width="660" height="168" rx="18" fill="#121831"/><rect class="feeds-arrival" width="660" height="168" rx="18" fill="none" stroke="#5275ff" stroke-width="5"/><rect x="28" y="28" width="91" height="91" rx="13" fill="#fff"/><path d="M48 96L83 48H102L69 96ZM77 96L101 61V96Z" fill="#327dab"/><text x="145" y="66" fill="#eee" font-family="Arial,sans-serif" font-size="30">Alpha Reinsurance</text><rect x="455" y="28" width="109" height="39" rx="7" fill="#446cf4"/><text x="467" y="55" fill="#fff" font-family="Arial,sans-serif" font-weight="600" letter-spacing="2" font-size="22">⬡ FREE</text><path d="M145 97H631" stroke="#8290b3" stroke-opacity=".45" stroke-width="2"/><text x="145" y="136" fill="#8290b3" font-family="Arial,sans-serif" font-size="24">Not seen yet</text></g></g></svg>
         <span class="case-block-text">
           <span class="case-block-kicker">Feeds</span>
           <span class="case-block-title">Connecting organisations through data</span>
@@ -1923,6 +1999,72 @@
         reveal();
       }, { threshold: 0.2 });
       io.observe(list);
+    })();
+  </script>
+  <script>
+    (function () {
+      document.querySelectorAll('.green-pipeline, .validation-card, .feeds-card, .mapping-card').forEach(function (card) {
+      var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      var observer, inView = false, running = false, completed = 0;
+      var animationName = card.classList.contains('mapping-card') ? 'mapping-fill-right' : card.classList.contains('feeds-card') ? 'feeds-arrive' : card.classList.contains('validation-card') ? 'validation-ring' : 'pipeline-trace';
+      var pulseCount = card.classList.contains('mapping-card') ? 1 : card.querySelectorAll('.green-trace, .validation-arc, .feeds-arrival').length;
+      function start(replay) {
+        if (running || reducedMotion.matches) return;
+        running = true;
+        completed = 0;
+        if (replay) {
+          card.classList.add('is-flow-reset');
+          card.classList.remove('is-flow-active');
+          // Commit the starting artwork before restarting the CSS animations.
+          void card.offsetWidth;
+          card.classList.remove('is-flow-reset');
+          void card.offsetWidth;
+        }
+        card.classList.add('is-flow-active');
+      }
+      function update() {
+        if (reducedMotion.matches) {
+          running = false;
+          card.classList.remove('is-flow-active');
+          return;
+        }
+        // Retain the active class for the entire sequence, even after leaving.
+        if (running) return;
+        if (inView) {
+          if (card.classList.contains('is-flow-active')) return;
+          start(false);
+        } else card.classList.remove('is-flow-active');
+      }
+      card.addEventListener('pointerenter', function (event) {
+        if (event.pointerType !== 'touch') start(true);
+      });
+      card.addEventListener('focus', function () {
+        if (card.matches(':focus-visible')) start(true);
+      });
+      card.addEventListener('animationend', function (event) {
+        if (event.animationName !== animationName || !running) return;
+        if (++completed === pulseCount) {
+          running = false;
+          update();
+        }
+      });
+      function configure() {
+        if (observer) observer.disconnect();
+        inView = false;
+        if (!reducedMotion.matches && 'IntersectionObserver' in window) {
+          observer = new IntersectionObserver(function (entries) {
+            var entry = entries[0];
+            if (entry.intersectionRatio >= 0.6) inView = true;
+            else if (!entry.isIntersecting) inView = false;
+            update();
+          }, { threshold: [0, 0.6], rootMargin: '-64px 0px 0px 0px' });
+          observer.observe(card.querySelector('.case-block-media'));
+        }
+        update();
+      }
+      reducedMotion.addEventListener('change', configure);
+      configure();
+      });
     })();
   </script>
   <script data-goatcounter="https://tomdegay.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>

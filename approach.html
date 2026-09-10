@@ -777,7 +777,41 @@
       display: none;
     }
   }
+  /* -- interior-page heading entrance -- */
+
+  .head-armed .head-fade {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  .head-play .head-fade {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .head-fade {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
+  }
 </style>
+<script>
+  (function () {
+    try {
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('head-armed');
+      }
+    } catch (e) {}
+  })();
+</script>
+<noscript>
+  <style>
+    .head-armed .head-fade { opacity: 1 !important; transform: none !important; }
+  </style>
+</noscript>
 </head>
 <body>
   <nav class="site-nav">
@@ -843,9 +877,9 @@
   </nav>
   <main>
     <div class="content">
-      <h1 class="lede display">Learning from wayfinding</h1>
+      <h1 class="lede display head-fade">Learning from wayfinding</h1>
 
-      <p class="intro">Before moving into digital product design, I designed wayfinding systems for schools, hospitals and other complex buildings. That work still shapes my approach: help people understand where they are, what they can do next and whether they&rsquo;re on the right track.</p>
+      <p class="intro head-fade">Before moving into digital product design, I designed wayfinding systems for schools, hospitals and other complex buildings. That work still shapes my approach: help people understand where they are, what they can do next and whether they&rsquo;re on the right track.</p>
 
       <figure class="figure">
         <img src="media/haggerston-colour-banding.jpg" alt="Interior of Haggerston School showing a staircase and corridor walls painted in bands of red and green to distinguish floors.">
@@ -1142,6 +1176,20 @@
       });
       document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape') closeAll(null);
+      });
+    })();
+  </script>
+  <script>
+    (function () {
+      var root = document.documentElement;
+      if (!root.classList.contains('head-armed')) return;
+      var els = document.querySelectorAll('.head-fade');
+      if (!els.length) return;
+      Array.prototype.forEach.call(els, function (el, i) {
+        el.style.transitionDelay = (i * 70) + 'ms';
+      });
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () { root.classList.add('head-play'); });
       });
     })();
   </script>

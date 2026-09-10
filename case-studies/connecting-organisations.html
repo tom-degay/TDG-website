@@ -1229,7 +1229,41 @@
       display: none;
     }
   }
+  /* -- interior-page heading entrance -- */
+
+  .head-armed .head-fade {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  .head-play .head-fade {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .head-fade {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
+  }
 </style>
+<script>
+  (function () {
+    try {
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('head-armed');
+      }
+    } catch (e) {}
+  })();
+</script>
+<noscript>
+  <style>
+    .head-armed .head-fade { opacity: 1 !important; transform: none !important; }
+  </style>
+</noscript>
 </head>
 <body>
   <nav class="site-nav">
@@ -1296,9 +1330,9 @@
   <main>
   <div class="content">
     <header>
-      <span class="kicker">Case Study | <a href="https://help.quantemplate.com/about-feeds" target="_blank" rel="noopener noreferrer">Quantemplate Feeds</a></span>
-      <h1 class="display">Connecting organisations through data</h1>
-      <p class="subtitle">Infrastructure to automate data exchange, laying the foundation for a connected network.</p>
+      <span class="kicker head-fade">Case Study | <a href="https://help.quantemplate.com/about-feeds" target="_blank" rel="noopener noreferrer">Quantemplate Feeds</a></span>
+      <h1 class="display head-fade">Connecting organisations through data</h1>
+      <p class="subtitle head-fade">Infrastructure to automate data exchange, laying the foundation for a connected network.</p>
       <p class="keywords"><span class="keyword">Product strategy</span><span class="keyword">Systems thinking</span><span class="keyword">Process design</span></p>
 
       <hr class="rule">
@@ -1852,6 +1886,20 @@
       });
       document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape') closeAll(null);
+      });
+    })();
+  </script>
+  <script>
+    (function () {
+      var root = document.documentElement;
+      if (!root.classList.contains('head-armed')) return;
+      var els = document.querySelectorAll('.head-fade');
+      if (!els.length) return;
+      Array.prototype.forEach.call(els, function (el, i) {
+        el.style.transitionDelay = (i * 70) + 'ms';
+      });
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () { root.classList.add('head-play'); });
       });
     })();
   </script>

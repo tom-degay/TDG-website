@@ -301,9 +301,10 @@
     content: none;
   }
 
-  /* -- photo now fills the column: drop the links below it in
-        normal flow and stop them sticking -- */
-  @media (max-width: 820px) {
+  /* -- below 1100px the right-hand gutter is too narrow for the button
+        modules, so drop the links below the photo in normal flow and
+        stop them sticking -- */
+  @media (max-width: 1099px) {
     .about-header {
       order: 0;
       margin-bottom: 20px;
@@ -431,10 +432,14 @@
   }
 
   .nav-item:hover .nav-dropdown,
-  .nav-item:focus-within .nav-dropdown {
+  .nav-item:focus-within .nav-dropdown,
+  .nav-item.is-open .nav-dropdown {
     opacity: 1;
     visibility: visible;
     transform: translate(-50%, 0);
+  }
+
+  .nav-item:hover .nav-dropdown {
     transition-delay: 0.14s;
   }
 
@@ -592,7 +597,8 @@
     /* the desktop open-state rule is more specific and would otherwise
        still slide the panel -50% when the item is hovered/focused here */
     .nav-item:hover .nav-dropdown,
-    .nav-item:focus-within .nav-dropdown {
+    .nav-item:focus-within .nav-dropdown,
+    .nav-item.is-open .nav-dropdown {
       transform: none;
     }
 
@@ -731,6 +737,32 @@
       });
       window.addEventListener('resize', function () {
         if (window.innerWidth > 640) setOpen(false);
+      });
+    })();
+
+    (function () {
+      var items = document.querySelectorAll('.site-nav .nav-item');
+      if (!items.length) return;
+      function closeAll(except) {
+        Array.prototype.forEach.call(items, function (it) {
+          if (it !== except) it.classList.remove('is-open');
+        });
+      }
+      Array.prototype.forEach.call(items, function (item) {
+        var link = item.firstElementChild;
+        if (!link || link.tagName !== 'A') return;
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          var wasOpen = item.classList.contains('is-open');
+          closeAll(item);
+          item.classList.toggle('is-open', !wasOpen);
+        });
+      });
+      document.addEventListener('click', function (e) {
+        if (!e.target.closest('.nav-item')) closeAll(null);
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeAll(null);
       });
     })();
   </script>

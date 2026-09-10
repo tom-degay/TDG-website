@@ -211,8 +211,8 @@
   /* -- inline UI video -- */
 
   .ui-video {
+    position: relative;
     margin: 28px 0 0;
-    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 6px;
     overflow: hidden;
   }
@@ -225,6 +225,36 @@
 
   .figure .ui-video {
     margin: 0;
+  }
+
+  .ui-video-expand {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.55);
+    color: #fff;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+  }
+
+  .ui-video:hover .ui-video-expand,
+  .ui-video:focus-within .ui-video-expand {
+    opacity: 1;
+  }
+
+  .ui-video-expand:hover,
+  .ui-video-expand:focus-visible {
+    border-color: rgba(255, 255, 255, 0.85);
+    background: rgba(0, 0, 0, 0.8);
   }
 
   /* -- image lightbox -- */
@@ -260,6 +290,15 @@
     max-height: calc(100vh - 140px);
     border-radius: 6px;
     box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
+    cursor: default;
+  }
+
+  .lightbox-video {
+    max-width: 100%;
+    max-height: calc(100vh - 140px);
+    border-radius: 6px;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
+    background: #000;
     cursor: default;
   }
 
@@ -511,17 +550,17 @@
     justify-content: space-between;
     gap: 20px;
     padding: 18px 22px 12px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgb(33, 33, 33);
     border-radius: 10px;
-    background-color: transparent;
+    background-color: rgb(33, 33, 33);
     transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
     max-width: 46rem;
   }
 
   .case-block:hover,
   .case-block:focus-visible {
-    background-color: #1a1a1a;
-    border-color: rgba(255, 255, 255, 0.4);
+    background-color: rgb(48, 48, 48);
+    border-color: rgb(48, 48, 48);
     transform: translateY(-4px);
   }
 
@@ -706,10 +745,14 @@
   }
 
   .nav-item:hover .nav-dropdown,
-  .nav-item:focus-within .nav-dropdown {
+  .nav-item:focus-within .nav-dropdown,
+  .nav-item.is-open .nav-dropdown {
     opacity: 1;
     visibility: visible;
     transform: translate(-50%, 0);
+  }
+
+  .nav-item:hover .nav-dropdown {
     transition-delay: 0.14s;
   }
 
@@ -867,7 +910,8 @@
     /* the desktop open-state rule is more specific and would otherwise
        still slide the panel -50% when the item is hovered/focused here */
     .nav-item:hover .nav-dropdown,
-    .nav-item:focus-within .nav-dropdown {
+    .nav-item:focus-within .nav-dropdown,
+    .nav-item.is-open .nav-dropdown {
       transform: none;
     }
 
@@ -956,9 +1000,21 @@
         <section class="principle">
           <h1 class="lede display" id="ai-for-heading">Designing for AI</h1>
           <blockquote>How should a system express what it doesn&rsquo;t know? How do we build confidence in automated decisions? How do we prevent harm?</blockquote>
-          <p>At <a href="https://quantemplate.com" target="_blank" rel="noopener noreferrer">Quantemplate</a>, I&rsquo;ve spent years designing systems that suggest column mappings, identify join points and resolve inconsistent company names.</p>
-          <p>An uncertain suggestion may be useful if it&rsquo;s easy to check and correct. Even a confident one may need approval if a mistake would be costly. I design previews, controls and feedback around that distinction, helping people put their attention where it matters.</p>
-          <p>When results change between runs, people need to see what changed. Their corrections shouldn&rsquo;t be silently undone. They should control what automation can access and change, and be able to trace what it did.</p>
+          <p>An uncertain suggestion can be useful if it&rsquo;s easy to check and correct. Even a confident one may need approval if a mistake would be costly. Previews, controls and feedback should reflect that distinction, directing attention where it matters most.</p>
+
+          <figure class="figure">
+            <div class="ui-video">
+              <video autoplay controls muted loop playsinline disablepictureinpicture controlslist="nofullscreen nodownload" poster="/case-studies/media/automap-preview.jpg">
+                <source src="/case-studies/media/automap-preview.mp4" type="video/mp4">
+              </video>
+            <button class="ui-video-expand" type="button" aria-label="View full size"><svg viewBox="0 0 20 20" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3H3v4M13 3h4v4M13 17h4v-4M7 17H3v-4"/></svg></button>
+            </div>
+            <figcaption>Lower confidence ratings are highlighted yellow for user review.</figcaption>
+          </figure>
+
+          <p>Trust in a process depends on evidence: who or what suggested a change, what informed it, and how it can be checked. Systems should show their working.</p>
+          <p>When results change between runs, those changes should be visible. Human work should never be silently undone. People should control what automation can access and change, and be able to trace what it did.</p>
+          <p>As AI takes on more of the work, design must keep asking where in the loop, the human needs to be.</p>
 
           <a class="case-block has-thumb" href="/case-studies/mapping-inconsistent-schemas">
             <img class="case-block-thumb" src="/case-studies/media/concept-mapping-detail.png" alt="Concept design for Quantemplate's column mapping interface: schemas as vertically stacked fields aligned to a common master." loading="lazy">
@@ -981,9 +1037,10 @@
 
           <figure class="figure">
             <div class="ui-video">
-              <video autoplay controls muted loop playsinline poster="media/loveable-poster.jpg">
+              <video autoplay controls muted loop playsinline disablepictureinpicture controlslist="nofullscreen nodownload" poster="media/loveable-poster.jpg">
                 <source src="media/loveable.mp4" type="video/mp4">
               </video>
+            <button class="ui-video-expand" type="button" aria-label="View full size"><svg viewBox="0 0 20 20" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3H3v4M13 3h4v4M13 17h4v-4M7 17H3v-4"/></svg></button>
             </div>
             <figcaption>A 10-minute prototype made in Lovable to test and refine some interactions. It doesn&rsquo;t look exactly like Quantemplate but at this point in the process it doesn&rsquo;t have to.</figcaption>
           </figure>
@@ -1014,6 +1071,7 @@
       <button class="lightbox-nav lightbox-prev" type="button" aria-label="Previous image">&lsaquo;</button>
       <button class="lightbox-nav lightbox-next" type="button" aria-label="Next image">&rsaquo;</button>
       <img src="" alt="">
+      <video class="lightbox-video" controls muted loop playsinline hidden></video>
       <p class="lightbox-caption" hidden></p>
     </div>
   </main>
@@ -1069,6 +1127,7 @@
       var lightbox = document.getElementById("lightbox");
       if (!lightbox) return;
       var lightboxImg = lightbox.querySelector("img");
+      var lightboxVideo = lightbox.querySelector(".lightbox-video");
       var lightboxCaption = lightbox.querySelector(".lightbox-caption");
       var closeBtn = lightbox.querySelector(".lightbox-close");
       var prevBtn = lightbox.querySelector(".lightbox-prev");
@@ -1105,22 +1164,69 @@
         nextBtn.hidden = !showNav;
       }
 
+      function stopVideo() {
+        if (!lightboxVideo) return;
+        lightboxVideo.pause();
+        lightboxVideo.removeAttribute("src");
+        lightboxVideo.load();
+        lightboxVideo.hidden = true;
+      }
+
       function openLightbox(index) {
         lastFocused = document.activeElement;
+        stopVideo();
+        lightboxImg.hidden = false;
         showIndex(index);
         lightbox.classList.add("is-open");
         document.body.style.overflow = "hidden";
         closeBtn.focus();
       }
 
+      function openVideo(src, caption) {
+        if (!lightboxVideo || !src) return;
+        lastFocused = document.activeElement;
+        lightboxImg.hidden = true;
+        lightboxImg.src = "";
+        lightboxVideo.src = src;
+        lightboxVideo.hidden = false;
+        prevBtn.hidden = true;
+        nextBtn.hidden = true;
+        if (caption) {
+          lightboxCaption.textContent = caption;
+          lightboxCaption.hidden = false;
+        } else {
+          lightboxCaption.textContent = "";
+          lightboxCaption.hidden = true;
+        }
+        lightbox.classList.add("is-open");
+        document.body.style.overflow = "hidden";
+        var playback = lightboxVideo.play();
+        if (playback && playback.catch) playback.catch(function () {});
+        closeBtn.focus();
+      }
+
       function closeLightbox() {
         lightbox.classList.remove("is-open");
         lightboxImg.src = "";
+        stopVideo();
+        lightboxImg.hidden = false;
         lightboxCaption.textContent = "";
         lightboxCaption.hidden = true;
         document.body.style.overflow = "";
         if (lastFocused) lastFocused.focus();
       }
+
+      Array.prototype.forEach.call(document.querySelectorAll(".ui-video-expand"), function (btn) {
+        var wrap = btn.parentNode;
+        var source = wrap.querySelector("source");
+        if (!source) { btn.hidden = true; return; }
+        var figure = wrap.closest("figure");
+        var captionEl = figure ? figure.querySelector("figcaption") : null;
+        var caption = captionEl ? captionEl.textContent.trim() : "";
+        btn.addEventListener("click", function () {
+          openVideo(source.src, caption);
+        });
+      });
 
       items.forEach(function (item, index) {
         var img = item.img;
@@ -1188,6 +1294,32 @@
       });
       window.addEventListener('resize', function () {
         if (window.innerWidth > 640) setOpen(false);
+      });
+    })();
+
+    (function () {
+      var items = document.querySelectorAll('.site-nav .nav-item');
+      if (!items.length) return;
+      function closeAll(except) {
+        Array.prototype.forEach.call(items, function (it) {
+          if (it !== except) it.classList.remove('is-open');
+        });
+      }
+      Array.prototype.forEach.call(items, function (item) {
+        var link = item.firstElementChild;
+        if (!link || link.tagName !== 'A') return;
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          var wasOpen = item.classList.contains('is-open');
+          closeAll(item);
+          item.classList.toggle('is-open', !wasOpen);
+        });
+      });
+      document.addEventListener('click', function (e) {
+        if (!e.target.closest('.nav-item')) closeAll(null);
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeAll(null);
       });
     })();
   </script>

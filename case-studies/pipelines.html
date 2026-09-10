@@ -947,7 +947,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 16px;
+    gap: 24px;
     padding: clamp(16px, 5vw, 64px);
     opacity: 0;
     visibility: hidden;
@@ -984,7 +984,7 @@
     max-width: 100%;
     max-height: calc(100vh - 140px);
     border-radius: 6px;
-    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
     cursor: default;
   }
 
@@ -992,12 +992,14 @@
     max-width: 100%;
     max-height: calc(100vh - 140px);
     border-radius: 6px;
-    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
     background: #000;
     cursor: default;
   }
 
   .lightbox-caption {
+    position: relative;
+    z-index: 1;
     margin: 0;
     max-width: 60ch;
     color: rgba(255, 255, 255, 0.55);

@@ -1278,6 +1278,26 @@
       transition: none !important;
     }
   }
+
+  /* -- key points: stagger in as the list enters view -- */
+
+  .head-armed .key-points li {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  .key-points li.kp-in {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .head-armed .key-points li {
+      opacity: 1;
+      transform: none;
+    }
+  }
 </style>
 <script>
   (function () {
@@ -1291,6 +1311,7 @@
 <noscript>
   <style>
     .head-armed .head-fade { opacity: 1 !important; transform: none !important; }
+    .head-armed .key-points li { opacity: 1 !important; transform: none !important; }
   </style>
 </noscript>
 </head>
@@ -1917,6 +1938,32 @@
       requestAnimationFrame(function () {
         requestAnimationFrame(function () { root.classList.add('head-play'); });
       });
+    })();
+
+    (function () {
+      var root = document.documentElement;
+      if (!root.classList.contains('head-armed')) return;
+      var list = document.querySelector('.key-points');
+      var items = list ? list.querySelectorAll('li') : [];
+      if (!items.length) return;
+
+      function reveal() {
+        Array.prototype.forEach.call(items, function (li, i) {
+          li.style.transitionDelay = (i * 90) + 'ms';
+          li.classList.add('kp-in');
+        });
+        setTimeout(function () {
+          Array.prototype.forEach.call(items, function (li) { li.style.transitionDelay = ''; });
+        }, items.length * 90 + 700);
+      }
+
+      if (!('IntersectionObserver' in window)) { reveal(); return; }
+      var io = new IntersectionObserver(function (entries) {
+        if (!entries.some(function (e) { return e.isIntersecting; })) return;
+        io.disconnect();
+        reveal();
+      }, { threshold: 0.2 });
+      io.observe(list);
     })();
   </script>
   <script data-goatcounter="https://tomdegay.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>

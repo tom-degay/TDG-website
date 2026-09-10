@@ -1034,6 +1034,19 @@
       display: none;
     }
   }
+
+  /* Let each corner move outwards without scaling its stroke. */
+  @media (prefers-reduced-motion: no-preference) {
+    .ui-video-expand .expand-corner { transition: transform .2s ease; }
+    .ui-video-expand:focus-visible .expand-corner {
+      transform: translate(var(--dx), var(--dy));
+    }
+  }
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .ui-video-expand:hover .expand-corner {
+      transform: translate(var(--dx), var(--dy));
+    }
+  }
 </style>
 </head>
 <body>
@@ -1111,7 +1124,7 @@
               <video autoplay controls muted loop playsinline disablepictureinpicture controlslist="nofullscreen nodownload" poster="/case-studies/media/automap-preview.jpg">
                 <source src="/case-studies/media/automap-preview.mp4" type="video/mp4">
               </video>
-            <button class="ui-video-expand" type="button" aria-label="View full size"><svg viewBox="0 0 20 20" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3H3v4M13 3h4v4M13 17h4v-4M7 17H3v-4"/></svg></button>
+            <button class="ui-video-expand" type="button" aria-label="View full size"><svg viewBox="0 0 20 20" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path class="expand-corner" style="--dx:-1px;--dy:-1px" d="M7 3H3v4"/><path class="expand-corner" style="--dx:1px;--dy:-1px" d="M13 3h4v4"/><path class="expand-corner" style="--dx:1px;--dy:1px" d="M13 17h4v-4"/><path class="expand-corner" style="--dx:-1px;--dy:1px" d="M7 17H3v-4"/></svg></button>
             </div>
             <figcaption>Lower confidence ratings are highlighted yellow for user review.</figcaption>
           </figure>
@@ -1152,7 +1165,7 @@
               <video autoplay controls muted loop playsinline disablepictureinpicture controlslist="nofullscreen nodownload" poster="media/loveable-poster.jpg">
                 <source src="media/loveable.mp4" type="video/mp4">
               </video>
-            <button class="ui-video-expand" type="button" aria-label="View full size"><svg viewBox="0 0 20 20" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3H3v4M13 3h4v4M13 17h4v-4M7 17H3v-4"/></svg></button>
+            <button class="ui-video-expand" type="button" aria-label="View full size"><svg viewBox="0 0 20 20" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path class="expand-corner" style="--dx:-1px;--dy:-1px" d="M7 3H3v4"/><path class="expand-corner" style="--dx:1px;--dy:-1px" d="M13 3h4v4"/><path class="expand-corner" style="--dx:1px;--dy:1px" d="M13 17h4v-4"/><path class="expand-corner" style="--dx:-1px;--dy:1px" d="M7 17H3v-4"/></svg></button>
             </div>
             <figcaption>A 10-minute prototype made in Lovable to test and refine some interactions. It doesn&rsquo;t look exactly like Quantemplate but at this point in the process it doesn&rsquo;t have to.</figcaption>
           </figure>

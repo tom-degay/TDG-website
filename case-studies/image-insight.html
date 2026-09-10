@@ -990,6 +990,24 @@
     font-size: 24px;
     color: #fff;
     border-bottom: none;
+    display: inline-block;
+    transform-origin: 50% 55%;
+  }
+
+  @keyframes brand-wiggle {
+    0%   { transform: rotate(0); }
+    25%  { transform: rotate(-2.4deg); }
+    55%  { transform: rotate(1.5deg); }
+    80%  { transform: rotate(-0.6deg); }
+    100% { transform: rotate(0); }
+  }
+
+  .site-nav-brand:hover {
+    animation: brand-wiggle 0.4s ease-in-out;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .site-nav-brand:hover { animation: none; }
   }
 
   .site-nav-links {

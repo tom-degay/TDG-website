@@ -1,0 +1,985 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Pipeline card — animation proof</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet"><style>
+
+  @font-face {
+    font-family: "Fakt Blond SemiBold";
+    src: url("FaktProSemiBold.woff2") format("woff2"),
+         url("FaktProSemiBold.woff") format("woff");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Fakt Blond";
+    src: url("FaktProBlond.woff2") format("woff2"),
+         url("FaktProBlond.woff") format("woff");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  :root {
+    color-scheme: dark;
+  }
+
+  ::selection {
+    background: rgba(0, 216, 170, 0.28);
+    color: #fff;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #131313;
+  }
+
+  body {
+    font-family: "Fakt Blond", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-width: 250px;
+  }
+
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: clamp(24px, 6vw, 72px) clamp(24px, 5vw, 56px) clamp(72px, 10vw, 120px);
+  }
+
+  @media (min-width: 1100px) {
+    main {
+      max-width: 1080px;
+    }
+  }
+
+  .display {
+    font-family: "Fakt Blond SemiBold", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 600;
+  }
+
+  h1 {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(28px, 4.6vw, 42px);
+    line-height: 1.1;
+  }
+
+  p.links {
+    margin: 0;
+    font-size: clamp(14px, 1.5vw, 16px);
+    white-space: nowrap;
+  }
+
+  p.links a + a {
+    margin-left: 28px;
+  }
+
+  a {
+    color: #fff;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+    padding-bottom: 1px;
+    transition: border-color 0.15s ease, opacity 0.15s ease;
+  }
+
+  a:hover,
+  a:focus-visible {
+    border-color: rgba(255, 255, 255, 0.9);
+  }
+
+  a:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.6);
+    outline-offset: 4px;
+    border-radius: 1px;
+  }
+
+  a[target="_blank"] {
+    position: relative;
+  }
+
+  a[target="_blank"]::after {
+    content: "→";
+    position: absolute;
+    right: -1.1em;
+    top: 50%;
+    transform: translate(-4px, -50%);
+    opacity: 0;
+    transition: transform 0.18s ease, opacity 0.18s ease;
+    pointer-events: none;
+    will-change: transform, opacity;
+  }
+
+  a[target="_blank"]:hover::after,
+  a[target="_blank"]:focus-visible::after {
+    opacity: 1;
+    transform: translate(0, -50%);
+  }
+
+  hr.rule {
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    margin: clamp(32px, 5vw, 48px) 0;
+  }
+
+  section .eyebrow {
+    display: block;
+    font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+    color: #00d8aa;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    word-spacing: -3px;
+    text-transform: uppercase;
+    margin: 0 0 20px;
+  }
+
+  .about-statement {
+    color: #fff;
+    font-size: clamp(24px, 3.6vw, 34px);
+    line-height: 1.3;
+    margin: 0;
+    max-width: 40ch;
+  }
+
+  .job {
+    margin: 0 0 8px;
+  }
+
+  .job-company {
+    color: #fff;
+    font-size: clamp(20px, 2.8vw, 26px);
+    line-height: 1.2;
+  }
+
+  .job-keywords {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 16px 0 0;
+  }
+
+  .keyword {
+    display: inline-block;
+    padding: 9px 13px;
+    border-radius: 6px;
+    background: rgb(40, 40, 40);
+    color: rgba(255, 255, 255, 0.72);
+    font-family: "Fakt Blond SemiBold", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+
+  .job-desc {
+    color: rgba(255, 255, 255, 0.68);
+    font-size: clamp(20px, 2.6vw, 25px);
+    line-height: 1.4;
+    max-width: 55ch;
+    margin: 18px 0 0;
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 28px 32px;
+    margin: 28px 0 0;
+  }
+
+  .stat {
+    margin: 0;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .stat-value {
+    display: block;
+    color: #00d8aa;
+    font-weight: 400;
+    font-size: clamp(28px, 4vw, 40px);
+    line-height: 1.05;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .stat-label {
+    display: block;
+    margin: 8px 0 0;
+    color: rgba(255, 255, 255, 0.55);
+    font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .case-blocks {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .case-blocks .case-block {
+    margin-top: 0;
+  }
+
+  @media (min-width: 820px) {
+    .case-blocks {
+      grid-template-columns: 1fr 1fr;
+      column-gap: 20px;
+    }
+
+    .case-blocks.approach-blocks {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .approach-blocks .case-block {
+    border-color: rgb(33, 33, 33);
+    background-color: rgb(33, 33, 33);
+  }
+
+  .approach-blocks .case-block:hover,
+  .approach-blocks .case-block:focus-visible {
+    border-color: rgb(48, 48, 48);
+    background-color: rgb(48, 48, 48);
+    transform: none;
+  }
+
+  .approach-blocks .case-block-media {
+    aspect-ratio: 5 / 2;
+  }
+
+  .job-link {
+    display: inline-block;
+    margin-top: 16px;
+    font-size: 14px;
+  }
+
+  form {
+    max-width: 480px;
+  }
+
+  .field {
+    margin-bottom: 28px;
+  }
+
+  .field label {
+    display: block;
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .field input,
+  .field textarea {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    color: #fff;
+    font-family: inherit;
+    font-size: 17px;
+    padding: 8px 0 10px;
+    outline: none;
+    transition: border-color 0.15s ease;
+  }
+
+  .field textarea {
+    resize: vertical;
+    min-height: 90px;
+    line-height: 1.4;
+  }
+
+  .field input::placeholder,
+  .field textarea::placeholder {
+    color: rgba(255, 255, 255, 0.32);
+  }
+
+  .field input:focus,
+  .field textarea:focus {
+    border-bottom-color: rgba(255, 255, 255, 0.9);
+  }
+
+  button[type="submit"] {
+    background: none;
+    border: none;
+    padding: 0 0 2px;
+    color: #fff;
+    font-family: inherit;
+    font-size: 16px;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+    transition: border-color 0.15s ease;
+  }
+
+  button[type="submit"]:hover,
+  button[type="submit"]:focus-visible {
+    border-color: rgba(255, 255, 255, 0.9);
+  }
+
+  button[type="submit"]:disabled {
+    cursor: default;
+    opacity: 0.6;
+  }
+
+  .form-status {
+    margin-top: 18px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.68);
+  }
+
+
+  /* -- case study link block -- */
+
+  .case-block {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 20px;
+    padding: 18px 22px 12px;
+    border: 1px solid rgb(33, 33, 33);
+    border-radius: 10px;
+    background-color: rgb(33, 33, 33);
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .case-block:hover,
+  .case-block:focus-visible {
+    background-color: rgb(48, 48, 48);
+    border-color: rgb(48, 48, 48);
+    transform: translateY(-4px);
+  }
+
+  .case-block .eyebrow {
+    margin: 0 0 6px;
+  }
+
+  .case-block-kicker {
+    display: block;
+    font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+    color: #00d8aa;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    word-spacing: -3px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .case-block-title {
+    display: block;
+    font-family: "Fakt Blond SemiBold", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    color: #fff;
+    font-size: clamp(18px, 2.4vw, 22px);
+    line-height: 1.3;
+  }
+
+  .case-block-subtitle {
+    display: block;
+    color: rgba(255, 255, 255, 0.68);
+    font-size: clamp(15px, 1.7vw, 17px);
+    line-height: 1.5;
+    margin-top: 8px;
+    max-width: 54ch;
+  }
+
+  .case-block-keywords {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+  }
+
+  .case-block-keyword {
+    display: inline-block;
+    padding: 9px 13px;
+    border-radius: 6px;
+    background: rgb(48, 48, 48);
+    color: rgba(255, 255, 255, 0.72);
+    font-family: "Fakt Blond SemiBold", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    transition: background-color 0.2s ease;
+  }
+
+  .case-block:hover .case-block-keyword,
+  .case-block:focus-visible .case-block-keyword {
+    background: rgb(64, 64, 64);
+  }
+
+  .case-studies-heading {
+    margin-top: 0;
+  }
+
+  .case-block[target="_blank"]::after {
+    content: none;
+  }
+
+  .job-company a[target="_blank"]::after {
+    content: none;
+  }
+
+  .case-block.is-soon {
+    cursor: default;
+    opacity: 0.7;
+  }
+
+  .case-block.is-soon:hover,
+  .case-block.is-soon:focus-visible {
+    background-color: transparent;
+    border-color: rgba(255, 255, 255, 0.25);
+    transform: none;
+  }
+
+  .case-block-soon-label {
+    display: block;
+    color: rgba(255, 255, 255, 0.45);
+    font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    word-spacing: -3px;
+    text-transform: uppercase;
+    margin-top: 8px;
+  }
+
+  /* -- case block with lead image -- */
+
+  .case-block.has-image {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 0;
+    padding: 0 0 14px;
+    overflow: hidden;
+  }
+
+  .case-block-media {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    object-position: center top;
+    margin-bottom: 16px;
+    transition: transform 0.3s ease;
+  }
+
+  .case-block.has-image .case-block-text {
+    padding: 0 22px;
+  }
+
+  .case-block.has-image:hover .case-block-media,
+  .case-block.has-image:focus-visible .case-block-media {
+    transform: scale(1.03);
+  }
+
+  /* -- horizontal video card (YouTube) -- */
+
+  .case-block.has-thumb {
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 22px;
+    margin-top: 28px;
+    padding: 18px 22px 16px;
+    overflow: hidden;
+    border-color: rgb(33, 33, 33);
+    background-color: rgb(33, 33, 33);
+  }
+
+  .case-block.has-thumb:hover,
+  .case-block.has-thumb:focus-visible {
+    border-color: rgb(48, 48, 48);
+    background-color: rgb(48, 48, 48);
+    transform: none;
+  }
+
+  .case-block-thumb {
+    flex: 0 0 clamp(150px, 26vw, 240px);
+    width: clamp(150px, 26vw, 240px);
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 6px;
+    transition: transform 0.3s ease;
+  }
+
+  .case-block.has-thumb .case-block-text {
+    min-width: 0;
+  }
+
+  .case-block.has-thumb:hover .case-block-thumb,
+  .case-block.has-thumb:focus-visible .case-block-thumb {
+    transform: scale(1.03);
+  }
+
+  .case-block-watch {
+    display: block;
+    margin-top: 12px;
+    font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    word-spacing: -3px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  @media (max-width: 560px) {
+    .case-block.has-thumb {
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .case-block-thumb {
+      width: 100%;
+      flex-basis: auto;
+    }
+  }
+
+  /* -- site nav -- */
+
+  .site-nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+
+  /* Frosted bar background lives on a pseudo-element so .site-nav itself is
+     not a backdrop-filter root — otherwise the open mobile menu panel (a
+     descendant that has its own backdrop-filter) can't blur the page. */
+  .site-nav::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: rgba(19, 19, 19, 0.86);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .site-nav-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 14px clamp(24px, 5vw, 56px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px 24px;
+    min-height: 56px;
+  }
+
+  @media (min-width: 1100px) {
+    .site-nav-inner {
+      max-width: 1320px;
+    }
+  }
+
+  .site-nav-brand {
+    font-size: 24px;
+    color: #fff;
+    border-bottom: none;
+    display: inline-block;
+    transform-origin: 50% 55%;
+  }
+
+  @keyframes brand-wiggle {
+    0%   { transform: rotate(0); }
+    25%  { transform: rotate(-2.4deg); }
+    55%  { transform: rotate(1.5deg); }
+    80%  { transform: rotate(-0.6deg); }
+    100% { transform: rotate(0); }
+  }
+
+  .site-nav-brand:hover {
+    animation: brand-wiggle 0.4s ease-in-out;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .site-nav-brand:hover { animation: none; }
+  }
+
+  .site-nav-links {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px 28px;
+  }
+
+  .site-nav-links a {
+    font-family: "Fakt Blond SemiBold", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.65);
+    border-bottom: none;
+  }
+
+  .site-nav-links a:hover,
+  .site-nav-links a:focus-visible {
+    color: #fff;
+  }
+
+  .site-nav-links a.is-current {
+    color: #00d8aa;
+  }
+
+  .nav-item {
+    position: relative;
+  }
+
+  .nav-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    padding-top: 14px;
+    min-width: 360px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translate(-50%, -6px);
+    transition: opacity 0.12s ease, transform 0.12s ease, visibility 0.12s ease;
+    z-index: 60;
+  }
+
+  /* Approach popover holds short items -> shrink to content instead of the 360px case-studies width */
+  .nav-dropdown--tight {
+    min-width: 0;
+  }
+
+  .nav-dropdown--tight .nav-dropdown-card-title {
+    white-space: nowrap;
+  }
+
+  .nav-item:hover .nav-dropdown,
+  .nav-item:focus-within .nav-dropdown,
+  .nav-item.is-open .nav-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, 0);
+  }
+
+  .nav-item:hover .nav-dropdown {
+    transition-delay: 0.14s;
+  }
+
+  .nav-dropdown-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 10px;
+    background: #1a1a1a;
+    border-radius: 10px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55);
+  }
+
+  .nav-dropdown-card {
+    display: block;
+    padding: 14px 16px 12px;
+    border-radius: 8px;
+    background-color: transparent;
+    transition: background-color 0.2s ease;
+  }
+
+  .nav-dropdown-card:hover,
+  .nav-dropdown-card:focus-visible {
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .nav-dropdown-card-kicker {
+    display: block;
+    font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+    color: #00d8aa;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    word-spacing: -3px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .nav-dropdown-card-title {
+    display: block;
+    font-family: "Fakt Blond SemiBold", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    color: #fff;
+    font-size: 15px;
+    line-height: 1.3;
+  }
+
+  .nav-dropdown-card-subtitle {
+    display: block;
+    color: rgba(255, 255, 255, 0.62);
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.45;
+    margin-top: 6px;
+  }
+
+  /* -- mobile: collapse the nav links behind a hamburger (<= 640px) -- */
+
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    margin: -10px -12px -10px 0;
+    padding: 0;
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .nav-toggle-bar {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: currentColor;
+    transition: transform 0.45s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.2s ease;
+  }
+
+  .nav-toggle-bar:nth-child(2) {
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
+  .site-nav.is-open .nav-toggle-bar:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .site-nav.is-open .nav-toggle-bar:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+  .site-nav.is-open .nav-toggle-bar:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  @media (max-width: 640px) {
+    .nav-toggle {
+      display: flex;
+    }
+
+    .site-nav-inner {
+      flex-wrap: nowrap;
+    }
+
+    .site-nav-links {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      display: none;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      align-items: stretch;
+      gap: 0;
+      max-height: 80vh;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      padding: 6px clamp(24px, 5vw, 56px) 18px;
+      background: rgba(19, 19, 19, 0.86);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .site-nav.is-open .site-nav-links {
+      display: flex;
+    }
+
+    .site-nav-links > a,
+    .nav-item > a {
+      display: block;
+      padding: 14px 0;
+      font-size: 20px;
+    }
+
+    .site-nav-links > a + a,
+    .nav-item {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-dropdown {
+      position: static;
+      min-width: 0;
+      padding: 0 0 10px;
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+      transition: none;
+    }
+
+    /* the desktop open-state rule is more specific and would otherwise
+       still slide the panel -50% when the item is hovered/focused here */
+    .nav-item:hover .nav-dropdown,
+    .nav-item:focus-within .nav-dropdown,
+    .nav-item.is-open .nav-dropdown {
+      transform: none;
+    }
+
+    .nav-dropdown-panel {
+      gap: 2px;
+      padding: 0;
+      background: none;
+      box-shadow: none;
+    }
+
+    .nav-dropdown-card {
+      padding: 9px 0 9px 16px;
+    }
+
+    .nav-dropdown-card-subtitle {
+      display: none;
+    }
+  }
+
+  /* -- hero entrance animation (word-by-word rise) --
+     .hero-armed is set on <html> by an inline head script only when
+     prefers-reduced-motion is not set; the body script splits the
+     statement into .word spans, staggers them, then adds .hero-play. */
+
+  .hero-armed #about-heading {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  .hero-armed .about-statement {
+    opacity: 0;
+  }
+
+  .hero-armed .about-statement .word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(0.5em);
+    will-change: transform, opacity;
+  }
+
+  .hero-play #about-heading {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .hero-play .about-statement {
+    opacity: 1;
+  }
+
+  .hero-play .about-statement .word {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.66s ease, transform 0.72s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .about-statement .word {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
+  }
+
+  /* -- scroll reveal: fade the card grids in as they enter the viewport --
+     .reveal-armed is set on <html> pre-paint (only when motion is welcome);
+     the body script adds .is-revealed per card with a per-row --reveal-delay. */
+
+  .reveal-armed .case-blocks .case-block {
+    opacity: 0;
+  }
+
+  .reveal-armed .case-blocks .case-block.is-revealed {
+    animation: card-fade-in 1.1s ease var(--reveal-delay, 0ms) both;
+  }
+
+  @keyframes card-fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal-armed .case-blocks .case-block,
+    .reveal-armed .case-blocks .case-block.is-revealed {
+      opacity: 1;
+      animation: none;
+    }
+  }
+
+main { max-width:1200px; }
+.proof-intro { color:rgba(255,255,255,.68); font-size:18px; line-height:1.5; max-width:650px; }
+.proof-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:28px; margin-top:36px; }
+.proof-label { font-family:"IBM Plex Mono",monospace; font-size:12px; color:#00d8aa; letter-spacing:2px; text-transform:uppercase; }
+.proof-grid .case-block { height:calc(100% - 34px); margin-top:14px; }
+.flow-trace { opacity:0; stroke-dasharray:18 118; stroke-dashoffset:18; }
+.stage-wash { opacity:0; }
+@keyframes pipeline-trace { 0% {opacity:0;stroke-dashoffset:18;} 10% {opacity:1;} 85% {opacity:1;} 100% {opacity:0;stroke-dashoffset:-100;} }
+@keyframes pipeline-stage { 0%,100% {opacity:0;} 35% {opacity:.2;} }
+@media (prefers-reduced-motion:no-preference) {
+ .animated-pipeline:focus-visible .flow-trace { animation:pipeline-trace 1s linear var(--delay) both; }
+ .animated-pipeline:focus-visible .stage-wash { animation:pipeline-stage .9s ease var(--delay) both; }
+}
+@media (hover:hover) and (prefers-reduced-motion:no-preference) {
+ .animated-pipeline:hover .flow-trace { animation:pipeline-trace 1s linear var(--delay) both; }
+ .animated-pipeline:hover .stage-wash { animation:pipeline-stage .9s ease var(--delay) both; }
+}
+@media (prefers-reduced-motion:reduce) {
+ .proof-grid .case-block:hover, .proof-grid .case-block:focus-visible, .proof-grid .case-block:hover .case-block-media, .proof-grid .case-block:focus-visible .case-block-media { transform:none; }
+}
+@media(max-width:700px) { .proof-grid {grid-template-columns:1fr;} }
+
+.green-stage [fill], .green-stage [stroke] { transition:fill .45s ease,stroke .45s ease; }
+.green-pipeline:focus-visible .green-stage [fill]:not([fill="none"]):not(.stage-bg) { fill:#8af4d2; }
+.green-pipeline:focus-visible .green-stage .stage-bg { fill:#091d1b; }
+.green-pipeline:focus-visible .green-stage [stroke] { stroke:#8af4d2; }
+.green-pipeline:focus-visible .green-stage [fill], .green-pipeline:focus-visible .green-stage [stroke] { transition-delay:var(--stage-delay); }
+@media(hover:hover) {
+ .green-pipeline:hover .green-stage [fill]:not([fill="none"]):not(.stage-bg) { fill:#8af4d2; }
+ .green-pipeline:hover .green-stage .stage-bg { fill:#091d1b; }
+ .green-pipeline:hover .green-stage [stroke] { stroke:#8af4d2; }
+ .green-pipeline:hover .green-stage [fill], .green-pipeline:hover .green-stage [stroke] { transition-delay:var(--stage-delay); }
+}
+@media(prefers-reduced-motion:reduce) { .green-pipeline .green-stage [fill], .green-pipeline .green-stage [stroke] { transition:none; } }
+
+.green-trace { opacity:0; stroke-dasharray:18 118; stroke-dashoffset:18; pointer-events:none; }
+@media(prefers-reduced-motion:no-preference) {
+ .green-pipeline:focus-visible .green-trace { animation:pipeline-trace .85s linear var(--trace-delay) both; }
+}
+@media(hover:hover) and (prefers-reduced-motion:no-preference) {
+ .green-pipeline:hover .green-trace { animation:pipeline-trace .85s linear var(--trace-delay) both; }
+}
+</style></head><body><main><h1 class="display">Two ways to bring the stages to life</h1><p class="proof-intro">Hover either card to compare. The second fades to green from top to bottom, with pulses cascading along the connections, and holds until you move away. You can also use Tab to focus each card.</p><div class="proof-grid"><section><div class="proof-label">Option 1 · travelling flow</div><a class="case-block has-image animated-pipeline" href="/case-studies/pipelines">
+            <svg class="case-block-media pipeline-vector" viewBox="0 0 1136 639" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Six pipeline stages: premium and claims data are mapped, combined and joined."><rect width="1136" height="639" fill="#000"/><path d="M924 109H937Q949 109 949 121V165Q949 177 937 177H924" fill="none" stroke="#8ff4d4" stroke-opacity=".45" stroke-width="4"/><path class="flow-trace" style="--delay:0s" d="M924 109H937Q949 109 949 121V165Q949 177 937 177H924" fill="none" stroke="#8ff4d4" stroke-width="5" stroke-linecap="round" pathLength="100"/><path d="M924 207H937Q949 207 949 219V263Q949 275 937 275H924" fill="none" stroke="#67d1f1" stroke-opacity=".45" stroke-width="4"/><path class="flow-trace" style="--delay:0.55s" d="M924 207H937Q949 207 949 219V263Q949 275 937 275H924" fill="none" stroke="#67d1f1" stroke-width="5" stroke-linecap="round" pathLength="100"/><path d="M924 305H947Q959 305 959 317V563Q959 575 947 575H924" fill="none" stroke="#459cff" stroke-opacity=".45" stroke-width="4"/><path class="flow-trace" style="--delay:1.1s" d="M924 305H947Q959 305 959 317V563Q959 575 947 575H924" fill="none" stroke="#459cff" stroke-width="5" stroke-linecap="round" pathLength="100"/><path d="M924 403H937Q949 403 949 415V459Q949 471 937 471H924" fill="none" stroke="#426eff" stroke-opacity=".45" stroke-width="4"/><path class="flow-trace" style="--delay:0s" d="M924 403H937Q949 403 949 415V459Q949 471 937 471H924" fill="none" stroke="#426eff" stroke-width="5" stroke-linecap="round" pathLength="100"/><path d="M924 501H937Q949 501 949 513V555Q949 567 937 567H924" fill="none" stroke="#8060fa" stroke-opacity=".45" stroke-width="4"/><path class="flow-trace" style="--delay:0.55s" d="M924 501H937Q949 501 949 513V555Q949 567 937 567H924" fill="none" stroke="#8060fa" stroke-width="5" stroke-linecap="round" pathLength="100"/><g transform="translate(171 53)"><rect width="758" height="82" rx="16" fill="#091d1b"/><rect class="stage-wash" style="--delay:0s" width="758" height="82" rx="16" fill="#8af4d2"/><path d="M3 0V82" stroke="#8af4d2" stroke-width="6"/><text x="43" y="52" fill="#8af4d2" opacity=".8" font-size="32" font-family="Arial,sans-serif" font-weight="600">1</text><text x="84" y="52" fill="#8af4d2" font-size="32" font-family="Arial,sans-serif" font-weight="600">Premium | Map &amp; Tag Data</text><path d="M688 26h16v16h-16z" fill="#8af4d2"/><circle cx="709" cy="46" r="9" fill="#8af4d2"/></g><g transform="translate(171 151)"><rect width="758" height="82" rx="16" fill="#12162e"/><rect class="stage-wash" style="--delay:0.55s" width="758" height="82" rx="16" fill="#67cff1"/><path d="M3 0V82" stroke="#67cff1" stroke-width="6"/><text x="43" y="52" fill="#8996bd" opacity=".8" font-size="32" font-family="Arial,sans-serif" font-weight="600">2</text><text x="84" y="52" fill="#fff" font-size="32" font-family="Arial,sans-serif" font-weight="600">Premium | Union Files</text><g fill="#8996bd"><path d="M686 28h28v8h-28z"/><path d="M686 38h28v18h-28z" opacity=".6"/></g><path d="M690 36v6a10 10 0 0 0 20 0v-6" fill="none" stroke="#8996bd" stroke-width="3"/></g><g transform="translate(171 249)"><rect width="758" height="82" rx="16" fill="#152153"/><rect class="stage-wash" style="--delay:1.1s" width="758" height="82" rx="16" fill="#428ffa"/><path d="M3 0V82" stroke="#428ffa" stroke-width="6"/><text x="43" y="52" fill="#8996bd" opacity=".8" font-size="32" font-family="Arial,sans-serif" font-weight="600">3</text><text x="84" y="52" fill="#fff" font-size="32" font-family="Arial,sans-serif" font-weight="600">Premium | Calculations</text><path d="M688 26h16v16h-16z" fill="#8996bd"/><circle cx="709" cy="46" r="9" fill="#8996bd"/><g fill="#8996bd"><circle cx="635" cy="44" r="3"/><circle cx="645" cy="44" r="3"/><circle cx="655" cy="44" r="3"/></g></g><g transform="translate(171 347)"><rect width="758" height="82" rx="16" fill="#12162e"/><rect class="stage-wash" style="--delay:0s" width="758" height="82" rx="16" fill="#315fff"/><path d="M3 0V82" stroke="#315fff" stroke-width="6"/><text x="43" y="52" fill="#8996bd" opacity=".8" font-size="32" font-family="Arial,sans-serif" font-weight="600">4</text><text x="84" y="52" fill="#fff" font-size="32" font-family="Arial,sans-serif" font-weight="600">Claims | Map &amp; Tag Data</text><path d="M688 26h16v16h-16z" fill="#8996bd"/><circle cx="709" cy="46" r="9" fill="#8996bd"/></g><g transform="translate(171 445)"><rect width="758" height="82" rx="16" fill="#12162e"/><rect class="stage-wash" style="--delay:0.55s" width="758" height="82" rx="16" fill="#6845ed"/><path d="M3 0V82" stroke="#6845ed" stroke-width="6"/><text x="43" y="52" fill="#8996bd" opacity=".8" font-size="32" font-family="Arial,sans-serif" font-weight="600">5</text><text x="84" y="52" fill="#fff" font-size="32" font-family="Arial,sans-serif" font-weight="600">Claims | Union Files</text><g fill="#8996bd"><path d="M686 28h28v8h-28z"/><path d="M686 38h28v18h-28z" opacity=".6"/></g><path d="M690 36v6a10 10 0 0 0 20 0v-6" fill="none" stroke="#8996bd" stroke-width="3"/></g><g transform="translate(171 543)"><rect width="758" height="82" rx="16" fill="#12162e"/><rect class="stage-wash" style="--delay:2.1s" width="758" height="82" rx="16" fill="#a169ed"/><path d="M3 0V82" stroke="#a169ed" stroke-width="6"/><text x="43" y="52" fill="#8996bd" opacity=".8" font-size="32" font-family="Arial,sans-serif" font-weight="600">6</text><text x="84" y="52" fill="#fff" font-size="32" font-family="Arial,sans-serif" font-weight="600">Combined | Join Premium &amp; Cla…</text><circle cx="694" cy="40" r="12" fill="#8996bd"/><circle cx="710" cy="40" r="12" fill="#8996bd" opacity=".5"/></g></svg>
+            <span class="case-block-text">
+              <span class="case-block-kicker">Pipelines</span>
+              <span class="case-block-title">Bringing clarity to complex data flows</span>
+              <span class="case-block-subtitle">Enterprise data processing made accessible through flexible, visual workflows.</span>
+              <span class="case-block-keywords"><span class="case-block-keyword">Zero-to-one</span><span class="case-block-keyword">Visual programming</span><span class="case-block-keyword">Evolution</span></span>
+            </span>
+          </a></section><section><div class="proof-label">Option 2 · green stages</div><a class="case-block has-image green-pipeline" href="/case-studies/pipelines">
+            <svg class="case-block-media pipeline-vector" viewBox="0 0 1136 639" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Six pipeline stages: premium and claims data are mapped, combined and joined."><rect width="1136" height="639" fill="#000"/><path d="M924 109H937Q949 109 949 121V165Q949 177 937 177H924" fill="none" stroke="#8ff4d4" stroke-opacity=".45" stroke-width="4"/><path class="green-trace" style="--trace-delay:0.22s" d="M924 109H937Q949 109 949 121V165Q949 177 937 177H924" fill="none" stroke="#8ff4d4" stroke-width="5" stroke-linecap="round" pathLength="100"/><path d="M924 207H937Q949 207 949 219V263Q949 275 937 275H924" fill="none" stroke="#67d1f1" stroke-opacity=".45" stroke-width="4"/><path class="green-trace" style="--trace-delay:0.4s" d="M924 207H937Q949 207 949 219V263Q949 275 937 275H924" fill="none" stroke="#67d1f1" stroke-width="5" stroke-linecap="round" pathLength="100"/><path d="M924 305H947Q959 305 959 317V563Q959 575 947 575H924" fill="none" stroke="#459cff" stroke-opacity=".45" stroke-width="4"/><path class="green-trace" style="--trace-delay:0.58s" d="M924 305H947Q959 305 959 317V563Q959 575 947 575H924" fill="none" stroke="#459cff" stroke-width="5" stroke-linecap="round" pathLength="100"/><path d="M924 403H937Q949 403 949 415V459Q949 471 937 471H924" fill="none" stroke="#426eff" stroke-opacity=".45" stroke-width="4"/><path class="green-trace" style="--trace-delay:0.76s" d="M924 403H937Q949 403 949 415V459Q949 471 937 471H924" fill="none" stroke="#426eff" stroke-width="5" stroke-linecap="round" pathLength="100"/><path d="M924 501H937Q949 501 949 513V555Q949 567 937 567H924" fill="none" stroke="#8060fa" stroke-opacity=".45" stroke-width="4"/><path class="green-trace" style="--trace-delay:0.94s" d="M924 501H937Q949 501 949 513V555Q949 567 937 567H924" fill="none" stroke="#8060fa" stroke-width="5" stroke-linecap="round" pathLength="100"/><g class="green-stage" style="--stage-delay:0.00s" transform="translate(171 53)"><rect class="stage-bg" width="758" height="82" rx="16" fill="#091d1b"/><path d="M3 0V82" stroke="#8af4d2" stroke-width="6"/><text x="43" y="52" fill="#8af4d2" opacity=".8" font-size="32" font-family="Arial,sans-serif" font-weight="600">1</text><text x="84" y="52" fill="#8af4d2" font-size="32" font-family="Arial,sans-serif" font-weight="600">Premium | Map &amp; Tag Data</text><path d="M688 26h16v16h-16z" fill="#8af4d2"/><circle cx="709" cy="46" r="9" fill="#8af4d2"/></g><g class="green-stage" style="--stage-delay:0.18s" transform="translate(171 151)"><rect class="stage-bg" width="758" height="82" rx="16" fill="#12162e"/><path d="M3 0V82" stroke="#67cff1" stroke-width="6"/><text x="43" y="52" fill="#8996bd" opacity=".8" font-size="32" font-family="Arial,sans-serif" font-weight="600">2</text><text x="84" y="52" fill="#fff" font-size="32" font-family="Arial,sans-serif" font-weight="600">Premium | Union Files</text><g fill="#8996bd"><path d="M686 28h28v8h-28z"/><path d="M686 38h28v18h-28z" opacity=".6"/></g><path d="M690 36v6a10 10 0 0 0 20 0v-6" fill="none" stroke="#8996bd" stroke-width="3"/></g><g class="green-stage" style="--stage-delay:0.36s" transform="translate(171 249)"><rect class="stage-bg" width="758" height="82" rx="16" fill="#12162e"/><path d="M3 0V82" stroke="#428ffa" stroke-width="6"/><text x="43" y="52" fill="#8996bd" opacity=".8" font-size="32" font-family="Arial,sans-serif" font-weight="600">3</text><text x="84" y="52" fill="#fff" font-size="32" font-family="Arial,sans-serif" font-weight="600">Premium | Calculations</text><path d="M688 26h16v16h-16z" fill="#8996bd"/><circle cx="709" cy="46" r="9" fill="#8996bd"/><g fill="#8996bd"><circle cx="635" cy="44" r="3"/><circle cx="645" cy="44" r="3"/><circle cx="655" cy="44" r="3"/></g></g><g class="green-stage" style="--stage-delay:0.54s" transform="translate(171 347)"><rect class="stage-bg" width="758" height="82" rx="16" fill="#12162e"/><path d="M3 0V82" stroke="#315fff" stroke-width="6"/><text x="43" y="52" fill="#8996bd" opacity=".8" font-size="32" font-family="Arial,sans-serif" font-weight="600">4</text><text x="84" y="52" fill="#fff" font-size="32" font-family="Arial,sans-serif" font-weight="600">Claims | Map &amp; Tag Data</text><path d="M688 26h16v16h-16z" fill="#8996bd"/><circle cx="709" cy="46" r="9" fill="#8996bd"/></g><g class="green-stage" style="--stage-delay:0.72s" transform="translate(171 445)"><rect class="stage-bg" width="758" height="82" rx="16" fill="#12162e"/><path d="M3 0V82" stroke="#6845ed" stroke-width="6"/><text x="43" y="52" fill="#8996bd" opacity=".8" font-size="32" font-family="Arial,sans-serif" font-weight="600">5</text><text x="84" y="52" fill="#fff" font-size="32" font-family="Arial,sans-serif" font-weight="600">Claims | Union Files</text><g fill="#8996bd"><path d="M686 28h28v8h-28z"/><path d="M686 38h28v18h-28z" opacity=".6"/></g><path d="M690 36v6a10 10 0 0 0 20 0v-6" fill="none" stroke="#8996bd" stroke-width="3"/></g><g class="green-stage" style="--stage-delay:0.90s" transform="translate(171 543)"><rect class="stage-bg" width="758" height="82" rx="16" fill="#12162e"/><path d="M3 0V82" stroke="#a169ed" stroke-width="6"/><text x="43" y="52" fill="#8996bd" opacity=".8" font-size="32" font-family="Arial,sans-serif" font-weight="600">6</text><text x="84" y="52" fill="#fff" font-size="32" font-family="Arial,sans-serif" font-weight="600">Combined | Join Premium &amp; Cla…</text><circle cx="694" cy="40" r="12" fill="#8996bd"/><circle cx="710" cy="40" r="12" fill="#8996bd" opacity=".5"/></g></svg>
+            <span class="case-block-text">
+              <span class="case-block-kicker">Pipelines</span>
+              <span class="case-block-title">Bringing clarity to complex data flows</span>
+              <span class="case-block-subtitle">Enterprise data processing made accessible through flexible, visual workflows.</span>
+              <span class="case-block-keywords"><span class="case-block-keyword">Zero-to-one</span><span class="case-block-keyword">Visual programming</span><span class="case-block-keyword">Evolution</span></span>
+            </span>
+          </a></section></div></main></body></html>

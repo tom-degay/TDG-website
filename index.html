@@ -969,6 +969,17 @@
 }
 
 
+
+  /* Validation rings retract and redraw, with a gentle top-to-bottom stagger. */
+  @keyframes validation-ring {
+    0%, 100% { stroke-dasharray: var(--arc) 100; }
+    38%, 48% { stroke-dasharray: 0 100; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .validation-card.is-flow-active .validation-arc {
+      animation: validation-ring 2.1s cubic-bezier(.4,0,.2,1) var(--ring-delay) both;
+    }
+  }
 </style>
 <script>
   /* Arm the entrance animations before first paint, but only when motion is welcome. */
@@ -1129,8 +1140,8 @@
             </span>
           </a>
 
-          <a class="case-block has-image" href="/case-studies/validation-and-correction">
-            <img class="case-block-media" src="/case-studies/media/validation-corrections-preview-crop.png" alt="Quantemplate's validation report: rule groups &mdash; Date, Financial and Cyber validations &mdash; each with a ring showing the share of rows that passed." loading="lazy">
+          <a class="case-block has-image validation-card" id="validations-card" href="/case-studies/validation-and-correction">
+            <svg class="case-block-media validation-vector" viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Date, Financial and Cyber validations, with green passed checks and yellow exceptions."><rect width="1600" height="900" fill="#000"/><g transform="translate(249 174) rotate(-90)" fill="none" stroke-width="19"><circle class="validation-arc" r="79" pathLength="100" stroke="#00d8aa" stroke-opacity="0.6" stroke-dasharray="99 100" style="--arc:99;--ring-delay:0.0s"/><circle class="validation-arc" r="79" pathLength="100" stroke="#f3ff85" stroke-dasharray="1 100" stroke-dashoffset="-99" style="--arc:1;--ring-delay:0.0s"/></g><text x="410" y="209" fill="#707070" font-family="Arial,sans-serif" font-size="92" font-weight="600">Date Validations</text><path d="M3 327H1597" stroke="#222" stroke-width="5"/><g transform="translate(249 456) rotate(-90)" fill="none" stroke-width="19"><circle class="validation-arc" r="79" pathLength="100" stroke="#00d8aa" stroke-opacity="0.6" stroke-dasharray="72 100" style="--arc:72;--ring-delay:0.18s"/><circle class="validation-arc" r="79" pathLength="100" stroke="#f3ff85" stroke-dasharray="28 100" stroke-dashoffset="-72" style="--arc:28;--ring-delay:0.18s"/></g><text x="410" y="491" fill="#707070" font-family="Arial,sans-serif" font-size="92" font-weight="600">Financial Validations</text><path d="M3 590H1597" stroke="#222" stroke-width="5"/><g transform="translate(249 720) rotate(-90)" fill="none" stroke-width="19"><circle class="validation-arc" r="79" pathLength="100" stroke="#00d8aa" stroke-opacity="0.6" stroke-dasharray="71 100" style="--arc:71;--ring-delay:0.36s"/><circle class="validation-arc" r="79" pathLength="100" stroke="#f3ff85" stroke-dasharray="29 100" stroke-dashoffset="-71" style="--arc:29;--ring-delay:0.36s"/></g><text x="410" y="755" fill="#707070" font-family="Arial,sans-serif" font-size="92" font-weight="600">Cyber Validations</text></svg>
             <span class="case-block-text">
               <span class="case-block-kicker">Validation</span>
               <span class="case-block-title">Closing the loop on data quality</span>
@@ -1384,12 +1395,12 @@
   <script data-goatcounter="https://tomdegay.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
   <script>
     (function () {
-      var card = document.querySelector('.green-pipeline');
-      if (!card) return;
+      document.querySelectorAll('.green-pipeline, .validation-card').forEach(function (card) {
       var scrollMode = window.matchMedia('(max-width: 1024px), (hover: none)');
       var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
       var observer, inView = false, hovered = false, running = false, completed = 0;
-      var pulseCount = card.querySelectorAll('.green-trace').length;
+      var animationName = card.classList.contains('validation-card') ? 'validation-ring' : 'pipeline-trace';
+      var pulseCount = card.querySelectorAll('.green-trace, .validation-arc').length;
       function engaged() {
         return (scrollMode.matches ? inView : hovered) || card.matches(':focus-visible');
       }
@@ -1409,7 +1420,7 @@
         } else card.classList.remove('is-flow-active');
       }
       card.addEventListener('animationend', function (event) {
-        if (event.animationName !== 'pipeline-trace' || !running) return;
+        if (event.animationName !== animationName || !running) return;
         if (++completed === pulseCount) {
           running = false;
           update();
@@ -1433,13 +1444,14 @@
             else if (!entry.isIntersecting) inView = false;
             update();
           }, { threshold: [0, 0.6], rootMargin: '-64px 0px 0px 0px' });
-          observer.observe(card.querySelector('.pipeline-vector'));
+          observer.observe(card.querySelector('.case-block-media'));
         }
         update();
       }
       scrollMode.addEventListener('change', configure);
       reducedMotion.addEventListener('change', configure);
       configure();
+      });
     })();
   </script>
   </body>

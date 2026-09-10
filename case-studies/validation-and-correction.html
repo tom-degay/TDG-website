@@ -863,6 +863,25 @@
     visibility: visible;
   }
 
+  .lightbox img,
+  .lightbox .lightbox-video {
+    transform: scale(0.96);
+    transition: transform 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .lightbox.is-open img,
+  .lightbox.is-open .lightbox-video {
+    transform: scale(1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lightbox img,
+    .lightbox .lightbox-video {
+      transition: none;
+      transform: none;
+    }
+  }
+
   .lightbox img {
     max-width: 100%;
     max-height: calc(100vh - 140px);

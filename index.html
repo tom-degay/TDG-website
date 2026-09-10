@@ -219,6 +219,7 @@
     font-weight: 400;
     font-size: clamp(28px, 4vw, 40px);
     line-height: 1.05;
+    font-variant-numeric: tabular-nums;
   }
 
   .stat-label {
@@ -875,13 +876,38 @@
       transition: none !important;
     }
   }
+
+  /* -- scroll reveal: fade the card grids in as they enter the viewport --
+     .reveal-armed is set on <html> pre-paint (only when motion is welcome);
+     the body script adds .is-revealed per card with a per-row --reveal-delay. */
+
+  .reveal-armed .case-blocks .case-block {
+    opacity: 0;
+  }
+
+  .reveal-armed .case-blocks .case-block.is-revealed {
+    animation: card-fade-in 1.1s ease var(--reveal-delay, 0ms) both;
+  }
+
+  @keyframes card-fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal-armed .case-blocks .case-block,
+    .reveal-armed .case-blocks .case-block.is-revealed {
+      opacity: 1;
+      animation: none;
+    }
+  }
 </style>
 <script>
-  /* Arm the hero animation before first paint, but only when motion is welcome. */
+  /* Arm the entrance animations before first paint, but only when motion is welcome. */
   (function () {
     try {
       if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        document.documentElement.classList.add('hero-armed');
+        document.documentElement.classList.add('hero-armed', 'reveal-armed');
       }
     } catch (e) {}
   })();
@@ -890,6 +916,7 @@
   <style>
     .hero-armed #about-heading,
     .hero-armed .about-statement { opacity: 1 !important; transform: none !important; }
+    .reveal-armed .case-blocks .case-block { opacity: 1 !important; }
   </style>
 </noscript>
 </head>
@@ -1204,6 +1231,84 @@
       } catch (e) {
         root.classList.remove('hero-armed');
       }
+    })();
+
+    (function () {
+      var root = document.documentElement;
+      if (!root.classList.contains('reveal-armed')) return;
+
+      var cards = Array.prototype.slice.call(document.querySelectorAll('.case-blocks .case-block'));
+      if (!cards.length) return;
+
+      if (!('IntersectionObserver' in window)) {
+        cards.forEach(function (c) { c.classList.add('is-revealed'); });
+        return;
+      }
+
+      var STAGGER = 90; // ms between cards entering together (row cascade)
+      var io = new IntersectionObserver(function (entries) {
+        entries
+          .filter(function (e) { return e.isIntersecting; })
+          .map(function (e) { return e.target; })
+          .sort(function (a, b) {
+            return (a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING) ? -1 : 1;
+          })
+          .forEach(function (el, i) {
+            el.style.setProperty('--reveal-delay', (i * STAGGER) + 'ms');
+            el.classList.add('is-revealed');
+            io.unobserve(el);
+          });
+      }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+
+      cards.forEach(function (c) { io.observe(c); });
+    })();
+
+    (function () {
+      var stats = document.querySelector('.stats');
+      if (!stats) return;
+      var values = Array.prototype.slice.call(stats.querySelectorAll('.stat-value'));
+      if (!values.length) return;
+      if (!('IntersectionObserver' in window) ||
+          (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
+        return; // leave the authored final values in place
+      }
+
+      var items = values.map(function (el) {
+        var raw = el.textContent.trim();
+        var m = raw.match(/^(\D*)([\d.]+)(.*)$/);
+        if (!m) return null;
+        var numStr = m[2];
+        return {
+          el: el, raw: raw, num: parseFloat(numStr),
+          decimals: (numStr.split('.')[1] || '').length,
+          prefix: m[1] || '', suffix: m[3] || ''
+        };
+      }).filter(Boolean);
+      if (!items.length) return;
+
+      function fmt(it, v) {
+        return it.prefix + (it.decimals ? v.toFixed(it.decimals) : String(Math.round(v))) + it.suffix;
+      }
+      function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+      var DURATION = 1600;
+
+      var io = new IntersectionObserver(function (entries) {
+        if (!entries.some(function (e) { return e.isIntersecting; })) return;
+        io.disconnect();
+        items.forEach(function (it) { it.el.textContent = fmt(it, 0); });
+        var start = null;
+        function frame(ts) {
+          if (start === null) start = ts;
+          var t = Math.min((ts - start) / DURATION, 1);
+          var e = easeOut(t);
+          items.forEach(function (it) { it.el.textContent = fmt(it, it.num * e); });
+          if (t < 1) requestAnimationFrame(frame);
+          else items.forEach(function (it) { it.el.textContent = it.raw; });
+        }
+        requestAnimationFrame(frame);
+      }, { threshold: 0.6 });
+
+      io.observe(stats);
     })();
   </script>
   <script data-goatcounter="https://tomdegay.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>

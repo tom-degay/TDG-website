@@ -560,7 +560,47 @@
     }
   }
 
+  /* -- scroll reveal: fade the card grids in as they enter the viewport --
+     .reveal-armed is set on <html> pre-paint (only when motion is welcome);
+     the body script adds .is-revealed per card with a per-row --reveal-delay. */
+
+  .reveal-armed .case-blocks .case-block {
+    opacity: 0;
+  }
+
+  .reveal-armed .case-blocks .case-block.is-revealed {
+    animation: card-fade-in 1.1s ease var(--reveal-delay, 0ms) both;
+  }
+
+  @keyframes card-fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal-armed .case-blocks .case-block,
+    .reveal-armed .case-blocks .case-block.is-revealed {
+      opacity: 1;
+      animation: none;
+    }
+  }
+
 </style>
+<script>
+  /* Arm the scroll reveal before first paint, but only when motion is welcome. */
+  (function () {
+    try {
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('reveal-armed');
+      }
+    } catch (e) {}
+  })();
+</script>
+<noscript>
+  <style>
+    .reveal-armed .case-blocks .case-block { opacity: 1 !important; }
+  </style>
+</noscript>
 </head>
 <body>
   <nav class="site-nav">
@@ -750,6 +790,36 @@
       document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape') closeAll(null);
       });
+    })();
+
+    (function () {
+      var root = document.documentElement;
+      if (!root.classList.contains('reveal-armed')) return;
+
+      var cards = Array.prototype.slice.call(document.querySelectorAll('.case-blocks .case-block'));
+      if (!cards.length) return;
+
+      if (!('IntersectionObserver' in window)) {
+        cards.forEach(function (c) { c.classList.add('is-revealed'); });
+        return;
+      }
+
+      var STAGGER = 90; // ms between cards entering together (row cascade)
+      var io = new IntersectionObserver(function (entries) {
+        entries
+          .filter(function (e) { return e.isIntersecting; })
+          .map(function (e) { return e.target; })
+          .sort(function (a, b) {
+            return (a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING) ? -1 : 1;
+          })
+          .forEach(function (el, i) {
+            el.style.setProperty('--reveal-delay', (i * STAGGER) + 'ms');
+            el.classList.add('is-revealed');
+            io.unobserve(el);
+          });
+      }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+
+      cards.forEach(function (c) { io.observe(c); });
     })();
   </script>
   <script data-goatcounter="https://tomdegay.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>

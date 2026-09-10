@@ -52,6 +52,17 @@
     color-scheme: dark;
   }
 
+  ::selection {
+    background: rgba(0, 216, 170, 0.28);
+    color: #fff;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
   * {
     box-sizing: border-box;
   }

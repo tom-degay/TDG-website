@@ -52,6 +52,17 @@
     color-scheme: dark;
   }
 
+  ::selection {
+    background: rgba(0, 216, 170, 0.28);
+    color: #fff;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
   * {
     box-sizing: border-box;
   }
@@ -277,7 +288,7 @@
     font-size: 15px;
     line-height: 1;
     white-space: nowrap;
-    transition: background-color 0.15s ease, border-color 0.15s ease;
+    transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
   }
 
   p.links a span {
@@ -289,6 +300,10 @@
   p.links a:focus-visible {
     background-color: rgb(48, 48, 48);
     border-color: rgb(48, 48, 48);
+  }
+
+  p.links a:active {
+    transform: scale(0.97);
   }
 
   p.links a svg {

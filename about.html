@@ -633,21 +633,31 @@
       display: none;
     }
   }
-  /* -- interior-page heading entrance -- */
+  /* -- interior-page heading entrance (word by word, like the home lede) -- */
 
-  .head-armed .head-fade {
+  .head-armed .lede {
     opacity: 0;
-    transform: translateY(10px);
   }
 
-  .head-play .head-fade {
+  .head-armed .lede .word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(0.5em);
+    will-change: transform, opacity;
+  }
+
+  .head-play .lede {
+    opacity: 1;
+  }
+
+  .head-play .lede .word {
     opacity: 1;
     transform: translateY(0);
-    transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: opacity 0.66s ease, transform 0.72s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .head-fade {
+    .lede .word {
       opacity: 1 !important;
       transform: none !important;
       transition: none !important;
@@ -665,7 +675,7 @@
 </script>
 <noscript>
   <style>
-    .head-armed .head-fade { opacity: 1 !important; transform: none !important; }
+    .head-armed .lede { opacity: 1 !important; }
   </style>
 </noscript>
 </head>
@@ -742,7 +752,7 @@
       <img src="about-photo.jpg" alt="Tom de Gay standing on top of a large boulder in the forest of Fontainebleau, framed by oak branches." class="about-photo">
     </div>
 
-    <p class="lede display head-fade">Hello. I&rsquo;m Tom, a digital product designer based in London.</p>
+    <p class="lede display">Hello. I&rsquo;m Tom, a digital product designer based in London.</p>
 
     <div class="about-copy">
       <p>I&rsquo;ve been untangling complexity in product for 14 years now, but <a href="/approach">my background is in wayfinding</a>: design to help people navigate spaces, which has shaped the principles I bring to user experience.</p>
@@ -820,14 +830,39 @@
     (function () {
       var root = document.documentElement;
       if (!root.classList.contains('head-armed')) return;
-      var els = document.querySelectorAll('.head-fade');
-      if (!els.length) return;
-      Array.prototype.forEach.call(els, function (el, i) {
-        el.style.transitionDelay = (i * 70) + 'ms';
-      });
-      requestAnimationFrame(function () {
-        requestAnimationFrame(function () { root.classList.add('head-play'); });
-      });
+      var lede = document.querySelector('.lede');
+      if (!lede) { root.classList.remove('head-armed'); return; }
+
+      try {
+        var words = lede.textContent.trim().split(/\s+/);
+        lede.textContent = '';
+        var wordEls = words.map(function (w, i) {
+          var s = document.createElement('span');
+          s.className = 'word';
+          s.textContent = w;
+          lede.appendChild(s);
+          if (i < words.length - 1) lede.appendChild(document.createTextNode(' '));
+          return s;
+        });
+
+        var STEP = 58; // ms between words
+        wordEls.forEach(function (el, i) {
+          el.style.transitionDelay = (i * STEP) + 'ms';
+        });
+
+        requestAnimationFrame(function () {
+          requestAnimationFrame(function () { root.classList.add('head-play'); });
+        });
+
+        setTimeout(function () {
+          wordEls.forEach(function (el) {
+            el.style.willChange = '';
+            el.style.transitionDelay = '';
+          });
+        }, wordEls.length * STEP + 900);
+      } catch (e) {
+        root.classList.remove('head-armed');
+      }
     })();
   </script>
 </body>

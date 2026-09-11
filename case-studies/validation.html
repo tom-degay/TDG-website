@@ -6,12 +6,12 @@
 <title>Validation</title>
 <meta name="description" content="How Tom de Gay designed Quantemplate's validation tooling — from row-level reporting in 2017 to integrated, fully auditable corrections and automated data type checks in 2026.">
 <meta name="theme-color" content="#131313">
-<link rel="canonical" href="https://tomdegay.com/case-studies/validation-and-correction">
+<link rel="canonical" href="https://tomdegay.com/case-studies/validation">
 
 <meta property="og:type" content="article">
 <meta property="og:title" content="Closing the loop on data quality — Tom de Gay">
 <meta property="og:description" content="How Tom de Gay designed Quantemplate's validation tooling — row-level reporting, integrated corrections with a full audit trail, and automated data type checks.">
-<meta property="og:url" content="https://tomdegay.com/case-studies/validation-and-correction">
+<meta property="og:url" content="https://tomdegay.com/case-studies/validation">
 <meta property="og:image" content="https://tomdegay.com/case-studies/media/validation-corrections-preview.png">
 <meta property="og:image:width" content="1899">
 <meta property="og:image:height" content="1068">
@@ -1406,15 +1406,15 @@
                 <span class="nav-dropdown-card-kicker"><img class="nav-dropdown-card-kicker-icon" src="/media/icons/pipelines.svg" alt="" width="17" height="13">Pipelines</span>
                 <span class="nav-dropdown-card-title">Bringing clarity to complex data flows</span>
               </a>
-              <a class="nav-dropdown-card" href="/case-studies/mapping-inconsistent-schemas">
+              <a class="nav-dropdown-card" href="/case-studies/column-mapping">
                 <span class="nav-dropdown-card-kicker"><img class="nav-dropdown-card-kicker-icon" src="/media/icons/mapping.svg" alt="" width="16" height="16">Column mapping</span>
                 <span class="nav-dropdown-card-title">Mapping inconsistent schemas at scale</span>
               </a>
-              <a class="nav-dropdown-card" href="/case-studies/connecting-organisations">
+              <a class="nav-dropdown-card" href="/case-studies/feeds">
                 <span class="nav-dropdown-card-kicker"><img class="nav-dropdown-card-kicker-icon" src="/media/icons/feeds.svg" alt="" width="17" height="16">Feeds</span>
                 <span class="nav-dropdown-card-title">Connecting organisations through data</span>
               </a>
-              <a class="nav-dropdown-card is-current" href="/case-studies/validation-and-correction">
+              <a class="nav-dropdown-card is-current" href="/case-studies/validation">
                 <span class="nav-dropdown-card-kicker"><img class="nav-dropdown-card-kicker-icon" src="/media/icons/validation.svg" alt="" width="16" height="16">Validation</span>
                 <span class="nav-dropdown-card-title">Closing the loop on data quality</span>
               </a>
@@ -1617,7 +1617,7 @@
 
       <div class="subsection" id="impl-sharing">
         <h3>A shared correction workflow</h3>
-        <p>The next step is to allow clients to send selected validation results back to the supplier through a <a href="/case-studies/connecting-organisations">Feed</a> where they can make corrections.</p>
+        <p>The next step is to allow clients to send selected validation results back to the supplier through a <a href="/case-studies/feeds">Feed</a> where they can make corrections.</p>
         <blockquote>This will take out several manual back-and-forth steps which are currently done over email.</blockquote>
         <p>The workflow covers preparing corrections, explicitly submitting them back, tracking progress and notifying both parties through in-app updates and email.</p>
 
@@ -1633,7 +1633,7 @@
       <div class="subsection" id="impl-typevalidation">
         <h3>Automated type validation</h3>
         <p>We&rsquo;d learnt from our client implementations that validating that data within a column met a generic type definition required too many steps. It wasn&rsquo;t a problem that fitted neatly into the custom validation rule model that we&rsquo;d established.</p>
-        <p>The solution arose when we implemented <a href="https://help.quantemplate.com/data-semantics" target="_blank" rel="noopener noreferrer">data semantics</a> across the platform. Now, with an understanding of the data in each column we could implement a very lightweight solution. We added a toggle to enable type validations in <a href="/case-studies/mapping-inconsistent-schemas#semantics-heading">Map Column Headers</a>, the point in the pipeline in which schema is defined.</p>
+        <p>The solution arose when we implemented <a href="https://help.quantemplate.com/data-semantics" target="_blank" rel="noopener noreferrer">data semantics</a> across the platform. Now, with an understanding of the data in each column we could implement a very lightweight solution. We added a toggle to enable type validations in <a href="/case-studies/column-mapping#semantics-heading">Map Column Headers</a>, the point in the pipeline in which schema is defined.</p>
         <blockquote>This cut out at least four pipeline steps for every column whose type was validated, removing implementation complexity and slashing hours from implementation time.</blockquote>
 
         <div class="ui-video">

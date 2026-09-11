@@ -231,7 +231,7 @@
 
   .case-block-keyword {
     display: inline-block;
-    padding: 11px 13px 7px;
+    padding: 9px 13px;
     border-radius: 6px;
     background: rgb(48, 48, 48);
     color: rgba(255, 255, 255, 0.72);
@@ -242,6 +242,15 @@
     letter-spacing: 0.02em;
     white-space: nowrap;
     transition: background-color 0.2s ease;
+  }
+
+  /* iOS WebKit computes the line-height:1 box for Fakt Blond SemiBold
+     differently to desktop/Android -- text sits visibly high there.
+     Nudge down for iOS only. */
+  @supports (-webkit-touch-callout: none) {
+    .case-block-keyword {
+      padding: 11px 13px 7px;
+    }
   }
 
   .case-block:hover .case-block-keyword,

@@ -1882,6 +1882,26 @@
         showIndex(currentIndex + 1);
       });
 
+      /* horizontal swipe -> prev / next (mobile) */
+      (function () {
+        var x0 = null, y0 = null, t0 = 0;
+        lightbox.addEventListener("touchstart", function (e) {
+          if (e.touches.length !== 1) { x0 = null; return; }
+          x0 = e.touches[0].clientX;
+          y0 = e.touches[0].clientY;
+          t0 = Date.now();
+        }, { passive: true });
+        lightbox.addEventListener("touchend", function (e) {
+          if (x0 === null || items.length < 2 || !lightboxVideo.hidden) { x0 = null; return; }
+          var dx = e.changedTouches[0].clientX - x0;
+          var dy = e.changedTouches[0].clientY - y0;
+          x0 = null;
+          if (Date.now() - t0 > 600) return;
+          if (Math.abs(dx) < 45 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
+          showIndex(currentIndex + (dx < 0 ? 1 : -1));
+        }, { passive: true });
+      })();
+
       lightbox.addEventListener("click", function (e) {
         if (e.target === lightbox) closeLightbox();
       });

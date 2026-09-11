@@ -2,7 +2,7 @@
 
   <style>
     @keyframes case-icon-draw {
-      0% { stroke-dashoffset: -101; opacity: 0; }
+      0% { stroke-dashoffset: 101; opacity: 0; }
       4% { opacity: 1; }
       100% { stroke-dashoffset: 0; opacity: 1; }
     }

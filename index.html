@@ -530,6 +530,13 @@
     transition: transform 0.3s ease;
   }
 
+  /* Branded logo cards (Zonefully, Image Insight) are centred compositions,
+     not top-anchored UI screenshots -- override the default top crop. */
+  .case-block-media[src$="zonefully-card.jpg"],
+  .case-block-media[src$="image-insight-card.jpg"] {
+    object-position: center;
+  }
+
   .case-block.has-image .case-block-text {
     padding: 0 22px;
   }

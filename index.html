@@ -180,6 +180,17 @@
     max-width: 40ch;
   }
 
+  .hero-video {
+    margin-top: clamp(28px, 4vw, 40px);
+  }
+
+  .hero-video video {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+
   .job {
     margin: 0 0 8px;
   }
@@ -1155,6 +1166,12 @@
     <section aria-labelledby="about-heading">
       <span class="eyebrow" id="about-heading">About</span>
       <p class="about-statement display">Digital product designer specialising in design for AI, automation and complex domains. I turn technically ambitious systems and ambiguous problems into clear, usable products.</p>
+
+      <div class="hero-video">
+        <video autoplay muted loop playsinline disablepictureinpicture poster="media/tdg-laptop-demo.jpg">
+          <source src="media/tdg-laptop-demo.mp4" type="video/mp4">
+        </video>
+      </div>
     </section>
 
     <hr class="rule">
@@ -1547,6 +1564,16 @@
       reducedMotion.addEventListener('change', configure);
       configure();
       });
+    })();
+  </script>
+  <script>
+    (function () {
+      if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        document.querySelectorAll(".hero-video video").forEach(function (v) {
+          v.pause();
+          v.removeAttribute("autoplay");
+        });
+      }
     })();
   </script>
   </body>

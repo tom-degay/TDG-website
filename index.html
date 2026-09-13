@@ -191,6 +191,22 @@
     border-radius: 8px;
   }
 
+  @media (max-width: 640px) {
+    .hero-video {
+      position: relative;
+      left: 50%;
+      width: 100vw;
+      margin-left: -50vw;
+    }
+
+    .hero-video video {
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      object-position: 32% 18%;
+      border-radius: 0;
+    }
+  }
+
   .job {
     margin: 0 0 8px;
   }

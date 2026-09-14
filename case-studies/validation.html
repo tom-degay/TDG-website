@@ -1575,16 +1575,8 @@
     <section aria-labelledby="approach-heading" class="case-body">
       <span class="eyebrow" id="approach-heading">Approach</span>
 
-      <div class="subsection" id="approach-infodesign">
-        <h3>Information design</h3>
-        <p>The design of the original report, done in 2017, was driven by <a href="/approach#complexity-heading">information design principles</a>, putting validation failures in the context of a whole dataset to give users a sense of scale.</p>
-        <p>I worked on this with an information designer who I was mentoring in UX. We did a lot of whiteboard prototyping so we could test ideas with subject matter experts and engineers before moving to high fidelity mockups to play back to our user cohort.</p>
-
-        <figure class="figure">
-          <img src="media/whiteboard-2.jpg" alt="Whiteboard sketches exploring the validation report: segmented ring charts with stacked result rows, a filter to select which sources to show, a per-dataset impact filter, drill-down on a segment, and notes on the download use cases.">
-          <figcaption>Collaborative whiteboarding helped us originate a solution to a problem where no prior patterns existed</figcaption>
-        </figure>
-
+      <div class="subsection" id="approach-context-rules">
+        <h3>Context: setting validation rules</h3>
         <p>Engineering had already created an Excel-style formula editor for creating calculated values. This was a syntax that was second-nature to power users and had proven its usefulness. We decided to allow users to set their own validation queries, as this would allow complete flexibility. Validation rules were accompanied by a description and a fail/warn action &ndash; another requirement we&rsquo;d learnt from the research.</p>
 
         <figure class="figure figure-strip">
@@ -1593,6 +1585,17 @@
             <img src="media/validation-syntax.png" alt="Autocomplete in the formula editor suggesting fields and the DATECALC function, with its syntax and description shown inline.">
           </div>
           <figcaption>Users write their own validation rules in a familiar, Excel-style syntax, with autocomplete surfacing fields and functions as they type.</figcaption>
+        </figure>
+      </div>
+
+      <div class="subsection" id="approach-infodesign">
+        <h3>Context: designing the v1</h3>
+        <p>The design of the original report, done in 2017, was driven by <a href="/approach#complexity-heading">information design principles</a>, putting validation failures in the context of a whole dataset to give users a sense of scale.</p>
+        <p>I worked on this with an information designer who I was mentoring in UX. We did a lot of whiteboard prototyping so we could test ideas with subject matter experts and engineers before moving to high fidelity mockups to play back to our user cohort.</p>
+
+        <figure class="figure">
+          <img src="media/whiteboard-2.jpg" alt="Whiteboard sketches exploring the validation report: segmented ring charts with stacked result rows, a filter to select which sources to show, a per-dataset impact filter, drill-down on a segment, and notes on the download use cases.">
+          <figcaption>Collaborative whiteboarding helped us originate a solution to a problem where no prior patterns existed</figcaption>
         </figure>
 
         <p>User feedback also helped us decide what to leave out. We explored allowing users to pivot the report to first view results by input file rather than by validation rule. Their response was helpfully direct:</p>

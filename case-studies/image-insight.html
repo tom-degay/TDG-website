@@ -872,7 +872,7 @@
 
   .lightbox img {
     max-width: 100%;
-    max-height: calc(100vh - 140px);
+    max-height: calc(100vh - 200px);
     border-radius: 6px;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
     cursor: default;
@@ -880,7 +880,7 @@
 
   .lightbox-video {
     max-width: 100%;
-    max-height: calc(100vh - 140px);
+    max-height: calc(100vh - 200px);
     border-radius: 6px;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
     background: #000;
@@ -926,6 +926,13 @@
     justify-content: center;
     cursor: pointer;
     transition: border-color 0.15s ease, background 0.15s ease;
+  }
+
+  .lightbox.is-tight .lightbox-close {
+    bottom: auto;
+    top: clamp(12px, 3vw, 28px);
+    right: clamp(12px, 3vw, 28px);
+    margin-bottom: 0;
   }
 
   .lightbox-close:hover,
@@ -1717,6 +1724,17 @@
       var prevBtn = lightbox.querySelector(".lightbox-prev");
       var nextBtn = lightbox.querySelector(".lightbox-next");
       var lastFocused = null;
+
+      (function () {
+        var media = lightbox.querySelector(".lightbox-media");
+        if (!media || !("ResizeObserver" in window)) return;
+        var closeSpace = 70;
+        var ro = new ResizeObserver(function () {
+          var rect = media.getBoundingClientRect();
+          lightbox.classList.toggle("is-tight", rect.top < closeSpace);
+        });
+        ro.observe(media);
+      })();
 
       var items = Array.prototype.slice.call(document.querySelectorAll(".figure img")).map(function (img) {
         var figure = img.closest("figure");

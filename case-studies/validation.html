@@ -637,7 +637,7 @@
       </div>
 
       <figure class="figure is-full">
-        <img src="media/validation-hero.png" alt="A Quantemplate validation report: rules grouped by pipeline stage — Claims Validations and Final Validations — each rule showing a pass/fail bar and a count such as 'All rows passed' or '1,223 rows failed', with Fail, Warn and Pass filters and an option to share the report with a partner organisation.">
+        <img src="media/validation-hero.png" width="2778" height="1409" alt="A Quantemplate validation report: rules grouped by pipeline stage — Claims Validations and Final Validations — each rule showing a pass/fail bar and a count such as 'All rows passed' or '1,223 rows failed', with Fail, Warn and Pass filters and an option to share the report with a partner organisation." loading="lazy">
         <figcaption>The validation report: every rule shown with its pass rate and failing-row count, grouped by the pipeline stage it runs in.</figcaption>
       </figure>
     </section>
@@ -650,7 +650,7 @@
       <p class="about-statement display">The latest work makes validation results actionable. Users can correct invalid values directly in the report, creating targeted mappings with a complete audit trail. Integrated data type checks simplify configuration, while a sharing workflow will bring data suppliers into the process.</p>
 
       <a class="case-block has-thumb" href="https://www.youtube.com/watch?v=OyLH4hdxrPk" target="_blank" rel="noopener noreferrer">
-        <img class="case-block-thumb" src="media/youtube-validation-corrections.jpg" alt="Thumbnail for the YouTube video &lsquo;Validation corrections: find and fix data errors&rsquo;" loading="lazy">
+        <img class="case-block-thumb" src="media/youtube-validation-corrections.jpg" width="800" height="450" alt="Thumbnail for the YouTube video &lsquo;Validation corrections: find and fix data errors&rsquo;" loading="lazy">
         <span class="case-block-text">
           <span class="case-block-title">Validation corrections: find and fix data errors</span>
           <span class="case-block-subtitle">Using the Validation Report to identify data quality issues and create instant correction rules, each with a full history of who changed what and when.</span>
@@ -680,8 +680,8 @@
 
         <figure class="figure figure-strip">
           <div class="figure-strip-imgs">
-            <img src="media/validation-operation.png" alt="The formula-based validation rule editor, showing eight example rules such as effective-date and premium checks, each with a description and a warn/fail action.">
-            <img src="media/validation-syntax.png" alt="Autocomplete in the formula editor suggesting fields and the DATECALC function, with its syntax and description shown inline.">
+            <img src="media/validation-operation.png" width="3404" height="1426" alt="The formula-based validation rule editor, showing eight example rules such as effective-date and premium checks, each with a description and a warn/fail action." loading="lazy">
+            <img src="media/validation-syntax.png" width="1196" height="756" alt="Autocomplete in the formula editor suggesting fields and the DATECALC function, with its syntax and description shown inline." loading="lazy">
           </div>
           <figcaption>Users write their own validation rules in a familiar, Excel-style syntax, with autocomplete surfacing fields and functions as they type.</figcaption>
         </figure>
@@ -693,7 +693,7 @@
         <p>I worked on this with an information designer who I was mentoring in UX. We did a lot of whiteboard prototyping so we could test ideas with subject matter experts and engineers before moving to high fidelity mockups to play back to our user cohort.</p>
 
         <figure class="figure">
-          <img src="media/whiteboard-2.jpg" alt="Whiteboard sketches exploring the validation report: segmented ring charts with stacked result rows, a filter to select which sources to show, a per-dataset impact filter, drill-down on a segment, and notes on the download use cases.">
+          <img src="media/whiteboard-2.jpg" width="1600" height="1117" alt="Whiteboard sketches exploring the validation report: segmented ring charts with stacked result rows, a filter to select which sources to show, a per-dataset impact filter, drill-down on a segment, and notes on the download use cases." loading="lazy">
           <figcaption>Collaborative whiteboarding helped us originate a solution to a problem where no prior patterns existed</figcaption>
         </figure>
 
@@ -723,7 +723,7 @@
         <blockquote>The opportunity was to bring that existing pattern into the report, making corrections easier to configure and trace.</blockquote>
 
         <figure class="figure">
-          <img src="media/ad-hoc-correction.png" alt="A pipeline calculation step containing a hand-written IF statement that sets the Accident State to a fixed value when the policy number matches.">
+          <img src="media/ad-hoc-correction.png" width="1240" height="218" alt="A pipeline calculation step containing a hand-written IF statement that sets the Accident State to a fixed value when the policy number matches." loading="lazy">
           <figcaption>Desire lines in the product: an ad-hoc correction added by a user to a pipeline. A manually-entered IF statement to modify the Accident State for a specific policy number.</figcaption>
         </figure>
 
@@ -742,7 +742,7 @@
         <p>We added a formula bar, so users could derive a value from another column. For example, if a date is missing, take the date from another column and subtract one month. Based on what we&rsquo;d observed in production pipelines, this would be a necessary addition.</p>
 
         <figure class="figure">
-          <img src="media/validation-corrections-preview.png" alt="Quantemplate's validation report: flagged errors beside an editable corrections column, with the correction popup open on a row.">
+          <img src="media/validation-corrections-preview.png" width="1899" height="1068" alt="Quantemplate's validation report: flagged errors beside an editable corrections column, with the correction popup open on a row." loading="lazy">
           <figcaption>Entering a correction. The popup makes the scope explicit &mdash; every matching value, or only where a condition is met &mdash; with a formula bar for deriving the value from another column.</figcaption>
         </figure>
       </div>
@@ -752,7 +752,7 @@
         <p>Audit was important to our clients, who use Quantemplate as a system-of-record for financial reporting. To support this we displayed the original failed values alongside the corrected rows in the report. The full change history of each edit was displayed.</p>
 
         <figure class="figure">
-          <img src="media/validation-history.png" alt="The correction popup with a Correction history section below the Apply button, listing successive edits to a value with the editor's name and a timestamp for each.">
+          <img src="media/validation-history.png" width="1254" height="1004" alt="The correction popup with a Correction history section below the Apply button, listing successive edits to a value with the editor's name and a timestamp for each." loading="lazy">
           <figcaption>Each edit to a failed value is recorded and displayed, building trust in the change and helping our clients meet their audit goals</figcaption>
         </figure>
       </div>
@@ -780,7 +780,7 @@
         <p>One of the things we discovered in testing, as part of our internal QA process, was that the order in which corrections apply is important, since one correction could overwrite a prior one. We created an interface showing all corrections applied to any validation rule, allowing users to reorder or remove them.</p>
 
         <figure class="figure">
-          <img src="media/validation-correction-log.jpg" alt="A table of all corrections attached to one validation rule, with columns for order, column, the correction rule, last editor and last edit date.">
+          <img src="media/validation-correction-log.jpg" width="2000" height="1206" alt="A table of all corrections attached to one validation rule, with columns for order, column, the correction rule, last editor and last edit date." loading="lazy">
           <figcaption>Behind each validation is a log of all corrections applied, allowing reordering of correction rules. We uncovered the need for this in QA testing.</figcaption>
         </figure>
       </div>
@@ -792,14 +792,14 @@
         <p>The workflow covers preparing corrections, explicitly submitting them back, tracking progress and notifying both parties through in-app updates and email.</p>
 
         <figure class="figure">
-          <img src="media/validation-sharing-spec.jpg" alt="Design specification board for the validation sharing workflow: the sharing popup across states, from selecting rules and a partner organisation, through a confirmation step, to automatic sharing settings.">
+          <img src="media/validation-sharing-spec.jpg" width="2000" height="1451" alt="Design specification board for the validation sharing workflow: the sharing popup across states, from selecting rules and a partner organisation, through a confirmation step, to automatic sharing settings." loading="lazy">
           <figcaption>Design specification showing steps in the validation sharing workflow. The user chooses what to share, and to whom, then passes a confirmation step.</figcaption>
         </figure>
 
         <p>Sharing raised a raft of new questions, for instance: should the validation progress bar reflect the entire dataset or only the validations shared with the supplier? I chose the shared validations, ensuring requester and supplier saw the same measure of completion, and made this clear in the UI.</p>
 
         <figure class="figure">
-          <img src="media/validation-progress-bar.png" alt="Two notifications: validations ready to share with a partner organisation, and a progress bar on the sent validations showing '10 results, 88% corrected'.">
+          <img src="media/validation-progress-bar.png" width="1254" height="680" alt="Two notifications: validations ready to share with a partner organisation, and a progress bar on the sent validations showing '10 results, 88% corrected'." loading="lazy">
           <figcaption>The progress bar tracks completion of the shared validations specifically, not the full dataset, so requester and supplier see the same number.</figcaption>
         </figure>
 
@@ -850,7 +850,7 @@
     <section aria-labelledby="next-heading" class="case-footer">
       <span class="eyebrow" id="next-heading">Next case study</span>
       <a class="case-block has-image" href="/case-studies/image-insight">
-        <img class="case-block-media" src="/case-studies/media/image-insight-card.jpg" alt="The Image Insight logo over a blurred grid of session images." loading="lazy">
+        <img class="case-block-media" src="/case-studies/media/image-insight-card.jpg" width="1484" height="916" alt="The Image Insight logo over a blurred grid of session images." loading="lazy">
         <span class="case-block-text">
           <span class="case-block-kicker">Image Insight</span>
           <span class="case-block-title">Making space for deeper reflection</span>

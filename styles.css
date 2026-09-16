@@ -32,6 +32,15 @@
 
 :root { color-scheme: dark; }
 
+/* Every <img> carries its intrinsic width/height so the browser can reserve
+   the right box before the file arrives. Those attributes are presentational
+   hints for the width and height PROPERTIES, though, not just an aspect ratio
+   -- so without this the attribute height would win wherever CSS sets a width
+   and leaves height alone, squashing the image and defeating aspect-ratio.
+   No rule anywhere sets a height on an img selector, so this only ever
+   overrides the attribute. */
+img { height: auto; }
+
 ::selection {
   background: rgba(0, 216, 170, 0.28);
   color: #fff;

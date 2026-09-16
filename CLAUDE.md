@@ -75,7 +75,7 @@ harness testing nothing.
 The site is a dark theme: `color-scheme: dark`, `background: #000` on `html, body`, white text at varying opacity for hierarchy. When adding UI, match these existing conventions rather than inventing new values:
 
 - **Text hierarchy via white opacity**, not different hues: `#fff` for primary/loudest text (headings, brand), `rgba(255,255,255,0.68)` for secondary body copy (`.job-desc`, subtitles), `rgba(255,255,255,0.45)` for muted labels/keywords, `rgba(255,255,255,0.35)` down to `rgba(255,255,255,0.12)` for borders/dividers at decreasing emphasis.
-- **Link underline pattern**, defined globally per-page near the top of each `<style>` block:
+- **Link underline pattern**, defined once in `styles.css` (the base `a` rule and all its `:hover` / `[target="_blank"]` companions live there):
   ```css
   a {
     color: #fff;
@@ -321,8 +321,7 @@ Added `case-studies/validation-and-correction.html` (route `/case-studies/valida
 
 ## Open threads
 
-- **`case-studies/media/connecting-organisations-og.jpg` is deliberately kept** even though nothing references it. It was the og:image for the old `/case-studies/connecting-organisations` URL, and platforms that cached a card before the rename still fetch it. Delete only if Tom asks.
-- **The base `a` rule is now identical on all thirteen pages**, so it is a candidate to hoist into `styles.css`. Doing that safely means re-running the cascade checks described in the Architecture section, not just moving the text.
+- **Social cards shared before the URL renames have lost their image.** `connecting-organisations-og.jpg` was deleted on Tom's instruction; the 308 redirects still work, so the links themselves are fine — only a cached card's thumbnail is affected.
 - **Six `.related-thumb` images on wayfinding/ai/design-craft are `loading="lazy"` despite sitting above the fold** at ≥1100px. Pre-existing and harmless in practice (Chrome loads near-viewport images anyway), flagged rather than changed.
 - **`contact.html` uses a non-sticky `p.links`** pattern, unlike `about.html`'s sticky gutter buttons. Nobody has asked for consistency here; noted only as a difference.
 - **No build step, by choice.** Nav *markup* is the last thing copy-pasted across thirteen pages. If it changes often, a minimal include step would remove the risk — but raise it as a suggestion, don't do it unprompted; Tom values the no-build simplicity.

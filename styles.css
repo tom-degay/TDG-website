@@ -63,6 +63,14 @@ html, body {
   font-weight: 600;
 }
 
+a {
+  color: #fff;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+  padding-bottom: 1px;
+  transition: border-color 0.15s ease, opacity 0.15s ease;
+}
+
 a:hover, a:focus-visible { border-color: rgba(255, 255, 255, 0.9); }
 
 a:focus-visible {

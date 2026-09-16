@@ -1183,6 +1183,18 @@ descendant that has its own backdrop-filter) can't blur the page. */
 
 .nav-item:hover .nav-dropdown { transition-delay: 0.14s; }
 
+/* Escape sets .is-dismissed (see nav.js). Without this the rule above keeps the
+   panel on screen while the pointer rests on the item or focus sits inside it,
+   so the key looks broken. Same specificity as that rule, declared after it, so
+   it wins. Desktop only -- below 640px the dropdown is expanded inline and must
+   stay visible. */
+@media (min-width: 641px) {
+  .nav-item.is-dismissed .nav-dropdown {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
 .nav-dropdown-panel {
   display: flex;
   flex-direction: column;

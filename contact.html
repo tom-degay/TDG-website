@@ -222,7 +222,7 @@
 
     <p class="lede display head-fade">Say hello. I&rsquo;m always happy to hear from people.</p>
 
-    <form id="contact-form">
+    <form id="contact-form" action="https://api.web3forms.com/submit" method="POST">
       <input type="hidden" name="access_key" value="a394dc7c-b791-40e6-9971-a34a75f44939">
       <input type="checkbox" name="botcheck" style="display: none;" tabindex="-1" autocomplete="off">
       <div class="field">
@@ -247,6 +247,13 @@
       var status = document.getElementById("form-status");
       var button = form.querySelector('button[type="submit"]');
 
+      // Every failure path offers the same route that actually works. It used to
+      // say "email me directly" on network errors, with no address on the page.
+      function showFallback() {
+        status.innerHTML = 'Something went wrong sending that. You can also reach me on ' +
+          '<a href="https://www.linkedin.com/in/tom-dg/" target="_blank" rel="noopener noreferrer">LinkedIn</a>.';
+      }
+
       form.addEventListener("submit", function (e) {
         e.preventDefault();
 
@@ -257,13 +264,18 @@
         button.querySelector("span").textContent = "Sending…";
         status.hidden = true;
 
+        // Without a timeout a hung request leaves the button stuck on "Sending…"
+        var controller = window.AbortController ? new AbortController() : null;
+        var timer = controller ? setTimeout(function () { controller.abort(); }, 15000) : null;
+
         fetch("https://api.web3forms.com/submit", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json"
           },
-          body: JSON.stringify(payload)
+          body: JSON.stringify(payload),
+          signal: controller ? controller.signal : undefined
         })
           .then(function (response) {
             return response.json().then(function (data) {
@@ -275,15 +287,17 @@
               form.reset();
               status.textContent = "Thanks. I'll get back to you soon.";
             } else {
-              status.innerHTML = 'Something went wrong sending that. You can also reach me on <a href="https://www.linkedin.com/in/tom-dg/" target="_blank" rel="noopener noreferrer">LinkedIn</a>.';
+              showFallback();
             }
             status.hidden = false;
           })
           .catch(function () {
-            status.textContent = "Something went wrong. Please email me directly instead.";
+            // network failure or the 15s timeout above
+            showFallback();
             status.hidden = false;
           })
           .finally(function () {
+            if (timer) clearTimeout(timer);
             button.disabled = false;
             button.querySelector("span").textContent = "Send";
           });

@@ -117,7 +117,11 @@
   function makeOpenable(img, list, getIndex) {
     img.setAttribute("tabindex", "0");
     img.setAttribute("role", "button");
-    img.setAttribute("aria-label", "Enlarge image");
+    /* Do NOT set aria-label here: it would override the alt text and every
+       figure would announce as the same "Enlarge image", which is useless when
+       a page has ten screenshots. The alt IS the accessible name. Only name the
+       ones that have no alt to lend. */
+    if (!img.getAttribute("alt")) img.setAttribute("aria-label", "Enlarge image");
     img.addEventListener("click", function () {
       if (img._swipeAt && Date.now() - img._swipeAt < 400) return;
       openLightbox(list, getIndex());
@@ -183,6 +187,7 @@
       };
     });
     var active = 0;
+    var seq = 0;
 
     function pad(n) { return n < 10 ? "0" + n : "" + n; }
 
@@ -210,8 +215,16 @@
       if (counter) counter.textContent = pad(active + 1) + " / " + pad(list.length);
       if (!main) return;
       if (instant) { paint(it); return; }
+      /* The caption, counter and active thumb update now; the image only
+         appears once it has preloaded. Two quick clicks can therefore finish
+         out of order and leave an older image under a newer caption, so a
+         preload that is no longer the current selection is discarded. */
+      var token = ++seq;
       var pre = new Image();
-      pre.onload = pre.onerror = function () { dissolve(it); };
+      pre.onload = pre.onerror = function () {
+        if (token !== seq) return;
+        dissolve(it);
+      };
       pre.src = it.src;
     }
 

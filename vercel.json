@@ -4,6 +4,7 @@
   "redirects": [
     { "source": "/case-studies/connecting-organisations", "destination": "/case-studies/feeds", "permanent": true },
     { "source": "/case-studies/validation-and-correction", "destination": "/case-studies/validation", "permanent": true },
-    { "source": "/case-studies/mapping-inconsistent-schemas", "destination": "/case-studies/column-mapping", "permanent": true }
+    { "source": "/case-studies/mapping-inconsistent-schemas", "destination": "/case-studies/column-mapping", "permanent": true },
+    { "source": "/approach", "destination": "/wayfinding", "permanent": true }
   ]
 }

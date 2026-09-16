@@ -416,7 +416,14 @@
     line-height: 1;
     display: flex;
     align-items: center;
-    justify-content: center;
+    /* right-aligned so the glyph lines up with the image edge rather than the
+       44px hit area around it; transform-origin keeps that edge fixed when the
+       hover scale fires */
+    justify-content: flex-end;
+    /* the glyph carries ~0.08em of right side bearing, so nudge it out by that
+       much to sit optically flush rather than merely box-flush */
+    margin-right: -0.08em;
+    transform-origin: right center;
     cursor: pointer;
     opacity: 0.75;
     transition: opacity 0.15s ease, transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);

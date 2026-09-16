@@ -1,10 +1,12 @@
-# tomdegay.com — handover notes for Claude Code
+# tomdegay.com — working notes for Claude Code
 
-This file is for whichever Claude session picks up this project next. It's a personal portfolio site for Tom de Gay (senior product designer, Head of Design at Quantemplate), being moved from a chat-based workflow (Claude/Cowork editing files on Tom's Mac via a device bridge) into Claude Code. Everything below reflects the state of the repo as of this handover.
+This file is for whichever Claude session picks up this project next. It's the live personal portfolio site for Tom de Gay (senior product designer, Head of Design at Quantemplate), maintained directly in Claude Code.
+
+**Read the Architecture and Conventions sections as current. Everything under "Session history" is a dated changelog** — useful for *why* a decision was made, but several of those notes describe an older structure (per-page CSS, per-page lightbox JS, a copy-pasted nav script) that has since been replaced by shared files.
 
 ## What this project is
 
-A static, no-build personal site: home page, about page, "Design principles" (approach) page, "Design and AI" page, contact page, and a case studies section with six long-form case study write-ups (four Quantemplate, plus Image Insight — a coaching tool — and Zonefully — a planning app). No framework, no bundler, no package.json — just hand-authored HTML files plus one shared `styles.css`, deployed to Vercel.
+A static, no-build personal site: home, about, contact, three "approach" pages (Learning from wayfinding, Design and AI, Design craft), and a case studies section with six long-form write-ups — four Quantemplate, plus Image Insight (a coaching tool) and Zonefully (a planning app). No framework, no bundler, no package.json: hand-authored HTML plus three shared files (`styles.css`, `nav.js`, `lightbox.js`), deployed to Vercel.
 
 Repo: `https://github.com/tom-degay/TDG-website.git`, local working copy at `/Users/Tom/Github/TDG-website` on Tom's Mac.
 
@@ -21,7 +23,7 @@ Repo: `https://github.com/tom-degay/TDG-website.git`, local working copy at `/Us
   - **Captions are set with `innerHTML`**, sourced from `figcaption.innerHTML` or a `data-caption` attribute, so a caption can carry a link. Both sources are our own markup; never feed it anything untrusted.
   - **A `.ui-video` marked `data-hover-controls` reveals the native player controls on hover** (pointer devices only), inline *and* in the lightbox. Only `validation.html`'s drill-down video uses it. Mark the markup — don't re-add a filename check in the script.
 - **The nav's behaviour is one shared file: `/nav.js`**, loaded with `<script src="/nav.js" defer></script>` by all thirteen pages. It holds the mobile hamburger (toggling `.site-nav.is-open` below 640px) and the two desktop popovers. Note the popover handler deliberately returns early below 640px, where the dropdown is shown expanded inline and the link should just navigate.
-- **No shared partials for markup.** The nav's CSS is in `styles.css` and its behaviour in `nav.js`, but its *markup* (`<nav class="site-nav">`) is still copy-pasted identically into every page's `<body>`. **Any change to the nav's markup or links must be manually applied to all thirteen live pages** (styling goes in `styles.css` once, behaviour in `nav.js` once) (see File inventory below). This is the single biggest source of drift risk in this codebase — there is no include mechanism to keep them in sync automatically. (There are now twelve pages — `approach.html`, `ai.html`, `case-studies/validation-and-correction.html`, `case-studies/image-insight.html`, `case-studies/zonefully.html` and `case-studies/pipelines.html` were all added after the original handover.) Nav/card changes are usually done with a throwaway Python script over the file list rather than twelve hand-edits — see the Image Insight session note below.
+- **No shared partials for markup.** The nav's CSS is in `styles.css` and its behaviour in `nav.js`, but its *markup* (`<nav class="site-nav">`) is still copy-pasted identically into every page's `<body>`. **Any change to the nav's markup or links must be manually applied to all thirteen live pages** (styling goes in `styles.css` once, behaviour in `nav.js` once). Markup is now the only thing still duplicated, and it remains the main drift risk — there is no include mechanism. Do markup changes with a throwaway Python script over the file list rather than thirteen hand-edits.
 - **Hosting: Vercel**, configured via `vercel.json`:
   ```json
   { "cleanUrls": true, "trailingSlash": false }
@@ -29,51 +31,44 @@ Repo: `https://github.com/tom-degay/TDG-website.git`, local working copy at `/Us
   This is why internal links are extensionless (`href="/about"` resolves to `about.html`). Keep this in mind when adding new pages — they'll be reachable at `/<filename-without-extension>`.
 - **Fonts:** "Fakt Blond SemiBold" self-hosted (`FaktProSemiBold.woff2`/`.woff`, `@font-face` declared per-page) used for all display/heading text via the `.display` class. Body/UI text falls back to the system font stack. "IBM Plex Mono" is pulled from Google Fonts and used for small overline/label text (the `.eyebrow`/`.kicker` pattern, see below).
 - **Contact form** (`contact.html`) submits client-side via `fetch` to `https://api.web3forms.com/submit` using a Web3Forms public access key embedded in the form (`access_key` hidden input) — this is a public/publishable key by design for that service, not a leaked secret.
-- **No JS framework/dependencies anywhere else.** Inline `<script>` blocks in the codebase: the contact form's submit handler (`contact.html`), the section-TOC scroll-spy on the case study + approach + AI pages, and the mobile nav hamburger toggle (all thirteen pages — see the mobile nav note below). Plus a GoatCounter analytics `<script>` tag near `</body>` on every page except `about.html`.
+- **No JS framework or dependencies.** Two shared files (`/nav.js`, `/lightbox.js`) plus per-page inline `<script>` blocks for things only that page does: the contact form's submit handler (`contact.html`), the TOC scroll-spy (the six case studies + wayfinding + ai + design-craft), the pre-paint animation arming and word-by-word entrance, the stats counter (`pipelines.html`), and the case-icon/card reveal animations. A GoatCounter analytics tag sits near `</body>` on every page except `about.html`.
 
 ## File inventory (current, live site)
 
+Thirteen pages. Routes are extensionless (Vercel `cleanUrls`), so the route is
+the filename minus `.html`.
+
 | File | Route | Notes |
 |---|---|---|
-| `index.html` | `/` | Home page: About teaser, Principal Experience (Quantemplate role + video embed), Case Studies preview blocks, "Other work" list |
-| `about.html` | `/about` | Full About page: photo, sticky LinkedIn/Download CV links, long-form bio copy |
-| `contact.html` | `/contact` | Contact page with Web3Forms-backed form |
-| `approach.html` | `/approach` | "Learning from wayfinding" page (was "Design principles") — five wayfinding-rooted principles, with a `<nav class="toc">` section index like the case study pages. Route stays `/approach`; only the `<title>`/`<h1>`/og:title/twitter:title changed |
-| `ai.html` | `/ai` | "Design and AI" page — two sections, "Designing for AI" and "Designing with AI". Built by copying `approach.html` (shares its `.principles`/`.principle` CSS, TOC scroll-spy, lightbox). Room to grow with more examples |
-| `design-craft.html` | `/design-craft` | "Design Craft" page — the hands-on craft side of the work (typography, colour, materials). Built by copying `approach.html`. Three `<section class="principle">` blocks in order **`#quantemplate-heading` → `#isokon-heading` → `#white-rainbow-heading`** + a matching 3-item `<nav class="toc">`. **All copy and images are real.** Quantemplate section: one `.figure` + an external `.case-block` card. Isokon (8 images) and White Rainbow (11 images) use a custom **`.gallery`** component (big image + thumbnail strip, hover arrows, mobile swipe, `aspect-ratio: 3/2` frame, click-through lightbox) |
-| `case-studies/index.html` | `/case-studies` | Case studies hub/index — grid of case-block links, plus the "Other work" list |
-| `case-studies/connecting-organisations.html` | `/case-studies/connecting-organisations` | Case study detail page |
-| `case-studies/mapping-inconsistent-schemas.html` | `/case-studies/mapping-inconsistent-schemas` | Case study detail page |
-| `case-studies/validation-and-correction.html` | `/case-studies/validation-and-correction` | Case study detail page — "Closing the loop on data quality" (Quantemplate Validations). Built by copying `connecting-organisations.html` |
-| `case-studies/image-insight.html` | `/case-studies/image-insight` | Case study detail page — "Making space for deeper reflection" (Image Insight, a non-Quantemplate coaching tool). Built by copying `validation-and-correction.html`. Also surfaced in the "Other work" list |
-| `case-studies/zonefully.html` | `/case-studies/zonefully` | Case study detail page — "Connecting long-term goals to everyday routines" (Zonefully planning app). Built by copying `validation-and-correction.html`. Also surfaced in the "Other work" list |
-| `case-studies/pipelines.html` | `/case-studies/pipelines` | Case study detail page — "Bringing clarity to complex data flows" (Quantemplate Pipelines). Built by copying `validation-and-correction.html`. Retired the last `.is-soon` "coming soon" card |
+| `index.html` | `/` | Home: hero video, About teaser, Principal Experience, case-study grid, Approach cards, "Other work" |
+| `about.html` | `/about` | Photo, sticky LinkedIn/Download CV buttons, long-form bio, "About this site" footnote |
+| `contact.html` | `/contact` | Web3Forms-backed contact form |
+| `wayfinding.html` | `/wayfinding` | "Learning from wayfinding" — five principles, with a `<nav class="toc">` |
+| `ai.html` | `/ai` | "Design and AI" — "Designing for AI" and "Designing with AI" |
+| `design-craft.html` | `/design-craft` | "Design craft" — Quantemplate brand, White Rainbow, Isokon. Uses the `.gallery` component |
+| `case-studies/index.html` | `/case-studies` | Hub — case-block grid + "Other work" |
+| `case-studies/pipelines.html` | `/case-studies/pipelines` | "Bringing clarity to complex data flows" (Quantemplate Pipelines). Has the `.stats` component |
+| `case-studies/column-mapping.html` | `/case-studies/column-mapping` | "Mapping inconsistent schemas at scale" |
+| `case-studies/feeds.html` | `/case-studies/feeds` | "Connecting organisations through data" |
+| `case-studies/validation.html` | `/case-studies/validation` | "Closing the loop on data quality". Its drill-down video carries `data-hover-controls` |
+| `case-studies/image-insight.html` | `/case-studies/image-insight` | "Making space for deeper reflection" (coaching tool). Also in "Other work" |
+| `case-studies/zonefully.html` | `/case-studies/zonefully` | "Connecting long-term goals to everyday routines" (planning app). Also in "Other work" |
 
-These **thirteen** all share the `.site-nav` sticky header (brand link + About / Approach / Case Studies / Contact — **AI is no longer a top-level link**; "Approach" is now a `.nav-item` with its own hover/tap popover to three cards: Design and AI → `/ai`, Design Craft → `/design-craft`, Learning from wayfinding → `/approach`) and the general dark visual language described below. See the "Approach popover + Design Craft" session note near the end of this file.
+Shared files at the root: `styles.css`, `nav.js`, `lightbox.js`.
 
-**Stray files — not part of the live site, need a decision:**
+**Three case studies and one page were renamed**, with 308 redirects in
+`vercel.json` — `/approach` → `/wayfinding`, `/case-studies/connecting-organisations`
+→ `/feeds`, `/case-studies/mapping-inconsistent-schemas` → `/column-mapping`,
+`/case-studies/validation-and-correction` → `/validation`. Older notes below
+still use the old names. Keep the redirects: links to the old URLs are out in
+the world.
 
-- `index-1.html`, `case-studies/connecting-organisations-1.html`, `case-studies/mapping-inconsistent-schemas-1.html` — these are **pre-restructure backups** (verified by diffing: they still have the old single-page `<header>` pattern instead of `.site-nav`, no About/Contact as separate pages). They're untracked in git and not linked from anywhere live. Ask Tom whether to delete them or keep them as reference before touching — don't assume.
-- `about-photo.jpg` — this one **is** a real, needed asset (referenced by `about.html`) but it's untracked in git. It needs to be committed, not removed.
-
-## Git state at handover — nothing about the restructure is committed yet
-
-```
- M case-studies/connecting-organisations.html
- M case-studies/mapping-inconsistent-schemas.html
- M index.html
-?? about-photo.jpg
-?? about.html
-?? case-studies/connecting-organisations-1.html
-?? case-studies/index.html
-?? case-studies/mapping-inconsistent-schemas-1.html
-?? contact.html
-?? index-1.html
-```
-
-The multi-page restructure (splitting a formerly single-page site into home/about/contact/case-studies-index) happened **entirely outside of version control** — `about.html`, `contact.html`, `case-studies/index.html`, and `about-photo.jpg` have never been committed. The three `M` files are pre-existing tracked files that picked up small edits during this session (see "What changed in this session" below). **One of the first things worth doing in Claude Code is sorting out this commit** — decide what to do with the `-1.html` backups first, then commit the real new pages and the modified ones together with a clear message, since right now a `git stash` or careless `git checkout` could lose the entire restructure.
-
-No CI/lint/test setup exists in this repo — there's nothing to run before committing beyond eyeballing the pages.
+There is **no CI, linting or test suite.** Verification is manual, and worth
+doing properly for anything structural — the browser tools can compare a page
+against its pre-change self (computed styles, per-element matching rules,
+driving the actual interactions). Several regressions in past sessions were
+caught only that way, and a couple of "verified" claims turned out to be the
+harness testing nothing.
 
 ## Visual design system / conventions
 
@@ -101,14 +96,102 @@ The site is a dark theme: `color-scheme: dark`, `background: #000` on `html, bod
   - **Dropdown cards** (`.nav-dropdown-card`): a white `.nav-dropdown-card-title` (the full page/study title), optionally preceded by a green `.nav-dropdown-card-kicker` mono overline. **The kicker is on the Case Studies dropdown only** — the Approach dropdown is title-only (Tom: on the Approach popover "we don't need a double level heading"). So `.nav-dropdown-card-kicker` CSS lives in every page but only the 6 Case Studies cards render a span.
   - **Case Studies dropdown order matches the home-page / `/case-studies` card grid**: Pipelines · Column mapping · Feeds · Validation · Image Insight · Zonefully (kicker / title): Bringing clarity to complex data flows / Mapping inconsistent schemas at scale / Connecting organisations through data / Closing the loop on data quality / Making space for deeper reflection / Connecting long-term goals to everyday routines. Reorder any time the home grid is reordered.
   - Titles are plain text with **no `<br>`** — panel `min-width: 360px` so they sit on one line where they fit. **No current-page highlight** in the dropdowns; titles are always white (detail pages still carry a vestigial `is-current` class on their own card, no CSS acts on it). There is no `.nav-dropdown-card-subtitle` — the rule was deleted once nothing rendered one.
-- **Mobile nav (≤640px):** the nav links collapse behind a `.nav-toggle` hamburger button. The `.site-nav-links` list becomes an absolutely-positioned panel below the bar (`display:none` → `display:flex` when `.site-nav.is-open`) with the same frosted `rgba(0,0,0,0.86)` + `backdrop-filter: blur(10px)` as the bar, and the Case Studies dropdown shown inline/expanded. Note the media query also has to re-null `.nav-item:hover/:focus-within .nav-dropdown { transform: none }` — the desktop centring rule (`translate(-50%, …)`) is more specific than the mobile `.nav-dropdown { transform: none }` and otherwise slides the open sub-list off-screen on tap. It **also must set `.site-nav-links { flex-wrap: nowrap }`** — the base rule is `flex-wrap: wrap`, so once the (now 6-card) dropdown made the open menu taller than the panel's `max-height` (`80vh`), iOS Safari wrapped the column into two side-by-side columns instead of scrolling. `-webkit-overflow-scrolling: touch` is on the panel for momentum scroll. The bars animate hamburger→X on an overshoot cubic-bezier ("bounce"); the middle bar is hidden with **both** `opacity: 0` **and** `transform: scaleX(0)` (on its own plain-ease transition, `.nav-toggle-bar:nth-child(2)`) — Safari was leaving the middle bar painted with `opacity: 0` alone while the siblings composited, so it needs the geometric collapse too. A small inline `<script>` at the end of each page's `<body>` toggles `.is-open` + `aria-expanded` and closes the menu on link click / Escape / outside click / resize above 640px. **This script and the `.nav-toggle` markup + mobile CSS are copy-pasted into all twelve pages** — keep them in sync like the rest of the nav.
-- **Anchor scroll offset:** every page with in-page `#hash` links (the six case study detail pages + `approach.html` + `ai.html`, all of which have a `<nav class="toc">`) sets `html { scroll-padding-top: 100px; }` right after the `html, body` rule so jumped-to headings land ~44px below the sticky nav instead of behind it. Put it on the scroll container (`html`), not on the target elements — an earlier attempt used `.principle { scroll-margin-top }` on `approach.html` but the ids live on the child `h2.principle-title`, so it was a no-op. **Any new page with a section TOC or hash links needs this rule.**
+- **Mobile nav (≤640px):** the nav links collapse behind a `.nav-toggle` hamburger button. The `.site-nav-links` list becomes an absolutely-positioned panel below the bar (`display:none` → `display:flex` when `.site-nav.is-open`) with the same frosted `rgba(0,0,0,0.86)` + `backdrop-filter: blur(10px)` as the bar, and the Case Studies dropdown shown inline/expanded. Note the media query also has to re-null `.nav-item:hover/:focus-within .nav-dropdown { transform: none }` — the desktop centring rule (`translate(-50%, …)`) is more specific than the mobile `.nav-dropdown { transform: none }` and otherwise slides the open sub-list off-screen on tap. It **also must set `.site-nav-links { flex-wrap: nowrap }`** — the base rule is `flex-wrap: wrap`, so once the (now 6-card) dropdown made the open menu taller than the panel's `max-height` (`80vh`), iOS Safari wrapped the column into two side-by-side columns instead of scrolling. `-webkit-overflow-scrolling: touch` is on the panel for momentum scroll. The bars animate hamburger→X on an overshoot cubic-bezier ("bounce"); the middle bar is hidden with **both** `opacity: 0` **and** `transform: scaleX(0)` (on its own plain-ease transition, `.nav-toggle-bar:nth-child(2)`) — Safari was leaving the middle bar painted with `opacity: 0` alone while the siblings composited, so it needs the geometric collapse too. The toggle behaviour lives in `/nav.js` (shared). The `.nav-toggle` markup is still per-page; the mobile CSS is in `styles.css`.
+- **Anchor scroll offset:** every page with in-page `#hash` links (the six case study detail pages + `wayfinding.html` + `ai.html` + `design-craft.html`, all of which have a `<nav class="toc">`) sets `html { scroll-padding-top: 100px; }` right after the `html, body` rule so jumped-to headings land ~44px below the sticky nav instead of behind it. Put it on the scroll container (`html`), not on the target elements — an earlier attempt used `.principle { scroll-margin-top }` on the wayfinding page but the ids live on the child `h2.principle-title`, so it was a no-op. **Any new page with a section TOC or hash links needs this rule.**
 - **Case blocks** (`.case-block`, used on the home page preview, the case studies index, and each detail page's "Next case study" block): bordered rounded cards with a hover lift (`transform: translateY(-4px)`, brightened border, background tint) and an arrow that translates on hover. There was an `.is-soon` variant for not-yet-published studies; every study is live now, so that CSS has been deleted — reinstate it if a placeholder card is ever needed again. The lift used to be `scale(1.02)`, but a centred scale grew the card past the page's left/right alignment edges — looked like the card jumped sideways; `translateY` avoids that. The `.has-image` variant additionally zooms its image (`transform: scale(1.03)` on `.case-block-media`, inside `overflow: hidden`).
   - **Inside `.case-block-text`**, in order: `.case-block-kicker` (green `#00d8aa` IBM Plex Mono, uppercase — a short project label: **COLUMN MAPPING / FEEDS / VALIDATION / PIPELINES / IMAGE INSIGHT / ZONEFULLY**, all now live studies, written sentence-case in the HTML and uppercased by CSS), then `.case-block-title`, `.case-block-subtitle`, and `.case-block-keywords` (muted grey mono keyword list). `.case-block-soon-label` and `.case-block.is-soon` have been deleted — no coming-soon cards left. The `.case-block-kicker` rule is duplicated into every file that renders a card (`index.html`, `case-studies/index.html`, and each detail page's "Next case study" block) — keep in sync like the nav.
-- **"Approach"** — a section on **`index.html` only** (removed from `case-studies/index.html`), sitting **between Case Studies and Other work** (its own `<hr class="rule">` either side), `<section aria-labelledby="approach-heading">`. Three `.case-block has-image` links — Design and AI → `/ai`, Design Craft → `/design-craft`, Wayfinding → `/approach` (**title + subtitle only, no green kicker**) — in a **`.case-blocks approach-blocks`** grid: `repeat(3, 1fr)` at `@media (min-width:820px)` (side-by-side row), 1-col below. Cards get the **dark YouTube-card look** (`.approach-blocks .case-block { border-color/background-color: rgb(33,33,33) }` → `rgb(48,48,48)` hover, `transform: none` — no lift) plus a **cropped-in detail image** at the top (`.approach-blocks .case-block-media { aspect-ratio: 5/2 }`): `media/approach-ai.png` (column-mapping UI — PNG for sharp UI text), `approach-craft.jpg` (embossed White Rainbow logo dots), `approach-wayfinding.jpg` ("The NORTH" road sign) — all ffmpeg tight crops of existing assets, ~30–60 KB. On `index.html` the section heading reads **"Quantemplate case studies"** (was "Case Studies"); `/case-studies` still says "Case Studies".
-- **Approach-page cross-nav** — `ai.html`, `design-craft.html`, `approach.html` each wrap their `<nav class="toc">` in `<div class="side-rail">` alongside a new `<nav class="related">` (heading "More" + two dark `rgb(33,33,33)` `.related a` cards → the other two Approach pages, in cycle order AI → Craft → Wayfinding → AI). Each card mirrors the home-page approach card: a full-width `.related-thumb` image band on top (`aspect-ratio: 5/2`, `object-fit: cover`, hairline `border-bottom`, **`transform: scale(1.04)` on card hover** — the `a` is `overflow: hidden`) then a padded `.related-title` — same `media/approach-*` crops. `.related` is a 2-col grid (`.related-heading` spans both via `grid-column: 1/-1`): **1-col in the rail** (`.side-rail .related` at ≥1100) and **1-col at ≤560px**, 2-across in between (the page-bottom band). The grid's sticky `grid-column: 2` + `top: 100px` moved from `.toc` to `.side-rail` (so toc + related stick as one unit); below 1100px the toc is `display:none` and `.related` sits at the page bottom with a `border-top` separator (overridden off inside the rail via `.side-rail .related`).
+- **"Approach"** — a section on **`index.html` only** (removed from `case-studies/index.html`), sitting **between Case Studies and Other work** (its own `<hr class="rule">` either side), `<section aria-labelledby="approach-heading">`. Three `.case-block has-image` links — Design and AI → `/ai`, Design craft → `/design-craft`, Wayfinding → `/wayfinding` (**title + subtitle only, no green kicker**) — in a **`.case-blocks approach-blocks`** grid: `repeat(3, 1fr)` at `@media (min-width:820px)` (side-by-side row), 1-col below. Cards get the **dark YouTube-card look** (`.approach-blocks .case-block { border-color/background-color: rgb(33,33,33) }` → `rgb(48,48,48)` hover, `transform: none` — no lift) plus a **cropped-in detail image** at the top (`.approach-blocks .case-block-media { aspect-ratio: 5/2 }`): `media/approach-ai.png` (column-mapping UI — PNG for sharp UI text), `approach-craft.jpg` (embossed White Rainbow logo dots), `approach-wayfinding.jpg` ("The NORTH" road sign) — all ffmpeg tight crops of existing assets, ~30–60 KB. On `index.html` the section heading reads **"Quantemplate case studies"** (was "Case Studies"); `/case-studies` still says "Case Studies".
+- **Approach-page cross-nav** — `ai.html`, `design-craft.html`, `wayfinding.html` each wrap their `<nav class="toc">` in `<div class="side-rail">` alongside a new `<nav class="related">` (heading "More" + two dark `rgb(33,33,33)` `.related a` cards → the other two Approach pages, in cycle order AI → Craft → Wayfinding → AI). Each card mirrors the home-page approach card: a full-width `.related-thumb` image band on top (`aspect-ratio: 5/2`, `object-fit: cover`, hairline `border-bottom`, **`transform: scale(1.04)` on card hover** — the `a` is `overflow: hidden`) then a padded `.related-title` — same `media/approach-*` crops. `.related` is a 2-col grid (`.related-heading` spans both via `grid-column: 1/-1`): **1-col in the rail** (`.side-rail .related` at ≥1100) and **1-col at ≤560px**, 2-across in between (the page-bottom band). The grid's sticky `grid-column: 2` + `top: 100px` moved from `.toc` to `.side-rail` (so toc + related stick as one unit); below 1100px the toc is `display:none` and `.related` sits at the page bottom with a `border-top` separator (overridden off inside the rail via `.side-rail .related`).
 - **"Other work"** — a section at the bottom of `index.html` **and** `case-studies/index.html` (`<section aria-labelledby="other-work-heading">` after an `<hr class="rule">`) holding non-Quantemplate projects. As of the Image Insight session it uses the **exact same `.case-block has-image` component and `.case-blocks` grid as the main studies** — the old bespoke `.other-block` CSS is gone. Currently: **Image Insight** (a real `<a>` linking to its case study) and **Zonefully** (now a live `<a>` to its case study; it was a `.is-soon` placeholder when this section was written). `case-studies/index.html` still carries the extra `hr.rule` + `#other-work-heading { margin-top: 0 }` rules (that page's `.eyebrow` has a `32px` top margin and no `hr.rule` otherwise). Card images live in `case-studies/media/` (`image-insight-session-expanded.jpg`, `zonefully.jpg`).
 - **Sticky in-page elements:** when making something sticky within the page (not just the top nav), remember CSS `position: sticky` is bounded by the element's *immediate parent's* box — if the parent is short (e.g. wraps only a photo), the sticky element stops sticking once that parent scrolls out of view. To keep something sticky for the full page scroll, it needs to be a direct child of a full-page-height container, not nested inside a shorter wrapper. On `about.html` this container is `<div class="about-top">` (a `display: flex; flex-direction: column` wrapper around **all** of `<main>`'s content — links, photo, lede, bio). `p.links` is its first child and stays sticky for the whole page because the wrapper is full-page height. The wrapper also exists so the responsive rules can reorder the links (via `order`) to sit below the photo at narrow widths — see the changelog below. If you add content to the About page, keep it inside `.about-top` or the sticky links will stop pinning early, **and** give it an explicit `order` in the `@media (max-width: 820px)` block — flex items default to `order: 0`, so without one a new element jumps above `p.links`/`.lede`/`.about-copy` (which are `order` 1/2/3) in the mobile reflow. The `.site-note` footnote (below) is `order: 4`.
+
+## Working conventions
+
+### Image source workflow
+
+Tom drops raw screenshots into `other-work/media/` (they arrive as multi-MB `.png`/`.jpg`, sometimes with spaces in the name — `session-view expanded.jpg`). Claude then compresses each into `case-studies/media/image-insight-<name>.jpg` — landscape UI shots `sips -Z 2000 -s format jpeg -s formatOptions 80..84` then `jpegtran -optimize -progressive`; result ~150–500 KB. The raw sources in `other-work/media/` are **left untracked** (only the compressed `case-studies/media/` copies are committed). If Tom says "X is updated", re-run the same compression over the new source and overwrite the committed jpg.
+
+### Media conventions
+
+- **Card images are dedicated ~16:9 crops**, separate from the full-size image. Naming: `<name>-crop.png|jpg` for the `.case-block-media` thumbnail, `<name>.png|jpg` for the full one that appears in-page as a `<figure>` and as `og:image`. Applied across the case studies (`concept-mapping-detail.jpg`, `feeds-repo-dashboard-crop.png`, `validation-corrections-preview-crop.png`). The card CSS does `object-fit: cover; object-position: center top`, so a full-bleed screenshot used as a card gets its bottom cropped — hence the separate crop files.
+- **Captioned figure:** `<figure class="figure"><img src="media/…" alt="…"><figcaption>…</figcaption></figure>`. `.figure` / `.figure img` / `.figure figcaption` styling is already in the copied CSS, and `/lightbox.js` auto-wires every `.figure img`. A figure can omit the `<figcaption>` and still works (spacing + lightbox), though most have one.
+- **Inline video** follows the `.ui-video` pattern already used on the other studies: `<div class="ui-video"><video autoplay controls muted loop playsinline poster="media/<name>.jpg"><source src="media/<name>.mp4" type="video/mp4"></video><button class="ui-video-expand" …>…</button></div>`. For a **captioned** video, nest that `.ui-video` div inside a `<figure class="figure">` with a `<figcaption>` sibling — top margins collapse cleanly and the uncaptioned form still works standalone. A `prefers-reduced-motion` block at the top of the page's script pauses `.ui-video video` and strips `autoplay`.
+  - `.ui-video` is `max-width: 46rem` (same as `.figure`) and `position: relative`. Inline `<video>` carries `controls` **plus `disablepictureinpicture` and `controlslist="nofullscreen nodownload"`** — so the browser's own PiP / fullscreen / download buttons are gone and the only "expand" affordance is the site's own **`.ui-video-expand`** corner button (absolute top-right, SVG corner-brackets, `opacity: 0.55` → `1` on hover/focus).
+  - Clicking `.ui-video-expand` opens the video **in the existing image `.lightbox` modal** (not browser fullscreen): a `<video class="lightbox-video" controls muted loop playsinline hidden>` was added to the lightbox markup + a `.lightbox-video` CSS block (`max-width:100%; max-height:calc(100vh - 140px)` — native resolution, capped to the viewport, never upscaled). The lightbox IIFE now also has `openVideo(src, caption)` / `stopVideo()` and wires the expand buttons (grabbing the `<source>` src and nearest `<figcaption>`); `openLightbox` (image path) and `closeLightbox` toggle `lightboxImg.hidden` / call `stopVideo`. Nav arrows are hidden in video mode. The CSS and the lightbox markup are still per-page, but the script now lives once in `/lightbox.js` (see Architecture).
+- **Figures on the validations page**, in document order — `media/` basenames (an example of how a study's media is laid out):
+  - Approach / Information design — `validation-whiteboard.jpg` (captioned)
+  - Approach / Ship, learn, repeat — `validations-drill-down.mp4` (captioned video) then `ad-hoc-correction.png` (captioned)
+  - Key decisions / Make the scope obvious — `validation-corrections-preview.png` (captioned; the `-crop` variant is the card image)
+  - Key decisions / Preserve evidence — `validation-history.png` (captioned)
+  - Key decisions / Give immediate feedback — `validation-instant-check.mp4` (uncaptioned video)
+  - Implementation / Ordering and audit — `validation-correction-log.jpg` (captioned)
+  - Implementation / A shared correction workflow — `validation-sharing-spec.jpg` (captioned)
+  - Implementation / Automated type validation — `type-validation.mp4` (uncaptioned video)
+- **If Tom supplies a PNG, keep it a PNG.** (Explicit instruction, Sept 2026 — "all those mch images should be png. If I give you a png, keep it as a png".) Do **not** convert a PNG he hands over to JPEG, even a large text-dense screenshot. Leave it at its native resolution (don't run `sips` PNG→PNG — it inflates). Only downscale if genuinely oversized, and flag it rather than changing format. The `<name>-web.jpg` / JPEG-flatten workflow below is for older assets and for stills Claude generates (video posters, ffmpeg crops), not for Tom's source PNGs. The `mch-excel-1..4.png` grid and `mch-sketch-green.png` on the mapping study are PNG for this reason.
+- **Compression** — tools already on Tom's Mac: `ffmpeg`/`ffprobe`, `sips`, `jpegtran`, `cwebp`. No `pngquant`/`oxipng`/`optipng`.
+  - Video: `ffmpeg -i IN -an -r 30 -vf "scale=<w>:-2" -c:v libx264 -profile:v high -preset slow -crf 26..28 -pix_fmt yuv420p -movflags +faststart OUT.mp4`, then a poster `ffmpeg -ss <t> -i OUT.mp4 -vframes 1 -q:v 3 poster.jpg` → `jpegtran -optimize -progressive`. Drop 60 fps → 30, strip audio, and CRF 26 for small/low-res UI captures (28 for full-frame). Reference results: 17.8 MB → 775 KB, 1.3 MB `.mov` → 98 KB, 605 KB `.mov` → 46 KB. **`.mov` must be re-encoded** — Chrome/Firefox don't play the container reliably.
+  - **Large screenshots / spec boards → JPEG.** `sips -Z 2000 -s format jpeg -s formatOptions 84..86` then `jpegtran -optimize -progressive`. Land ~200 KB (`feeds-add-partners-spec.jpg` is the reference). Reference points: an 11394-px spec board → 197 KB / 2000 px; a 2632-px, 432 KB corrections-table PNG → 229 KB / 2000 px JPEG (use q86 for text-dense tables). Rename the file to `.jpg` and update the `src` — the dark UI has no meaningful transparency so flattening is safe.
+  - **Small screenshot PNGs (≲150 KB) are left as PNG** — `validation-history.png` (128 KB, has a real drop-shadow alpha), `validation-corrections-preview.png` (137 KB). Not worth converting.
+  - `sips` has a weak PNG encoder — re-saving or downscaling an already-optimised PNG **inflates** it (a 137 KB PNG became 189–211 KB). Only use `sips` for the PNG→JPEG conversion above, never PNG→PNG. The card PNGs are already compressed on export; don't try to shrink them.
+- **Claude cannot save a pasted image to disk in the desktop app** — pasted images arrive only as vision input, and this client doesn't stage them to a temp path. Ask Tom to save the asset himself (an `osascript` clipboard-to-file one-liner, or Finder) into `case-studies/media/`, then wire up the markup. Rename anything with spaces or a version suffix (`… v3.png`) to kebab-case — no tracked media has a space or a capital in its name.
+
+### Deploy flow
+
+Tom says "push to prod" and changes go **straight to `main`**, not through PRs. Use `git push origin HEAD:main` when the local commit is a clean fast-forward, otherwise commit on `main` then `git pull --rebase origin main && git push`. **Wait for the deploy and verify against the live host** — a new shared file (`styles.css`, `nav.js`, `lightbox.js`) 404s for the first few seconds, and every page depends on it. Vercel auto-deploys `main` to production; the apex `tomdegay.com` 308-redirects to `www.tomdegay.com`, so verify with `curl -sIL` against the `www.` host. No branch protection exists. `git push --force-with-lease` and remote-branch deletes are blocked by the auto-mode classifier and have to be run by Tom.
+
+---
+
+# Session history
+
+Dated notes on how the site got here, newest concerns first. **Where these
+conflict with the sections above, the sections above are right** — these
+describe the structure at the time. Kept for the reasoning behind design and
+copy decisions, which is still the best record of it.
+
+## Sept 2026 — de-duplication pass (CSS, lightbox, nav, images)
+
+The session that produced the Architecture section above. Four things that had
+been copy-pasted into every page became one file each, and the page markup
+stopped being the only place changes could be made.
+
+- **`styles.css`** — extracted from thirteen inline `<style>` blocks. Inline rule
+  counts fell from 90–240 per page to 10–75. Deliberate divergence was preserved,
+  not unified: the point was to remove duplication, not to redesign.
+- **`lightbox.js`** — replaced **six drifted implementations** across nine pages.
+  Merging them meant taking the union of what each had learned (group-aware
+  galleries, swipe, video expand, `innerHTML` captions). The close button's
+  de-chromed look became the standard, handles moved off the image and are
+  hidden below 640px, and the hard-coded `validations-drill-down.mp4` check
+  became `data-hover-controls` in the markup.
+- **`nav.js`** — thirteen byte-identical copies, a straight lift.
+- **Images** — intrinsic `width`/`height` on every static image plus
+  `img { height: auto }`; lazy-loading extended from 55 to 112 images.
+- Also: 11 dead CSS rules, 2.6MB of orphaned media, a refreshed sitemap, and the
+  `0.22` link underline plus pure-white intro line made consistent site-wide.
+
+**What is worth copying is the verification, because it repeatedly caught real
+bugs that eyeballing would have shipped:** serve the pre-change pages alongside
+the new ones (`git show HEAD:page.html > page.baseline.html`) and compare, per
+element, both the computed styles and the *ordered list of CSS rules that match*
+— the latter is state- and media-independent, so it covers `:hover`, open menus
+and inactive media queries. Then drive the actual interactions and diff the
+observable values.
+
+Four traps that cost real time, all worth remembering:
+
+1. **A harness that reports "identical" may be testing nothing.** One popover
+   check passed while a synthetic click had navigated the iframe out from under
+   it; one lightbox comparison passed because the baselines had been captured
+   *after* the change. Sanity-check that the assertions can actually fail.
+2. **Matching selectors against the live DOM misses script-toggled classes.**
+   `.head-play`, `.is-open`, `.is-tight` match nothing at load, so rules using
+   them look dead. Neutralise those classes before testing, or you will both
+   leak rules onto pages that never had them and miss real order inversions.
+3. **Parsers that ignore `@media` miss whatever is inside it.** This bit the CSS
+   extraction and again the dead-rule sweep.
+4. **A warm cache hides lazy-loading**, and mid-animation snapshots produce
+   differences that look like regressions. Use a control run to tell an artifact
+   from a real change.
 
 ## Later session — site-wide cross-linking pass + nav-popover debounce + About buttons
 
@@ -200,10 +283,6 @@ Added `case-studies/image-insight.html` (`/case-studies/image-insight`, "Making 
 - **Nav dropdown rework** (all nine pages, via a throwaway Python script over the file list): added the 4th card; removed the forced `<br>` in titles; panel `min-width` `320 → 360px`; deleted the `is-current` green-title rule.
 - **9 figures**, in order: Problem (full UI), Summary (expanded session), Approach (dashboard, then sign-in), Key decisions (session settings), Implementation/Validating (session review, then PDF summary), Implementation/Refining (new-session menu, then grid toolbar). The card/OG image is `image-insight-session-expanded.jpg`.
 
-### Image source workflow
-
-Tom drops raw screenshots into `other-work/media/` (they arrive as multi-MB `.png`/`.jpg`, sometimes with spaces in the name — `session-view expanded.jpg`). Claude then compresses each into `case-studies/media/image-insight-<name>.jpg` — landscape UI shots `sips -Z 2000 -s format jpeg -s formatOptions 80..84` then `jpegtran -optimize -progressive`; result ~150–500 KB. The raw sources in `other-work/media/` are **left untracked** (only the compressed `case-studies/media/` copies are committed). If Tom says "X is updated", re-run the same compression over the new source and overwrite the committed jpg.
-
 ## Later session — "About this site" footnote + CV refresh
 
 - **`about.html` — added an "About this site" footnote** as the last child of `.about-top` (see the sticky-elements note above for why it must live there, and why it needs `order: 4` in the `@media (max-width: 820px)` block). Markup: `<section class="site-note" aria-label="About this site">` → `<span class="eyebrow">` label + one muted `<p>` (`rgba(255,255,255,0.5)`, ~15px, its own hairline `border-top`). Its scoped `a` rule is paired with a `.site-note a:hover, .site-note a:focus-visible` override (the specificity footgun), and `.site-note a[target="_blank"]::after { content: none }` was added alongside the existing `.about-copy` rule to suppress the external-link arrow. Links: "Claude" → `https://claude.com/claude-code`, "design principles" → `/approach`.
@@ -217,34 +296,6 @@ Added `case-studies/validation-and-correction.html` (route `/case-studies/valida
 - **The Case Studies nav dropdown grew to three cards** here (four as of the Image Insight session above). The card was hand-added to every page's nav (desktop hover panel + mobile inline-expanded form). Still no include mechanism.
 - **"Next case study" blocks form a 3-cycle:** connecting-organisations → mapping-inconsistent-schemas → validation-and-correction → connecting-organisations.
 - **Home page + `case-studies/index.html`:** the old `.case-block.is-soon` "Validation and correction" placeholder is now a live card. ("Data transformation pipelines" was the last `.is-soon` card — retired when the Pipelines study shipped; see the Pipelines session note.)
-
-### Media conventions (established / firmed up this session)
-
-- **Card images are dedicated ~16:9 crops**, separate from the full-size image. Naming: `<name>-crop.png|jpg` for the `.case-block-media` thumbnail, `<name>.png|jpg` for the full one that appears in-page as a `<figure>` and as `og:image`. Applied across all three studies (`concept-mapping-detail.jpg`, `feeds-repo-dashboard-crop.png`, `validation-corrections-preview-crop.png`). The card CSS does `object-fit: cover; object-position: center top`, so a full-bleed screenshot used as a card gets its bottom cropped — hence the separate crop files.
-- **Captioned figure:** `<figure class="figure"><img src="media/…" alt="…"><figcaption>…</figcaption></figure>`. `.figure` / `.figure img` / `.figure figcaption` styling is already in the copied CSS, and the page's lightbox script auto-wires every `.figure img`. A figure can omit the `<figcaption>` and still works (spacing + lightbox), but on this page every image figure ended up with a caption.
-- **Inline video** follows the `.ui-video` pattern already used on the other studies: `<div class="ui-video"><video autoplay controls muted loop playsinline poster="media/<name>.jpg"><source src="media/<name>.mp4" type="video/mp4"></video><button class="ui-video-expand" …>…</button></div>`. For a **captioned** video, nest that `.ui-video` div inside a `<figure class="figure">` with a `<figcaption>` sibling — top margins collapse cleanly and the uncaptioned form still works standalone. A `prefers-reduced-motion` block at the top of the page's script pauses `.ui-video video` and strips `autoplay`.
-  - `.ui-video` is `max-width: 46rem` (same as `.figure`) and `position: relative`. Inline `<video>` carries `controls` **plus `disablepictureinpicture` and `controlslist="nofullscreen nodownload"`** — so the browser's own PiP / fullscreen / download buttons are gone and the only "expand" affordance is the site's own **`.ui-video-expand`** corner button (absolute top-right, SVG corner-brackets, `opacity: 0.55` → `1` on hover/focus).
-  - Clicking `.ui-video-expand` opens the video **in the existing image `.lightbox` modal** (not browser fullscreen): a `<video class="lightbox-video" controls muted loop playsinline hidden>` was added to the lightbox markup + a `.lightbox-video` CSS block (`max-width:100%; max-height:calc(100vh - 140px)` — native resolution, capped to the viewport, never upscaled). The lightbox IIFE now also has `openVideo(src, caption)` / `stopVideo()` and wires the expand buttons (grabbing the `<source>` src and nearest `<figcaption>`); `openLightbox` (image path) and `closeLightbox` toggle `lightboxImg.hidden` / call `stopVideo`. Nav arrows are hidden in video mode. The CSS and the lightbox markup are still per-page, but the script now lives once in `/lightbox.js` (see Architecture).
-- **Figures currently on the validations page** (9), in document order — `media/` basenames:
-  - Approach / Information design — `validation-whiteboard.jpg` (captioned)
-  - Approach / Ship, learn, repeat — `validations-drill-down.mp4` (captioned video) then `ad-hoc-correction.png` (captioned)
-  - Key decisions / Make the scope obvious — `validation-corrections-preview.png` (captioned; the `-crop` variant is the card image)
-  - Key decisions / Preserve evidence — `validation-history.png` (captioned)
-  - Key decisions / Give immediate feedback — `validation-instant-check.mp4` (uncaptioned video)
-  - Implementation / Ordering and audit — `validation-correction-log.jpg` (captioned)
-  - Implementation / A shared correction workflow — `validation-sharing-spec.jpg` (captioned)
-  - Implementation / Automated type validation — `type-validation.mp4` (uncaptioned video)
-- **If Tom supplies a PNG, keep it a PNG.** (Explicit instruction, Sept 2026 — "all those mch images should be png. If I give you a png, keep it as a png".) Do **not** convert a PNG he hands over to JPEG, even a large text-dense screenshot. Leave it at its native resolution (don't run `sips` PNG→PNG — it inflates). Only downscale if genuinely oversized, and flag it rather than changing format. The `<name>-web.jpg` / JPEG-flatten workflow below is for older assets and for stills Claude generates (video posters, ffmpeg crops), not for Tom's source PNGs. The `mch-excel-1..4.png` grid and `mch-sketch-green.png` on the mapping study are PNG for this reason.
-- **Compression** — tools already on Tom's Mac: `ffmpeg`/`ffprobe`, `sips`, `jpegtran`, `cwebp`. No `pngquant`/`oxipng`/`optipng`.
-  - Video: `ffmpeg -i IN -an -r 30 -vf "scale=<w>:-2" -c:v libx264 -profile:v high -preset slow -crf 26..28 -pix_fmt yuv420p -movflags +faststart OUT.mp4`, then a poster `ffmpeg -ss <t> -i OUT.mp4 -vframes 1 -q:v 3 poster.jpg` → `jpegtran -optimize -progressive`. Drop 60 fps → 30, strip audio, and CRF 26 for small/low-res UI captures (28 for full-frame). Results this session: 17.8 MB → 775 KB, 1.3 MB `.mov` → 98 KB, 605 KB `.mov` → 46 KB. **`.mov` must be re-encoded** — Chrome/Firefox don't play the container reliably.
-  - **Large screenshots / spec boards → JPEG.** `sips -Z 2000 -s format jpeg -s formatOptions 84..86` then `jpegtran -optimize -progressive`. Land ~200 KB (`feeds-add-partners-spec.jpg` is the reference). This session: an 11394-px spec board → 197 KB / 2000 px; a 2632-px, 432 KB corrections-table PNG → 229 KB / 2000 px JPEG (use q86 for text-dense tables). Rename the file to `.jpg` and update the `src` — the dark UI has no meaningful transparency so flattening is safe.
-  - **Small screenshot PNGs (≲150 KB) are left as PNG** — `validation-history.png` (128 KB, has a real drop-shadow alpha), `validation-corrections-preview.png` (137 KB). Not worth converting.
-  - `sips` has a weak PNG encoder — re-saving or downscaling an already-optimised PNG **inflates** it (a 137 KB PNG became 189–211 KB). Only use `sips` for the PNG→JPEG conversion above, never PNG→PNG. The card PNGs are already compressed on export; don't try to shrink them.
-- **Claude cannot save a pasted image to disk in the desktop app** — pasted images arrive only as vision input, and this client doesn't stage them to a temp path. Tom saved each asset himself (an `osascript` clipboard-to-file one-liner, or Finder) into `case-studies/media/`, then Claude wired up the markup. Filenames with spaces or version suffixes (`… v3.png`) were renamed to kebab-case.
-
-### Deploy flow used this session
-
-Changes went **straight to `main`** rather than through PRs (Tom asked to "push to prod"). Either `git push origin HEAD:main` when the local commit was a clean fast-forward, or commit-on-`main` then `git pull --rebase origin main && git push`. Vercel auto-deploys `main` to production; the apex `tomdegay.com` 308-redirects to `www.tomdegay.com`, so verify with `curl -sIL` against the `www.` host. No branch protection exists. `git push --force-with-lease` and remote-branch deletes are blocked by the auto-mode classifier and have to be run by Tom.
 
 ## Later Claude Code session — nav + about-page responsive work
 
@@ -268,10 +319,10 @@ Changes went **straight to `main`** rather than through PRs (Tom asked to "push 
 4. Earlier in this session (before the above), an **initial attempt at the underline/lede tweaks was made against a stale, disconnected copy of the site** in the Claude/Cowork cloud workspace — not the real repo on Tom's Mac — so those edits never actually reached the live files. This was caught when Tom said "I'm not seeing the changes applied locally," at which point work moved to editing the real repo directly via the device bridge (`device_bash`) instead of a local cloud copy. **Practical implication for Claude Code:** none — Claude Code will always be operating directly on this repo, so this particular failure mode doesn't apply. It's noted here only so the history in this file makes sense.
 5. Slightly earlier still (reflected in the `M` files in git status — `index.html`, `case-studies/connecting-organisations.html`, `case-studies/mapping-inconsistent-schemas.html`): normalized the case-study keyword tag styling to match the `.eyebrow`/`.kicker` mono/uppercase treatment (14px, weight 500, letter-spacing 2px, word-spacing -3px, uppercase) and switched the `|` separator to `·` in keyword lists. This is already applied consistently across all case-study-keyword instances site-wide (verified — no remaining `|`-separated keyword lists exist).
 
-## Outstanding work / open questions for whoever picks this up
+## Open threads
 
-- **Nothing about the multi-page restructure is committed to git.** First real task: decide what to do with the `-1.html` backup files (ask Tom — don't delete unilaterally), then stage and commit `about.html`, `contact.html`, `case-studies/index.html`, `about-photo.jpg`, and the three modified files together with a clear commit message.
-- **The dimmed link underline (`0.22`) is now site-wide** — Tom confirmed it, so all thirteen pages match. The base `a` rule is therefore identical everywhere and is a candidate to hoist into `styles.css` next time that migration is revisited. Scoped overrides are deliberate and stay: `.about-copy a` at `0.4`, and the teal kicker links on the case studies. The **text-darkening** tweak that came with it has been reverted: every page's big intro line (`.lede` / `.about-statement`) is now pure `#fff`.
-- **`contact.html` still has the old (non-sticky) `p.links` pattern** — LinkedIn/Download CV nested in a `.contact-header` flex wrapper, not pulled out to be sticky like on the about page. Nobody has asked for this to change; flagging only as an inconsistency now that about.html works differently. Same goes for `index.html`, which doesn't have a `p.links` masthead at all anymore (it moved into the nav itself as brand + nav links).
-- **No shared nav/partial mechanism.** Every nav change now requires editing eight files by hand (and the Case Studies dropdown lists all three published studies, so adding a fourth means eight more hand-edits). If more pages get added, or the nav changes again, it's worth considering whether to introduce some kind of build step (even a minimal one — an 11ty/Eleventy setup, or a simple Node script that inlines a shared `_nav.html` partial at build time) purely to remove this duplication risk. Not something to do unprompted — raise it as a suggestion if the opportunity comes up, since Tom may prefer keeping the "no build step" simplicity.
-- No automated tests, linting, or CI exist. Any verification is manual/visual (this session used a headless Playwright render to check layout and sticky behavior before touching the live files — worth doing something similar for any non-trivial layout change, since there's no other safety net).
+- **`case-studies/media/connecting-organisations-og.jpg` is deliberately kept** even though nothing references it. It was the og:image for the old `/case-studies/connecting-organisations` URL, and platforms that cached a card before the rename still fetch it. Delete only if Tom asks.
+- **The base `a` rule is now identical on all thirteen pages**, so it is a candidate to hoist into `styles.css`. Doing that safely means re-running the cascade checks described in the Architecture section, not just moving the text.
+- **Six `.related-thumb` images on wayfinding/ai/design-craft are `loading="lazy"` despite sitting above the fold** at ≥1100px. Pre-existing and harmless in practice (Chrome loads near-viewport images anyway), flagged rather than changed.
+- **`contact.html` uses a non-sticky `p.links`** pattern, unlike `about.html`'s sticky gutter buttons. Nobody has asked for consistency here; noted only as a difference.
+- **No build step, by choice.** Nav *markup* is the last thing copy-pasted across thirteen pages. If it changes often, a minimal include step would remove the risk — but raise it as a suggestion, don't do it unprompted; Tom values the no-build simplicity.

@@ -307,7 +307,9 @@
       if (!lede) { root.classList.remove('head-armed'); return; }
 
       try {
-        var words = lede.textContent.trim().split(/\s+/);
+        // split on plain spaces only -- \s would also match &nbsp;, which is
+        // there to keep a pair of words on the same line
+        var words = lede.textContent.replace(/[\t\n\r]+/g, ' ').trim().split(/ +/);
         lede.textContent = '';
         var wordEls = words.map(function (w, i) {
           var s = document.createElement('span');

@@ -419,7 +419,7 @@
 
     <section aria-labelledby="about-heading">
       <span class="eyebrow" id="about-heading">About</span>
-      <p class="about-statement display">Product designer. Big-picture thinker. Small-detail obsessive. Complexity to clarity. A human in the loop.</p>
+      <p class="about-statement display">Product designer. Big-picture thinker. Small-detail obsessive. Complexity to clarity. A&nbsp;human in the loop.</p>
     </section>
 
     <hr class="rule">
@@ -632,7 +632,9 @@
       if (!stmt) { root.classList.remove('hero-armed'); return; }
 
       try {
-        var words = stmt.textContent.trim().split(/\s+/);
+        // split on plain spaces only -- \s would also match &nbsp;, which is
+        // there to keep a pair of words on the same line
+        var words = stmt.textContent.replace(/[\t\n\r]+/g, ' ').trim().split(/ +/);
         stmt.textContent = '';
         var wordEls = words.map(function (w, i) {
           var s = document.createElement('span');

@@ -468,6 +468,25 @@
 
   .lightbox-next { right: clamp(8px, 3vw, 28px); }
 
+  /* -- Where there is room the handles sit beside the image rather than on
+     top of it, and the image gives up just enough width to make space. Below
+     640px there isn't enough room to spare, so they stay over the edges. -- */
+  @media (min-width: 640px) {
+    .lightbox-media { max-width: calc(100% - 2 * (48px + 20px)); }
+
+    .lightbox-prev {
+      left: auto;
+      right: 100%;
+      margin-right: 20px;
+    }
+
+    .lightbox-next {
+      right: auto;
+      left: 100%;
+      margin-left: 20px;
+    }
+  }
+
   /* -- interior-page heading entrance -- */
   .head-armed .head-fade {
     opacity: 0;

@@ -615,6 +615,22 @@ button[type="submit"]:disabled {
 
 .case-body h2 { max-width: 46rem; }
 
+/* Available to screen readers and to the document outline, but not painted.
+   index.html uses it for its h1: the homepage has no visible page title, so
+   without this its sections would start at h2 with no h1 above them. */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
 h3 {
   font-family: "Fakt Blond SemiBold", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   font-weight: 600;

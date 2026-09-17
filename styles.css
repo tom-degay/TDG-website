@@ -882,14 +882,6 @@ h4 {
   grid-template-columns: repeat(2, 1fr);
 }
 
-/* A portrait shot inside a 4/3 object-fit: cover cell keeps only a horizontal
-   band, and the default centre crop would land on this one's empty editor
-   body. Anchor it to the top so the panel title and its single config line
-   survive. */
-.figure-strip-imgs img[src$="code-editor-2.png"] {
-  object-position: 50% 0%;
-}
-
 /* -- resources -- */
 .resources-list {
   list-style: none;

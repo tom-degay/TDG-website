@@ -1,0 +1,6 @@
+# Working notes, not site content. These live in the repo but must never be
+# served: Vercel publishes every file in the root as a static asset, so
+# CLAUDE.md was reachable at https://tomdegay.com/CLAUDE.md -- exposing the
+# repo URL, the dated session history and local filesystem paths.
+CLAUDE.md
+AGENTS.md

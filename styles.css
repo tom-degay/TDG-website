@@ -252,14 +252,23 @@ hr.rule:has(+ .back-to-top-row) { margin-bottom: clamp(8px, 1.2vw, 14px); }
   line-height: 1.65;
 }
 
+/* A real underline rather than the site's usual border-bottom: the border sits
+   under the whole inline box, which leaves ~5.75px of descent space below text
+   with no descenders. text-underline-offset can sit tight to the baseline. */
 .site-footer-links a {
   color: rgba(255, 255, 255, 0.72);
-  border-bottom-color: rgba(255, 255, 255, 0.25);
+  border-bottom: none;
+  padding-bottom: 0;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  text-decoration-color: rgba(255, 255, 255, 0.25);
+  transition: color 0.15s ease, text-decoration-color 0.15s ease;
 }
 
 .site-footer-links a:hover, .site-footer-links a:focus-visible {
   color: #fff;
-  border-color: rgba(255, 255, 255, 0.9);
+  text-decoration-color: rgba(255, 255, 255, 0.9);
 }
 
 /* -- "About this site" footnote -- */

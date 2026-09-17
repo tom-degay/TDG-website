@@ -79,9 +79,9 @@ a:focus-visible {
   border-radius: 1px;
 }
 
-a[target="_blank"] { position: relative; }
+a[target="_blank"], .site-footer-links a { position: relative; }
 
-a[target="_blank"]::after {
+a[target="_blank"]::after, .site-footer-links a::after {
   content: "→";
   position: absolute;
   right: -1.1em;
@@ -93,7 +93,8 @@ a[target="_blank"]::after {
   will-change: transform, opacity;
 }
 
-a[target="_blank"]:hover::after, a[target="_blank"]:focus-visible::after {
+a[target="_blank"]:hover::after, a[target="_blank"]:focus-visible::after,
+.site-footer-links a:hover::after, .site-footer-links a:focus-visible::after {
   opacity: 1;
   transform: translate(0, -50%);
 }
@@ -219,6 +220,45 @@ hr.rule:has(+ .back-to-top-row) { margin-bottom: clamp(8px, 1.2vw, 14px); }
 }
 
 .about-copy a:hover, .about-copy a:focus-visible {
+  border-color: rgba(255, 255, 255, 0.9);
+}
+
+/* -- Site footer: copyright left, links right. Lives inside <main> on every
+   page so it picks up that page's max-width and padding -- each page sets its
+   own, so a footer outside main would need per-page values to stay aligned.
+   Uses the same small-print scale as .site-note. -- */
+.site-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px 28px;
+  margin-top: clamp(24px, 3.5vw, 32px);
+}
+
+.site-footer p { margin: 0; }
+
+.site-footer-copy {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: clamp(14px, 1.6vw, 15px);
+  line-height: 1.65;
+}
+
+.site-footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 30px;
+  font-size: clamp(14px, 1.6vw, 15px);
+  line-height: 1.65;
+}
+
+.site-footer-links a {
+  color: rgba(255, 255, 255, 0.72);
+  border-bottom-color: rgba(255, 255, 255, 0.25);
+}
+
+.site-footer-links a:hover, .site-footer-links a:focus-visible {
+  color: #fff;
   border-color: rgba(255, 255, 255, 0.9);
 }
 

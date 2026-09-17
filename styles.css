@@ -875,13 +875,6 @@ h4 {
   grid-template-columns: repeat(4, 1fr);
 }
 
-/* Two across, so four images read as a 2x2 grid. Two classes, so this beats
-   the pages' own single-class .figure-strip-imgs default of three columns
-   whatever the source order, exactly as .figure-strip-4 does. */
-.figure-strip-2 .figure-strip-imgs {
-  grid-template-columns: repeat(2, 1fr);
-}
-
 /* -- resources -- */
 .resources-list {
   list-style: none;

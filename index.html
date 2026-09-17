@@ -103,6 +103,27 @@
 
   .case-blocks .case-block { margin-top: 0; }
 
+  /* -- testimonials: 2x2 from 820px, stacked below. The quote and cite
+     styling is the shared one in styles.css; only the grid is page-specific. -- */
+  .testimonials {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .testimonials blockquote { margin: 0; }
+
+  .testimonials cite a[target="_blank"]::after { content: none; }
+
+  @media (min-width: 820px) {
+    .testimonials {
+      grid-template-columns: 1fr 1fr;
+      column-gap: 40px;
+      row-gap: 36px;
+    }
+  }
+
   @media (min-width: 820px) {
     .case-blocks {
       grid-template-columns: 1fr 1fr;
@@ -556,6 +577,33 @@
             <span class="case-block-keywords"><span class="case-block-keyword">Interaction design</span><span class="case-block-keyword">Visual design</span></span>
           </span>
         </a>
+      </div>
+    </section>
+
+    <hr class="rule">
+
+    <section aria-labelledby="testimonials-heading">
+      <span class="eyebrow" id="testimonials-heading">Testimonials</span>
+      <div class="testimonials">
+        <blockquote>
+          He can take a vague problem with incomplete information, competing priorities and a lot of uncertainty, and methodically turn that into a clear product direction.
+          <cite><a href="https://www.linkedin.com/in/tom-dg/details/recommendations/?detailScreenTabIndex=0" target="_blank" rel="noopener noreferrer">Andre Brantom</a>, CTO, Quantemplate</cite>
+        </blockquote>
+
+        <blockquote>
+          Tom has produced immaculately conceived designs for every aspect of the platform, and has a razor-sharp eye for detail in addition to the high level vision that is critical for a cohesive product.
+          <cite><a href="https://www.linkedin.com/in/tom-dg/details/recommendations/?detailScreenTabIndex=0" target="_blank" rel="noopener noreferrer">Alex Fox Gill</a>, Application Architect, Quantemplate</cite>
+        </blockquote>
+
+        <blockquote>
+          His feedback is always thoughtful, respectful and supportive, he makes people feel appreciated and included. Tom simply brings out the best in everyone.
+          <cite><a href="https://www.linkedin.com/in/tom-dg/details/recommendations/?detailScreenTabIndex=0" target="_blank" rel="noopener noreferrer">Sol Kawage</a>, Designer, Isokon Gallery</cite>
+        </blockquote>
+
+        <blockquote>
+          I cannot adequately express how receptive he was to our suggestions for improvement. He would listen, ask questions and make our wishlist items reality; even enhancing our suggestions.
+          <cite><a href="https://www.linkedin.com/in/tom-dg/details/recommendations/?detailScreenTabIndex=0" target="_blank" rel="noopener noreferrer">Lee Ann Dewell Lang</a>, Quantemplate user-client, James River Insurance</cite>
+        </blockquote>
       </div>
     </section>
 

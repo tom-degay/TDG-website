@@ -140,7 +140,7 @@ Tom drops raw screenshots into `other-work/media/` (they arrive as multi-MB `.pn
 
 ### Deploy flow
 
-Tom says "push to prod" and changes go **straight to `main`**, not through PRs. Use `git push origin HEAD:main` when the local commit is a clean fast-forward, otherwise commit on `main` then `git pull --rebase origin main && git push`. **Wait for the deploy and verify against the live host** — a new shared file (`styles.css`, `nav.js`, `lightbox.js`) 404s for the first few seconds, and every page depends on it. Vercel auto-deploys `main` to production; the apex `tomdegay.com` 308-redirects to `www.tomdegay.com`, so verify with `curl -sIL` against the `www.` host. No branch protection exists. `git push --force-with-lease` and remote-branch deletes are blocked by the auto-mode classifier and have to be run by Tom.
+Tom says "push to prod" and changes go **straight to `main`**, not through PRs. Use `git push origin HEAD:main` when the local commit is a clean fast-forward, otherwise commit on `main` then `git pull --rebase origin main && git push`. **Wait for the deploy and verify against the live host** — a new shared file (`styles.css`, `nav.js`, `lightbox.js`) 404s for the first few seconds, and every page depends on it. Vercel auto-deploys `main` to production. **The apex is the primary domain**: `https://tomdegay.com` serves 200 and `www.` 308-redirects to it, matching the canonicals, `og:url` and the sitemap. Verify against the apex. No branch protection exists. `git push --force-with-lease` and remote-branch deletes are blocked by the auto-mode classifier and have to be run by Tom.
 
 ---
 
@@ -324,7 +324,6 @@ Added `case-studies/validation-and-correction.html` (route `/case-studies/valida
 
 ## Open threads
 
-- **The canonical hostname and the hosting redirect disagree.** Canonicals, `og:url` and the sitemap all use the apex (`https://tomdegay.com`), which is what Tom wants — but Vercel currently 308s the apex to `www`. That redirect is a **domain setting in the Vercel dashboard, not `vercel.json`**, so it has to be flipped there: make `tomdegay.com` the primary domain so `www` redirects to it. Do **not** add a `www → apex` rule to `vercel.json` while the dashboard redirect points the other way — that is an infinite loop.
 - **Social cards shared before the URL renames have lost their image.** `connecting-organisations-og.jpg` was deleted on Tom's instruction; the 308 redirects still work, so the links themselves are fine — only a cached card's thumbnail is affected.
 - **Six `.related-thumb` images on wayfinding/ai/design-craft are `loading="lazy"` despite sitting above the fold** at ≥1100px. Pre-existing and harmless in practice (Chrome loads near-viewport images anyway), flagged rather than changed.
 - **`contact.html` uses a non-sticky `p.links`** pattern, unlike `about.html`'s sticky gutter buttons. Nobody has asked for consistency here; noted only as a difference.

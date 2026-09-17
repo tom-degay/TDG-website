@@ -261,7 +261,7 @@ hr.rule:has(+ .back-to-top-row) { margin-bottom: clamp(8px, 1.2vw, 14px); }
   padding-bottom: 0;
   text-decoration: underline;
   text-decoration-thickness: 1px;
-  text-underline-offset: 2px;
+  text-underline-offset: 4px;
   text-decoration-color: rgba(255, 255, 255, 0.25);
   transition: color 0.15s ease, text-decoration-color 0.15s ease;
 }

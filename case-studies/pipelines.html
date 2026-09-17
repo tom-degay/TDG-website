@@ -862,13 +862,13 @@
         <p>As clients chained pipelines together, we found ourselves explaining the connections through <a href="https://miro.com" target="_blank" rel="noopener noreferrer">Miro</a> flowcharts. This was a desire line: a view we repeatedly created outside the product.</p>
         <p>In 2026, we built a flowchart view into Quantemplate, giving users an overview across pipelines alongside the detailed stage editor.</p>
 
-        <a class="case-block has-thumb" href="https://www.youtube.com/watch?v=8AbiemD7UMk" target="_blank" rel="noopener noreferrer">
-          <img class="case-block-thumb" src="media/youtube-pipelines-flow.jpg" width="800" height="450" alt="Thumbnail for the YouTube video &lsquo;See your data automation in real time with Quantemplate Flow&rsquo;" loading="lazy">
-          <span class="case-block-text">
-            <span class="case-block-title">See your data automation in real time with Quantemplate Flow</span>
-            <span class="case-block-watch">Watch on YouTube</span>
-          </span>
-        </a>
+        <div class="ui-video">
+          <video autoplay muted loop playsinline disablepictureinpicture poster="media/pipelines-flow-view.jpg">
+            <source src="media/pipelines-flow-view.mp4" type="video/mp4">
+          </video>
+          <button class="ui-video-expand" type="button" aria-label="View full size"><svg viewBox="0 0 20 20" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path class="expand-corner" style="--dx:-1px;--dy:-1px" d="M7 3H3v4"/><path class="expand-corner" style="--dx:1px;--dy:-1px" d="M13 3h4v4"/><path class="expand-corner" style="--dx:1px;--dy:1px" d="M13 17h4v-4"/><path class="expand-corner" style="--dx:-1px;--dy:1px" d="M7 17H3v-4"/></svg></button>
+        </div>
+
         <p>Automated runs introduced a further risk: a chain of pipelines could end up triggering itself and running forever.</p>
         <blockquote>This was a systemic risk. I advocated for the engineering team to develop loop detection and designed a UI for it.</blockquote>
 

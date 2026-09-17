@@ -830,12 +830,6 @@
           </video>
           <button class="ui-video-expand" type="button" aria-label="View full size"><svg viewBox="0 0 20 20" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path class="expand-corner" style="--dx:-1px;--dy:-1px" d="M7 3H3v4"/><path class="expand-corner" style="--dx:1px;--dy:-1px" d="M13 3h4v4"/><path class="expand-corner" style="--dx:1px;--dy:1px" d="M13 17h4v-4"/><path class="expand-corner" style="--dx:-1px;--dy:1px" d="M7 17H3v-4"/></svg></button>
         </div>
-        <p>Later, when we started chaining pipelines together and introduced automated runs, I realised this created the potential for infinite loops.</p>
-        <blockquote>This was a systemic risk. I advocated for the engineering team to develop loop detection and designed a UI for it.</blockquote>
-
-        <figure class="figure">
-          <img src="media/auto-run92.jpg" width="1340" height="1044" alt="The loop-detection UI: a popover warning &lsquo;Automation loop detected&rsquo;, showing the chain of pipelines that would form an infinite loop &mdash; API data, Chain 1, intermediate-10, and this pipeline." loading="lazy">
-        </figure>
       </div>
     </section>
 
@@ -894,6 +888,12 @@
             <span class="case-block-watch">Watch on YouTube</span>
           </span>
         </a>
+        <p>Later, when we started chaining pipelines together and introduced automated runs, I realised this created the potential for infinite loops.</p>
+        <blockquote>This was a systemic risk. I advocated for the engineering team to develop loop detection and designed a UI for it.</blockquote>
+
+        <figure class="figure">
+          <img src="media/auto-run92.jpg" width="1340" height="1044" alt="The loop-detection UI: a popover warning &lsquo;Automation loop detected&rsquo;, showing the chain of pipelines that would form an infinite loop &mdash; API data, Chain 1, intermediate-10, and this pipeline." loading="lazy">
+        </figure>
       </div>
 
       <div class="subsection" id="impl-activity">

@@ -8,7 +8,7 @@ This file is for whichever Claude session picks up this project next. It's the l
 
 A static, no-build personal site: home, about, contact, three "approach" pages (Learning from wayfinding, Design and AI, Design craft), and a case studies section with six long-form write-ups — four Quantemplate, plus Image Insight (a coaching tool) and Zonefully (a planning app). No framework, no bundler, no package.json: hand-authored HTML plus three shared files (`styles.css`, `nav.js`, `lightbox.js`), deployed to Vercel.
 
-Repo: `https://github.com/tom-degay/TDG-website.git`, local working copy at `/Users/Tom/Github/TDG-website` on Tom's Mac.
+Repo: `https://github.com/tom-degay/tube-alloys.git` (renamed from `TDG-website` in Sept 2026 — GitHub redirects the old path permanently, so old clones keep working), local working copy still at `/Users/Tom/Github/TDG-website` on Tom's Mac.
 
 ## Architecture
 

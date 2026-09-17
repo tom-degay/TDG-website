@@ -787,14 +787,7 @@
           <figcaption>Pipeline evolution: from one long script to named operations, each with its own interface &ndash; and the pipeline as it stands today.</figcaption>
         </figure>
         <p>I started creating UI for each of these script operations incrementally. I worked with solutions architects to stack-rank the operations by frequency of use and difficulty of use as a script. That meant infrequently used operations where only one number needs to be changed were done later whilst big operations like <a href="/case-studies/column-mapping">Map Column Headers</a> were done first. This delivered the most value, fastest.</p>
-        <blockquote>This was <a href="/wayfinding#information-heading">progressive disclosure</a>, a principle I had learnt through wayfinding: help people orient themselves, then reveal the detail they need at the point they need it.</blockquote>
 
-        <div class="ui-video is-tall">
-          <video autoplay muted loop playsinline disablepictureinpicture poster="media/pipelines-move-operation.jpg">
-            <source src="media/pipelines-move-operation.mp4" type="video/mp4">
-          </video>
-          <button class="ui-video-expand" type="button" aria-label="View full size"><svg viewBox="0 0 20 20" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path class="expand-corner" style="--dx:-1px;--dy:-1px" d="M7 3H3v4"/><path class="expand-corner" style="--dx:1px;--dy:-1px" d="M13 3h4v4"/><path class="expand-corner" style="--dx:1px;--dy:1px" d="M13 17h4v-4"/><path class="expand-corner" style="--dx:-1px;--dy:1px" d="M7 17H3v-4"/></svg></button>
-        </div>
       </div>
 
       <div class="subsection" id="approach-implementations">
@@ -813,14 +806,23 @@
         <h3>Give pipelines a simple hierarchy</h3>
         <p>Our first visual model broke the code into steps called stages. We soon realised that pipelines would become enormous if every operation occupied its own stage.</p>
         <p>Working with engineering, we introduced operations within stages. Stages represented the broader structure of the data flow (joining, combining or transforming inputs) while operations contained the detailed work.</p>
-        <blockquote>This collapsed the pipeline into a manageable sequence. Users could see its overall structure, then open a stage to work on individual operations.</blockquote>
+        <p>This collapsed the pipeline into a manageable sequence. Users could see its overall structure, then open a stage to work on individual operations.</p>
+        <blockquote>This was <a href="/wayfinding#information-heading">progressive disclosure</a>, a principle I had learnt through wayfinding: help people orient themselves, then reveal the detail they need at the point they need it.</blockquote>
         <p>The model also made development practical. It allowed us to build the web application rapidly without getting caught up in complicated flowchart engineering, for which suitable web-based libraries were not available at the time.</p>
 
-        <div class="ui-video is-tall">
-          <video autoplay muted loop playsinline disablepictureinpicture poster="media/pipelines-add-stage.jpg">
-            <source src="media/pipelines-add-stage.mp4" type="video/mp4">
-          </video>
-          <button class="ui-video-expand" type="button" aria-label="View full size"><svg viewBox="0 0 20 20" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path class="expand-corner" style="--dx:-1px;--dy:-1px" d="M7 3H3v4"/><path class="expand-corner" style="--dx:1px;--dy:-1px" d="M13 3h4v4"/><path class="expand-corner" style="--dx:1px;--dy:1px" d="M13 17h4v-4"/><path class="expand-corner" style="--dx:-1px;--dy:1px" d="M7 17H3v-4"/></svg></button>
+        <div class="ui-video-pair">
+          <div class="ui-video is-tall">
+            <video autoplay muted loop playsinline disablepictureinpicture poster="media/pipelines-add-stage.jpg">
+              <source src="media/pipelines-add-stage.mp4" type="video/mp4">
+            </video>
+            <button class="ui-video-expand" type="button" aria-label="View full size"><svg viewBox="0 0 20 20" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path class="expand-corner" style="--dx:-1px;--dy:-1px" d="M7 3H3v4"/><path class="expand-corner" style="--dx:1px;--dy:-1px" d="M13 3h4v4"/><path class="expand-corner" style="--dx:1px;--dy:1px" d="M13 17h4v-4"/><path class="expand-corner" style="--dx:-1px;--dy:1px" d="M7 17H3v-4"/></svg></button>
+          </div>
+          <div class="ui-video is-tall">
+            <video autoplay muted loop playsinline disablepictureinpicture poster="media/pipelines-move-operation.jpg">
+              <source src="media/pipelines-move-operation.mp4" type="video/mp4">
+            </video>
+            <button class="ui-video-expand" type="button" aria-label="View full size"><svg viewBox="0 0 20 20" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path class="expand-corner" style="--dx:-1px;--dy:-1px" d="M7 3H3v4"/><path class="expand-corner" style="--dx:1px;--dy:-1px" d="M13 3h4v4"/><path class="expand-corner" style="--dx:1px;--dy:1px" d="M13 17h4v-4"/><path class="expand-corner" style="--dx:-1px;--dy:1px" d="M7 17H3v-4"/></svg></button>
+          </div>
         </div>
       </div>
 

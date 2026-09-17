@@ -687,6 +687,26 @@ h4 {
 
 .ui-video.is-small { max-width: 30rem; }
 
+/* Two portrait clips side by side, matched in height. The pair sets an explicit
+   height on the videos rather than letting each hit its own max-height, so they
+   line up; widths then follow each clip's own ratio. Wraps to stacked when the
+   two no longer fit. */
+.ui-video-pair {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 16px;
+  margin-top: 28px;
+}
+
+.ui-video-pair .ui-video { margin-top: 0; }
+
+.ui-video-pair .ui-video.is-tall video {
+  height: clamp(320px, 52vh, 460px);
+  max-height: none;
+  width: auto;
+}
+
 .ui-video + p { margin-top: clamp(24px, 3.5vw, 36px); }
 
 .ui-video.is-tall video {

@@ -385,12 +385,36 @@
       padding-right: var(--gutter);
     }
 
-    /* -- hero. Runs the full band (1325px at 1440, up from 968px) and is
-       deliberately allowed to spill past the fold -- on black, a video
-       stopped short of the band's right edge reads as a mistake rather
-       than as whitespace. No max-height: the element is width:100% /
-       height:auto, so capping the height would stretch the frame. -- */
-    .hero-video { margin-bottom: clamp(88px, 9vw, 136px); }
+    /* -- the opening spread: statement left, video hard against the band's
+       right edge. The two are placed explicitly rather than reordered in
+       the markup, so the stacking order below 1100px stays video-first.
+
+       40/60 is the balance point: the video still reads as the hero, and
+       the statement lands on four or five lines instead of one long
+       banner. The label sits above the statement here rather than in the
+       rail -- the masthead is the one place the rail would squeeze the
+       display type into something unreadable. -- */
+    .hero-spread {
+      display: grid;
+      grid-template-columns: minmax(0, 40fr) minmax(0, 60fr);
+      column-gap: clamp(40px, 5vw, 80px);
+      align-items: center;
+      margin-bottom: clamp(88px, 9vw, 136px);
+    }
+
+    .hero-spread > section {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    .hero-spread .hero-video {
+      grid-column: 2;
+      grid-row: 1;
+      margin-bottom: 0;
+    }
+
+    /* Sized for the 40% column, not the old full-width line. */
+    .hero-spread .about-statement { font-size: clamp(26px, 2.3vw, 36px); }
 
     /* -- sections: [label rail] [content]. Children sit in the content
        column by default; the hairline, the sub-label and the card grids
@@ -436,9 +460,7 @@
       border-top-color: rgba(255, 255, 255, 0.16);
     }
 
-    /* -- type: the extra width buys a bigger opening statement. -- */
-    .about-statement { font-size: clamp(32px, 2.9vw, 46px); }
-
+    /* -- type: the extra width buys a bigger job title. -- */
     .job-company { font-size: clamp(26px, 2.3vw, 34px); }
 
     /* The YouTube card would stretch to the full content column; hold it
@@ -549,16 +571,21 @@
   </nav>
   <main>
       <h1 class="visually-hidden">Tom de Gay &mdash; Digital Product Designer</h1>
-    <div class="hero-video">
-      <video autoplay muted loop playsinline disablepictureinpicture poster="media/tdg-laptop-demo.jpg">
-        <source src="media/tdg-laptop-demo.mp4" type="video/mp4">
-      </video>
-    </div>
+    <!-- Opening spread. Below 1100px this wrapper is inert and the two
+         blocks stack exactly as they always did, video first. Above it,
+         they become one two-column grid: statement left, video right. -->
+    <div class="hero-spread">
+      <div class="hero-video">
+        <video autoplay muted loop playsinline disablepictureinpicture poster="media/tdg-laptop-demo.jpg">
+          <source src="media/tdg-laptop-demo.mp4" type="video/mp4">
+        </video>
+      </div>
 
-    <section aria-labelledby="about-heading">
-      <h2 class="eyebrow" id="about-heading">About</h2>
-      <p class="about-statement display">Product designer. Big-picture thinker. Small-detail obsessive. Complexity to clarity. A&nbsp;human in the loop.</p>
-    </section>
+      <section aria-labelledby="about-heading">
+        <h2 class="eyebrow" id="about-heading">About</h2>
+        <p class="about-statement display">Product designer. Big-picture thinker. Small-detail obsessive. Complexity to clarity. A&nbsp;human in the loop.</p>
+      </section>
+    </div>
 
     <hr class="rule">
 

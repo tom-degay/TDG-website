@@ -476,6 +476,9 @@
       padding: clamp(32px, 3.4vw, 52px) var(--gutter) clamp(104px, 10vw, 156px);
     }
 
+    /* styles.css hardcodes this same 1500px/clamp(32px,4vw,72px) pair at the
+       same 1024px breakpoint, so the nav doesn't resize when navigating to
+       another page -- keep both in sync if --band/--gutter change. */
     .site-nav-inner {
       max-width: var(--band);
       padding-left: var(--gutter);

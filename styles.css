@@ -1218,8 +1218,15 @@ descendant that has its own backdrop-filter) can't blur the page. */
   min-height: 56px;
 }
 
-@media (min-width: 1100px) {
-  .site-nav-inner { max-width: 1320px; }
+/* Matches index.html's --band/--gutter landing-page override (same breakpoint
+   and values) so the nav doesn't visibly resize when navigating to or from
+   the landing page. If those custom properties ever change, update here too. */
+@media (min-width: 1024px) {
+  .site-nav-inner {
+    max-width: 1500px;
+    padding-left: clamp(32px, 4vw, 72px);
+    padding-right: clamp(32px, 4vw, 72px);
+  }
 }
 
 .site-nav-brand {

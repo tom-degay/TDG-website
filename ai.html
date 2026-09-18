@@ -141,6 +141,12 @@
 
   .example-card > .note + .note { margin-top: 14px; }
 
+  .example-card hr {
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    margin: 18px 22px 0;
+  }
+
   .example-card > .note:last-child { margin-bottom: 22px; }
 
   .ui-video-expand {
@@ -579,6 +585,14 @@
           <p>I built this portfolio with <a href="https://claude.com/claude-code" target="_blank" rel="noopener noreferrer">Claude Code</a>. I have a working knowledge of web development, but using AI helped me get something real stood up faster. I could test how something would look, without building a mockup. And I could spend more time thinking about content, interaction and design and less time debugging nested divs.</p>
           <p>Aside from Claude, I&rsquo;ve found <a href="https://lovable.dev" target="_blank" rel="noopener noreferrer">Lovable</a> to be a great tool for getting rough prototypes up and working with realistic data in minutes, so we can test interaction patterns. I&rsquo;m excited about where these tools can take us.</p>
 
+          <h4>Things I might say to an AI</h4>
+          <blockquote>Help me prototype this idea so I can try it out.</blockquote>
+          <blockquote>Suggest some other options for this pattern. What haven&rsquo;t I thought of?</blockquote>
+          <blockquote>Run an accessibility audit on this site.</blockquote>
+          <blockquote>Review this logic. Are there any edge cases or gaps in this approach?</blockquote>
+          <blockquote>What&rsquo;s another way we could say this?</blockquote>
+          <blockquote>Challenge this design decision. What&rsquo;s the strongest argument against it?</blockquote>
+
           <div class="example-card">
             <figure>
               <div class="ui-video">
@@ -589,6 +603,8 @@
               </div>
               <figcaption>A 10-minute prototype made in Lovable to test and refine some interactions. It doesn&rsquo;t look exactly like Quantemplate but at this point in the process it doesn&rsquo;t have to.</figcaption>
             </figure>
+
+            <hr>
 
             <p class="note">In this example I used Lovable to test how users could find and sort datasets designated as &lsquo;data dictionaries&rsquo;. I explored placing the filter in the sidebar or the top ribbon, and sorting by properties unique to data dictionaries.</p>
             <p class="note">The prototype revealed a conflict between dictionary-specific sorting and the main dataset sort setting. I made the dictionary sort behave like a removable filter: users could see when it was active and clear it to return to the main sort order.</p>

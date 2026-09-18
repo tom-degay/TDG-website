@@ -675,6 +675,21 @@
       aspect-ratio: auto;
     }
 
+    /* -- the study icon, lifted out of the kicker line to sit above the
+       text block at about three times its inline size. The kicker is
+       already a flex row containing icon + label, so turning it into a
+       column is all it takes -- no markup change, and the icons are SVG
+       so they scale without loss. -- */
+    .case-blocks-wide .case-block-kicker {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .case-blocks-wide .case-block-kicker-icon {
+      height: clamp(30px, 2.6vw, 40px);
+    }
+
     .case-blocks-wide .case-block.has-image .case-block-text {
       grid-area: 1 / 2;
       padding: clamp(28px, 3.4vw, 48px) clamp(32px, 4vw, 64px);

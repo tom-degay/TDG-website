@@ -114,7 +114,17 @@
     gap: 40px;
   }
 
-  .testimonials blockquote { margin: 0; }
+  /* No teal rule here -- the quote mark already says "quotation", and two
+     markers for one thing is one too many. Dropping the shared rule's
+     border and its 22px padding puts the text back on the grid line the
+     section labels and card grids start from. (The case studies keep
+     theirs: the shared rule covers both, so this overrides rather than
+     edits it.) */
+  .testimonials blockquote {
+    margin: 0;
+    border-left: none;
+    padding-left: 0;
+  }
 
   /* A large open quote above each testimonial. Plain generated content
      rather than the content: "..." / "" alt-text form, which older Safari
@@ -137,7 +147,12 @@
     font-size: clamp(96px, 10vw, 150px);
     line-height: 0.95;
     margin-bottom: -0.52em;
-    color: rgba(255, 255, 255, 0.3);
+    /* The glyph carries a 0.066em left side bearing -- measured, not
+       guessed -- so at this size it would sit ~9px inside the grid line
+       while the text sits on it. Pulling the box left by the bearing puts
+       the ink itself on the line. */
+    margin-left: -0.066em;
+    color: rgba(255, 255, 255, 0.22);
   }
 
   .testimonials cite a[target="_blank"]::after { content: none; }

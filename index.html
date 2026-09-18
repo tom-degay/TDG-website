@@ -370,7 +370,27 @@
       --gutter: clamp(32px, 4vw, 72px);    /* band inset, shared with the nav */
       --rail: clamp(150px, 14vw, 220px);   /* the label column */
       --rail-gap: clamp(40px, 5vw, 96px);
+
+      /* main is centred once the window is wider than the band, so reaching
+         the window edge from inside the band means clearing the right
+         gutter AND that outer margin. --bleed is the overhang past the
+         edge, which the document clips. */
+      --outer: max(0px, (100vw - var(--band)) / 2);
+      --bleed: clamp(56px, 9vw, 180px);
     }
+
+    /* Clips the hero's overhang at the real window edge, which also makes
+       the exact value of 100vw (it includes a classic scrollbar) stop
+       mattering. Both parts of this are load-bearing -- measured at
+       1920px, where every wrong combination still scrolled 173px sideways:
+         - it needs BOTH html and body. The root's overflow propagates to
+           the viewport, so body's own value is ignored until html is
+           itself non-visible. Either one alone leaves the page scrolling.
+         - it needs clip, not hidden. `hidden` on both does stop the
+           scroll, but it makes body a scroll container and the sticky nav
+           scrolls away with the page (-1400px instead of pinning at 0).
+           `clip` is not a scroll container, so the nav still pins. */
+    html, body { overflow-x: clip; }
 
     /* -- the band. main and the nav share it, so the brand, every section
        label and every hairline start on the same vertical line. -- */
@@ -385,9 +405,10 @@
       padding-right: var(--gutter);
     }
 
-    /* -- the opening spread: statement left, video hard against the band's
-       right edge. The two are placed explicitly rather than reordered in
-       the markup, so the stacking order below 1100px stays video-first.
+    /* -- the opening spread: statement left, video running off the right
+       of the window. The two are placed explicitly rather than reordered
+       in the markup, so the stacking order below 1100px stays
+       video-first.
 
        40/60 is the balance point: the video still reads as the hero, and
        the statement lands on four or five lines instead of one long
@@ -407,10 +428,15 @@
       grid-row: 1;
     }
 
+    /* The video runs off the right of the window rather than stopping at
+       the band. Growing the box is what makes the video bigger -- it is
+       width:100% of it -- so the frame scales up and the overhang is the
+       part that falls off the edge. */
     .hero-spread .hero-video {
       grid-column: 2;
       grid-row: 1;
       margin-bottom: 0;
+      margin-right: calc(-1 * (var(--gutter) + var(--outer) + var(--bleed)));
     }
 
     /* Sized for the 40% column, not the old full-width line. */

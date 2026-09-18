@@ -377,6 +377,11 @@
          edge, which the document clips. */
       --outer: max(0px, (100vw - var(--band)) / 2);
       --bleed: clamp(56px, 9vw, 180px);
+
+      /* One gap for the Experience grid and for the stats nested inside it,
+         so the four stat columns sit on the same lines as the four grid
+         columns beneath them. */
+      --job-gap: clamp(32px, 4vw, 64px);
     }
 
     /* Clips the hero's overhang at the real window edge, which also makes
@@ -454,12 +459,21 @@
 
     main > section > * { grid-column: 2; }
 
+    /* The rail label shares a baseline with the first line of the content
+       beside it. Grid baseline alignment rather than a padding nudge: the
+       job title's size is a clamp, so any fixed offset drifts -- a 12px
+       padding measured -4.5px out at 1100 and +2px at 1920. Baseline
+       alignment is 0 at every width. Where a section has nothing in the
+       content column (the card grids break out to their own row), the
+       label is alone in its baseline group and simply sits at the top. */
     main > section > h2.eyebrow {
       grid-column: 1;
       grid-row: 1;
       margin: 0;
-      padding-top: 12px;   /* optical: drops the label to the content's cap height */
+      align-self: baseline;
     }
+
+    main > section > .job { align-self: baseline; }
 
     main > section > hr.rule,
     main > section > span.eyebrow,
@@ -475,14 +489,17 @@
       border-top-color: rgba(255, 255, 255, 0.1);
     }
 
-    main > section > span.eyebrow { margin: clamp(52px, 5vw, 76px) 0 0; }
+    main > section > span.eyebrow { margin: clamp(40px, 4vw, 60px) 0 0; }
 
     main > section > .case-blocks,
     main > section > .testimonials { margin-top: clamp(28px, 3vw, 44px); }
 
-    /* -- section separators: full-band hairlines with real air round them. -- */
+    /* -- section separators: full-band hairlines with real air round them.
+       Asymmetric on purpose -- a rule belongs to the section it introduces,
+       so it sits close to the heading below and far from the section
+       above. -- */
     main > hr.rule {
-      margin: clamp(88px, 8.5vw, 132px) 0;
+      margin: clamp(88px, 8.5vw, 132px) 0 clamp(40px, 4vw, 60px);
       border-top-color: rgba(255, 255, 255, 0.16);
     }
 
@@ -493,13 +510,63 @@
        to the site's usual 46rem media measure. */
     .case-block.has-thumb { max-width: 46rem; }
 
+    /* -- the Experience content, as the four-column grid the stats already
+       imply. The closing paragraph takes columns 1-2 and the video card
+       columns 3-4, so they sit side by side rather than stacking.
+
+       Rows are explicit because the card comes before the paragraph in the
+       markup: with auto-placement, an item starting in column 3 followed
+       by one starting in column 1 moves the cursor backwards, which pushes
+       the paragraph onto a row of its own. -- */
+    .job {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      column-gap: var(--job-gap);
+      align-items: start;
+    }
+
+    /* Margins do not collapse in a grid, and the job title's is the default
+       1em on a <p> -- which scales with its own font size, so it was
+       pushing the title ~33px below the rail label it should line up with. */
+    .job-company  { grid-area: 1 / 1 / 2 / -1; margin: 0; }
+    .job-keywords { grid-area: 2 / 1 / 3 / -1; }
+    .stats        { grid-area: 3 / 1 / 4 / -1; }
+
+    /* Both row-4 items take the same top margin so they start level. */
+    .job-desc { grid-area: 4 / 1 / 5 / 3; margin-top: clamp(40px, 4vw, 56px); }
+
+    .job .case-block.has-thumb {
+      grid-area: 4 / 3 / 5 / -1;
+      margin-top: clamp(40px, 4vw, 56px);
+    }
+
+    /* -- the video card, turned upright: thumbnail on top, text beneath,
+       which in a half-width column lands it close to square. Same shape as
+       the .has-image cards elsewhere on the page. -- */
+    .job .case-block.has-thumb {
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: flex-start;
+      gap: 0;
+      max-width: none;
+      padding: 0 0 18px;
+    }
+
+    .job .case-block-thumb {
+      flex: none;
+      width: 100%;
+      border-radius: 0;
+    }
+
+    .job .case-block.has-thumb .case-block-text { padding: 18px 22px 0; }
+
     /* -- grids: wider band, wider gaps. -- */
     /* Fixed at four so the stats stay on one row at every desktop width;
        auto-fit drops one to a second row around 1200px. Four columns
        because there are four stats -- revisit if that changes. */
     .stats {
-      grid-template-columns: repeat(4, 1fr);
-      gap: 32px clamp(32px, 4vw, 64px);
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 32px var(--job-gap);
       margin-top: 36px;
     }
 

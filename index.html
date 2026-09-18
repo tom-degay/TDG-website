@@ -44,10 +44,6 @@
     padding: clamp(24px, 6vw, 72px) clamp(24px, 5vw, 56px) clamp(72px, 10vw, 120px);
   }
 
-  @media (min-width: 1100px) {
-    main { max-width: 1080px; }
-  }
-
   h1 {
     margin: 0;
     color: #fff;
@@ -115,7 +111,7 @@
   }
 
   /* The animated study icons ride in the markup at every width but only show
-     above 1100px -- see the desktop block for why. */
+     above 1024px -- see the desktop block for why. */
   .case-block-kicker .case-icon { display: none; }
 
   /* No teal rule here -- the quote mark already says "quotation", and two
@@ -398,7 +394,7 @@
 
   /* ══ Editorial desktop layout ══════════════════════════════════════
 
-     A desktop-only re-grid of the landing page -- nothing below 1100px
+     A desktop-only re-grid of the landing page -- nothing below 1024px
      changes, and no rule here leaves index.html, so the other twelve
      pages are untouched.
 
@@ -416,7 +412,7 @@
        3. Much more air. The hairlines between sections go from ~48px of
           margin to ~128px, and they now span the whole band.
      ═════════════════════════════════════════════════════════════════ */
-  @media (min-width: 1100px) {
+  @media (min-width: 1024px) {
     :root {
       --band: 1500px;                      /* caps the band on big screens */
       --gutter: clamp(32px, 4vw, 72px);    /* band inset, shared with the nav */
@@ -464,7 +460,7 @@
 
     /* -- the opening spread: statement left, video running off the right
        of the window. The two are placed explicitly rather than reordered
-       in the markup, so the stacking order below 1100px stays
+       in the markup, so the stacking order below 1024px stays
        video-first.
 
        40/60 is the balance point: the video still reads as the hero, and
@@ -860,7 +856,7 @@
   </nav>
   <main>
       <h1 class="visually-hidden">Tom de Gay &mdash; Digital Product Designer</h1>
-    <!-- Opening spread. Below 1100px this wrapper is inert and the two
+    <!-- Opening spread. Below 1024px this wrapper is inert and the two
          blocks stack exactly as they always did, video first. Above it,
          they become one two-column grid: statement left, video right. -->
     <div class="hero-spread">

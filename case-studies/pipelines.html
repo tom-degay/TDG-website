@@ -794,19 +794,23 @@
         <h3>Give pipelines a simple hierarchy</h3>
         <p>Our first visual model broke the code into steps called stages. We soon realised that pipelines would become enormous if every operation occupied its own stage.</p>
 
-        <div class="ui-video is-tall">
-          <video autoplay muted loop playsinline disablepictureinpicture poster="media/pipelines-add-stage.jpg">
-            <source src="media/pipelines-add-stage.mp4" type="video/mp4">
-          </video>
-          <button class="ui-video-expand" type="button" aria-label="View full size"><svg viewBox="0 0 20 20" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path class="expand-corner" style="--dx:-1px;--dy:-1px" d="M7 3H3v4"/><path class="expand-corner" style="--dx:1px;--dy:-1px" d="M13 3h4v4"/><path class="expand-corner" style="--dx:1px;--dy:1px" d="M13 17h4v-4"/><path class="expand-corner" style="--dx:-1px;--dy:1px" d="M7 17H3v-4"/></svg></button>
+        <div class="video-panel">
+          <div class="ui-video is-tall">
+            <video autoplay muted loop playsinline disablepictureinpicture poster="media/pipelines-add-stage.jpg">
+              <source src="media/pipelines-add-stage.mp4" type="video/mp4">
+            </video>
+            <button class="ui-video-expand" type="button" aria-label="View full size"><svg viewBox="0 0 20 20" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path class="expand-corner" style="--dx:-1px;--dy:-1px" d="M7 3H3v4"/><path class="expand-corner" style="--dx:1px;--dy:-1px" d="M13 3h4v4"/><path class="expand-corner" style="--dx:1px;--dy:1px" d="M13 17h4v-4"/><path class="expand-corner" style="--dx:-1px;--dy:1px" d="M7 17H3v-4"/></svg></button>
+          </div>
         </div>
         <p>Working with engineering, we introduced operations within stages. Stages represented the broader structure of the data flow (joining, combining or transforming inputs) while operations contained the detailed work.</p>
 
-        <div class="ui-video is-tall">
-          <video autoplay muted loop playsinline disablepictureinpicture poster="media/pipelines-move-operation.jpg">
-            <source src="media/pipelines-move-operation.mp4" type="video/mp4">
-          </video>
-          <button class="ui-video-expand" type="button" aria-label="View full size"><svg viewBox="0 0 20 20" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path class="expand-corner" style="--dx:-1px;--dy:-1px" d="M7 3H3v4"/><path class="expand-corner" style="--dx:1px;--dy:-1px" d="M13 3h4v4"/><path class="expand-corner" style="--dx:1px;--dy:1px" d="M13 17h4v-4"/><path class="expand-corner" style="--dx:-1px;--dy:1px" d="M7 17H3v-4"/></svg></button>
+        <div class="video-panel">
+          <div class="ui-video is-tall">
+            <video autoplay muted loop playsinline disablepictureinpicture poster="media/pipelines-move-operation.jpg">
+              <source src="media/pipelines-move-operation.mp4" type="video/mp4">
+            </video>
+            <button class="ui-video-expand" type="button" aria-label="View full size"><svg viewBox="0 0 20 20" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path class="expand-corner" style="--dx:-1px;--dy:-1px" d="M7 3H3v4"/><path class="expand-corner" style="--dx:1px;--dy:-1px" d="M13 3h4v4"/><path class="expand-corner" style="--dx:1px;--dy:1px" d="M13 17h4v-4"/><path class="expand-corner" style="--dx:-1px;--dy:1px" d="M7 17H3v-4"/></svg></button>
+          </div>
         </div>
         <p>This collapsed the pipeline into a manageable sequence. Users could see its overall structure, then open a stage to work on individual operations.</p>
         <blockquote>This was <a href="/wayfinding#information-heading">progressive disclosure</a>, a principle I had learnt through wayfinding: help people orient themselves, then reveal the detail they need at the point they need it.</blockquote>

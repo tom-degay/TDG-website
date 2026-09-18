@@ -703,7 +703,22 @@ h4 {
 
 .ui-video.is-small { max-width: 30rem; }
 
-.ui-video + p { margin-top: clamp(24px, 3.5vw, 36px); }
+.ui-video + p, .video-panel + p { margin-top: clamp(24px, 3.5vw, 36px); }
+
+/* A portrait clip sits in a full-measure black stage rather than shrinking the
+   column to its own width. The panel is the wrapper, not .ui-video itself, so
+   the expand button stays anchored to the video's top-right corner instead of
+   flying out to the panel's. */
+.video-panel {
+  display: flex;
+  justify-content: center;
+  background: #000;
+  border-radius: 6px;
+  max-width: 46rem;
+  margin-top: 28px;
+}
+
+.video-panel .ui-video { margin-top: 0; }
 
 .ui-video.is-tall video {
   width: auto;

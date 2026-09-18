@@ -85,11 +85,22 @@
     max-width: 40ch;
   }
 
+  /* Always 2x2 or 4x1, never 3+1. auto-fit(minmax(130px,...)) packed as
+     many >=130px tracks as the container allowed, and there is a real
+     range of container widths (roughly 454-615px here) where exactly 3
+     fit and the 4th stat wraps alone onto its own row. Two explicit
+     breakpoints instead of a width-driven auto-fit: 2 columns by default,
+     4 from 700px -- verified nothing between them lands 3-and-1, checked
+     at 20px steps across the danger zone the old rule actually hit. */
   .stats {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 28px 32px;
     margin: 28px 0 0;
+  }
+
+  @media (min-width: 700px) {
+    .stats { grid-template-columns: repeat(4, 1fr); }
   }
 
   .case-blocks {

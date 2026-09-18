@@ -114,6 +114,8 @@
      above 1024px -- see the desktop block for why. */
   .case-block-kicker .case-icon { display: none; }
 
+  .testimonials { --stagger: clamp(72px, 9vw, 130px); }
+
   /* No teal rule here -- the quote mark already says "quotation", and two
      markers for one thing is one too many. Dropping the shared rule's
      border and its 22px padding puts the text back on the grid line the
@@ -162,6 +164,17 @@
       grid-template-columns: 1fr 1fr;
       column-gap: 40px;
       row-gap: 56px;
+      /* Reserves the room the dropped column needs at the foot of the
+         section, since a transform takes up no space. */
+      padding-bottom: var(--stagger);
+    }
+
+    /* The right-hand column sits lower than the left, so the four quotes
+       read as two staggered columns rather than a 2x2 block. A transform
+       rather than a margin: a margin on a grid item grows its row, which
+       would carry the left column down with it and lose the stagger. */
+    .testimonials blockquote:nth-child(even) {
+      transform: translateY(var(--stagger));
     }
   }
 

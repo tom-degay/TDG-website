@@ -4,3 +4,10 @@
 # repo URL, the dated session history and local filesystem paths.
 CLAUDE.md
 AGENTS.md
+
+# Scratch pages used to eyeball a component in isolation. They are untracked,
+# so a git deploy never sees them -- but `vercel --prod` ships the working
+# directory, which would publish them at /card-animation-proof, /icon-proof
+# and /case-studies/schema-flow-proof. No leading slash, so this matches at
+# any depth, including the one under case-studies/.
+*-proof.html

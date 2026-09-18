@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page not found — Tom de Gay</title>
+<meta name="description" content="That page doesn't exist. Find your way back to Tom de Gay's portfolio.">
+<meta name="theme-color" content="#131313">
+<meta name="robots" content="noindex">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Page not found — Tom de Gay">
+<meta property="og:description" content="That page doesn't exist. Find your way back to Tom de Gay's portfolio.">
+
+<link rel="icon" href="/tdg-favicon.svg" type="image/svg+xml">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="/styles.css">
+<style>
+  body {
+    font-family: "Fakt Blond", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-width: 250px;
+  }
+
+  /* 640 not contact.html's 592: three 156px .links buttons plus their gaps
+     need 488px of content box, and 592 leaves 480 -- eight short, so the
+     last button wrapped to its own row. */
+  main {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: clamp(24px, 6vw, 72px) clamp(24px, 5vw, 56px) clamp(96px, 12vw, 140px);
+  }
+
+  hr.rule {
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    margin: clamp(32px, 5vw, 48px) 0;
+  }
+
+  .eyebrow {
+    display: block;
+    font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+    color: #00d8aa;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    word-spacing: -3px;
+    text-transform: uppercase;
+    margin: 32px 0 28px;
+  }
+
+  .lede {
+    color: #fff;
+    font-size: clamp(24px, 3.6vw, 32px);
+    line-height: 1.35;
+    margin: 0 0 clamp(28px, 4vw, 36px);
+    max-width: 26ch;
+  }
+
+  .not-found-copy {
+    margin: 0 0 clamp(36px, 5.5vw, 52px);
+    font-size: 17px;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.68);
+    max-width: 46ch;
+  }
+
+  p.links {
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  /* -- interior-page heading entrance -- */
+  .head-armed .head-fade {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  .head-play .head-fade {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .head-fade {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
+  }
+</style>
+<script>
+  (function () {
+    try {
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('head-armed');
+      }
+    } catch (e) {}
+  })();
+</script>
+<noscript>
+  <style>
+    .head-armed .head-fade { opacity: 1 !important; transform: none !important; }
+  </style>
+</noscript>
+  <script src="/nav.js" defer></script>
+  <script src="/footer.js" defer></script>
+</head>
+<body>
+  <nav class="site-nav">
+    <div class="site-nav-inner">
+      <a class="site-nav-brand display" href="/">Tom de Gay</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav-links" aria-label="Menu">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
+      <div class="site-nav-links" id="site-nav-links">
+        <a href="/about">About</a>
+        <div class="nav-item">
+          <a href="/wayfinding">Approach</a>
+          <div class="nav-dropdown nav-dropdown--tight">
+            <div class="nav-dropdown-panel">
+              <a class="nav-dropdown-card" href="/ai">
+                <span class="nav-dropdown-card-title">Design and AI</span>
+              </a>
+              <a class="nav-dropdown-card" href="/design-craft">
+                <span class="nav-dropdown-card-title">Design craft</span>
+              </a>
+              <a class="nav-dropdown-card" href="/wayfinding">
+                <span class="nav-dropdown-card-title">Learning from wayfinding</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="/case-studies">Case Studies</a>
+          <div class="nav-dropdown">
+            <div class="nav-dropdown-panel">
+              <a class="nav-dropdown-card" href="/case-studies/pipelines">
+                <span class="nav-dropdown-card-kicker"><img class="nav-dropdown-card-kicker-icon" src="/media/icons/pipelines.svg" alt="" width="17" height="13">Pipelines</span>
+                <span class="nav-dropdown-card-title">Bringing clarity to complex data flows</span>
+              </a>
+              <a class="nav-dropdown-card" href="/case-studies/column-mapping">
+                <span class="nav-dropdown-card-kicker"><img class="nav-dropdown-card-kicker-icon" src="/media/icons/mapping.svg" alt="" width="16" height="16">Column mapping</span>
+                <span class="nav-dropdown-card-title">Mapping inconsistent schemas at scale</span>
+              </a>
+              <a class="nav-dropdown-card" href="/case-studies/feeds">
+                <span class="nav-dropdown-card-kicker"><img class="nav-dropdown-card-kicker-icon" src="/media/icons/feeds.svg" alt="" width="17" height="16">Feeds</span>
+                <span class="nav-dropdown-card-title">Connecting organisations through data</span>
+              </a>
+              <a class="nav-dropdown-card" href="/case-studies/validation">
+                <span class="nav-dropdown-card-kicker"><img class="nav-dropdown-card-kicker-icon" src="/media/icons/validation.svg" alt="" width="16" height="16">Validation</span>
+                <span class="nav-dropdown-card-title">Closing the loop on data quality</span>
+              </a>
+              <hr class="nav-dropdown-divider">
+              <a class="nav-dropdown-card" href="/case-studies/image-insight">
+                <span class="nav-dropdown-card-kicker">Image Insight</span>
+                <span class="nav-dropdown-card-title">Making space for deeper reflection</span>
+              </a>
+              <a class="nav-dropdown-card" href="/case-studies/zonefully">
+                <span class="nav-dropdown-card-kicker">Zonefully</span>
+                <span class="nav-dropdown-card-title">Connecting long-term goals to everyday routines</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <a href="/contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+  <main>
+    <span class="eyebrow head-fade">Error 404</span>
+
+    <h1 class="lede display head-fade">This page doesn&rsquo;t exist.</h1>
+
+    <p class="not-found-copy head-fade">The link may be out of date, or I may have moved the page. Careless, for someone who writes about <a href="/wayfinding">wayfinding</a>.</p>
+
+    <p class="links head-fade">
+      <a href="/"><span>Home</span></a>
+      <a href="/case-studies"><span>Case studies</span></a>
+      <a href="/about"><span>About</span></a>
+    </p>
+  </main>
+  <script>
+    (function () {
+      var root = document.documentElement;
+      if (!root.classList.contains('head-armed')) return;
+      var els = document.querySelectorAll('.head-fade');
+      if (!els.length) return;
+      Array.prototype.forEach.call(els, function (el, i) {
+        el.style.transitionDelay = (i * 70) + 'ms';
+      });
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () { root.classList.add('head-play'); });
+      });
+    })();
+  </script>
+  <script data-goatcounter="https://tomdegay.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

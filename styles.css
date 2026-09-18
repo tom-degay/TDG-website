@@ -1089,6 +1089,17 @@ h4 {
   margin-top: clamp(16px, 2vw, 22px);
 }
 
+/* .principle p sets color: rgba(255,255,255,0.82) on every <p>,
+   including ones nested inside a blockquote for multi-line quotes --
+   an inherited value always loses to an explicit one on the element
+   itself, so those paragraphs were rendering at 0.82 instead of the
+   blockquote's own #fff. .principle blockquote p is more specific
+   (an extra type selector) than .principle p, so this wins reliably
+   rather than by source-order luck. color: inherit rather than a
+   hardcoded #fff, so it always matches whatever the blockquote itself
+   is set to. */
+.principle blockquote p { color: inherit; }
+
 .principle blockquote p + p { margin-top: 10px; }
 
 .case-block-kicker-icon {

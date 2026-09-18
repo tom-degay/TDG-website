@@ -475,6 +475,24 @@
 
     main > section > .job { align-self: baseline; }
 
+    /* ...then lifted off that shared baseline so the two sets of CAPS start
+       on the same line instead, which is what actually reads as aligned
+       when one is 14px mono and the other is ~33px display.
+
+       The lift is the difference in cap height. Measured off the real
+       fonts (canvas actualBoundingBoxAscent on a capital): IBM Plex Mono
+       caps are 0.698em, Fakt Blond SemiBold 0.688em, so the label needs
+       to rise by 0.688 x <title size> - 0.698 x 14px. The title's size is
+       a clamp, so the lift has to track it -- 8.1px at 1100 up to 13.6px
+       at 1920. transform, not margin: a margin is folded into the
+       baseline offset and would move nothing.
+
+       Scoped with :has() to the one section whose label has a title beside
+       it; the rest sit alone above their grids with nothing to align to. */
+    main > section:has(> .job) > h2.eyebrow {
+      transform: translateY(calc(0.698 * 14px - 0.688 * clamp(26px, 2.3vw, 34px)));
+    }
+
     main > section > hr.rule,
     main > section > span.eyebrow,
     main > section > .case-blocks,
@@ -532,8 +550,14 @@
     .job-keywords { grid-area: 2 / 1 / 3 / -1; }
     .stats        { grid-area: 3 / 1 / 4 / -1; }
 
-    /* Both row-4 items take the same top margin so they start level. */
-    .job-desc { grid-area: 4 / 1 / 5 / 3; margin-top: clamp(40px, 4vw, 56px); }
+    /* Both row-4 items take the same top margin so they start level. The
+       type drops from 25px to 22px: the column is half-width here, and 25px
+       was running to ten lines at 1100. */
+    .job-desc {
+      grid-area: 4 / 1 / 5 / 3;
+      margin-top: clamp(40px, 4vw, 56px);
+      font-size: 22px;
+    }
 
     .job .case-block.has-thumb {
       grid-area: 4 / 3 / 5 / -1;

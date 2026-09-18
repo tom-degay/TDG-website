@@ -116,6 +116,30 @@
 
   .testimonials blockquote { margin: 0; }
 
+  /* A large open quote above each testimonial. Plain generated content
+     rather than the content: "..." / "" alt-text form, which older Safari
+     fails to parse -- it would drop the glyph entirely, and a screen reader
+     reading one quotation mark is the lesser problem.
+
+     The glyph is small inside its em box: measured on Fakt Blond SemiBold
+     it is 0.28em tall and sits between 0.41em and 0.69em above the
+     baseline. So the size is set for the ink, not the em -- 150px gives a
+     42px mark, about three times the quote text's cap height -- and the
+     box is then closed up around it. line-height 0.95 is the lowest value
+     that still contains the glyph (below ~0.91 it starts overflowing above
+     the block and colliding with whatever sits there), and the negative
+     margin takes back the empty two thirds of the box beneath the ink. */
+  .testimonials blockquote::before {
+    content: "\201C";
+    display: block;
+    font-family: "Fakt Blond SemiBold", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    font-size: clamp(96px, 10vw, 150px);
+    line-height: 0.95;
+    margin-bottom: -0.52em;
+    color: rgba(255, 255, 255, 0.3);
+  }
+
   .testimonials cite a[target="_blank"]::after { content: none; }
 
   @media (min-width: 820px) {

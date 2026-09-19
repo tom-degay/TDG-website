@@ -106,7 +106,7 @@ a[target="_blank"]:hover::after, a[target="_blank"]:focus-visible::after,
 
 .intro {
   color: rgba(255, 255, 255, 0.82);
-  font-size: clamp(19px, 2.5vw, 24px);
+  font-size: clamp(18px, 2.3vw, 22px);
   line-height: 1.55;
   margin: 0;
   max-width: 620px;
@@ -170,9 +170,9 @@ hr.rule:has(+ .back-to-top-row) { margin-bottom: clamp(8px, 1.2vw, 14px); }
   font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
   font-size: 14px;
   font-weight: 500;
-  letter-spacing: 1.5px;
+  letter-spacing: 2px;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.45);
+  color: rgba(255, 255, 255, 0.55);
   border-bottom: none;
   white-space: nowrap;
 }
@@ -206,7 +206,7 @@ hr.rule:has(+ .back-to-top-row) { margin-bottom: clamp(8px, 1.2vw, 14px); }
 
 .about-copy p {
   color: rgba(255, 255, 255, 0.82);
-  font-size: clamp(19px, 2.5vw, 24px);
+  font-size: clamp(18px, 2.3vw, 22px);
   line-height: 1.55;
   margin: 0 0 clamp(26px, 3.4vw, 34px);
   max-width: 620px;
@@ -431,9 +431,9 @@ p.keywords {
 }
 
 .job-desc {
-  color: rgba(255, 255, 255, 0.68);
-  font-size: clamp(20px, 2.6vw, 25px);
-  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: clamp(18px, 2.3vw, 22px);
+  line-height: 1.55;
   max-width: 55ch;
   margin: 18px 0 0;
 }
@@ -661,9 +661,9 @@ h4 {
 
 .case-body p {
   max-width: 46rem;
-  color: rgba(255, 255, 255, 0.7);
-  font-size: clamp(15.5px, 1.7vw, 17px);
-  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: clamp(18px, 2.3vw, 22px);
+  line-height: 1.55;
   margin: 0 0 20px;
 }
 

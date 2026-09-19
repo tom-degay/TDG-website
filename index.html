@@ -312,7 +312,7 @@
     display: block;
     margin-top: 12px;
     font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 500;
     letter-spacing: 2px;
     word-spacing: -3px;
@@ -626,12 +626,11 @@
     .stats        { grid-area: 3 / 1 / 4 / -1; }
 
     /* Both row-4 items take the same top margin so they start level. The
-       type drops from 25px to 22px: the column is half-width here, and 25px
-       was running to ten lines at 1100. */
+       font-size override that used to live here is gone -- .job-desc's
+       shared clamp() now tops out at 22px well before this breakpoint. */
     .job-desc {
       grid-area: 4 / 1 / 5 / 3;
       margin-top: clamp(40px, 4vw, 56px);
-      font-size: 22px;
     }
 
     .job .case-block.has-thumb {

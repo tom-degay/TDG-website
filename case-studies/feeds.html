@@ -743,19 +743,29 @@
         <h3>From Data Drop to Data Network</h3>
         <p>My initial concept, Data Drop, was a lightweight portal with an unauthenticated, one-time upload link. It would have been a quick win, but mapping its workflow revealed that it would move the email problem further down the chain: links buried in inboxes, no persistent activity record and resubmissions still needing coordination.</p>
 
-        <blockquote>The Data Drop would have been a quick win but an incomplete solution.</blockquote>
+        <blockquote>The Data Drop would have been a quick win but an incomplete solution. I proposed Feeds instead.</blockquote>
 
         <figure class="figure">
           <img src="media/data-drop-concept.png" width="1600" height="1000" alt="Mockup of the Data Drop secure data transfer concept: a card showing transfer from and to organisations, submission type, period, due date, a worksheet selector with checkboxes, and a submit button." loading="lazy">
           <figcaption>The data drop concept we never shipped.</figcaption>
         </figure>
 
-        <p>I proposed Feeds instead: a whole new area in the product with authenticated users, separate organisations and persistent relationships between partners. This was a larger product increment, but one that addressed the whole workflow, making persistent connections between organisations and opening a path to a broader network strategy.</p>
+        <p>Feeds would be a whole new area in the product with authenticated users, separate organisations and persistent relationships between partners. This was a larger product increment, but one that addressed the whole workflow, making persistent connections between organisations and opening a path to a broader network strategy.</p>
 
         <figure class="figure">
           <img src="media/feeds-org-relationship-diagram.jpg" width="2000" height="1093" alt="Diagram showing a Data originator org with a Feed Out mirroring data to a Data consumer org's Feed In, fed by API, pipeline and manual upload sources on each side, with an upload portal shown as a separate concept still under consideration." loading="lazy">
           <figcaption>Architecting the relationship between organisation feeds. Every Feed In corresponds to a Feed Out in the partner org. At this point I was still considering the &lsquo;upload portal&rsquo; as a layer in the workflow. It was descoped when the walkthrough revealed it to be superfluous.</figcaption>
         </figure>
+      </div>
+
+      <div class="subsection" id="scope-heading">
+        <h3>Selling the wider scope</h3>
+        <p>I used the journey maps to make the case for the broader scope, showing how onboarding, scheduling and administration were necessary parts of a complete submission workflow. Connecting each capability to a concrete user need helped explain why improving the upload experience alone wouldn’t solve the whole problem.</p>
+      </div>
+
+      <div class="subsection" id="portal-drop-heading">
+        <h3>Dropping the portal layer</h3>
+        <p>I initially favoured retaining a separate, stripped-back portal. My product partner challenged that assumption, and working through the journey together changed my view. If we could preserve the simplicity of the upload process within feeds, whilst introducing users to key Quantemplate behaviours, that would make for a more coherent user experience, and a more efficient and maintainable build.</p>
       </div>
 
       <div class="subsection" id="datamodel-heading">
@@ -786,6 +796,9 @@
           <img src="media/feeds-permissions-share-panel.png" width="1270" height="866" alt="Feed sharing panel listing who has access: TDG TPA with 9 members as Submitter, Robot User as Can view, Martina Brito as Manager, and Tom de Gay as Owner." loading="lazy">
           <figcaption>Sharing a Feed. Owner, Manager, Submitter and view-only roles sit alongside the Robot User, enabling automations across the platform.</figcaption>
         </figure>
+
+        <p>Enabling automation surfaces a clear ‘Share with Robot User’ button, with prompts to share any dependent documents too. If users lack sharing rights, they can ask the document owner to grant access. This makes the permissions model visible at the point it matters, reduces setup friction and anticipates the next action users need to take.</p>
+
       </div>
     </section>
 
@@ -798,11 +811,11 @@
         <h3>Trusted setup in under a minute</h3>
         <p>Initiating a partner connection required just their contact&rsquo;s email. We used the domain to find their organisation or begin creating it. I researched and proposed a <a href="https://www.logo.dev" target="_blank" rel="noopener noreferrer">logo.dev</a> integration to populate organisation names and logos automatically, reducing setup effort and making requests more recognisable. Admins on each side approve the connection, with all events tracked in a new admin panel.</p>
 
-        <blockquote>A lot of complexity behind the scenes, enabling simplicity in the product.</blockquote>
+        <blockquote>What if the organisation was already on Quantemplate? What if they were already a partner? Working through every scenario meant some complexity behind the scenes, but ensured simplicity in the user experience.</blockquote>
 
         <figure class="figure">
           <img src="media/feeds-add-partners-spec.jpg" width="2000" height="1102" alt="Design specification board mapping every path through the add-partners workflow: adding internal submitters, connecting to an existing partner, adding a new partner, setup via a Feed In or Feed Out, setup statuses and review settings." loading="lazy">
-          <figcaption>Design specification for the &lsquo;Add partners&rsquo; workflow. Did the partner already exist on the system? Were they already connected to this? Was the user an admin?</figcaption>
+          <figcaption>Design specification for the &lsquo;Add partners&rsquo; workflow. Did the partner already exist on the system? Were they already connected? Was the user an admin?</figcaption>
         </figure>
 
         <p>Admins can also create reusable schedules to centrally manage request frequency. Research revealed that feeds often shared a cadence but followed different contract dates. I made start and end dates properties of a Feed, rather than a schedule, allowing requests to stop at contract end without affecting other feeds using the same schedule.</p>

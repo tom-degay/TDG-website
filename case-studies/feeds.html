@@ -761,6 +761,11 @@
           <img src="media/feeds-org-relationship-diagram.jpg" width="2000" height="1093" alt="Diagram showing a Data originator org with a Feed Out mirroring data to a Data consumer org's Feed In, fed by API, pipeline and manual upload sources on each side, with an upload portal shown as a separate concept still under consideration." loading="lazy">
           <figcaption>Architecting the relationship between organisation feeds. Every Feed In corresponds to a Feed Out in the partner org. At this point I was still considering the &lsquo;upload portal&rsquo; as a layer in the workflow. It was descoped when the walkthrough revealed it to be superfluous.</figcaption>
         </figure>
+
+        <figure class="figure">
+          <img src="media/in-out-diagram.png" width="1346" height="852" alt="Diagram of the four Feed roles: Feed Out Leader (pushing out) and Feed In Follower (receiving pushes) connected by one arrow, Feed Out Follower (responding to requests) and Feed In Leader (pulling/requesting) connected by another." loading="lazy">
+          <figcaption>A conceptual model that users could understand: each Feed In is mirrored by a Feed Out in the partner organisation. Leaders control all Feed configuration, whilst followers simply respond. This reflected real-world market relationships.</figcaption>
+        </figure>
       </div>
 
       <div class="subsection" id="portal-drop-heading">

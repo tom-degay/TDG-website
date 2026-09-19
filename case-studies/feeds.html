@@ -172,6 +172,22 @@
     border-radius: 6px;
   }
 
+  /* The schedules modal is portrait and would look small and adrift straight on
+     the page's black background -- a grey frame the full width of the
+     figure gives it a backdrop to float on, with its own shadow for lift. */
+  .figure-portrait-frame {
+    display: flex;
+    justify-content: center;
+    padding: 32px 24px;
+    background: rgb(33, 33, 33);
+    border-radius: 10px;
+  }
+
+  .figure-portrait-frame img {
+    max-width: 300px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+  }
+
   .figure-strip-imgs {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -848,7 +864,9 @@
         <p>Admins can also create reusable schedules to centrally manage request frequency. Research revealed that feeds often shared a cadence but followed different contract dates. I made start and end dates properties of a Feed, rather than a schedule, allowing requests to stop at contract end without affecting other feeds using the same schedule.</p>
 
         <figure class="figure">
-          <img src="media/schedules.png" width="1002" height="1060" alt="A Scheduling modal for a Feed: schedule name 'Monthly BDX', start and end date fields (end date optional), and frequency, request, deadline and reminder settings." loading="lazy">
+          <div class="figure-portrait-frame">
+            <img src="media/schedules.png" width="1002" height="1060" alt="A Scheduling modal for a Feed: schedule name 'Monthly BDX', start and end date fields (end date optional), and frequency, request, deadline and reminder settings." loading="lazy">
+          </div>
           <figcaption>We needed a scheduling feature to automate submission request creation. Keeping schedules across hundreds of feeds in sync would be a challenge, so I proposed they were centrally managed by Org Admins. An insight from the user research phase was that schedules would need an end date, as contracts might only run for a set number of years.</figcaption>
         </figure>
 

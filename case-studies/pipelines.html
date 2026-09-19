@@ -708,7 +708,7 @@
         </div>
       </dl>
 
-      <div class="ui-video is-full">
+      <div class="ui-video is-full" data-hover-controls>
         <video autoplay muted loop playsinline disablepictureinpicture poster="media/pipelines-ui.jpg">
           <source src="media/pipelines-ui.mp4" type="video/mp4">
         </video>
@@ -795,7 +795,7 @@
         <p>Our first visual model broke the code into steps called stages. We soon realised that pipelines would become enormous if every operation occupied its own stage.</p>
 
         <div class="video-panel">
-          <div class="ui-video is-tall">
+          <div class="ui-video is-tall" data-hover-controls>
             <video autoplay muted loop playsinline disablepictureinpicture poster="media/pipelines-add-stage.jpg">
               <source src="media/pipelines-add-stage.mp4" type="video/mp4">
             </video>
@@ -805,7 +805,7 @@
         <p>Working with engineering, we introduced operations within stages. Stages represented the broader structure of the data flow (joining, combining or transforming inputs) while operations contained the detailed work.</p>
 
         <div class="video-panel">
-          <div class="ui-video is-tall">
+          <div class="ui-video is-tall" data-hover-controls>
             <video autoplay muted loop playsinline disablepictureinpicture poster="media/pipelines-move-operation.jpg">
               <source src="media/pipelines-move-operation.mp4" type="video/mp4">
             </video>
@@ -834,7 +834,7 @@
         <h3>Bring inputs and outputs into one view</h3>
         <p>The pipeline&rsquo;s right-hand area was originally intended for live data preview, but this proved technically challenging. Based on user feedback, I repurposed it to bring inputs and outputs together from their three separate tabs, resolving a navigation problem inherited from the original code editor.</p>
 
-        <div class="ui-video">
+        <div class="ui-video" data-hover-controls>
           <video autoplay muted loop playsinline disablepictureinpicture poster="media/pipelines-inputs-outputs.jpg">
             <source src="media/pipelines-inputs-outputs.mp4" type="video/mp4">
           </video>
@@ -846,7 +846,7 @@
         <h3>Show the lineage</h3>
         <p>Another pain point we identified was keeping track of data lineage through pipelines. I proposed connecting lines between stages to <a href="/wayfinding#complexity-heading">help users follow data through a pipeline</a>. Initially, I envisioned user-defined colour groups to denote functions, but the feedback we got was that these would add configuration overhead. Instead, we automatically cycled colours through a spectrum to distinguish connections.</p>
 
-        <div class="ui-video">
+        <div class="ui-video" data-hover-controls>
           <video autoplay muted loop playsinline disablepictureinpicture poster="media/pipelines-lineage-highlight.jpg">
             <source src="media/pipelines-lineage-highlight.mp4" type="video/mp4">
           </video>
@@ -859,7 +859,7 @@
         <p>As clients chained pipelines together, we found ourselves explaining the connections through <a href="https://miro.com" target="_blank" rel="noopener noreferrer">Miro</a> flowcharts. This was a desire line: a view we repeatedly created outside the product.</p>
         <p>In 2026, we built a flowchart view into Quantemplate, giving users an overview across pipelines alongside the detailed stage editor.</p>
 
-        <div class="ui-video">
+        <div class="ui-video" data-hover-controls>
           <video autoplay muted loop playsinline disablepictureinpicture poster="media/pipelines-flow-view.jpg">
             <source src="media/pipelines-flow-view.mp4" type="video/mp4">
           </video>
@@ -878,7 +878,7 @@
         <h3>Make activity visible</h3>
         <p>Pipelines glow as they run, along with their corresponding connecting lines in the flowchart. This makes execution visible in the context of the wider workflow. We recorded an uptick in engagement during demos and training sessions as the data flow through a pipeline became tangible.</p>
 
-        <div class="ui-video">
+        <div class="ui-video" data-hover-controls>
           <video autoplay muted loop playsinline disablepictureinpicture poster="media/pipelines-glow.jpg">
             <source src="media/pipelines-glow.mp4" type="video/mp4">
           </video>

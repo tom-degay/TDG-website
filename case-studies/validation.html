@@ -755,7 +755,7 @@
         <h3>Give immediate feedback</h3>
         <p>Corrections are applied to the output on the next pipeline run, so we called this out with a notification bar. But as a user types in a correction, we check that their entered value will pass the rule, and warn if it&rsquo;s still a fail.</p>
 
-        <div class="ui-video">
+        <div class="ui-video" data-hover-controls>
           <video autoplay muted loop playsinline disablepictureinpicture poster="media/validation-instant-check.jpg">
             <source src="media/validation-instant-check.mp4" type="video/mp4">
           </video>
@@ -806,7 +806,7 @@
         <p>The solution arose when we implemented <a href="https://help.quantemplate.com/data-semantics" target="_blank" rel="noopener noreferrer">data semantics</a> across the platform. Now, with an understanding of the data in each column we could implement a very lightweight solution. We added a toggle to enable type validations in <a href="/case-studies/column-mapping#semantics-heading">Map Column Headers</a>, the point in the pipeline in which schema is defined.</p>
         <blockquote>This cut out at least four pipeline steps for every column whose type was validated, removing implementation complexity and slashing hours from implementation time.</blockquote>
 
-        <div class="ui-video">
+        <div class="ui-video" data-hover-controls>
           <video autoplay muted loop playsinline disablepictureinpicture poster="media/type-validation.jpg">
             <source src="media/type-validation.mp4" type="video/mp4">
           </video>

@@ -158,7 +158,21 @@
     max-width: 46rem;
   }
 
-  .figure-portrait { max-width: 440px; }
+  /* The PDF summary is portrait and would look small and adrift straight on
+     the page's black background -- a grey frame the full width of the
+     figure gives it a backdrop to float on, with its own shadow for lift. */
+  .figure-portrait-frame {
+    display: flex;
+    justify-content: center;
+    padding: 32px 24px;
+    background: rgb(33, 33, 33);
+    border-radius: 10px;
+  }
+
+  .figure-portrait-frame img {
+    max-width: 300px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+  }
 
   .figure img {
     display: block;
@@ -636,8 +650,10 @@
           <figcaption>The session review pairs each image with its reflection and foregrounds the actions to take forward, ready to export as a PDF.</figcaption>
         </figure>
 
-        <figure class="figure figure-portrait">
-          <img src="media/image-insight-pdf-report.jpg" width="1050" height="1486" alt="A one-page PDF session summary: an Image Insight header, a narrative summary, a list of actions, and the session review questions with their images and reflections." loading="lazy">
+        <figure class="figure">
+          <div class="figure-portrait-frame">
+            <img src="media/image-insight-pdf-report.jpg" width="1050" height="1486" alt="A one-page PDF session summary: an Image Insight header, a narrative summary, a list of actions, and the session review questions with their images and reflections." loading="lazy">
+          </div>
           <figcaption>The downloadable summary the coach shares afterwards: the narrative, the actions to take forward, and the images and reflections from the review.</figcaption>
         </figure>
       </div>
@@ -670,7 +686,7 @@
 
     <section aria-labelledby="outcome-heading" class="case-body">
       <h2 class="eyebrow" id="outcome-heading">Outcome</h2>
-      <h3>An interface that leaves room for conversation</h3>
+      <h3>A strong baseline to build upon</h3>
       <p>The beta test across two schools and 120 active users showed some promising early results, with positive qualitative feedback, and a 71% completion rate on sessions. This provides a good baseline for testing the recent round of improvements.</p>
       <p>Coaches highlighted the tool&rsquo;s simplicity, while co-founder Anna Malone credited the design work with making the product easier to use.</p>
       <blockquote>Tom has been crucial in transforming Image Insight from a clunky MVP to an intuitive, easy-to-use product that I&rsquo;m really proud of.
@@ -718,7 +734,6 @@
     <a href="#keydecisions-heading">Key decisions</a>
     <a href="#implementation-heading">Implementation</a>
     <a href="#outcome-heading">Outcome</a>
-    <a href="#resources-heading">Resources</a>
   </nav>
 
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Enlarged image" tabindex="-1">

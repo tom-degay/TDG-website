@@ -418,7 +418,12 @@ p.keywords {
 
 .keyword {
   display: inline-block;
-  padding: 9px 13px;
+  /* Fakt Blond SemiBold's ascent/descent split isn't symmetric (see the
+     LinkedIn/CV button note above), so a symmetric 9/9 padding leaves the
+     ink sitting visibly high. 10/8 was re-measured Sept 2026 and centres it
+     on both desktop and iOS -- previously iOS alone needed 11px/7px via
+     @supports(-webkit-touch-callout), but that's gone now they match. */
+  padding: 10px 13px 8px;
   border-radius: 6px;
   background: rgb(40, 40, 40);
   color: rgba(255, 255, 255, 0.72);
@@ -1127,7 +1132,7 @@ h4 {
 
 .case-block-keyword {
   display: inline-block;
-  padding: 9px 13px;
+  padding: 10px 13px 8px;
   border-radius: 6px;
   background: rgb(48, 48, 48);
   color: rgba(255, 255, 255, 0.72);

@@ -86,7 +86,7 @@
     font-size: clamp(18px, 2.3vw, 22px);
     line-height: 1.3;
     margin: 0 0 20px;
-    max-width: 50ch;
+    max-width: 46rem;
   }
 
   .about-statement:last-child { margin-bottom: 0; }
@@ -239,13 +239,6 @@
     color: #fff;
     font-size: clamp(18px, 2.4vw, 22px);
     line-height: 1.3;
-  }
-
-  @supports (-webkit-touch-callout: none) {
-    /* iOS WebKit computes the line-height:1 box for Fakt Blond SemiBold
-    differently to desktop/Android -- text sits visibly high there.
-    Nudge down for iOS only (both chip variants share this font/line-height). */
-    .case-block-keyword, .keyword { padding: 11px 13px 7px; }
   }
 
   /* -- suppress the external-link arrow inside running text -- */

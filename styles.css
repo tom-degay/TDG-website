@@ -106,8 +106,8 @@ a[target="_blank"]:hover::after, a[target="_blank"]:focus-visible::after,
 
 .intro {
   color: rgba(255, 255, 255, 0.82);
-  font-size: clamp(18px, 2.3vw, 22px);
-  line-height: 33px;
+  font-size: 18px;
+  line-height: 1.6;
   margin: 0;
   max-width: 620px;
 }
@@ -1069,7 +1069,7 @@ h4 {
 
 .principle-title {
   color: #fff;
-  font-size: 32px;
+  font-size: clamp(18px, 2.3vw, 22px);
   line-height: 1.3;
   margin: 0 0 clamp(14px, 1.8vw, 18px);
   max-width: 32ch;
@@ -1077,8 +1077,8 @@ h4 {
 
 .principle p {
   color: rgba(255, 255, 255, 0.82);
-  font-size: clamp(18px, 2.3vw, 22px);
-  line-height: 1.55;
+  font-size: 18px;
+  line-height: 1.6;
   margin: 0;
   max-width: 620px;
 }
